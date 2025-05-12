@@ -5,15 +5,16 @@ import type { PropsWithChildren } from 'react'
 
 import type { ConfigProviderProps } from 'antd/es/config-provider'
 
-interface IProps extends PropsWithChildren {
+export interface IPropsConfigProvider extends PropsWithChildren, ConfigProviderProps {
 	locale: ConfigProviderProps['locale']
 	theme: ConfigProviderProps['theme']
 }
 
-const Index = (props: IProps) => {
-	const { children, locale, theme } = props
+const Index = (props: IPropsConfigProvider) => {
+	const { children, locale, theme, ...rest_props } = props
 
 	const props_config_provider: ConfigProviderProps = {
+		...rest_props,
 		prefixCls: 'omni',
 		iconPrefixCls: 'omni-icon',
 		locale,
