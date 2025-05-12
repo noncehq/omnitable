@@ -120,6 +120,9 @@ importers:
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
+      postcss:
+        specifier: ^8.5.3
+        version: 8.5.3
       postcss-calc:
         specifier: ^10.1.1
         version: 10.1.1(postcss@8.5.3)
@@ -138,6 +141,9 @@ importers:
       tinyglobby:
         specifier: ^0.2.13
         version: 0.2.13
+      ts-node:
+        specifier: ^10.9.2
+        version: 10.9.2(@types/node@22.15.17)(typescript@5.8.3)
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
@@ -1459,6 +1465,7 @@ packages:
 
   bun@1.2.13:
     resolution: {integrity: sha512-EhP1MhFbicqtaRSFCbEZdkcFco8Ov47cNJcB9QmKS8U4cojKHfLU+dQR14lCvLYmtBvGgwv/Lp+9SSver2OPzQ==}
+    cpu: [arm64, x64, aarch64]
     os: [darwin, linux, win32]
     hasBin: true
 

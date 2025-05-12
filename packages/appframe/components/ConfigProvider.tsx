@@ -14,8 +14,8 @@ const Index = (props: IProps) => {
 	const { children, locale, theme } = props
 
 	const props_config_provider: ConfigProviderProps = {
-		prefixCls: 'ani',
-		iconPrefixCls: 'ani-icon',
+		prefixCls: 'omni',
+		iconPrefixCls: 'omni-icon',
 		locale,
 		theme,
 		virtual: false,

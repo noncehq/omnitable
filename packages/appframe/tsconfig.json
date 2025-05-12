@@ -22,6 +22,7 @@
 		"experimentalDecorators": true
 	},
 	"include": ["**/*.ts", "**/*.tsx"],
+	"exclude": ["./node_modules", "./build", "./rspack.config.ts"],
 	"ts-node": {
 		"compilerOptions": {
 			"module": "commonjs"
