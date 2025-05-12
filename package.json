@@ -1,12 +1,29 @@
 {
-  "name": "ominitable",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+	"name": "omnitable",
+	"author": "1yasa",
+	"version": "0.0.0",
+	"homepage": "https://github.com/openages/animus",
+	"packageManager": "pnpm@9.15.5",
+	"scripts": {
+		"dev": "turbo run dev",
+		"build": "turbo run build",
+		"dev:core": "turbo run dev --filter=core",
+		"build:core": "turbo run build --filter=core",
+		"prettier": "prettier --parser=typescript --write \"**/*.ts?(x)\"",
+		"biome": "biome format . --write --staged"
+	},
+	"gitHooks": {
+		"pre-commit": "lint-staged --allow-empty"
+	},
+	"lint-staged": {
+		"*.{css,md}": ["prettier --write"],
+		"*.(j|t)s?(x)": ["biome format . --write --staged"]
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.0.0-beta.1",
+		"lint-staged": "^16.0.0",
+		"prettier": "^3.5.3",
+		"yorkie": "^2.0.0",
+		"turbo": "^2.5.3"
+	}
 }

@@ -1,0 +1,28 @@
+.clickable {
+	cursor: pointer;
+	transition: scale ease 0.12s;
+
+	&:hover {
+		scale: 1.02;
+	}
+
+	&:active {
+		scale: 0.96;
+	}
+}
+
+.inline_flex {
+	display: inline-flex;
+}
+
+.color_bg {
+	background-color: var(--color_bg);
+}
+
+.color_main {
+	color: var(--color_main);
+}
+
+.transparent {
+	opacity: 0;
+}

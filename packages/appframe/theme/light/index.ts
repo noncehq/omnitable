@@ -1,0 +1,27 @@
+export default {
+	color_std: 'white',
+	color_std_rgb: '255,255,255',
+	color_contrast: 'black',
+	color_contrast_rgb: '0,0,0',
+
+	color_text: '#000000',
+	color_text_rgb: '0,0,0',
+	color_text_sub: 'rgba(0,0,0,0.9)',
+	color_text_sublight: 'rgba(0,0,0,0.81)',
+	color_text_grey: 'rgba(0,0,0,0.72)',
+	color_text_greylight: 'rgba(0,0,0,0.6)',
+	color_text_light: 'rgba(0,0,0,0.48)',
+	color_text_softlight: 'rgba(0,0,0,0.36)',
+	color_bg: '#ffffff',
+	color_bg_rgb: '255,255,255',
+	color_bg_1: '#fafafa',
+	color_bg_1_rgb: '250,250,250',
+	color_bg_2: '#f0f0f0',
+	color_bg_2_rgb: '240,240,240',
+	color_border: 'rgba(0, 0, 0, 0.09)',
+	color_border_light: 'rgba(0, 0, 0, 0.06)',
+	color_border_soft: 'rgba(0, 0, 0, 0.036)',
+	color_border_softlight: 'rgba(0, 0, 0, 0.021)',
+	shadow: '0 0 30px rgba(var(--color_text_rgb), 0.072)',
+	wave: 'rgba(var(--color_main_rgb), 0.06)'
+}

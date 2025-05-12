@@ -1,0 +1,30 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "ESNext",
+		"skipLibCheck": true,
+		"lib": ["ESNEXT", "DOM"],
+		"moduleResolution": "bundler",
+		"declaration": true,
+		"emitDeclarationOnly": true,
+		"strict": false,
+		"outDir": "dist",
+		"baseUrl": "../",
+		"isolatedModules": false,
+		"esModuleInterop": true,
+		"importHelpers": true,
+		"jsx": "react-jsx",
+		"allowImportingTsExtensions": true,
+		"paths": {
+			"@appframe/*": ["./appframe/*"]
+		},
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true
+	},
+	"include": ["**/*.ts", "**/*.tsx"],
+	"ts-node": {
+		"compilerOptions": {
+			"module": "commonjs"
+		}
+	}
+}

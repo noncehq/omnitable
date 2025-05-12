@@ -1,0 +1,30 @@
+.omni-message {
+	top: initial !important;
+	bottom: 0px !important;
+
+	.omni-message-notice-wrapper {
+		.omni-message-notice {
+			padding: 0 !important;
+			margin-top: -8px;
+			text-align: right !important;
+
+			.omni-message-notice-content {
+				padding: 3px 6px;
+				border-radius: 4px;
+				outline: var(--border);
+				font-size: 12px;
+
+				.omni-message-custom-content {
+					display: flex;
+					align-items: center;
+
+					.omni-icon {
+						margin-inline-end: 4px;
+						color: var(--color_text);
+						font-size: 12px;
+					}
+				}
+			}
+		}
+	}
+}
