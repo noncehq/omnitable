@@ -6,7 +6,7 @@ import { $, is_server } from 'stk/utils'
 
 import { X } from '@phosphor-icons/react'
 
-import styles from './index.css'
+import styles from './index.module.css'
 
 import type { MouseEvent, ReactNode, CSSProperties } from 'react'
 

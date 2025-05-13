@@ -1,4 +1,4 @@
-import type Model from '../src/model'
+import type Model from '../model'
 import type { Omnitable } from '../types'
 
 export interface IPropsSort {
@@ -161,22 +161,16 @@ export interface IPropsCol {
 export interface IPropsComponent {
 	column: Model['table_columns'][number]
 	value?: any
-	row_index: number
-	editing: boolean
+	row_index?: number
+	editing?: boolean
 	item?: any
 	group_replace?: string | number
+	disabled?: boolean
+	force_type?: string
+	use_by_filter?: boolean
+	use_by_form?: boolean
 	onFocus?: (v?: any) => void
 	onBlur?: () => void
-	onChange?: (v: any) => void
-}
-
-export interface IPropsFormComponent {
-	column: Model['table_columns'][number]
-	disabled?: boolean
-	value?: any
-	item?: any
-	use_by_filter?: boolean
-	force_type?: string
 	onChange?: (v: any) => void
 }
 

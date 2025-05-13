@@ -200,7 +200,8 @@ export namespace Omnitable {
 				// 附带的请求参数
 				query?: Record<string, any>
 			}
-			mode?: 'single' | 'multiple' | 'tags'
+			single?: boolean
+			mode?: 'multiple' | 'tags'
 			placeholder?: string
 			borderless?: boolean
 		}
@@ -232,7 +233,7 @@ export namespace Omnitable {
 		label?: ReactNode
 		value: string | number | boolean | '__self__'
 		color: PresetColor | string | ((v: TagOption['value']) => PresetColor | string)
-		icon?: string | ((v: TagOption['value']) => string)
+		icon?: ReactNode | ((v: TagOption['value']) => ReactNode)
 	}
 
 	export type Date = {

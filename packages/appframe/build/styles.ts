@@ -7,6 +7,6 @@ const source = readFileSync(from)
 
 const plugins = ['autoprefixer', 'postcss-import', 'postcss-nested', 'postcss-calc']
 
-const { css } = await postcss(plugins.map(item => require(item))).process(source, { from })
+const { css } = await postcss(plugins.map((item) => require(item))).process(source, { from })
 
 writeFileSync(to, css)

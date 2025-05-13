@@ -1,7 +1,6 @@
 import { useMemo } from 'react'
 import { $ } from 'stk/utils'
 
-import { Icon } from '../../components'
 import { preset_color } from '../../metadata'
 import styles from './index.module.css'
 
@@ -72,9 +71,7 @@ const Index = (props: ComponentType<Omnitable.Tag['props']>) => {
 						className='icon_wrap flex justify_center align_center'
 						style={{ width: icon_size, height: icon_size, fontSize: icon_size }}
 					>
-						<Icon
-							id={typeof option.icon === 'function' ? option.icon(value) : option.icon}
-						></Icon>
+						{typeof option.icon === 'function' ? option.icon(value) : option.icon}
 					</span>
 				) : (
 					<span

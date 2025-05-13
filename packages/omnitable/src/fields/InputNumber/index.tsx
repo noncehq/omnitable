@@ -35,4 +35,4 @@ const Index = (props: ComponentType<Omnitable.InputNumber['props']>) => {
 	)
 }
 
-export default $.memo(Index)
+export default $.memo(Index as any)

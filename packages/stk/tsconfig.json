@@ -10,7 +10,7 @@
 		"strict": false,
 		"outDir": "dist",
 		"baseUrl": ".",
-		"isolatedModules": false,
+		"isolatedModules": true,
 		"esModuleInterop": true,
 		"importHelpers": true,
 		"jsx": "react-jsx",

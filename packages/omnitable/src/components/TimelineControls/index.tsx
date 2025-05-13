@@ -1,10 +1,10 @@
 import { useMemoizedFn } from 'ahooks'
 import { Select } from 'antd'
+import { LoadingCircle } from 'appframe/components'
 import dayjs from 'dayjs'
 import { $ } from 'stk/utils'
 
 import { ArrowCounterClockwise, CaretLeft, CaretRight } from '@phosphor-icons/react'
-import { LoadingCircle } from '@website/components'
 
 import { timeline_args_map, timeline_type_options } from '../../metadata'
 import styles from './index.module.css'

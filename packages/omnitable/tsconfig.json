@@ -10,7 +10,7 @@
 		"strict": false,
 		"outDir": "dist",
 		"baseUrl": ".",
-		"isolatedModules": false,
+		"isolatedModules": true,
 		"esModuleInterop": true,
 		"importHelpers": true,
 		"jsx": "react-jsx",
@@ -21,7 +21,7 @@
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true
 	},
-	"include": ["../../typings", "src", "build"],
+	"include": ["../../typings", "src"],
 	"ts-node": {
 		"compilerOptions": {
 			"module": "commonjs"

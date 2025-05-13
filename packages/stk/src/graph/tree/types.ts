@@ -1,2 +1,2 @@
-export { NodeType as Node, Options } from './layout/hierarchy'
-export { Direction } from './layout/layout'
+export type { NodeType as Node, Options } from './layout/hierarchy'
+export type { Direction } from './layout/layout'

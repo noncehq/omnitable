@@ -40,7 +40,7 @@ const Index = (props: IPropsStat) => {
 		if (!items.length) return onReset()
 
 		if (items.every(item => item.field && item.type)) {
-			onChangeStat(uniqBy(items, item => `${item.field}-${item.type}`))
+			onChangeStat(uniqBy(items, (item: IPropsStat['stat_params'][number]) => `${item.field}-${item.type}`))
 		}
 	})
 

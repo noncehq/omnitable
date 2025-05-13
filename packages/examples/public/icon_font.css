@@ -1,0 +1,31 @@
+/** WorkSans */
+@font-face {
+	font-family: 'WorkSans';
+	font-style: normal;
+	src:
+		local('WorkSans'),
+		url('./font/WorkSans/WorkSans.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'WorkSans';
+	font-style: italic;
+	src:
+		local('WorkSans'),
+		url('./font/WorkSans/WorkSans-Italic.ttf') format('truetype');
+}
+
+/** STIXTwoText */
+@font-face {
+	font-family: 'STIXTwoText';
+	font-style: normal;
+	src:
+		local('STIXTwoText'),
+		url('./font/STIXTwoText/STIXTwoText.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'STIXTwoText';
+	font-style: italic;
+	src:
+		local('STIXTwoText'),
+		url('./font/STIXTwoText/STIXTwoText-Italic.ttf') format('truetype');
+}

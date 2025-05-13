@@ -14,7 +14,7 @@ import { $, isMillisecondTimestamp } from 'stk/utils'
 
 import { timeline_args_map } from './metadata'
 
-import type { Omnitable } from '../types'
+import type { Omnitable } from './types'
 import type { useAppProps } from 'antd/es/app/context'
 import type { IReactionDisposer, Lambda } from 'mobx'
 import type { StatType } from './metadata'

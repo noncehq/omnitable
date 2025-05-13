@@ -1,7 +1,7 @@
 import { Loader2 } from 'lucide-react'
 import { $ } from 'stk/utils'
 
-import styles from './index.css'
+import styles from './index.module.css'
 
 export interface IProps {
 	className?: HTMLDivElement['className']

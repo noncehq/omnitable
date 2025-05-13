@@ -34,7 +34,11 @@
 		"rfdc": "^1.4.1",
 		"smoothscroll-for-websites": "^1.5.1",
 		"stk": "workspace:*",
-		"tslib": "^2.8.1"
+		"omnitable": "workspace:*",
+		"appframe": "workspace:*",
+		"tslib": "^2.8.1",
+		"react-router": "^7.6.0",
+		"react-router-dom": "^7.6.0"
 	},
 	"devDependencies": {
 		"@rspack/cli": "1.3.10",
@@ -59,6 +63,8 @@
 		"react-refresh": "^0.17.0",
 		"tinyglobby": "^0.2.13",
 		"typescript": "^5.8.3",
-		"wrangler": "^4.14.4"
+		"wrangler": "^4.14.4",
+		"@rspack/plugin-react-refresh": "^1.4.3",
+		"ts-node": "^10.9.2"
 	}
 }

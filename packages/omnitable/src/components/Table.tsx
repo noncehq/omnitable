@@ -1,8 +1,7 @@
 import { useMemoizedFn } from 'ahooks'
 import { Empty } from 'antd'
 import { useLayoutEffect, useRef, Fragment } from 'react'
-import { $ } from 'stk/utils'
-import StickyTableHeader from 'stk/utils/StickyTableHeader'
+import { $, StickyTableHeader } from 'stk/utils'
 
 import Row from './Row'
 import Th from './Th'
