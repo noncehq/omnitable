@@ -16,13 +16,12 @@
 		"jsx": "react-jsx",
 		"allowImportingTsExtensions": true,
 		"paths": {
-			"@appframe/*": ["./appframe/*"]
+			"@/*": ["./src/*"]
 		},
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true
 	},
-	"include": ["**/*.ts", "**/*.tsx"],
-	"exclude": ["./node_modules", "./build", "./rspack.config.ts"],
+	"include": ["../../typings", "src", "build"],
 	"ts-node": {
 		"compilerOptions": {
 			"module": "commonjs"

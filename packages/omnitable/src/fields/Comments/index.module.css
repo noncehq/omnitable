@@ -1,0 +1,68 @@
+._local {
+	:global {
+		.form_items {
+			margin-bottom: 16px;
+
+			.form_item_wrap {
+				padding-bottom: 16px;
+				padding-left: 16px;
+
+				&:first-child {
+					&::after {
+						height: calc(100% - 5px);
+					}
+				}
+
+				&:last-child {
+					padding-bottom: 0;
+				}
+
+				&::before {
+					position: absolute;
+					top: 5px;
+					left: 0.6px;
+					width: 4.8px;
+					height: 4.8px;
+					border-radius: 50%;
+					background-color: var(--color_text);
+					content: "";
+				}
+
+				&::after {
+					position: absolute;
+					bottom: 0;
+					left: 2px;
+					width: 2px;
+					height: 100%;
+					background-color: var(--color_border_light);
+					content: "";
+				}
+
+				.item_header {
+					line-height: 1;
+					margin-bottom: 8px;
+					color: var(--color_text_light);
+					font-size: 12px;
+
+					.field_role {
+						width: unset !important;
+						line-height: 1;
+						padding: 0;
+						border-radius: unset;
+						color: var(--color_text_light);
+						font-size: 12px;
+					}
+				}
+
+				.field_text {
+					&:disabled {
+						border: none;
+						color: var(--color_text);
+						background-color: unset;
+						background-color: var(--color_bg_1);
+					}
+				}
+			}
+		}
+	}
+}

@@ -5,12 +5,21 @@
 	"author": "1yasa",
 	"license": "MIT",
 	"sideEffects": false,
-	"keywords": ["react", "nodejs", "web", "utils", "typescript"],
-	"files": ["./dist", "./package.json", "./README.md"],
+	"keywords": [
+		"react",
+		"nodejs",
+		"web",
+		"utils",
+		"typescript"
+	],
+	"files": [
+		"./dist",
+		"./package.json",
+		"./README.md"
+	],
 	"exports": {
 		"./common": {
 			"types": "./dist/common/index.d.ts",
-			"require": "./dist/common/index.js",
 			"import": "./dist/common/index.js",
 			"default": "./dist/common/index.js"
 		},
@@ -48,6 +57,11 @@
 			"types": "./dist/graph/index.d.ts",
 			"import": "./dist/graph/index.js",
 			"default": "./dist/graph/index.js"
+		},
+		"./utils": {
+			"types": "./dist/utils/index.d.ts",
+			"import": "./dist/utils/index.js",
+			"default": "./dist/utils/index.js"
 		}
 	},
 	"scripts": {
@@ -62,7 +76,9 @@
 		"mobx": "^6.13.7",
 		"react": "19.1.0",
 		"react-dom": "19.1.0",
-		"scheduler": "^0.26.0"
+		"scheduler": "^0.26.0",
+		"classix": "^2.2.2",
+		"rfdc": "^1.4.1"
 	},
 	"devDependencies": {
 		"@rspack/cli": "1.3.9",

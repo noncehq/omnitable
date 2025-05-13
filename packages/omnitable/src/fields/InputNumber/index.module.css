@@ -1,0 +1,31 @@
+._local {
+	&.use_by_form {
+		:global {
+			.ani-input-number {
+				width: 100% !important;
+				height: 30px;
+				line-height: 30px;
+				padding: 0 7px;
+				border: var(--border);
+			}
+		}
+	}
+
+	&.disabled {
+		:global {
+			.ani-input-number {
+				background-color: var(--color_border_soft);
+			}
+		}
+	}
+
+	:global {
+		.ani-input-number {
+			width: unset !important;
+
+			.ani-input-number-input {
+				padding: 0;
+			}
+		}
+	}
+}

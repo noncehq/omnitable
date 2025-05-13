@@ -1,0 +1,54 @@
+._local {
+	&.use_by_form {
+		:global {
+			.ani-picker {
+				height: 30px;
+				line-height: 30px;
+			}
+		}
+	}
+
+	:global {
+		.ani-picker {
+			height: 26px;
+			line-height: 26px;
+			padding: 0 7px;
+
+			.ani-picker-input {
+				height: 100%;
+
+				input {
+					font-size: 14px;
+				}
+			}
+		}
+
+		.text_wrap {
+			height: 26px;
+			line-height: 26px;
+			padding: 0 7px;
+			border: 1px solid transparent;
+			border-radius: var(--radius);
+		}
+	}
+}
+
+.popup {
+	:global {
+		.ani-picker-body {
+			padding: 0 6px !important;
+		}
+
+		.ani-picker-cell {
+			padding: 3px !important;
+		}
+
+		.ani-picker-ranges {
+			border-top: var(--border);
+
+			.ani-picker-now-btn {
+				color: var(--color_text);
+			}
+		}
+	}
+}

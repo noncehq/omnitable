@@ -1,8 +1,7 @@
 {
-	"name": "omnitable",
-	"author": "1yasa",
+	"name": "monorepo",
+      "private": true,
 	"version": "0.0.0",
-	"homepage": "https://github.com/openages/animus",
 	"packageManager": "pnpm@9.15.5",
 	"scripts": {
 		"dev": "turbo run dev",
@@ -24,6 +23,9 @@
 		"lint-staged": "^16.0.0",
 		"prettier": "^3.5.3",
 		"yorkie": "^2.0.0",
-		"turbo": "^2.5.3"
+		"turbo": "^2.5.3",
+		"@rspack/core": "1.3.9",
+            "@types/node": "^22.15.17",
+		"@types/react": "^19.1.4"
 	}
 }

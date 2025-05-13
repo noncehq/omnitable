@@ -1,0 +1,55 @@
+.empty {
+	:global {
+		svg {
+			color: var(--color_text_softlight);
+			font-size: 60px;
+		}
+	}
+}
+
+._local {
+	:global {
+		.view_item_wrap {
+			padding: 0 16px;
+			margin-bottom: 16px;
+			border: var(--border);
+			border-radius: var(--radius);
+
+			&:first-child {
+				padding-top: 0;
+			}
+
+			.view_option {
+				padding: 16px 0;
+				border-bottom: var(--border);
+
+				&:last-child {
+					border-bottom: none;
+				}
+
+				&.name_wrap {
+					.view_name {
+						padding: 0;
+						font-size: 16px;
+						font-weight: 500;
+					}
+
+					.view_actions {
+						gap: 8px;
+
+						.btn {
+							&_remove {
+								width: 30px;
+								padding: 0;
+							}
+
+							&_apply {
+								padding: 0 8px;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

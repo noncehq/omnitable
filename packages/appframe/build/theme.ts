@@ -1,11 +1,11 @@
 import { writeFileSync } from 'fs'
 import { join } from 'path'
 
-import common from '../theme/common'
-import dark from '../theme/dark'
-import light from '../theme/light'
+import common from '../src/theme/common'
+import dark from '../src/theme/dark'
+import light from '../src/theme/light'
 
-const output_path = join(process.cwd(), `/styles`)
+const output_path = join(process.cwd(), `/src/styles`)
 
 const getVars = (theme: any) => {
 	return Object.keys(theme).reduce((total, key: string) => {
