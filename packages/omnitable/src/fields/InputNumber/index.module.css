@@ -1,7 +1,7 @@
 ._local {
 	&.use_by_form {
 		:global {
-			.ani-input-number {
+			.omni-input-number {
 				width: 100% !important;
 				height: 30px;
 				line-height: 30px;
@@ -13,17 +13,17 @@
 
 	&.disabled {
 		:global {
-			.ani-input-number {
+			.omni-input-number {
 				background-color: var(--color_border_soft);
 			}
 		}
 	}
 
 	:global {
-		.ani-input-number {
+		.omni-input-number {
 			width: unset !important;
 
-			.ani-input-number-input {
+			.omni-input-number-input {
 				padding: 0;
 			}
 		}

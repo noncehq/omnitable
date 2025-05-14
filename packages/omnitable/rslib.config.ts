@@ -1,30 +1,23 @@
-import { pluginReact } from '@rsbuild/plugin-react'
-import { defineConfig } from '@rslib/core'
+import { deepmerge } from 'deepmerge-ts'
 
+import { pluginReact } from '@rsbuild/plugin-react'
+
+import { rslib } from '../../config'
 import { dependencies } from './package.json'
 
-const is_dev = process.env.NODE_ENV === 'development'
-const is_prod = process.env.NODE_ENV === 'production'
-const postcss_plugins = ['autoprefixer', 'postcss-import', 'postcss-nested', 'postcss-calc']
+import type { RslibConfig } from '@rslib/core'
 
-export default defineConfig({
-	mode: is_dev ? 'development' : 'production',
-	lib: [{ format: 'esm' }],
+export default deepmerge(rslib, {
 	source: {
 		entry: {
 			index: './src/index.tsx'
 		}
 	},
 	output: {
-		target: 'web',
-		injectStyles: true,
-		cleanDistPath: is_prod,
-		externals: Object.keys(dependencies)
-	},
-	plugins: [pluginReact()],
-	tools: {
-		postcss: (_, { addPlugins }) => {
-			addPlugins(postcss_plugins.map(item => require(item)))
+		externals: Object.keys(dependencies),
+		filename: {
+			js: 'index.js'
 		}
-	}
-})
+	},
+	plugins: [pluginReact()]
+} as Partial<RslibConfig>)

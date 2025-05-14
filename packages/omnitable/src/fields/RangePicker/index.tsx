@@ -27,7 +27,7 @@ const Index = (props: ComponentType<Omnitable.RangePicker['props']>) => {
 				<RangePicker
 					{...self_props}
 					showTime
-					popupClassName={styles.popup}
+					classNames={{ popup: { root: styles.popup } }}
 					className='w_100'
 					placement='bottomLeft'
 					suffixIcon={null}

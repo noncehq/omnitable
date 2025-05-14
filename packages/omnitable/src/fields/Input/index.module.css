@@ -1,7 +1,7 @@
 ._local {
 	&.use_by_form {
 		:global {
-			.ani-input {
+			.omni-input {
 				width: 100%;
 				height: 30px;
 				line-height: 30px;
@@ -12,14 +12,14 @@
 
 	&.disabled {
 		:global {
-			.ani-input {
+			.omni-input {
 				background-color: var(--color_border_soft);
 			}
 		}
 	}
 
 	:global {
-		.ani-input {
+		.omni-input {
 			overflow-x: unset;
 			padding: 0;
 		}

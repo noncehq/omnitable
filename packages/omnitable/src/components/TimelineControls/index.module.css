@@ -28,11 +28,11 @@
 		}
 
 		.type_wrap {
-			.ani-select-selector {
+			.omni-select-selector {
 				padding: 0 !important;
 				border: none !important;
 
-				.ani-select-selection-item {
+				.omni-select-selection-item {
 					font-weight: 500;
 				}
 			}

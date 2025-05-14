@@ -18,6 +18,10 @@ export default ({
 		chunkSplit: { strategy: 'split-by-module' }
 	},
 	tools: {
+            lightningcssLoader: {
+			targets: 'chrome >= 120',
+			exclude: { isSelector: true }
+		},
 		postcss: (_, { addPlugins }) => {
 			addPlugins(postcss_plugins.map(item => require(item)))
 		}

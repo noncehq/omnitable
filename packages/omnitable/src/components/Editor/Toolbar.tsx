@@ -98,7 +98,7 @@ const Index = (props: IProps) => {
 					<Popover
 						trigger={['click']}
 						placement='bottom'
-						destroyTooltipOnHide
+						destroyOnHidden
 						content={
 							<Highlight
 								getColorActive={getColorActive}
@@ -152,7 +152,7 @@ const Index = (props: IProps) => {
 					<Popover
 						trigger={['click']}
 						placement='bottom'
-						destroyTooltipOnHide
+						destroyOnHidden
 						content={<TableActions editor={editor} />}
 						key='table'
 					>

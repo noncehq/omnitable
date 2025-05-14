@@ -8,12 +8,12 @@
 	margin-bottom: 12px;
 
 	:global {
-		.ani-popover-inner {
+		.omni-popover-inner {
 			padding: 16px !important;
 		}
 
 		.fields_popover {
-			.ani-popover-inner {
+			.omni-popover-inner {
 				padding: 8px !important;
 			}
 		}
@@ -101,12 +101,12 @@
 					margin-bottom: 16px;
 				}
 
-				.ani-form-item {
+				.omni-form-item {
 					margin-bottom: 24px;
 				}
 
-				.ani-select-selector {
-					.ani-select-selection-item {
+				.omni-select-selector {
+					.omni-select-selection-item {
 						border-radius: var(--radius_small_0) !important;
 					}
 				}
@@ -182,7 +182,7 @@
 					margin-top: 16px;
 				}
 
-				.ani-form-item {
+				.omni-form-item {
 					margin-bottom: 0;
 				}
 
@@ -388,7 +388,11 @@
 					&.selected {
 						&.has_row_bg {
 							td {
-								background-color: color-mix(in srgb, var(--row_bg) 7.2%, transparent) !important;
+								background-color: color-mix(
+									in srgb,
+									var(--row_bg) 7.2%,
+									transparent
+								) !important;
 							}
 						}
 					}
@@ -468,11 +472,11 @@
 	padding: 12px 0;
 
 	:global {
-		.ani-pagination {
+		.omni-pagination {
 			position: relative;
 			align-items: center;
 
-			.ani-pagination-total-text {
+			.omni-pagination-total-text {
 				position: absolute;
 				left: 0;
 				color: var(--color_text_greylight);
@@ -485,7 +489,7 @@
 	padding: 18px !important;
 
 	:global {
-		.ani-form-item {
+		.omni-form-item {
 			margin-bottom: 18px;
 
 			&-label {
@@ -493,7 +497,7 @@
 			}
 		}
 
-		.ani-picker {
+		.omni-picker {
 			height: 30px;
 			line-height: 30px;
 		}

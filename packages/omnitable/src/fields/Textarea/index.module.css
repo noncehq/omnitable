@@ -1,14 +1,14 @@
 ._local {
 	&.use_by_form {
 		:global {
-			.ani-input {
+			.omni-input {
 				border: var(--border);
 			}
 		}
 	}
 
 	:global {
-		.ani-input {
+		.omni-input {
 			resize: none;
 			white-space: wrap;
 

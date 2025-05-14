@@ -34,7 +34,7 @@ const Index = (props: ComponentType<Omnitable.Select['props']>) => {
 							className='icon_wrap flex justify_center align_center'
 							style={{ width: 16, height: 16 }}
 						>
-							<img src={`/icons/${item.icon}.svg`} alt='icon' />
+							<i className={`ph ph-${item.icon}`}></i>
 						</div>
 						<span className='text ml_4'>{item.label}</span>
 					</div>
@@ -71,7 +71,7 @@ const Index = (props: ComponentType<Omnitable.Select['props']>) => {
 					{...rest_props}
 					{...search_props}
 					className={$.cx(w_100)}
-					popupClassName={$.cx(styles.popup)}
+					classNames={{ popup: { root: styles.popup } }}
 					size={use_by_form ? 'middle' : 'small'}
 					popupMatchSelectWidth={false}
 					virtual={false}

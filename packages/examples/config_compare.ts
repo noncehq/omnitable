@@ -1,6 +1,6 @@
 import Decimal from 'decimal.js'
 
-import type { Omnitable } from './types'
+import type { Omnitable } from 'omnitable'
 
 export default {
 	name: 'table_compare',

@@ -8,8 +8,8 @@
 	}
 
 	:global {
-		.ani-select-disabled,
-		.ani-select-open {
+		.omni-select-disabled,
+		.omni-select-open {
 			.custom_icon_wrap,
 			img {
 				opacity: 0.3;
@@ -28,8 +28,8 @@
 			}
 		}
 
-		.ani-select-selector {
-			.ani-select-selection-item {
+		.omni-select-selector {
+			.omni-select-selection-item {
 				border-radius: var(--radius_small_0) !important;
 			}
 		}
@@ -38,15 +38,15 @@
 
 .popup {
 	:global {
-		.ani-select-item {
+		.omni-select-item {
 			padding: 3px 9px !important;
 		}
 
-		.ani-select-item-empty {
+		.omni-select-item-empty {
 			display: flex !important;
 			justify-content: center;
 
-			.ani-spin {
+			.omni-spin {
 				display: flex;
 				align-items: center;
 				justify-content: center;

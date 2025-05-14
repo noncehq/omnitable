@@ -30,12 +30,12 @@
 
 .dropdown {
 	:global {
-		.ani-dropdown-menu {
-			.ani-dropdown-menu-item {
+		.omni-dropdown-menu {
+			.omni-dropdown-menu-item {
 				min-width: 108px;
 				padding: 3px 6px !important;
 
-				.ani-dropdown-menu-item-icon {
+				.omni-dropdown-menu-item-icon {
 					margin-inline-end: 6px !important;
 				}
 			}

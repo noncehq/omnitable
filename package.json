@@ -6,8 +6,9 @@
 	"scripts": {
 		"dev": "turbo run dev",
 		"build": "turbo run build",
-		"dev:core": "turbo run dev --filter=core",
-		"build:core": "turbo run build --filter=core",
+		"build:deps": "bun ./build/deps",
+		"dev:omnitable": "turbo run dev --filter=omnitable",
+		"build:omnitable": "turbo run build --filter=omnitable",
 		"prettier": "prettier --parser=typescript --write \"**/*.ts?(x)\"",
 		"biome": "biome format . --write --staged"
 	},
@@ -26,6 +27,10 @@
 		"turbo": "^2.5.3",
 		"@rslib/core": "^0.6.9",
             "@types/node": "^22.15.17",
-		"@types/react": "^19.1.4"
+		"@types/react": "^19.1.4",
+            "bun": "^1.2.13",
+		"bun-types": "^1.2.13",
+		"lodash-es": "^4.17.21",
+		"@types/lodash-es": "^4.17.12"
 	}
 }

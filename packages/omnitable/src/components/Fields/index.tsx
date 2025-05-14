@@ -63,7 +63,7 @@ const Index = (props: IPropsFields) => {
 			trigger={['click']}
 			placement='bottomRight'
 			content={Content}
-			destroyTooltipOnHide
+			destroyOnHidden
 		>
 			<div>
 				<button className='header_btn_wrap border_box flex align_center clickable'>

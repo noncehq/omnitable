@@ -59,7 +59,6 @@ const Index = (props: IPropsCol) => {
 
 	const props_component: IPropsComponent = {
 		column,
-		row_index,
 		editing: focus || hover
 	}
 

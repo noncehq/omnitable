@@ -161,12 +161,10 @@ export interface IPropsCol {
 export interface IPropsComponent {
 	column: Model['table_columns'][number]
 	value?: any
-	row_index?: number
-	editing?: boolean
 	item?: any
-	group_replace?: string | number
-	disabled?: boolean
 	force_type?: string
+	editing?: boolean
+	disabled?: boolean
 	use_by_filter?: boolean
 	use_by_form?: boolean
 	onFocus?: (v?: any) => void

@@ -69,7 +69,7 @@ const Index = (props: ComponentType<Omnitable.Operation['props']>) => {
 					<Dropdown
 						rootClassName={styles.dropdown}
 						trigger={['click']}
-						destroyPopupOnHide
+						destroyOnHidden
 						getPopupContainer={() => document.body}
 						menu={{ items, onClick, onFocus }}
 					>

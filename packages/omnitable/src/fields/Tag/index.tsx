@@ -71,7 +71,9 @@ const Index = (props: ComponentType<Omnitable.Tag['props']>) => {
 						className='icon_wrap flex justify_center align_center'
 						style={{ width: icon_size, height: icon_size, fontSize: icon_size }}
 					>
-						{typeof option.icon === 'function' ? option.icon(value) : option.icon}
+						<i
+							className={`ph ph-${typeof option.icon === 'function' ? option.icon(value) : option.icon}`}
+						></i>
 					</span>
 				) : (
 					<span

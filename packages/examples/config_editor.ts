@@ -1,4 +1,4 @@
-import type { Omnitable } from './types'
+import type { Omnitable } from 'omnitable'
 
 export default {
 	name: 'table_normal',

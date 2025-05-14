@@ -12,8 +12,7 @@ export default deepmerge(rslib, {
 		entry: {
 			components: './src/components/index.ts',
 			theme: './src/theme/index.ts',
-			preset: './src/preset/index.ts',
-			antd_next15_polyfill: './src/antd_next15_polyfill/index.ts'
+			preset: './src/preset/index.ts'
 		}
 	},
 	output: {

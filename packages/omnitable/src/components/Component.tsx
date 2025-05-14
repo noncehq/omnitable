@@ -16,12 +16,24 @@ import Textarea from '../fields/Textarea'
 import type { IPropsComponent } from '../types'
 
 const Index = (props: IPropsComponent) => {
-	const { column, value, editing, item, onFocus, onBlur, onChange } = props
+	const {
+		column,
+		value,
+		item,
+		force_type,
+		editing,
+		disabled,
+		use_by_filter,
+		use_by_form,
+		onFocus,
+		onBlur,
+		onChange
+	} = props
 	const { type, width, props: self_props } = column
 
 	const Component = useMemo(() => {
 		// 这里不使用React.lazy进行动态导入，因为单元格进入编辑状态时会闪现空白，如果是Form可使用动态导入
-		switch (type) {
+		switch (force_type || type) {
 			case 'text':
 				return Text
 			case 'input':
@@ -45,10 +57,26 @@ const Index = (props: IPropsComponent) => {
 			case 'operation':
 				return Operation
 		}
-	}, [type])
+	}, [force_type, type])
 
-	// @ts-ignore
-	return <Component {...{ self_props, width, value, editing, item, onFocus, onBlur, onChange }} />
+	return (
+		// @ts-ignore
+		<Component
+			{...{
+				self_props,
+				value,
+				editing,
+				item,
+				disabled,
+				use_by_filter,
+				use_by_form,
+				onFocus,
+				onBlur,
+				onChange
+			}}
+			width={use_by_form ? undefined : width}
+		/>
+	)
 }
 
 export default $.memo(Index)
