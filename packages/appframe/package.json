@@ -6,8 +6,7 @@
 	"scripts": {
 		"build": "cross-env NODE_ENV=production rslib build && pnpm run build:theme && pnpm run build:styles && tsc -p ./tsconfig.build.json",
 		"build:theme": "bun ./build/theme",
-		"build:styles": "bun ./build/styles",
-		"build:deps": "bun ./build/deps"
+		"build:styles": "bun ./build/styles"
 	},
 	"exports": {
 		"./components": {
