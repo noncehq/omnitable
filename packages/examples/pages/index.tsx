@@ -1,11 +1,8 @@
 import { useToggle } from 'ahooks'
 import { Modal } from 'appframe/components'
-import Omnitable from 'omnitable'
 import { $ } from 'stk/utils'
 
-import styles from './index.css'
-
-console.log(Omnitable);
+import styles from './index.module.css'
 
 const Index = () => {
 	const [open, { toggle }] = useToggle()
@@ -13,7 +10,9 @@ const Index = () => {
 	return (
 		<div className={$.cx(styles._local)}>
 			<button onClick={toggle}>toggle</button>
-			<Modal open={open} maskClosable onCancel={toggle}>1231</Modal>
+			<Modal open={open} maskClosable onCancel={toggle}>
+				12311231
+			</Modal>
 		</div>
 	)
 }

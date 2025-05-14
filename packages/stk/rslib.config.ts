@@ -1,12 +1,13 @@
-import { defineConfig } from '@rslib/core'
+import { deepmerge } from 'deepmerge-ts'
 
+import { rslib } from '../../config'
 import { dependencies } from './package.json'
+
+import type { RslibConfig } from '@rslib/core'
 
 const modules = ['common', 'dnd', 'emittery', 'mobx', 'react', 'storage', 'dom', 'graph', 'utils']
 
-export default defineConfig({
-	mode: 'production',
-	lib: [{ format: 'esm' }],
+export default deepmerge(rslib, {
 	source: {
 		entry: modules.reduce((total, item) => {
 			total[item] = `./src/${item}/index.ts`
@@ -15,12 +16,6 @@ export default defineConfig({
 		}, {})
 	},
 	output: {
-		target: 'web',
-		injectStyles: true,
-		cleanDistPath: true,
-		filename: {
-			js: '[name]/index.js'
-		},
 		externals: Object.keys(dependencies)
 	}
-})
+} as Partial<RslibConfig>)

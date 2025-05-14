@@ -1,7 +1,7 @@
 import { useOutlet } from 'react-router-dom'
 import { $ } from 'stk/utils'
 
-import styles from './index.css'
+import styles from './index.module.css'
 
 const Index = () => {
 	const outlet = useOutlet()
