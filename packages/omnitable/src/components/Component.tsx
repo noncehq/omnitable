@@ -1,8 +1,10 @@
 import { useMemo } from 'react'
 import { $ } from 'stk/utils'
 
+import Comments from '../fields/Comments'
 import Date from '../fields/Date'
 import DatePicker from '../fields/DatePicker'
+import Editor from '../fields/Editor'
 import Input from '../fields/Input'
 import InputNumber from '../fields/InputNumber'
 import Operation from '../fields/Operation'
@@ -54,6 +56,10 @@ const Index = (props: IPropsComponent) => {
 				return RangePicker
 			case 'priority':
 				return Priority
+			case 'editor':
+				return Editor
+			case 'comments':
+				return Comments
 			case 'operation':
 				return Operation
 		}

@@ -1,0 +1,1 @@
+let t=(t,e,o)=>{let r=o||"sort",a=e-1>=0?t.at(e-1):null,l=t.at(e+1),p=0;return a&&l&&(p=parseFloat(((a[r]+l[r])/2).toFixed(24))),!a&&l&&(p=parseFloat((l[r]/1.00000002).toFixed(24))),a&&!l&&(p=2*a[r]),a||l||(p=666666),t[e][r]=p,{item:t[e],sort:p||666666}};export{t as updateSort};

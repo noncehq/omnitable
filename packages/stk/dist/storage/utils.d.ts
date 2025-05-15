@@ -1,0 +1,18 @@
+import { TargetObject } from './shared';
+export declare const isArray: (arg: any) => arg is any[];
+export declare const isSet: (val: unknown) => val is Set<any>;
+export declare const isMap: (val: unknown) => val is Map<any, any>;
+export declare const isDate: (val: unknown) => val is Date;
+export declare const isRegExp: (val: unknown) => val is RegExp;
+export declare const isFunction: (val: unknown) => val is Function;
+export declare const isNumber: (val: unknown) => val is number;
+export declare const isString: (val: unknown) => val is string;
+export declare const isObject: (val: unknown) => val is Record<any, any>;
+export declare const isIntegerKey: (key: unknown) => boolean;
+export declare const getTypeString: (value: unknown) => string;
+export declare const getRawType: (value: unknown) => string;
+export declare const hasChanged: (value: any, oldValue: any) => boolean;
+export declare function transformJSON(data: string): TargetObject | string;
+export declare function propertyIsInPrototype(object: object, prototypeName: string): boolean;
+export declare const hasOwn: (val: object, key: string | symbol) => key is keyof typeof val;
+export declare function transformEval(code: string): any;

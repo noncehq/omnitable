@@ -3,22 +3,24 @@ import type { RslibConfig } from '@rslib/core'
 const is_dev = process.env.NODE_ENV === 'development'
 const postcss_plugins = ['autoprefixer', 'postcss-import', 'postcss-nested', 'postcss-calc']
 
-export default ({
+export default {
 	mode: is_dev ? 'development' : 'production',
 	lib: [{ format: 'esm' }],
 	output: {
+		minify: is_dev ? false : {},
+		sourceMap: is_dev,
 		target: 'web',
 		injectStyles: true,
 		cleanDistPath: true,
 		filename: {
 			js: '[name]/index.js'
-		},
+		}
 	},
 	performance: {
 		chunkSplit: { strategy: 'split-by-module' }
 	},
 	tools: {
-            lightningcssLoader: {
+		lightningcssLoader: {
 			targets: 'chrome >= 120',
 			exclude: { isSelector: true }
 		},
@@ -26,4 +28,4 @@ export default ({
 			addPlugins(postcss_plugins.map(item => require(item)))
 		}
 	}
-} as RslibConfig)
+} as RslibConfig

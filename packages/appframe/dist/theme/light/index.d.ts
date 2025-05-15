@@ -1,0 +1,27 @@
+declare const _default: {
+    color_std: string;
+    color_std_rgb: string;
+    color_contrast: string;
+    color_contrast_rgb: string;
+    color_text: string;
+    color_text_rgb: string;
+    color_text_sub: string;
+    color_text_sublight: string;
+    color_text_grey: string;
+    color_text_greylight: string;
+    color_text_light: string;
+    color_text_softlight: string;
+    color_bg: string;
+    color_bg_rgb: string;
+    color_bg_1: string;
+    color_bg_1_rgb: string;
+    color_bg_2: string;
+    color_bg_2_rgb: string;
+    color_border: string;
+    color_border_light: string;
+    color_border_soft: string;
+    color_border_softlight: string;
+    shadow: string;
+    wave: string;
+};
+export default _default;

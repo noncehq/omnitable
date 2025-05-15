@@ -1,0 +1,1 @@
+let e=(e,t)=>{let r=e;for(;r;){if(r?.matches(t))return r;r=r?.parentElement}return null};export{e as findParent};
