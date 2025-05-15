@@ -1,9 +1,10 @@
 {
 	"name": "monorepo",
-      "private": true,
+	"private": true,
 	"version": "0.0.0",
 	"packageManager": "pnpm@9.15.5",
 	"scripts": {
+		"prepare": "husky",
 		"dev": "turbo run dev",
 		"build": "turbo run build",
 		"build:deps": "bun ./build/deps",
@@ -12,23 +13,24 @@
 		"prettier": "prettier --parser=typescript --write \"**/*.ts?(x)\"",
 		"biome": "biome format . --write --staged"
 	},
-	"gitHooks": {
-		"pre-commit": "lint-staged --allow-empty"
-	},
 	"lint-staged": {
-		"*.{css,md}": ["prettier --write"],
-		"*.(j|t)s?(x)": ["biome format . --write --staged"]
+		"*.{css,md}": [
+			"prettier --write"
+		],
+		"*.(j|t)s?(x)": [
+			"biome format . --write --staged"
+		]
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.0.0-beta.1",
 		"lint-staged": "^16.0.0",
 		"prettier": "^3.5.3",
-		"yorkie": "^2.0.0",
+		"husky": "^9.1.7",
 		"turbo": "^2.5.3",
 		"@rslib/core": "^0.6.9",
-            "@types/node": "^22.15.17",
+		"@types/node": "^22.15.17",
 		"@types/react": "^19.1.4",
-            "bun": "^1.2.13",
+		"bun": "^1.2.13",
 		"bun-types": "^1.2.13",
 		"lodash-es": "^4.17.21",
 		"@types/lodash-es": "^4.17.12"

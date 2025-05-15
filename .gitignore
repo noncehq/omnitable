@@ -17,6 +17,7 @@ npm-debug.log*
 .svn
 .swc
 @mf-types
+.husky/_
 
 # temp
 **/.tmp
