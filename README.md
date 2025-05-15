@@ -15,7 +15,7 @@ Then add `pnpm-workspace.yaml` in you app root dir, and add below to `pnpm-works
 
 ```yaml
 packages:
-      - 'omnitable/*'
+      - 'omnitable/packages/*'
 ```
 
 Add this to your package.json:

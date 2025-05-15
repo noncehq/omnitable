@@ -81,7 +81,6 @@
 		"postcss-loader": "^8.1.1",
 		"postcss-nested": "^7.0.2",
 		"tinyglobby": "^0.2.13",
-		"ts-node": "^10.9.2",
 		"typescript": "^5.8.3"
 	}
 }

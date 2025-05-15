@@ -1,1 +1,1 @@
-let e=(e,t)=>{let r=e;for(;r;){if(r?.matches(t))return r;r=r?.parentElement}return null};export{e as findParent};
+let e=(e,t)=>{let r=e;for(;r;){if(r?.matches(t))return r;r=r?.parentElement}return null},t=e=>Number(e.replace("px","")),r=(e,t)=>Number(getComputedStyle(e).getPropertyValue(t).replace("px",""));export{e as findParent,r as getComputedStyleValue,t as getStyleValue};

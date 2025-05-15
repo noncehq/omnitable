@@ -92,7 +92,6 @@
 		"deepmerge-ts": "^7.1.5",
 		"fast-glob": "^3.3.3",
 		"fs-extra": "^11.3.0",
-		"ts-node": "^10.9.2",
 		"typescript": "^5.8.3"
 	}
 }

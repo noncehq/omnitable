@@ -10,14 +10,21 @@
 		"useIgnoreFile": true
 	},
 	"files": {
-		"ignoreUnknown": true
+		"ignoreUnknown": true,
+		"includes": [
+			"build/**",
+			"config/**",
+			"packages/**",
+			"!packages/stk/dist/**",
+			"!packages/appframe/dist/**",
+			"!packages/omnitable/dist/**"
+		]
 	},
 	"formatter": {
 		"enabled": true,
 		"lineWidth": 120,
 		"indentWidth": 6,
-		"formatWithErrors": true,
-		"includes": ["build/**", "config/**", "packages/**"]
+		"formatWithErrors": true
 	},
 	"javascript": {
 		"formatter": {
