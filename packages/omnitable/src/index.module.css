@@ -258,16 +258,15 @@
 			border: var(--border);
 			border-radius: var(--radius);
 
-			&.hover {
+			&.clone {
+				border-right-color: transparent;
+				border-bottom: unset;
+				border-left-color: transparent;
 				border-radius: unset;
 			}
 
 			&.edge {
 				border-top: unset;
-				border-right-color: transparent;
-				border-bottom: unset;
-				border-left-color: transparent;
-				border-radius: unset;
 			}
 		}
 

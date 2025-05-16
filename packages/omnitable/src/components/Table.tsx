@@ -26,7 +26,7 @@ const Index = (props: IPropsTable) => {
 	const table = useRef<HTMLTableElement>(null)
 	const clone_table = useRef<HTMLTableElement>(null)
 	const sticky = useRef<StickyTableHeader>(null)
-	const sticky_top = table_props.header_sticky_top || 0
+	const sticky_top = table_props?.header_sticky_top || 0
 
 	useLayoutEffect(() => {
 		if (table.current && clone_table.current) {
@@ -142,10 +142,7 @@ const Index = (props: IPropsTable) => {
 					)}
 				</table>
 			</div>
-			<div
-				className={$.cx('table_container w_100', sticky_top > 0 ? 'hover' : 'edge')}
-				style={{ zIndex: 103 }}
-			>
+			<div className={$.cx('table_container clone w_100', !sticky_top && 'edge')} style={{ zIndex: 103 }}>
 				<table className={table_class} ref={clone_table} />
 			</div>
 		</Fragment>
