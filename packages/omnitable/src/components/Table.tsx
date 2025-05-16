@@ -26,16 +26,17 @@ const Index = (props: IPropsTable) => {
 	const table = useRef<HTMLTableElement>(null)
 	const clone_table = useRef<HTMLTableElement>(null)
 	const sticky = useRef<StickyTableHeader>(null)
+	const sticky_top = table_props.header_sticky_top || 0
 
 	useLayoutEffect(() => {
 		if (table.current && clone_table.current) {
 			sticky.current = new StickyTableHeader(table.current, clone_table.current, {
-				max: table_props.header_sticky_top || 0
+				max: sticky_top
 			})
 
 			return () => sticky.current?.destroy()
 		}
-	}, [sort_params, table_props.header_sticky_top])
+	}, [sort_params, sticky_top])
 
 	const getOrder = useMemoizedFn((item: IPropsTable['table_columns'][number]) => {
 		if (!item.sort || !sort_params.length) return
@@ -141,7 +142,7 @@ const Index = (props: IPropsTable) => {
 					)}
 				</table>
 			</div>
-			<div className='table_container clone w_100' style={{ zIndex: 103 }}>
+			<div className={$.cx('table_container w_100', !sticky_top && 'clone')} style={{ zIndex: 103 }}>
 				<table className={table_class} ref={clone_table} />
 			</div>
 		</Fragment>
