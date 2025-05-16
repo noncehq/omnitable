@@ -142,7 +142,10 @@ const Index = (props: IPropsTable) => {
 					)}
 				</table>
 			</div>
-			<div className={$.cx('table_container w_100', !sticky_top && 'clone')} style={{ zIndex: 103 }}>
+			<div
+				className={$.cx('table_container w_100', sticky_top > 0 ? 'hover' : 'edge')}
+				style={{ zIndex: 103 }}
+			>
 				<table className={table_class} ref={clone_table} />
 			</div>
 		</Fragment>

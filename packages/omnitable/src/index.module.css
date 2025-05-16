@@ -258,7 +258,11 @@
 			border: var(--border);
 			border-radius: var(--radius);
 
-			&.clone {
+			&.hover {
+				border-radius: unset;
+			}
+
+			&.edge {
 				border-top: unset;
 				border-right-color: transparent;
 				border-bottom: unset;
@@ -388,11 +392,7 @@
 					&.selected {
 						&.has_row_bg {
 							td {
-								background-color: color-mix(
-									in srgb,
-									var(--row_bg) 7.2%,
-									transparent
-								) !important;
+								background-color: color-mix(in srgb, var(--row_bg) 7.2%, transparent) !important;
 							}
 						}
 					}
