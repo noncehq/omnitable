@@ -15,7 +15,11 @@ const Index = (props: ComponentType<Omnitable.RangePicker['props']>) => {
 	const { format = 'YYYY-MM-DD HH:mm:ss' } = self_props || {}
 
 	const onChangeDate = useMemoizedFn((v: [Dayjs | null, Dayjs | null] | null) =>
-		onChange?.(v ? [v[0]?.valueOf(), v[1]?.valueOf()] : [])
+		onChange?.(
+			v?.[0] && v?.[1]
+				? [v[0].format('YYYY-MM-DDTHH:mm:ss.SSS'), v[1].format('YYYY-MM-DDTHH:mm:ss.SSS')]
+				: []
+		)
 	)
 
 	return (

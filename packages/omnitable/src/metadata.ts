@@ -89,31 +89,21 @@ export const preset_color = {
 
 export type StatType = (typeof stat_options)[number]['value']
 
-export const common_expressions = ['is empty', 'is not empty']
+export const common_expressions = ['set', 'notSet', 'euqals', 'notEquals']
 
 export const filter_expressions = {
-	string: ['contains', 'does not contain', 'is', 'is not', ...common_expressions],
-	number: [
-		'is',
-		'is not',
-		'is less then',
-		'is less then or euqal to',
-		'is greater then',
-		'is greater then or euqal to',
-		'is between',
-		...common_expressions
+	string: [
+		...common_expressions,
+		'contains',
+		'notContains',
+		'startsWith',
+		'noStartsWith',
+		'endsWith',
+		'notEndsWith'
 	],
-	array: ['has any of', 'has none of', ...common_expressions],
-	date: [
-		'is',
-		'is not',
-		'is before',
-		'is after',
-		'is on or before',
-		'is on or after',
-		'is between',
-		...common_expressions
-	]
+	number: [...common_expressions, 'gt', 'gte', 'lt', 'lte'],
+	array: [...common_expressions, 'has any of', 'has none of'],
+	date: [...common_expressions, 'inDateRange', 'notInDateRange', 'beforeDate', 'afterDate']
 }
 
 export const getFilterComponentType = (datatype: Omnitable.FilterColumn['datatype'], expression: string) => {

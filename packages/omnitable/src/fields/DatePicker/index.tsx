@@ -12,7 +12,7 @@ const Index = (props: ComponentType<Omnitable.DatePicker['props']>) => {
 	const { self_props, width, value, editing, use_by_form, onFocus, onChange } = props
 	const { format = 'MMMM D, YYYY' } = self_props || {}
 
-	const onChangeDate = useMemoizedFn((v: Dayjs) => onChange?.(v.valueOf()))
+	const onChangeDate = useMemoizedFn((v: Dayjs) => onChange?.(v.format('YYYY-MM-DDTHH:mm:ss.SSS')))
 
 	return (
 		<div
