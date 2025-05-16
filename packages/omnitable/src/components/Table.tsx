@@ -29,11 +29,13 @@ const Index = (props: IPropsTable) => {
 
 	useLayoutEffect(() => {
 		if (table.current && clone_table.current) {
-			sticky.current = new StickyTableHeader(table.current, clone_table.current, { max: 0 })
+			sticky.current = new StickyTableHeader(table.current, clone_table.current, {
+				max: table_props.header_sticky_top || 0
+			})
 
 			return () => sticky.current?.destroy()
 		}
-	}, [sort_params])
+	}, [sort_params, table_props.header_sticky_top])
 
 	const getOrder = useMemoizedFn((item: IPropsTable['table_columns'][number]) => {
 		if (!item.sort || !sort_params.length) return

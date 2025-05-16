@@ -15,6 +15,7 @@
 			"build/**",
 			"config/**",
 			"packages/**",
+			"typings/**",
 			"!packages/stk/dist/**",
 			"!packages/appframe/dist/**",
 			"!packages/omnitable/dist/**"

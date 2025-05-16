@@ -58,6 +58,7 @@ export declare namespace Omnitable {
         table: {
             columns: Array<TableColumn>;
             props?: {
+                header_sticky_top?: number;
                 pagesize?: number;
                 border?: boolean;
                 row_click?: boolean;

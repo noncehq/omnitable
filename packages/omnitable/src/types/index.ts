@@ -78,6 +78,7 @@ export namespace Omnitable {
 		table: {
 			columns: Array<TableColumn>
 			props?: {
+				header_sticky_top?: number
 				// 预置的pagesize
 				pagesize?: number
 				border?: boolean
