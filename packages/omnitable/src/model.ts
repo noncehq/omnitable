@@ -185,7 +185,7 @@ export default class Index {
 			this.items = items
 		}
 
-		this.pagination = omit(res.data, 'items')
+		this.pagination = { ...this.pagination, ...omit(res.data, 'items') }
 
 		this.getStatItems()
 
