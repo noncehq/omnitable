@@ -125,10 +125,12 @@ export namespace Omnitable {
 	}
 
 	export interface FilterColumn extends BaseColumn {
+		granularity?: string
 		datatype: 'string' | 'number' | 'array' | 'date'
 	}
 
 	export interface TableColumn extends BaseColumn {
+		measure?: boolean
 		sort?: boolean
 		readonly?: boolean
 		sticky?: boolean

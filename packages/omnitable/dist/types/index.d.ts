@@ -95,9 +95,11 @@ export declare namespace Omnitable {
         span?: number;
     }
     interface FilterColumn extends BaseColumn {
+        granularity?: string;
         datatype: 'string' | 'number' | 'array' | 'date';
     }
     interface TableColumn extends BaseColumn {
+        measure?: boolean;
         sort?: boolean;
         readonly?: boolean;
         sticky?: boolean;
