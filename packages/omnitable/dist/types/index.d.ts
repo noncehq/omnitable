@@ -3,6 +3,7 @@ import type { TextAreaProps } from 'antd/es/input';
 import type { ReactNode } from 'react';
 import type { StatType } from '../metadata';
 import type { CSSProperties } from 'react';
+import type { Model } from '..';
 export * from './components';
 export declare namespace Omnitable {
     type Props = LowCodeConfig | Config;
@@ -10,7 +11,10 @@ export declare namespace Omnitable {
         config_url: string;
     }
     interface Config {
+        locale?: 'en' | 'zh';
+        theme?: 'light' | 'dark';
         name: string;
+        adapter?: Adapter;
         primary?: string;
         baseurl: string;
         actions: {
@@ -84,6 +88,19 @@ export declare namespace Omnitable {
             table?: Fields;
             form?: Fields;
         };
+    }
+    interface AdapterQueryArgs {
+        config: Omnitable.Config;
+        sort_params: Model['sort_params'];
+        filter_relation: Model['filter_relation'];
+        filter_params: Model['filter_params'];
+        page: Model['pagination']['page'];
+        pagesize: Model['pagination']['pagesize'];
+    }
+    interface Adapter {
+        query: (args: AdapterQueryArgs) => Promise<Omnitable.Error | {
+            data: Omnitable.List;
+        }>;
     }
     type Action = string | {
         api: string;
@@ -232,8 +249,8 @@ export declare namespace Omnitable {
     };
     interface List {
         items: Array<any>;
-        page: number;
-        pagesize: number;
         total: number;
+        page?: number;
+        pagesize?: number;
     }
 }

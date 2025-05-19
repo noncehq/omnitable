@@ -24,9 +24,9 @@
 			"import": "./dist/preset/index.js",
 			"default": "./dist/preset/index.js"
 		},
-		"./antd_next15_polyfill": {
-			"import": "./dist/antd_next15_polyfill/index.js",
-			"default": "./dist/antd_next15_polyfill/index.js"
+		"./init.css": {
+			"import": "./dist/init.css",
+			"default": "./dist/init.css"
 		},
 		"./global.css": {
 			"import": "./dist/global.css",

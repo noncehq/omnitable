@@ -7,7 +7,6 @@
 		"prepare": "husky",
 		"dev": "turbo run dev",
 		"build": "turbo run build",
-		"build:deps": "bun ./build/deps",
 		"dev:omnitable": "turbo run dev --filter=omnitable",
 		"build:omnitable": "turbo run build --filter=omnitable",
 		"prettier": "prettier --parser=typescript --write \"**/*.ts?(x)\"",

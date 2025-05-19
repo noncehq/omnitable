@@ -141,21 +141,40 @@ export default class Index {
 	async query(ignore_querying?: boolean, ignore_timeline_query?: boolean) {
 		if (!ignore_querying) this.querying = true
 
-		const { api, params } = this.getAction(this.config.actions.query)
+		let err = null as Error
+		let res = null as Omnitable.Error | { data: Omnitable.List }
 
-		const [err, res] = await to<Omnitable.Error | { data: Omnitable.List }>(
-			ofetch(`${this.config.baseurl}${api}`, {
-				method: 'POST',
-				body: {
+		if (this.config.adapter) {
+			res = await this.config.adapter.query(
+				$.copy({
+					config: this.config,
 					sort_params: this.sort_params,
 					filter_relation: this.filter_relation,
 					filter_params: this.filter_params.filter(i => 'value' in i),
 					page: this.pagination.page,
-					pagesize: this.pagination.pagesize,
-					params
-				}
-			})
-		)
+					pagesize: this.pagination.pagesize
+				})
+			)
+		} else {
+			const { api, params } = this.getAction(this.config.actions.query)
+
+			const response = await to<Omnitable.Error | { data: Omnitable.List }>(
+				ofetch(`${this.config.baseurl}${api}`, {
+					method: 'POST',
+					body: {
+						sort_params: this.sort_params,
+						filter_relation: this.filter_relation,
+						filter_params: this.filter_params.filter(i => 'value' in i),
+						page: this.pagination.page,
+						pagesize: this.pagination.pagesize,
+						params
+					}
+				})
+			)
+
+			err = response[0]
+			res = response[1]
+		}
 
 		if (!ignore_querying) this.querying = false
 

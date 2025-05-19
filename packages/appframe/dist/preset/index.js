@@ -1,1 +1,1 @@
-import"@ant-design/v5-patch-for-react-19";import"@abraham/reflection";import*as e from"mobx";import*as o from"mobx-react-lite";(0,o.enableStaticRendering)("undefined"==typeof window),(0,e.configure)({enforceActions:"never"});
+import"@abraham/reflection";import*as e from"mobx";import*as o from"mobx-react-lite";(0,o.enableStaticRendering)("undefined"==typeof window),(0,e.configure)({enforceActions:"never"});

@@ -1,8 +1,10 @@
 import '@phosphor-icons/web/regular'
+import 'appframe/global.css'
+import 'appframe/preset'
 
 import { useMemoizedFn } from 'ahooks'
 import { App, Button } from 'antd'
-import { Drawer, LoadingCircle } from 'appframe/components'
+import { AntdConfigProvider, Drawer, LoadingCircle } from 'appframe/components'
 import { debounce } from 'lodash-es'
 import { RefreshCw } from 'lucide-react'
 import { observer } from 'mobx-react-lite'
@@ -177,131 +179,138 @@ const Index = (props: Omnitable.Props) => {
 	})
 
 	return (
-		<Provider value={{ base_url: x.config?.baseurl }}>
-			<div className={$.cx(styles._local)}>
-				<div className={$.cx('header_wrap w_100 flex flex_wrap justify_between', styles.header_wrap)}>
-					{x.config && (
-						<div className='flex'>
-							<button
-								className='header_btn_wrap border_box flex align_center clickable mr_8'
-								onClick={onToggleView}
-							>
-								<Eyes className='icon'></Eyes>
-								<span className='label'>View</span>
-								{x.apply_view_name && (
-									<span className='counts flex align_center'>
-										{x.apply_view_name}
-									</span>
+		<AntdConfigProvider locale={x.config?.locale} theme={x.config?.theme}>
+			<Provider value={{ base_url: x.config?.baseurl }}>
+				<div className={$.cx(styles._local)}>
+					<div
+						className={$.cx(
+							'header_wrap w_100 flex flex_wrap justify_between',
+							styles.header_wrap
+						)}
+					>
+						{x.config && (
+							<div className='flex'>
+								<button
+									className='header_btn_wrap border_box flex align_center clickable mr_8'
+									onClick={onToggleView}
+								>
+									<Eyes className='icon'></Eyes>
+									<span className='label'>View</span>
+									{x.apply_view_name && (
+										<span className='counts flex align_center'>
+											{x.apply_view_name}
+										</span>
+									)}
+								</button>
+								{x.sort_columns.length > 0 && <Sort {...props_sort}></Sort>}
+								{x.filter_columns.length > 0 && <Filter {...props_filter}></Filter>}
+								{!x.config?.stat?.hide && <Stat {...props_stat}></Stat>}
+								{!x.config?.group?.hide && <Group {...props_group}></Group>}
+								{x.config?.timeline && (
+									<TimelineControls {...props_timeline_controls}></TimelineControls>
 								)}
-							</button>
-							{x.sort_columns.length > 0 && <Sort {...props_sort}></Sort>}
-							{x.filter_columns.length > 0 && <Filter {...props_filter}></Filter>}
-							{!x.config?.stat?.hide && <Stat {...props_stat}></Stat>}
-							{!x.config?.group?.hide && <Group {...props_group}></Group>}
-							{x.config?.timeline && (
-								<TimelineControls {...props_timeline_controls}></TimelineControls>
+							</div>
+						)}
+						<div className='flex'>
+							{x.config?.refresh && (
+								<button
+									className={$.cx(
+										'header_btn_wrap square border_box flex justify_center align_center clickable mr_8',
+										x.refreshing && 'refreshing'
+									)}
+									onClick={x.onRefresh}
+								>
+									<RefreshCw
+										className='icon'
+										size='0.921em'
+										strokeWidth={1.5}
+									></RefreshCw>
+								</button>
+							)}
+							{x.config?.live && (
+								<button
+									className={$.cx(
+										'header_btn_wrap border_box flex align_center clickable mr_8',
+										x.living && 'living'
+									)}
+									onClick={x.onLive}
+								>
+									{x.living ? (
+										<PauseCircle className='icon'></PauseCircle>
+									) : (
+										<PlayCircle className='icon'></PlayCircle>
+									)}
+									<span className='label'>Live</span>
+								</button>
+							)}
+							<Fields {...props_fields}></Fields>
+							{x.config?.actions?.create && (
+								<Button
+									className='flex justify_center align_center clickable ml_8'
+									type='primary'
+									onClick={onCreate}
+								>
+									<Plus className='icon' weight='bold'></Plus>
+									<span>Create</span>
+								</Button>
 							)}
 						</div>
-					)}
-					<div className='flex'>
-						{x.config?.refresh && (
-							<button
-								className={$.cx(
-									'header_btn_wrap square border_box flex justify_center align_center clickable mr_8',
-									x.refreshing && 'refreshing'
-								)}
-								onClick={x.onRefresh}
-							>
-								<RefreshCw
-									className='icon'
-									size='0.921em'
-									strokeWidth={1.5}
-								></RefreshCw>
-							</button>
+					</div>
+					{x.config?.timeline && <Timeline {...props_timeline}></Timeline>}
+					<div className='body_wrap w_100 flex flex_column relative'>
+						{!x.loading_init && x.querying && (
+							<div className='querying_wrap w_100 h_100 flex justify_center align_center absolute'>
+								<LoadingCircle></LoadingCircle>
+							</div>
 						)}
-						{x.config?.live && (
-							<button
-								className={$.cx(
-									'header_btn_wrap border_box flex align_center clickable mr_8',
-									x.living && 'living'
-								)}
-								onClick={x.onLive}
-							>
-								{x.living ? (
-									<PauseCircle className='icon'></PauseCircle>
-								) : (
-									<PlayCircle className='icon'></PlayCircle>
-								)}
-								<span className='label'>Live</span>
-							</button>
-						)}
-						<Fields {...props_fields}></Fields>
-						{x.config?.actions?.create && (
-							<Button
-								className='flex justify_center align_center clickable ml_8'
-								type='primary'
-								onClick={onCreate}
-							>
-								<Plus className='icon' weight='bold'></Plus>
-								<span>Create</span>
-							</Button>
+						{!x.loading_init && x.config ? (
+							<Fragment>
+								<Table {...props_table}></Table>
+								<Pagination {...props_pagination}></Pagination>
+							</Fragment>
+						) : (
+							<div className='loading_wrap w_100 flex justify_center align_center'>
+								<LoadingCircle></LoadingCircle>
+							</div>
 						)}
 					</div>
-				</div>
-				{x.config?.timeline && <Timeline {...props_timeline}></Timeline>}
-				<div className='body_wrap w_100 flex flex_column relative'>
-					{!x.loading_init && x.querying && (
-						<div className='querying_wrap w_100 h_100 flex justify_center align_center absolute'>
-							<LoadingCircle></LoadingCircle>
-						</div>
-					)}
-					{!x.loading_init && x.config ? (
-						<Fragment>
-							<Table {...props_table}></Table>
-							<Pagination {...props_pagination}></Pagination>
-						</Fragment>
-					) : (
-						<div className='loading_wrap w_100 flex justify_center align_center'>
-							<LoadingCircle></LoadingCircle>
-						</div>
-					)}
-				</div>
 
-				<Drawer
-					className={styles.Drawer}
-					open={x.modal_visible || x.modal_view_visible}
-					title={
-						x.modal_view_visible
-							? 'Table views'
-							: x.modal_type === 'add'
-								? 'Create'
-								: props_detail.item?.[x.primary]
-					}
-					width={x.modal_view_visible ? 'min(90vw,660px)' : 'min(100vw,480px)'}
-					placement={x.modal_view_visible ? 'left' : 'right'}
-					maskClosable={x.modal_type === 'view' || x.modal_view_visible}
-					disablePadding={x.modal_visible}
-					onCancel={x.modal_view_visible ? onToggleView : props_detail.onClose}
-					header_actions={
-						x.modal_view_visible && (
-							<button
-								className='btn_add_view flex justify_center align_center absolute clickable'
-								onClick={x.onAddView}
-							>
-								<Plus className='icon' weight='bold'></Plus>
-								<span>Add</span>
-							</button>
-						)
-					}
-				>
-					{x.modal_view_visible ? (
-						<View {...props_view}></View>
-					) : (
-						<Detail {...props_detail}></Detail>
-					)}
-				</Drawer>
-			</div>
-		</Provider>
+					<Drawer
+						className={styles.Drawer}
+						open={x.modal_visible || x.modal_view_visible}
+						title={
+							x.modal_view_visible
+								? 'Table views'
+								: x.modal_type === 'add'
+									? 'Create'
+									: props_detail.item?.[x.primary]
+						}
+						width={x.modal_view_visible ? 'min(90vw,660px)' : 'min(100vw,480px)'}
+						placement={x.modal_view_visible ? 'left' : 'right'}
+						maskClosable={x.modal_type === 'view' || x.modal_view_visible}
+						disablePadding={x.modal_visible}
+						onCancel={x.modal_view_visible ? onToggleView : props_detail.onClose}
+						header_actions={
+							x.modal_view_visible && (
+								<button
+									className='btn_add_view flex justify_center align_center absolute clickable'
+									onClick={x.onAddView}
+								>
+									<Plus className='icon' weight='bold'></Plus>
+									<span>Add</span>
+								</button>
+							)
+						}
+					>
+						{x.modal_view_visible ? (
+							<View {...props_view}></View>
+						) : (
+							<Detail {...props_detail}></Detail>
+						)}
+					</Drawer>
+				</div>
+			</Provider>
+		</AntdConfigProvider>
 	)
 }
 

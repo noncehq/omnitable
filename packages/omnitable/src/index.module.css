@@ -236,7 +236,19 @@
 }
 
 ._local {
+	line-height: var(--line_height);
+	padding: 0;
+	margin: 0;
 	outline: none;
+	color: var(--color_text);
+	background-color: var(--color_bg);
+	font-size: 14px;
+	text-rendering: optimizeLegibility;
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
+	unicode-bidi: isolate;
+
+	-webkit-tap-highlight-color: transparent;
 
 	:global {
 		.querying_wrap {
@@ -391,7 +403,11 @@
 					&.selected {
 						&.has_row_bg {
 							td {
-								background-color: color-mix(in srgb, var(--row_bg) 7.2%, transparent) !important;
+								background-color: color-mix(
+									in srgb,
+									var(--row_bg) 7.2%,
+									transparent
+								) !important;
 							}
 						}
 					}

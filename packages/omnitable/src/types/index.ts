@@ -3,6 +3,7 @@ import type { TextAreaProps } from 'antd/es/input'
 import type { ReactNode } from 'react'
 import type { StatType } from '../metadata'
 import type { CSSProperties } from 'react'
+import type { Model } from '..'
 
 export * from './components'
 
@@ -14,8 +15,11 @@ export namespace Omnitable {
 	}
 
 	export interface Config {
+		locale?: 'en' | 'zh'
+		theme?: 'light' | 'dark'
 		// 表名称，用于本地存储的前缀（请保持唯一）
 		name: string
+		adapter?: Adapter
 		// 主键，默认为 'id'
 		primary?: string
 		baseurl: string
@@ -108,6 +112,20 @@ export namespace Omnitable {
 			table?: Fields
 			form?: Fields
 		}
+	}
+
+	export interface AdapterQueryArgs {
+		config: Omnitable.Config
+		sort_params: Model['sort_params']
+		filter_relation: Model['filter_relation']
+		filter_params: Model['filter_params']
+		page: Model['pagination']['page']
+		pagesize: Model['pagination']['pagesize']
+	}
+
+	// 适配器
+	export interface Adapter {
+		query: (args: AdapterQueryArgs) => Promise<Omnitable.Error | { data: Omnitable.List }>
 	}
 
 	export type Action =
@@ -303,8 +321,8 @@ export namespace Omnitable {
 
 	export interface List {
 		items: Array<any>
-		page: number
-		pagesize: number
 		total: number
+		page?: number
+		pagesize?: number
 	}
 }
