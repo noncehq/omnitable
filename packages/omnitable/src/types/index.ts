@@ -313,8 +313,8 @@ export namespace Omnitable {
 	export type PresetColor = 'light' | 'dark' | 'danger' | 'success' | 'warning'
 
 	export interface Error {
-		error: string
-		message: string
+		error: any
+		message?: string
 	}
 
 	export type MutationResponse = Error | { id: number }
