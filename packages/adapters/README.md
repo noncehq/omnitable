@@ -1,9 +1,15 @@
-# STK
+# Adpters
 
-Shared toolkit for web apps.
+## adapter for cube
 
-To maximize the HMR performance in the main project development environment, you should install all externals in you app:
+```ts
+import adapter from '@omnitable/adapters/cube'
 
-```bash
-pnpm install --save react react-dom fast-equals ahooks mobx lodash-es scheduler classix rfdc
+const cube_api = cube(process.env.PUBLIC_CUBE_API_TOKEN, { apiUrl: process.env.PUBLIC_CUBE_API_URL })
+
+const config={
+      name: 'table_cube',
+	adapter: adapter(cube),
+      // ...
+}
 ```
