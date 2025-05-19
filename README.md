@@ -23,9 +23,9 @@ Add this to your package.json:
 ```json
 {
       "dependencies":{
-            "appframe": "workspace:*",
-            "stk": "workspace:*",
-            "omnitable": "workspace:*"
+            "@omnitable/appframe": "workspace:*",
+            "@omnitable/stk": "workspace:*",
+            "@omnitable/omnitable": "workspace:*"
       }
 }
 ```
@@ -40,43 +40,10 @@ pnpm install --save [all external deps in `deps.sh`]
 
 ## Presets
 
-Import presets in your app entry:
+Only one preset dependency in your app entry:
 
 ```tsx
-import 'appframe/global.css'
-import 'appframe/preset'
-```
-
-## Context
-
-Using preset context in root layout:
-
-```tsx
-import { App } from 'antd'
-import en_US from 'antd/locale/en_US'
-import { AntdConfigProvider } from 'appframe/components'
-import { getAntdTheme } from 'appframe/theme'
-import { useMemo } from 'react'
-import { useOutlet } from 'react-router-dom'
-
-import styles from './layout.module.css'
-import Nav from './Nav'
-
-export default () => {
-	const outlet = useOutlet()
-	const theme = useMemo(() => getAntdTheme('light'), [])
-
-	return (
-		<AntdConfigProvider locale={en_US} theme={theme}>
-			<App prefixCls='omni'>
-				<div className={styles._local}>
-					<Nav></Nav>
-					{outlet}
-				</div>
-			</App>
-		</AntdConfigProvider>
-	)
-}
+import '@abraham/reflection'
 ```
 
 ## Using
