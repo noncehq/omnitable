@@ -30,14 +30,6 @@ Add this to your package.json:
 }
 ```
 
-## Deps
-
-Before use omnitable, some deps should install in you app, see `deps.sh`.
-
-```bash
-pnpm install --save [all external deps in `deps.sh`]
-```
-
 ## Presets
 
 Only one preset dependency in your app entry:
