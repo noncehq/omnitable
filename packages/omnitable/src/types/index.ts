@@ -22,7 +22,7 @@ export namespace Omnitable {
 		adapter?: Adapter
 		// 主键，默认为 'id'
 		primary?: string
-		baseurl: string
+		baseurl?: string
 		// 支持mustache语法 /delete/{{id}} => /delete/3
 		actions: {
 			// POST
