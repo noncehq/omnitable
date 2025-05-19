@@ -24,7 +24,7 @@ export namespace Omnitable {
 		primary?: string
 		baseurl?: string
 		// 支持mustache语法 /delete/{{id}} => /delete/3
-		actions: {
+		actions?: {
 			// POST
 			query: Action
 			// POST

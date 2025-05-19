@@ -17,7 +17,7 @@ export declare namespace Omnitable {
         adapter?: Adapter;
         primary?: string;
         baseurl?: string;
-        actions: {
+        actions?: {
             query: Action;
             create?: Action;
             update?: Action;
