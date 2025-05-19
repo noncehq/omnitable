@@ -1,6 +1,8 @@
+import Decimal from 'decimal.js'
 import mustache from 'mustache'
 import { useMemo } from 'react'
-import { $ } from 'stk/utils'
+
+import { $ } from '@omnitable/stk/utils'
 
 import styles from './index.module.css'
 
@@ -13,7 +15,13 @@ const Index = (props: ComponentType<Omnitable.Text['props']>) => {
 	const text = useMemo(() => {
 		if (!value) return '-'
 		if (format) return mustache.render(format, item || {})
-		if (textwrap) return mustache.render(textwrap, { value })
+
+		if (textwrap) {
+			return mustache.render(textwrap, {
+				value,
+				__percent__: () => new Decimal(value).mul(100).toFixed(2) + '%'
+			})
+		}
 
 		return `${prefix ?? ''}${value}${suffix ?? ''}`
 	}, [value, format, prefix, suffix, textwrap])

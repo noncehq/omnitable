@@ -1,9 +1,9 @@
 import { useMemoizedFn } from 'ahooks'
 import { Form } from 'antd'
 import { useLayoutEffect, useRef, useState } from 'react'
-import { useDeepMemo } from 'stk/react'
-import { $ } from 'stk/utils'
 
+import { useDeepMemo } from '@omnitable/stk/react'
+import { $ } from '@omnitable/stk/utils'
 import { CaretRight } from '@phosphor-icons/react'
 
 import { readonly_fields } from '../metadata'
@@ -58,6 +58,7 @@ const Index = (props: IPropsCol) => {
 	const onBlur = useMemoizedFn(() => setEditingField?.(null))
 
 	const props_component: IPropsComponent = {
+		row_index,
 		column,
 		editing: focus || hover
 	}

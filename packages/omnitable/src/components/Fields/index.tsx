@@ -1,9 +1,9 @@
 import { useMemoizedFn } from 'ahooks'
 import { Popover } from 'antd'
-import { $ } from 'stk/utils'
 
 import { DndContext } from '@dnd-kit/core'
 import { arrayMove, verticalListSortingStrategy, SortableContext } from '@dnd-kit/sortable'
+import { $ } from '@omnitable/stk/utils'
 import { SlidersHorizontal } from '@phosphor-icons/react'
 
 import styles from '../../index.module.css'

@@ -2,8 +2,9 @@ import { useMemoizedFn } from 'ahooks'
 import { Form } from 'antd'
 import { get } from 'lodash-es'
 import { useLayoutEffect, useMemo } from 'react'
-import { deepEqual } from 'stk/react'
-import { $ } from 'stk/utils'
+
+import { deepEqual } from '@omnitable/stk/react'
+import { $ } from '@omnitable/stk/utils'
 
 import { preset_color } from '../metadata'
 import Column from './Col'

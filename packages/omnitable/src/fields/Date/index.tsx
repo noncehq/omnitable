@@ -1,5 +1,6 @@
 import dayjs from 'dayjs'
-import { $ } from 'stk/utils'
+
+import { $ } from '@omnitable/stk/utils'
 
 import styles from './index.module.css'
 
@@ -7,7 +8,7 @@ import type { Omnitable, ComponentType } from '../../types'
 
 const Index = (props: ComponentType<Omnitable.Date['props']>) => {
 	const { self_props, value, use_by_form, disabled } = props
-	const { format = 'MMMM D, YYYY' } = self_props || {}
+	const { format = 'YYYY-MM-DD' } = self_props || {}
 
 	return (
 		<span

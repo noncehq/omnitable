@@ -1,6 +1,7 @@
 import dayjs from 'dayjs'
 import { useMemo } from 'react'
-import { $ } from 'stk/utils'
+
+import { $ } from '@omnitable/stk/utils'
 
 import { timeline_args_map } from '../../metadata'
 import { preset_color } from './'

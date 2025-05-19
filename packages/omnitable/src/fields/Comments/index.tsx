@@ -3,9 +3,9 @@ import { Button, Form, Input } from 'antd'
 import dayjs from 'dayjs'
 import { debounce } from 'lodash-es'
 import { useLayoutEffect } from 'react'
-import { deepEqual } from 'stk/react'
-import { $ } from 'stk/utils'
 
+import { deepEqual } from '@omnitable/stk/react'
+import { $ } from '@omnitable/stk/utils'
 import { Plus } from '@phosphor-icons/react'
 
 import styles from './index.module.css'

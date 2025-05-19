@@ -1,4 +1,4 @@
-import { createContext, useContextSelector } from 'stk/react'
+import { createContext, useContextSelector } from '@omnitable/stk/react'
 
 export interface Context {
 	base_url: string

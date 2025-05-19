@@ -1,6 +1,7 @@
 import { useMemoizedFn } from 'ahooks'
 import { Empty } from 'antd'
-import { $ } from 'stk/utils'
+
+import { $ } from '@omnitable/stk/utils'
 
 import styles from './index.module.css'
 import Item from './Item'

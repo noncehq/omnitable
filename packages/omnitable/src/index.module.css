@@ -494,7 +494,15 @@
 			.omni-pagination-total-text {
 				position: absolute;
 				left: 0;
+				height: unset;
+				line-height: 1;
 				color: var(--color_text_greylight);
+			}
+
+			.omni-pagination-prev,
+			.omni-pagination-next,
+			.omni-pagination-item {
+				margin-bottom: -1px;
 			}
 		}
 	}

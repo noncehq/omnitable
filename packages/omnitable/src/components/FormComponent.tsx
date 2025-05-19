@@ -1,4 +1,4 @@
-import { $ } from 'stk/utils'
+import { $ } from '@omnitable/stk/utils'
 
 import Component from './Component'
 

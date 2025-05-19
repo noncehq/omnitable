@@ -1,5 +1,6 @@
 import { useLocation, NavLink } from 'react-router-dom'
-import { $ } from 'stk/utils'
+
+import { $ } from '@omnitable/stk/utils'
 
 const nav_items = [
 	{

@@ -1,9 +1,9 @@
 import { useMemoizedFn } from 'ahooks'
 import { Checkbox } from 'antd'
-import { $ } from 'stk/utils'
 
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
+import { $ } from '@omnitable/stk/utils'
 import { DotsSixVertical } from '@phosphor-icons/react'
 
 import type { IPropsFieldsItem } from '../../types'

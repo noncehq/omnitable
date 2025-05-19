@@ -14,6 +14,7 @@ npm-debug.log*
 !packages/stk/dist
 !packages/appframe/dist
 !packages/omnitable/dist
+!packages/adapters/dist
 
 # misc
 .DS_Store

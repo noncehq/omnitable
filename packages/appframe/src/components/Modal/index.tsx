@@ -2,8 +2,8 @@ import { useClickAway } from 'ahooks'
 import { motion, AnimatePresence } from 'motion/react'
 import { useEffect, useRef, useState, Fragment } from 'react'
 import { createPortal } from 'react-dom'
-import { $, is_server } from 'stk/utils'
 
+import { $, is_server } from '@omnitable/stk/utils'
 import { X } from '@phosphor-icons/react'
 
 import styles from './index.module.css'

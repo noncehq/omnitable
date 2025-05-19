@@ -1,7 +1,8 @@
 import dayjs from 'dayjs'
 import { pick } from 'lodash-es'
 import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis } from 'recharts'
-import { $ } from 'stk/utils'
+
+import { $ } from '@omnitable/stk/utils'
 
 import { timeline_args_map } from '../../metadata'
 import Background from './Background'

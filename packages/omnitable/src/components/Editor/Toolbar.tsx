@@ -1,8 +1,8 @@
 import { useMemoizedFn } from 'ahooks'
 import { Popover } from 'antd'
 import { useMemo } from 'react'
-import { $ } from 'stk/utils'
 
+import { $ } from '@omnitable/stk/utils'
 import {
 	ArrowClockwise,
 	ArrowCounterClockwise,

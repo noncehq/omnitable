@@ -1,7 +1,7 @@
 import { useMemoizedFn } from 'ahooks'
 import { Button, Input } from 'antd'
-import { $ } from 'stk/utils'
 
+import { $ } from '@omnitable/stk/utils'
 import { Trash } from '@phosphor-icons/react'
 
 import Fields from '../Fields'

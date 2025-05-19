@@ -1,7 +1,8 @@
 import { useMemoizedFn } from 'ahooks'
 import { InputNumber } from 'antd'
 import { debounce } from 'lodash-es'
-import { $ } from 'stk/utils'
+
+import { $ } from '@omnitable/stk/utils'
 
 import styles from './index.module.css'
 

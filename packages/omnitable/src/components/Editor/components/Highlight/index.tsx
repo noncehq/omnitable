@@ -1,5 +1,6 @@
 import Color from 'color'
-import { $ } from 'stk/utils'
+
+import { $ } from '@omnitable/stk/utils'
 
 import styles from './index.module.css'
 

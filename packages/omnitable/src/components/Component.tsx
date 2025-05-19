@@ -1,10 +1,12 @@
 import { useMemo } from 'react'
-import { $ } from 'stk/utils'
+
+import { $ } from '@omnitable/stk/utils'
 
 import Comments from '../fields/Comments'
 import Date from '../fields/Date'
 import DatePicker from '../fields/DatePicker'
 import Editor from '../fields/Editor'
+import Index from '../fields/Index'
 import Input from '../fields/Input'
 import InputNumber from '../fields/InputNumber'
 import Operation from '../fields/Operation'
@@ -17,8 +19,9 @@ import Textarea from '../fields/Textarea'
 
 import type { IPropsComponent } from '../types'
 
-const Index = (props: IPropsComponent) => {
+const X = (props: IPropsComponent) => {
 	const {
+		row_index,
 		column,
 		value,
 		item,
@@ -36,6 +39,8 @@ const Index = (props: IPropsComponent) => {
 	const Component = useMemo(() => {
 		// 这里不使用React.lazy进行动态导入，因为单元格进入编辑状态时会闪现空白，如果是Form可使用动态导入
 		switch (force_type || type) {
+			case 'index':
+				return Index
 			case 'text':
 				return Text
 			case 'input':
@@ -69,6 +74,7 @@ const Index = (props: IPropsComponent) => {
 		// @ts-ignore
 		<Component
 			{...{
+				row_index,
 				self_props,
 				value,
 				editing,
@@ -85,4 +91,4 @@ const Index = (props: IPropsComponent) => {
 	)
 }
 
-export default $.memo(Index)
+export default $.memo(X)

@@ -2,11 +2,11 @@ import { useMemoizedFn } from 'ahooks'
 import { Button, Form, Popover, Select } from 'antd'
 import { pick } from 'lodash-es'
 import { useLayoutEffect, useMemo } from 'react'
-import { deepEqual } from 'stk/react'
-import { $ } from 'stk/utils'
 
 import { DndContext } from '@dnd-kit/core'
 import { verticalListSortingStrategy, SortableContext } from '@dnd-kit/sortable'
+import { deepEqual } from '@omnitable/stk/react'
+import { $ } from '@omnitable/stk/utils'
 import { CaretDoubleRight } from '@phosphor-icons/react'
 
 import styles from '../../index.module.css'

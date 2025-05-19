@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
-import { $ } from 'stk/utils'
 
+import { $ } from '@omnitable/stk/utils'
 import { ExclamationMark } from '@phosphor-icons/react'
 
 import styles from './index.module.css'

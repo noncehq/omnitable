@@ -1,9 +1,10 @@
 import { App } from 'antd'
 import en_US from 'antd/locale/en_US'
-import { AntdConfigProvider } from 'appframe/components'
-import { getAntdTheme } from 'appframe/theme'
 import { useMemo } from 'react'
 import { useOutlet } from 'react-router-dom'
+
+import { AntdConfigProvider } from '@@omnitable/omnitable/appframe/components'
+import { getAntdTheme } from '@@omnitable/omnitable/appframe/theme'
 
 import styles from './layout.module.css'
 import Nav from './Nav'

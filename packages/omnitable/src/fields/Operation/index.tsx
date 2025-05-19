@@ -2,8 +2,8 @@ import { useMemoizedFn } from 'ahooks'
 import { Dropdown } from 'antd'
 import { Ellipsis } from 'lucide-react'
 import { useMemo, useRef } from 'react'
-import { $ } from 'stk/utils'
 
+import { $ } from '@omnitable/stk/utils'
 import { Eye, PencilSimpleLine, Trash } from '@phosphor-icons/react'
 
 import styles from './index.module.css'

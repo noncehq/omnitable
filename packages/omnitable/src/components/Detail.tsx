@@ -1,8 +1,9 @@
 import { useMemoizedFn } from 'ahooks'
 import { Button, Col, ConfigProvider, Form, Row } from 'antd'
 import { useLayoutEffect } from 'react'
-import { deepEqual } from 'stk/react'
-import { $ } from 'stk/utils'
+
+import { deepEqual } from '@omnitable/stk/react'
+import { $ } from '@omnitable/stk/utils'
 
 import styles from '../index.module.css'
 import FormComponent from './FormComponent'

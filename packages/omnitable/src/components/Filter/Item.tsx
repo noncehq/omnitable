@@ -1,9 +1,9 @@
 import { Button, Form, Select } from 'antd'
 import { useMemo } from 'react'
-import { $ } from 'stk/utils'
 
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
+import { $ } from '@omnitable/stk/utils'
 import { DotsSixVertical, Trash } from '@phosphor-icons/react'
 
 import { filter_expressions, filter_relation_options, getFilterComponentType } from '../../metadata'

@@ -1,7 +1,8 @@
 import { App, Select, Spin } from 'antd'
 import { observer } from 'mobx-react-lite'
 import { useLayoutEffect, useMemo, useState } from 'react'
-import { $ } from 'stk/utils'
+
+import { $ } from '@omnitable/stk/utils'
 
 import { useContext } from '../../context'
 import styles from './index.module.css'

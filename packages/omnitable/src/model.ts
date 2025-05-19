@@ -8,9 +8,10 @@ import { makeAutoObservable } from 'mobx'
 import mustache from 'mustache'
 import { nanoid } from 'nanoid'
 import { ofetch } from 'ofetch'
-import { setStorageWhenChange } from 'stk/mobx'
-import { deepEqual } from 'stk/react'
-import { $, isMillisecondTimestamp } from 'stk/utils'
+
+import { setStorageWhenChange } from '@omnitable/stk/mobx'
+import { deepEqual } from '@omnitable/stk/react'
+import { $, isMillisecondTimestamp } from '@omnitable/stk/utils'
 
 import { timeline_args_map } from './metadata'
 
@@ -149,6 +150,7 @@ export default class Index {
 				$.copy({
 					config: this.config,
 					sort_params: this.sort_params,
+					time_dimensions: this.config.time_dimensions,
 					filter_relation: this.filter_relation,
 					filter_params: this.filter_params.filter(i => 'value' in i),
 					page: this.pagination.page,
@@ -432,23 +434,38 @@ export default class Index {
 	}
 
 	make() {
+		if (this.config.filter?.defaults) {
+			this.filter_params = this.config.filter?.defaults
+		}
+
 		this.filter_columns =
 			this.config.filter?.columns.map(item => {
-				const field = this.config.fields.filter?.[item.name] || this.config.fields.common[item.name]
+				const field = this.config.fields.filter?.[item.name] || this.config.fields.common?.[item.name]
 
 				return { ...item, ...field }
 			}) || []
 
 		this.table_columns = this.config.table.columns.map(item => {
-			const field = this.config.fields.table?.[item.name] || this.config.fields.common[item.name]
+			const field = this.config.fields.table?.[item.name] || this.config.fields.common?.[item.name]
 			const column = { ...item, ...field }
 
-			if (item.sort) this.sort_columns.push(column)
+			if (item.sort) {
+				this.sort_columns.push(column)
+
+				if (typeof item.sort === 'string') {
+					this.sort_params.push({
+						field: field.bind,
+						order: item.sort
+					})
+				}
+			}
 
 			this.visible_columns.push({ name: column.name, id: column.bind, visible: true })
 
 			return column
 		})
+
+		this.sort_params = $.copy(this.sort_params)
 
 		if (!this.config.form || this.config.form?.use_table_columns) {
 			const target_columns = this.config.form
@@ -461,7 +478,7 @@ export default class Index {
 				.map(item => {
 					const field =
 						this.config.fields.form?.[item.name] ||
-						this.config.fields.common[item.name] ||
+						this.config.fields.common?.[item.name] ||
 						this.config.fields.table?.[item.name]
 
 					if (field.bind === '_operation') return null
@@ -474,7 +491,8 @@ export default class Index {
 		} else {
 			this.form_columns =
 				this.config.form?.columns?.map(item => {
-					const field = this.config.fields.form?.[item.name] || this.config.fields.common[item.name]
+					const field =
+						this.config.fields.form?.[item.name] || this.config.fields.common?.[item.name]
 
 					return { ...item, ...field }
 				}) || []

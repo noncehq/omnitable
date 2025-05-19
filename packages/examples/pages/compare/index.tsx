@@ -1,6 +1,6 @@
 'use client'
 
-import Omnitable from 'omnitable'
+import Omnitable from '@omnitable/omnitable'
 
 import config from '../../config_compare'
 

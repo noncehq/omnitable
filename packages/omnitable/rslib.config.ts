@@ -18,4 +18,5 @@ export default deepmerge(rslib, {
 		}
 	},
 	plugins: [pluginReact()]
+	// performance: { removeConsole: false },
 } as Partial<RslibConfig>)

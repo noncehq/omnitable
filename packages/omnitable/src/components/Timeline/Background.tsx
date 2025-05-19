@@ -1,5 +1,6 @@
 import { Rectangle } from 'recharts'
-import { $ } from 'stk/utils'
+
+import { $ } from '@omnitable/stk/utils'
 
 interface IProps {
 	x: number

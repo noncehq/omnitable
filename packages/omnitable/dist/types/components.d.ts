@@ -142,6 +142,7 @@ export interface IPropsCol {
 }
 export interface IPropsComponent {
     column: Model['table_columns'][number];
+    row_index?: number;
     value?: any;
     item?: any;
     force_type?: string;
@@ -154,6 +155,7 @@ export interface IPropsComponent {
     onChange?: (v: any) => void;
 }
 export interface ComponentType<T = {}> extends Pick<IPropsComponent, 'value' | 'editing' | 'onFocus' | 'onBlur' | 'onChange'> {
+    row_index?: number;
     width?: number;
     disabled?: boolean;
     use_by_form?: boolean;

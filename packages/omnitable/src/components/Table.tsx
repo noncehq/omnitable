@@ -1,7 +1,8 @@
 import { useMemoizedFn } from 'ahooks'
 import { Empty } from 'antd'
 import { useLayoutEffect, useRef, Fragment } from 'react'
-import { $, StickyTableHeader } from 'stk/utils'
+
+import { $, StickyTableHeader } from '@omnitable/stk/utils'
 
 import Row from './Row'
 import Th from './Th'
@@ -120,7 +121,8 @@ const Index = (props: IPropsTable) => {
 										key={
 											item[primary] ||
 											item['__group_id__'] ||
-											item['__stat_type__']
+											item['__stat_type__'] ||
+											index
 										}
 									></Row>
 								)

@@ -1,4 +1,4 @@
-import { $ } from 'stk/utils'
+import { $ } from '@omnitable/stk/utils'
 
 import { Select } from '../../components'
 import Icon from './Icon'

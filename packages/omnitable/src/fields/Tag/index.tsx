@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
-import { $ } from 'stk/utils'
+
+import { $ } from '@omnitable/stk/utils'
 
 import { preset_color } from '../../metadata'
 import styles from './index.module.css'

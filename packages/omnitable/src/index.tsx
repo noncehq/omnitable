@@ -1,16 +1,16 @@
 import '@phosphor-icons/web/regular'
-import 'appframe/global.css'
-import 'appframe/preset'
+import '@omnitable/appframe/global.css'
+import '@omnitable/appframe/preset'
 
 import { useMemoizedFn } from 'ahooks'
 import { App, Button } from 'antd'
-import { AntdConfigProvider, Drawer, LoadingCircle } from 'appframe/components'
 import { debounce } from 'lodash-es'
 import { RefreshCw } from 'lucide-react'
 import { observer } from 'mobx-react-lite'
 import { useLayoutEffect, useState, Fragment } from 'react'
-import { $ } from 'stk/utils'
 
+import { AntdConfigProvider, Drawer, LoadingCircle } from '@omnitable/appframe/components'
+import { $ } from '@omnitable/stk/utils'
 import { Eyes, PauseCircle, PlayCircle, Plus } from '@phosphor-icons/react'
 
 import {
@@ -190,18 +190,20 @@ const Index = (props: Omnitable.Props) => {
 					>
 						{x.config && (
 							<div className='flex'>
-								<button
-									className='header_btn_wrap border_box flex align_center clickable mr_8'
-									onClick={onToggleView}
-								>
-									<Eyes className='icon'></Eyes>
-									<span className='label'>View</span>
-									{x.apply_view_name && (
-										<span className='counts flex align_center'>
-											{x.apply_view_name}
-										</span>
-									)}
-								</button>
+								{!x.config?.view?.hide && (
+									<button
+										className='header_btn_wrap border_box flex align_center clickable mr_8'
+										onClick={onToggleView}
+									>
+										<Eyes className='icon'></Eyes>
+										<span className='label'>View</span>
+										{x.apply_view_name && (
+											<span className='counts flex align_center'>
+												{x.apply_view_name}
+											</span>
+										)}
+									</button>
+								)}
 								{x.sort_columns.length > 0 && <Sort {...props_sort}></Sort>}
 								{x.filter_columns.length > 0 && <Filter {...props_filter}></Filter>}
 								{!x.config?.stat?.hide && <Stat {...props_stat}></Stat>}

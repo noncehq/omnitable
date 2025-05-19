@@ -1,6 +1,7 @@
 import { useMemoizedFn } from 'ahooks'
 import { debounce } from 'lodash-es'
-import { $ } from 'stk/utils'
+
+import { $ } from '@omnitable/stk/utils'
 
 import { Editor } from '../../components'
 import styles from './index.module.css'

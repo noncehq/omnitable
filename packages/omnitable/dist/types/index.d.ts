@@ -28,10 +28,17 @@ export declare namespace Omnitable {
             beforeCreate?: (v: any) => any;
             beforeUpdate?: (v: any) => any;
         };
+        view?: {
+            hide?: boolean;
+        };
+        time_dimensions?: Array<{
+            dimension: string;
+            granularity: string;
+            date_range: [string, string];
+        }>;
         filter?: {
             columns: Array<FilterColumn>;
-            props?: {};
-            flat?: boolean;
+            defaults?: Model['filter_params'];
         };
         stat?: {
             columns?: Array<{
@@ -83,7 +90,7 @@ export declare namespace Omnitable {
             exclude_table_columns?: Array<string>;
         };
         fields: {
-            common: Fields;
+            common?: Fields;
             filter?: Fields;
             table?: Fields;
             form?: Fields;
@@ -92,6 +99,7 @@ export declare namespace Omnitable {
     interface AdapterQueryArgs {
         config: Omnitable.Config;
         sort_params: Model['sort_params'];
+        time_dimensions: Omnitable.Config['time_dimensions'];
         filter_relation: Model['filter_relation'];
         filter_params: Model['filter_params'];
         page: Model['pagination']['page'];
@@ -112,12 +120,11 @@ export declare namespace Omnitable {
         span?: number;
     }
     interface FilterColumn extends BaseColumn {
-        granularity?: string;
         datatype: 'string' | 'number' | 'array' | 'date';
     }
     interface TableColumn extends BaseColumn {
         measure?: boolean;
-        sort?: boolean;
+        sort?: boolean | 'asc' | 'desc';
         readonly?: boolean;
         sticky?: boolean;
         align?: CSSProperties['textAlign'];
@@ -131,7 +138,11 @@ export declare namespace Omnitable {
     type Field = {
         bind: string;
     } & FieldComponent;
-    type FieldComponent = Text | Input | InputNumber | Textarea | Select | Tag | Date | DatePicker | RangePicker | Priority | Editor | Comments | Operation;
+    type FieldComponent = Index | Text | Input | InputNumber | Textarea | Select | Tag | Date | DatePicker | RangePicker | Priority | Editor | Comments | Operation;
+    type Index = {
+        type: 'index';
+        props?: {};
+    };
     type Text = {
         type: 'text';
         props?: {
@@ -241,8 +252,8 @@ export declare namespace Omnitable {
     };
     type PresetColor = 'light' | 'dark' | 'danger' | 'success' | 'warning';
     interface Error {
-        error: string;
-        message: string;
+        error: any;
+        message?: string;
     }
     type MutationResponse = Error | {
         id: number;

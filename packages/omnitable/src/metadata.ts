@@ -32,7 +32,7 @@ export const timeline_type_options = [
 
 export const pagesize_options = [12, 30, 60, 100, 300, 600, 1200]
 
-export const readonly_fields = ['text', 'tag', 'date']
+export const readonly_fields = ['index', 'text', 'tag', 'date']
 
 export const sort_options = [
 	{

@@ -1,6 +1,6 @@
 import { useMemoizedFn } from 'ahooks'
-import { $ } from 'stk/utils'
 
+import { $ } from '@omnitable/stk/utils'
 import { CaretDown, CaretUp } from '@phosphor-icons/react'
 
 import type { IPropsTh } from '../types'

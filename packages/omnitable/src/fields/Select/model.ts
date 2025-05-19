@@ -2,7 +2,8 @@ import to from 'await-to-js'
 import { debounce } from 'lodash-es'
 import { makeAutoObservable } from 'mobx'
 import { ofetch } from 'ofetch'
-import { decode, encode } from 'stk/storage'
+
+import { decode, encode } from '@omnitable/stk/storage'
 
 import type { SelectProps } from 'antd'
 import type { Omnitable } from '../../types'

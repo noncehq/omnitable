@@ -42,10 +42,19 @@ export namespace Omnitable {
 			// 处理要变更的数据
 			beforeUpdate?: (v: any) => any
 		}
+		view?: {
+			// 隐藏view按钮
+			hide?: boolean
+		}
+		// 提供给 cube 的 timeDimensions
+		time_dimensions?: Array<{
+			dimension: string
+			granularity: string
+			date_range: [string, string]
+		}>
 		filter?: {
 			columns: Array<FilterColumn>
-			props?: {}
-			flat?: boolean
+			defaults?: Model['filter_params']
 		}
 		stat?: {
 			// 预先配置的字段，指定字段生成数据分析结果
@@ -107,7 +116,7 @@ export namespace Omnitable {
 		}
 		fields: {
 			// filter和table可覆盖common中定义的字段
-			common: Fields
+			common?: Fields
 			filter?: Fields
 			table?: Fields
 			form?: Fields
@@ -117,6 +126,7 @@ export namespace Omnitable {
 	export interface AdapterQueryArgs {
 		config: Omnitable.Config
 		sort_params: Model['sort_params']
+		time_dimensions: Omnitable.Config['time_dimensions']
 		filter_relation: Model['filter_relation']
 		filter_params: Model['filter_params']
 		page: Model['pagination']['page']
@@ -143,13 +153,12 @@ export namespace Omnitable {
 	}
 
 	export interface FilterColumn extends BaseColumn {
-		granularity?: string
 		datatype: 'string' | 'number' | 'array' | 'date'
 	}
 
 	export interface TableColumn extends BaseColumn {
 		measure?: boolean
-		sort?: boolean
+		sort?: boolean | 'asc' | 'desc'
 		readonly?: boolean
 		sticky?: boolean
 		align?: CSSProperties['textAlign']
@@ -166,6 +175,7 @@ export namespace Omnitable {
 	export type Field = { bind: string } & FieldComponent
 
 	export type FieldComponent =
+		| Index
 		| Text
 		| Input
 		| InputNumber
@@ -179,6 +189,11 @@ export namespace Omnitable {
 		| Editor
 		| Comments
 		| Operation
+
+	export type Index = {
+		type: 'index'
+		props?: {}
+	}
 
 	export type Text = {
 		type: 'text'
