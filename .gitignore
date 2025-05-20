@@ -10,6 +10,7 @@ npm-debug.log*
 .vercel
 .wrangler
 .turbo
+*.build.tsbuildinfo
 
 !packages/stk/dist
 !packages/appframe/dist

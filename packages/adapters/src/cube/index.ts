@@ -1,7 +1,16 @@
 import to from 'await-to-js'
+import { deepmergeCustom } from 'deepmerge-ts'
+import { uniq } from 'lodash-es'
 
 import type { Model, Omnitable } from '@omnitable/omnitable'
 import type { Filter, TimeDimension, CubeApi } from '@cubejs-client/core'
+import type { Query } from '@cubejs-client/core'
+
+const deepmerge = deepmergeCustom({
+	mergeArrays: (values, utils) => {
+		return uniq(utils.defaultMergeFunctions.mergeArrays(values))
+	}
+})
 
 export default (cube: CubeApi) =>
 	({
@@ -15,6 +24,7 @@ export default (cube: CubeApi) =>
 				page,
 				pagesize
 			} = args
+			const cube_options = (config.cube_options || {}) as Query
 
 			const measures = [] as Array<string>
 			const dimensions = [] as Array<string>
@@ -65,16 +75,21 @@ export default (cube: CubeApi) =>
 			] as Array<Filter>
 
 			const [err, res] = await to(
-				cube.load({
-					measures,
-					dimensions,
-					order,
-					timeDimensions: target_time_dimensions,
-					filters,
-					offset: (page - 1) * pagesize,
-					limit: pagesize,
-					total: true
-				})
+				cube.load(
+					deepmerge(
+						{
+							measures,
+							dimensions,
+							order,
+							timeDimensions: target_time_dimensions,
+							filters,
+							offset: (page - 1) * pagesize,
+							limit: pagesize,
+							total: true
+						},
+						cube_options
+					)
+				)
 			)
 
 			if (err) return { error: err, message: err?.message }

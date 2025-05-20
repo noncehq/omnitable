@@ -4,6 +4,7 @@ import type { ReactNode } from 'react'
 import type { StatType } from '../metadata'
 import type { CSSProperties } from 'react'
 import type { Model } from '..'
+import type { Query } from '@cubejs-client/core'
 
 export * from './components'
 
@@ -125,6 +126,8 @@ export namespace Omnitable {
 		hide_header?: boolean
 		// 隐藏翻页器
 		hide_pagination?: boolean
+		// cube 自定义配置项，可覆盖和合并table生成的query配置
+		cube_options?: Partial<Query>
 	}
 
 	export interface AdapterQueryArgs {
