@@ -1,9 +1,3 @@
-import type { ComponentType } from '../../types';
-declare const _default: import("react").MemoExoticComponent<(props: ComponentType<{
-    binds: {
-        date: string;
-        text: string;
-        role?: string;
-    };
-}>) => import("react").JSX.Element | import("react").ReactNode>;
+import type { Omnitable, ComponentType } from '../../types';
+declare const _default: import("react").MemoExoticComponent<(props: ComponentType<Omnitable.Comments["props"]>) => import("react/jsx-runtime").JSX.Element>;
 export default _default;

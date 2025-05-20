@@ -1,8 +1,3 @@
-import type { ComponentType } from '../../types';
-declare const _default: import("react").MemoExoticComponent<(props: ComponentType<{
-    format?: string;
-    textwrap?: string;
-    prefix?: string;
-    suffix?: string;
-}>) => import("react").JSX.Element | import("react").ReactNode>;
+import type { Omnitable, ComponentType } from '../../types';
+declare const _default: import("react").MemoExoticComponent<(props: ComponentType<Omnitable.Text["props"]>) => import("react/jsx-runtime").JSX.Element>;
 export default _default;

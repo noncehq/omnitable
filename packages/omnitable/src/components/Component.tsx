@@ -71,7 +71,6 @@ const X = (props: IPropsComponent) => {
 	}, [force_type, type])
 
 	return (
-		// @ts-ignore
 		<Component
 			{...{
 				row_index,
@@ -86,6 +85,7 @@ const X = (props: IPropsComponent) => {
 				onBlur,
 				onChange
 			}}
+			// @ts-ignore
 			width={use_by_form ? undefined : width}
 		/>
 	)

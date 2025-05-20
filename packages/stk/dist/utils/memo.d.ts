@@ -1,5 +1,4 @@
-import type { JSX, ReactNode } from 'react';
-type Element = JSX.Element | ReactNode | null;
-type Memo = <T>(el: (props: T) => Element) => React.MemoExoticComponent<(props: T) => Element>;
+import type { MemoExoticComponent, ComponentType } from 'react';
+type Memo = <T extends ComponentType<any>>(Component: T) => MemoExoticComponent<T>;
 declare const Index: Memo;
 export default Index;

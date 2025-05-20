@@ -6,5 +6,5 @@ export declare const preset_color: {
     warning: string;
     danger: string;
 };
-declare const _default: import("react").MemoExoticComponent<(props: IPropsTimeline) => import("react").JSX.Element | import("react").ReactNode>;
+declare const _default: import("react").MemoExoticComponent<(props: IPropsTimeline) => import("react/jsx-runtime").JSX.Element>;
 export default _default;

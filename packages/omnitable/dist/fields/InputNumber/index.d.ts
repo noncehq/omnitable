@@ -1,2 +1,2 @@
-declare const _default: import("react").MemoExoticComponent<(props: unknown) => import("react").JSX.Element | import("react").ReactNode>;
+declare const _default: import("react").MemoExoticComponent<any>;
 export default _default;
