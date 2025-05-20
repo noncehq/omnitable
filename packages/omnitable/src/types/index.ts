@@ -121,6 +121,10 @@ export namespace Omnitable {
 			table?: Fields
 			form?: Fields
 		}
+		// 隐藏头部
+		hide_header?: boolean
+		// 隐藏翻页器
+		hide_pagination?: boolean
 	}
 
 	export interface AdapterQueryArgs {

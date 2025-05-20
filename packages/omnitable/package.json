@@ -3,7 +3,7 @@
 	"author": "1yasa",
 	"version": "0.0.0",
 	"scripts": {
-		"dev": "cross-env NODE_ENV=development rslib build -w",
+		"dev": "concurrently \"cross-env NODE_ENV=development rslib build -w\" \"tsc -w\"",
 		"build": "cross-env NODE_ENV=production rslib build && tsc -p ./tsconfig.build.json"
 	},
 	"exports": {
@@ -17,6 +17,8 @@
 		"@dnd-kit/core": "^6.3.1",
 		"@dnd-kit/sortable": "^10.0.0",
 		"@dnd-kit/utilities": "^3.2.2",
+		"@omnitable/appframe": "workspace:*",
+		"@omnitable/stk": "workspace:*",
 		"@phosphor-icons/react": "^2.1.7",
 		"@phosphor-icons/web": "^2.1.2",
 		"@tiptap/extension-code-block-lowlight": "^2.12.0",
@@ -39,7 +41,6 @@
 		"@tiptap/starter-kit": "^2.12.0",
 		"ahooks": "^3.8.4",
 		"antd": "^5.25.1",
-		"@omnitable/appframe": "workspace:*",
 		"await-to-js": "^3.0.0",
 		"change-case": "^5.4.4",
 		"color": "^5.0.0",
@@ -59,7 +60,6 @@
 		"react-dom": "^19.1.0",
 		"react-error-boundary": "^6.0.0",
 		"recharts": "^2.15.3",
-		"@omnitable/stk": "workspace:*",
 		"tslib": "^2.8.1"
 	},
 	"devDependencies": {
@@ -74,6 +74,7 @@
 		"autoprefixer": "^10.4.21",
 		"bun": "^1.2.13",
 		"bun-types": "^1.2.13",
+		"concurrently": "^9.1.2",
 		"cross-env": "^7.0.3",
 		"deepmerge-ts": "^7.1.5",
 		"postcss-calc": "^10.1.1",

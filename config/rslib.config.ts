@@ -1,20 +1,28 @@
 import type { RslibConfig } from '@rslib/core'
 
 const is_dev = process.env.NODE_ENV === 'development'
+const is_prod = process.env.NODE_ENV === 'production'
 const postcss_plugins = ['autoprefixer', 'postcss-import', 'postcss-nested', 'postcss-calc']
+
+const prod_output = {} as RslibConfig['output']
+
+if (is_prod) {
+	prod_output!['minify'] = {}
+}
 
 export default {
 	mode: is_dev ? 'development' : 'production',
 	lib: [{ format: 'esm' }],
+	source: { decorators: { version: 'legacy' } },
 	output: {
-		minify: is_dev ? false : {},
 		sourceMap: is_dev,
 		target: 'web',
 		injectStyles: true,
 		cleanDistPath: true,
 		filename: {
 			js: '[name]/index.js'
-		}
+		},
+		...prod_output
 	},
 	performance: {
 		chunkSplit: { strategy: 'split-by-module' }

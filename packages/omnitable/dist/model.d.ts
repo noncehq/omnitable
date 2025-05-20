@@ -31,6 +31,7 @@ export default class Index {
         field: string;
         expression: string;
         value: any;
+        shadow?: boolean;
     }>;
     stat_params: Array<{
         field: string;

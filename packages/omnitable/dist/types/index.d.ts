@@ -95,6 +95,8 @@ export declare namespace Omnitable {
             table?: Fields;
             form?: Fields;
         };
+        hide_header?: boolean;
+        hide_pagination?: boolean;
     }
     interface AdapterQueryArgs {
         config: Omnitable.Config;

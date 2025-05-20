@@ -35,7 +35,7 @@ export default class Index {
 	sort_field_options = [] as Array<{ label: string; value: any; disabled?: boolean }>
 	sort_params = [] as Array<{ field: string; order: 'desc' | 'asc' }>
 	filter_relation = 'and' as 'and' | 'or'
-	filter_params = [] as Array<{ field: string; expression: string; value: any }>
+	filter_params = [] as Array<{ field: string; expression: string; value: any; shadow?: boolean }>
 	stat_params = [] as Array<{ field: string; type: StatType }>
 	stat_items = [] as Array<any>
 

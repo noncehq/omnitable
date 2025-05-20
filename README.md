@@ -23,19 +23,9 @@ Add this to your package.json:
 ```json
 {
       "dependencies":{
-            "@omnitable/appframe": "workspace:*",
-            "@omnitable/stk": "workspace:*",
             "@omnitable/omnitable": "workspace:*"
       }
 }
-```
-
-## Presets
-
-Only one preset dependency in your app entry:
-
-```tsx
-import '@abraham/reflection'
 ```
 
 ## Using

@@ -6,6 +6,7 @@ import { preset_color } from '../../metadata'
 import styles from './index.module.css'
 
 import type { Omnitable, ComponentType } from '../../types'
+import type { CSSProperties } from 'react'
 
 const Index = (props: ComponentType<Omnitable.Tag['props']>) => {
 	const { self_props, width, value, use_by_form } = props
@@ -54,10 +55,12 @@ const Index = (props: ComponentType<Omnitable.Tag['props']>) => {
 				mode === 'dot' && styles.dot_mode,
 				use_by_form && styles.use_by_form
 			)}
-			style={{
-				width,
-				'--tag_color': color
-			}}
+			style={
+				{
+					width,
+					'--tag_color': color
+				} as CSSProperties
+			}
 		>
 			<div
 				className={$.cx(

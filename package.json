@@ -6,7 +6,8 @@
 	"scripts": {
 		"prepare": "husky",
 		"dev": "turbo run dev",
-		"build": "turbo run build",
+		"build": "turbo run build --filter=!examples",
+		"build:affected": "turbo run build --affected --filter=!examples",
 		"dev:omnitable": "turbo run dev --filter=omnitable",
 		"build:omnitable": "turbo run build --filter=omnitable",
 		"prettier": "prettier --parser=typescript --write \"**/*.ts?(x)\"",

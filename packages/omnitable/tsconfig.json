@@ -3,6 +3,7 @@
 		"target": "ESNext",
 		"module": "ESNext",
 		"skipLibCheck": true,
+		"incremental": true,
 		"lib": ["ESNEXT", "DOM"],
 		"moduleResolution": "bundler",
 		"declaration": true,

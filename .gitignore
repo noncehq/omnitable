@@ -26,6 +26,7 @@ npm-debug.log*
 
 # temp
 **/.tmp
+*.js.map
 
 # Electron
 release

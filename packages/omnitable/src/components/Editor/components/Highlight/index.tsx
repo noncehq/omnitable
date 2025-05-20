@@ -4,6 +4,8 @@ import { $ } from '@omnitable/stk/utils'
 
 import styles from './index.module.css'
 
+import type { CSSProperties } from 'react'
+
 interface IProps {
 	getColorActive: (v: string) => boolean
 	getbackgroundActive: (v: string) => boolean
@@ -49,10 +51,12 @@ const Index = (props: IProps) => {
 							'border_box flex justify_center align_center clickable',
 							item && getColorActive(Color(item).hex()) && 'active'
 						)}
-						style={{
-							'--color': item ? item : 'var(--color_text)',
-							'--border_color': item ? item : 'var(--color_text)'
-						}}
+						style={
+							{
+								'--color': item ? item : 'var(--color_text)',
+								'--border_color': item ? item : 'var(--color_text)'
+							} as CSSProperties
+						}
 						onClick={() => onSelect('color', item ? Color(item).hex() : '')}
 						key={item}
 					>
@@ -68,12 +72,14 @@ const Index = (props: IProps) => {
 							'border_box clickable',
 							item && getbackgroundActive(Color(item).hex()) && 'active'
 						)}
-						style={{
-							'--color': item ? item : 'var(--color_bg)',
-							'--border_color': item
-								? Color(item).darken(0.1).toString()
-								: 'var(--color_border)'
-						}}
+						style={
+							{
+								'--color': item ? item : 'var(--color_bg)',
+								'--border_color': item
+									? Color(item).darken(0.1).toString()
+									: 'var(--color_border)'
+							} as CSSProperties
+						}
 						onClick={() => onSelect('background', item ? Color(item).hex() : '')}
 						key={item}
 					></span>

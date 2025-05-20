@@ -11,6 +11,7 @@ import Column from './Col'
 
 import type { IPropsRow } from '../types'
 import type { FormProps } from 'antd'
+import type { CSSProperties } from 'react'
 
 const { useForm } = Form
 
@@ -60,7 +61,7 @@ const Index = (props: IPropsRow) => {
 
 		return {
 			'--row_bg': preset_color[bg as keyof typeof preset_color] ?? bg
-		}
+		} as CSSProperties
 	}, [row_bg, item])
 
 	const onRow = useMemoizedFn(() => onRowClick(index))
