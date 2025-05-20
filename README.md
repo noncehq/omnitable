@@ -4,7 +4,7 @@ online preview: https://omnitable-examples.pages.dev/
 
 ## Local use
 
-By run `git submodule add git@github.com:noncehq/ominitable.git omnitable` to add omnitable monorepo in you app root dir, pull submodule:
+By run `git submodule add git@github.com:noncehq/omnitable.git omnitable` to add omnitable monorepo in you app root dir, pull submodule:
 
 ```bash
 git submodule init
