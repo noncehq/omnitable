@@ -1,4 +1,5 @@
 import { useMemoizedFn } from 'ahooks'
+import { Tooltip } from 'antd'
 
 import { $ } from '@omnitable/stk/utils'
 import { CaretDown, CaretUp } from '@phosphor-icons/react'
@@ -7,7 +8,7 @@ import type { IPropsTh } from '../types'
 
 const Index = (props: IPropsTh) => {
 	const { column, order, onSort } = props
-	const { type, name, bind, sort } = column
+	const { type, name, desc, bind, sort } = column
 	const is_operation = type === 'operation'
 	const text = is_operation ? '' : name
 
@@ -26,7 +27,13 @@ const Index = (props: IPropsTh) => {
 		>
 			{sort ? (
 				<div className='inline_flex align_center'>
-					<span>{name}</span>
+					{desc ? (
+						<Tooltip title={desc}>
+							<span className='desc'>{name}</span>
+						</Tooltip>
+					) : (
+						<span>{name}</span>
+					)}
 					<div className={$.cx('table_sort flex_column justify_center', order && 'order')}>
 						{(order === 'asc' || !order) && <CaretUp className='asc' weight='bold'></CaretUp>}
 						{(order === 'desc' || !order) && (
@@ -34,6 +41,10 @@ const Index = (props: IPropsTh) => {
 						)}
 					</div>
 				</div>
+			) : desc ? (
+				<Tooltip title={desc}>
+					<span className='desc'>{name}</span>
+				</Tooltip>
 			) : (
 				text
 			)}

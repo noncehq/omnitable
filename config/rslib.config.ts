@@ -18,7 +18,7 @@ export default {
 		sourceMap: is_dev,
 		target: 'web',
 		injectStyles: true,
-		cleanDistPath: true,
+		cleanDistPath: is_prod,
 		filename: {
 			js: '[name]/index.js'
 		},

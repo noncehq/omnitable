@@ -36,7 +36,7 @@ const Index = (props: ComponentType<Omnitable.Text['props']>) => {
 	return (
 		<span
 			className={$.cx(
-				'border_box',
+				'inline_flex align_center border_box',
 				styles._local,
 				use_by_form && styles.use_by_form,
 				disabled && styles.disabled

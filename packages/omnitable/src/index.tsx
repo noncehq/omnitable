@@ -44,6 +44,7 @@ import type {
 	IPropsTimeline,
 	IPropsTimelineControls
 } from './types'
+import type { IPropsConfigProvider } from '@omnitable/appframe/components'
 
 const { useApp } = App
 
@@ -58,6 +59,11 @@ const Index = (props: Omnitable.Props) => {
 
 		return () => x.off()
 	}, [props, antd])
+
+	const props_config_provider: IPropsConfigProvider = {}
+
+	if (x.config?.locale) props_config_provider['locale'] = x.config?.locale
+	if (x.config?.theme) props_config_provider['theme'] = x.config?.theme
 
 	const props_sort: IPropsSort = {
 		sort_field_options: $.copy(x.sort_field_options),
@@ -179,7 +185,7 @@ const Index = (props: Omnitable.Props) => {
 	})
 
 	return (
-		<AntdConfigProvider locale={x.config?.locale} theme={x.config?.theme}>
+		<AntdConfigProvider {...props_config_provider}>
 			<Provider value={{ base_url: x.config?.baseurl }}>
 				<div className={$.cx('omnitable_root', styles._local)}>
 					{!x.config?.hide_header && (

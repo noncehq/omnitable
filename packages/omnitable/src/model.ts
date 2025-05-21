@@ -1053,6 +1053,13 @@ export default class Index {
 	}
 
 	off() {
+		this.filter_columns = []
+		this.table_columns = []
+		this.visible_columns = []
+		this.form_columns = []
+		this.editing_info = null
+		this.sort_columns = []
+
 		if (this.config?.refresh?.on_show) {
 			document.removeEventListener('visibilitychange', this.onVisibilityChange)
 		}

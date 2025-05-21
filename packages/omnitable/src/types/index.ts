@@ -156,6 +156,7 @@ export namespace Omnitable {
 	}
 
 	export interface TableColumn extends BaseColumn {
+		desc?: string
 		sort?: boolean | 'asc' | 'desc'
 		readonly?: boolean
 		sticky?: boolean

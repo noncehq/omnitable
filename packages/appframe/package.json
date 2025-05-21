@@ -4,6 +4,7 @@
 	"version": "0.0.0",
 	"description": "Preset components and utils for omnitable app.",
 	"scripts": {
+		"dev": "concurrently \"cross-env NODE_ENV=development rslib build -w\" \"tsc -w\"",
 		"build": "cross-env NODE_ENV=production rslib build && pnpm run build:theme && pnpm run build:styles && tsc -p ./tsconfig.build.json",
 		"build:theme": "bun ./build/theme",
 		"build:styles": "bun ./build/styles"
@@ -57,6 +58,7 @@
 		"tsyringe": "^4.10.0"
 	},
 	"devDependencies": {
+		"concurrently": "^9.1.2",
 		"@rsbuild/plugin-react": "^1.3.1",
 		"@rslib/core": "^0.6.9",
 		"@svgr/webpack": "^8.1.0",

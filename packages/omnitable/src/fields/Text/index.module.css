@@ -1,4 +1,7 @@
 ._local {
+	line-height: 1;
+	gap: 6px;
+
 	&.use_by_form {
 		display: flex;
 		overflow: scroll;

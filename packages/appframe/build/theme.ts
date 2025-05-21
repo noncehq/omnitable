@@ -19,4 +19,4 @@ const getVars = (theme: any) => {
 
 writeFileSync(`${output_path}/common.css`, `:root {\n${getVars(common)}}`)
 writeFileSync(`${output_path}/light.css`, `:root {\n${getVars(light)}}`)
-writeFileSync(`${output_path}/dark.css`, `[data-theme='dark'] {\n${getVars(dark)}}`)
+writeFileSync(`${output_path}/dark.css`, `[data-theme='dark'],.dark {\n${getVars(dark)}}`)

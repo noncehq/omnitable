@@ -11,8 +11,7 @@ export default {
 		controlHeight: 30,
 		controlHeightSM: 26,
 		controlHeightXS: 18,
-		lineHeight: common.line_height,
-		fontFamily: 'var(--font_family)',
+		fontFamily: 'inherit',
 		controlOutline: 'none'
 	}
 } as ThemeConfig

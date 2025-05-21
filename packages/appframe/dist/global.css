@@ -955,6 +955,7 @@
 	--shadow: 0 0 30px rgba(var(--color_text_rgb), 0.072);
 	--wave: rgba(var(--color_main_rgb), 0.06);
 }
+.dark,
 [data-theme='dark'] {
 	--color_std: #000;
 	--color_std_rgb: 0, 0, 0;

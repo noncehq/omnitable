@@ -258,7 +258,7 @@
 		}
 
 		.loading_wrap {
-			height: 300px;
+			height: 180px;
 			border: var(--border);
 			border-radius: var(--radius);
 		}
@@ -343,6 +343,15 @@
 							&:active {
 								background-color: var(--color_bg_2);
 							}
+						}
+
+						.desc {
+							cursor: pointer;
+							text-decoration-color: rgba(var(--color_text_rgb), 0.15);
+							text-decoration-line: underline;
+							text-decoration-style: dashed;
+							text-decoration-thickness: 2px;
+							text-underline-offset: 1.5px;
 						}
 
 						.table_sort {
