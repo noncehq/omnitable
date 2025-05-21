@@ -102,6 +102,8 @@ export default class Index {
 		this.loading_init = true
 		this.antd = antd
 
+		if ('suspending' in this.config && this.config['suspending']) return
+
 		if ('config_url' in props) {
 			await this.getConfig(props.config_url)
 		} else {
@@ -121,8 +123,6 @@ export default class Index {
 
 		if (this.config.group) this.makeGroupParams()
 		if (this.config.stat?.columns?.length) this.makeStatParams()
-
-		if ('suspending' in this.config && this.config['suspending']) return
 
 		await this.query()
 
