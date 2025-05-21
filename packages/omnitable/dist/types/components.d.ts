@@ -160,7 +160,7 @@ export interface ComponentType<T = {}> extends Pick<IPropsComponent, 'value' | '
     disabled?: boolean;
     use_by_form?: boolean;
     use_by_filter?: boolean;
-    item?: boolean;
+    item?: any;
     self_props: T;
 }
 export interface IPropsPagination {

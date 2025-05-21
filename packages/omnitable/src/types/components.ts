@@ -180,7 +180,7 @@ export interface ComponentType<T = {}>
 	disabled?: boolean
 	use_by_form?: boolean
 	use_by_filter?: boolean
-	item?: boolean
+	item?: any
 	self_props: T
 }
 
