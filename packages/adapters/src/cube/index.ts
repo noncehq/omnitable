@@ -12,8 +12,8 @@ const deepmerge = deepmergeCustom({
 	}
 })
 
-export default (cube: CubeApi) =>
-	({
+export default (cube: CubeApi) => {
+	return {
 		async query(args: Omnitable.AdapterQueryArgs) {
 			const {
 				config,
@@ -99,4 +99,14 @@ export default (cube: CubeApi) =>
 
 			return { data: { items, total } }
 		}
-	}) as Omnitable.Adapter
+	} as Omnitable.Adapter
+}
+
+declare module '@omnitable/omnitable' {
+	namespace Omnitable {
+		export interface Config {
+			// cube 自定义配置项，可覆盖和合并table生成的query配置
+			cube_options?: Partial<Query>
+		}
+	}
+}

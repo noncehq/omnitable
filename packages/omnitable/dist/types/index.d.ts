@@ -4,7 +4,6 @@ import type { ReactNode } from 'react';
 import type { StatType } from '../metadata';
 import type { CSSProperties } from 'react';
 import type { Model } from '..';
-import type { Query } from '@cubejs-client/core';
 export * from './components';
 export declare namespace Omnitable {
     type Props = LowCodeConfig | Config;
@@ -12,6 +11,7 @@ export declare namespace Omnitable {
         config_url: string;
     }
     interface Config {
+        suspending?: boolean;
         locale?: 'en' | 'zh';
         theme?: 'light' | 'dark';
         name: string;
@@ -98,7 +98,6 @@ export declare namespace Omnitable {
         };
         hide_header?: boolean;
         hide_pagination?: boolean;
-        cube_options?: Partial<Query>;
     }
     interface AdapterQueryArgs {
         config: Omnitable.Config;
