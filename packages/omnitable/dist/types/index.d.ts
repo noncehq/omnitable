@@ -6,10 +6,7 @@ import type { CSSProperties } from 'react';
 import type { Model } from '..';
 export * from './components';
 export declare namespace Omnitable {
-    interface CommonProps {
-        className?: string;
-    }
-    type Props = CommonProps & (LowCodeConfig | Config);
+    type Props = LowCodeConfig | Config;
     interface LowCodeConfig {
         config_url: string;
     }

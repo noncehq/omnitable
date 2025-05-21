@@ -8,11 +8,7 @@ import type { Model } from '..'
 export * from './components'
 
 export namespace Omnitable {
-	export interface CommonProps {
-		className?: string
-	}
-
-	export type Props = CommonProps & (LowCodeConfig | Config)
+	export type Props = LowCodeConfig | Config
 
 	export interface LowCodeConfig {
 		config_url: string

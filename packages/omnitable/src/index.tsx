@@ -50,15 +50,14 @@ const { useApp } = App
 const Index = (props: Omnitable.Props) => {
 	const [x] = useState(() => new Model())
 	const antd = useApp()
-	const { className, ...rest_props } = props
 	const filter_columns = $.copy(x.filter_columns)
 	const visible_columns = $.copy(x.visible_columns)
 
 	useLayoutEffect(() => {
-		x.init({ props: rest_props, antd })
+		x.init({ props, antd })
 
 		return () => x.off()
-	}, [rest_props, antd])
+	}, [props, antd])
 
 	const props_sort: IPropsSort = {
 		sort_field_options: $.copy(x.sort_field_options),
@@ -182,7 +181,7 @@ const Index = (props: Omnitable.Props) => {
 	return (
 		<AntdConfigProvider locale={x.config?.locale} theme={x.config?.theme}>
 			<Provider value={{ base_url: x.config?.baseurl }}>
-				<div className={$.cx('omnitable_root', styles._local, className)}>
+				<div className={$.cx('omnitable_root', styles._local)}>
 					{!x.config?.hide_header && (
 						<div
 							className={$.cx(
