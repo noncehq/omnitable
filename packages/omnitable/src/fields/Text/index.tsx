@@ -23,7 +23,7 @@ const Index = (props: ComponentType<Omnitable.Text['props']>) => {
 		return `${prefix ?? ''}${value}${suffix ?? ''}`
 	}, [value, format, prefix, suffix, textwrap])
 
-	const has_span = text.indexOf('<span>') !== -1
+	const has_span = text.indexOf('</span>') !== -1
 
 	return (
 		<span
