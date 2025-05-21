@@ -16,6 +16,8 @@ export namespace Omnitable {
 	}
 
 	export interface Config {
+		// 外部注入的加载中状态，该字段存在，且为false时触发query
+		suspending?: boolean
 		locale?: 'en' | 'zh'
 		theme?: 'light' | 'dark'
 		// 表名称，用于本地存储的前缀（请保持唯一）

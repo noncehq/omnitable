@@ -124,6 +124,8 @@ export default class Index {
 		if (this.config.group) this.makeGroupParams()
 		if (this.config.stat?.columns?.length) this.makeStatParams()
 
+		if ('suspending' in this.config && this.config['suspending']) return
+
 		await this.query()
 
 		this.loading_init = false
