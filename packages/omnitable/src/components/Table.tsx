@@ -79,11 +79,11 @@ const Index = (props: IPropsTable) => {
 		setItems(target_items)
 	})
 
-	const table_class = $.cx('table_wrap w_100', table_props?.border && 'border_style')
+	const table_class = $.cx('omnitable_table_wrap table_wrap w_100', table_props?.border && 'border_style')
 
 	return (
 		<Fragment>
-			<div className='table_container w_100'>
+			<div className='omnitable_table_container table_container w_100'>
 				<table className={table_class} ref={table}>
 					<thead>
 						<tr className={$.cx(modal_index === 0 && 'selected')}>

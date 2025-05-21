@@ -50,14 +50,15 @@ const { useApp } = App
 const Index = (props: Omnitable.Props) => {
 	const [x] = useState(() => new Model())
 	const antd = useApp()
+	const { className, ...rest_props } = props
 	const filter_columns = $.copy(x.filter_columns)
 	const visible_columns = $.copy(x.visible_columns)
 
 	useLayoutEffect(() => {
-		x.init({ props, antd })
+		x.init({ props: rest_props, antd })
 
 		return () => x.off()
-	}, [props, antd])
+	}, [rest_props, antd])
 
 	const props_sort: IPropsSort = {
 		sort_field_options: $.copy(x.sort_field_options),
@@ -181,11 +182,11 @@ const Index = (props: Omnitable.Props) => {
 	return (
 		<AntdConfigProvider locale={x.config?.locale} theme={x.config?.theme}>
 			<Provider value={{ base_url: x.config?.baseurl }}>
-				<div className={$.cx(styles._local)}>
+				<div className={$.cx('omnitable_root', styles._local, className)}>
 					{!x.config?.hide_header && (
 						<div
 							className={$.cx(
-								'header_wrap w_100 flex flex_wrap justify_between',
+								'omnitable_table_header_wrap header_wrap w_100 flex flex_wrap justify_between',
 								styles.header_wrap
 							)}
 						>
@@ -265,7 +266,7 @@ const Index = (props: Omnitable.Props) => {
 						</div>
 					)}
 					{x.config?.timeline && <Timeline {...props_timeline}></Timeline>}
-					<div className='body_wrap w_100 flex flex_column relative'>
+					<div className='omnitable_table_body_wrap body_wrap w_100 flex flex_column relative'>
 						{!x.loading_init && x.querying && (
 							<div className='querying_wrap w_100 h_100 flex justify_center align_center absolute'>
 								<LoadingCircle></LoadingCircle>
