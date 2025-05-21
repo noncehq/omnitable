@@ -325,7 +325,7 @@ const Index = (props: Omnitable.Props) => {
 	)
 }
 
-export default observer(Index)
+export default $.memo(observer(Index))
 
 export type { Omnitable } from './types'
 export type { Model }
