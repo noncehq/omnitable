@@ -32,11 +32,6 @@ export declare namespace Omnitable {
         view?: {
             hide?: boolean;
         };
-        time_dimensions?: Array<{
-            dimension: string;
-            granularity: string;
-            date_range: [string, string];
-        }>;
         filter?: {
             columns: Array<FilterColumn>;
             defaults?: Model['filter_params'];
@@ -102,7 +97,6 @@ export declare namespace Omnitable {
     interface AdapterQueryArgs {
         config: Omnitable.Config;
         sort_params: Model['sort_params'];
-        time_dimensions: Omnitable.Config['time_dimensions'];
         filter_relation: Model['filter_relation'];
         filter_params: Model['filter_params'];
         page: Model['pagination']['page'];
@@ -126,7 +120,6 @@ export declare namespace Omnitable {
         datatype: 'string' | 'number' | 'array' | 'date';
     }
     interface TableColumn extends BaseColumn {
-        measure?: boolean;
         sort?: boolean | 'asc' | 'desc';
         readonly?: boolean;
         sticky?: boolean;

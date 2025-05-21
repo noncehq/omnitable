@@ -3,7 +3,7 @@ import { deepmergeCustom } from 'deepmerge-ts'
 import { uniq } from 'lodash-es'
 
 import type { Model, Omnitable } from '@omnitable/omnitable'
-import type { Filter, TimeDimension, CubeApi } from '@cubejs-client/core'
+import type { Filter, CubeApi } from '@cubejs-client/core'
 import type { Query } from '@cubejs-client/core'
 
 const deepmerge = deepmergeCustom({
@@ -15,46 +15,8 @@ const deepmerge = deepmergeCustom({
 export default (cube: CubeApi) => {
 	return {
 		async query(args: Omnitable.AdapterQueryArgs) {
-			const {
-				config,
-				sort_params,
-				time_dimensions = [],
-				filter_relation,
-				filter_params,
-				page,
-				pagesize
-			} = args
+			const { config, sort_params, filter_relation, filter_params, page, pagesize } = args
 			const cube_options = (config.cube_options || {}) as Query
-
-			const measures = [] as Array<string>
-			const dimensions = [] as Array<string>
-			const target_time_dimensions = [] as Array<TimeDimension>
-
-			time_dimensions.forEach(item => {
-				const field = (config.fields.table?.[item.dimension] || config.fields.common?.[item.dimension])!
-
-				target_time_dimensions.push({
-					dimension: field.bind,
-					granularity: item.granularity,
-					dateRange: item.date_range
-				})
-			})
-
-			config.table.columns.forEach(item => {
-				const field = (config.fields.table?.[item.name] || config.fields.common?.[item.name])!
-
-				if (!field.bind.startsWith('_')) {
-					if (item.measure) {
-						measures.push(field.bind)
-					} else {
-						const is_time_dimention = target_time_dimensions.find(
-							t => t.dimension === field.bind
-						)
-
-						if (!is_time_dimention) dimensions.push(field.bind)
-					}
-				}
-			})
 
 			const order = sort_params.map(item => [item.field, item.order], []) as Array<
 				[string, Model['sort_params'][number]['order']]
@@ -78,10 +40,7 @@ export default (cube: CubeApi) => {
 				cube.load(
 					deepmerge(
 						{
-							measures,
-							dimensions,
 							order,
-							timeDimensions: target_time_dimensions,
 							filters,
 							offset: (page - 1) * pagesize,
 							limit: pagesize,

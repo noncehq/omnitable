@@ -1,5 +1,3 @@
-'use client'
-
 import to from 'await-to-js'
 import dayjs from 'dayjs'
 import { Decimal } from 'decimal.js'
@@ -152,7 +150,6 @@ export default class Index {
 				$.copy({
 					config: this.config,
 					sort_params: this.sort_params,
-					time_dimensions: this.config.time_dimensions,
 					filter_relation: this.filter_relation,
 					filter_params: this.filter_params.filter(i => 'value' in i),
 					page: this.pagination.page,

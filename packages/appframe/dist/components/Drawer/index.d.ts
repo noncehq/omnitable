@@ -16,5 +16,5 @@ export interface IProps {
     onCancel?: (e?: MouseEvent<HTMLElement>) => void;
     getRef?: (v: HTMLElement | null) => void;
 }
-declare const _default: import("react").MemoExoticComponent<(props: IProps) => import("react").JSX.Element | import("react").ReactNode>;
+declare const _default: import("react").MemoExoticComponent<(props: IProps) => import("react").ReactPortal>;
 export default _default;

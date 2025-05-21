@@ -22,6 +22,7 @@ export default {
 		filename: {
 			js: '[name]/index.js'
 		},
+		externals: ['react', 'react-dom'],
 		...prod_output
 	},
 	performance: {
