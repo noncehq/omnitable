@@ -102,13 +102,13 @@ export default class Index {
 		this.loading_init = true
 		this.antd = antd
 
-		if ('suspending' in this.config && this.config['suspending']) return
-
 		if ('config_url' in props) {
 			await this.getConfig(props.config_url)
 		} else {
 			this.config = props
 		}
+
+		if ('suspending' in this.config && this.config['suspending']) return
 
 		this.disposers = [setStorageWhenChange([{ [`${this.config.name}:views`]: 'views' }], this)]
 
