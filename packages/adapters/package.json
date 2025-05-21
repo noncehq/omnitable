@@ -13,7 +13,7 @@
 	},
 	"exports": {
 		"./cube": {
-			"types": "./dist/index.d.ts",
+			"types": "./dist/cube/index.d.ts",
 			"import": "./dist/cube/index.js",
 			"default": "./dist/cube/index.js"
 		}
