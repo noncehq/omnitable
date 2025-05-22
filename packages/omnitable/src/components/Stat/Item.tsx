@@ -27,11 +27,7 @@ const Index = (props: IPropsStatItem & FormListFieldData) => {
 			{...attributes}
 		>
 			<Item {...rest} className='field_name' name={[name, 'field']}>
-				<Select
-					showSearch
-					fieldNames={{ label: 'name', value: 'id' }}
-					options={visible_columns}
-				></Select>
+				<Select showSearch fieldNames={{ label: 'name', value: 'id' }} options={visible_columns}></Select>
 			</Item>
 			<Item {...rest} className='sort_value' name={[name, 'type']}>
 				<Select options={[...stat_options]}></Select>

@@ -97,8 +97,7 @@ const Index = (props: IPropsRow) => {
 							: undefined
 
 					const group_level =
-						(col.name === item['__group_name__'] ||
-							col.name === item['__group_replace__']?.name) &&
+						(col.name === item['__group_name__'] || col.name === item['__group_replace__']?.name) &&
 						item['__group_level__']
 							? item['__group_level__']
 							: undefined

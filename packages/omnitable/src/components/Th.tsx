@@ -36,9 +36,7 @@ const Index = (props: IPropsTh) => {
 					)}
 					<div className={$.cx('table_sort flex_column justify_center', order && 'order')}>
 						{(order === 'asc' || !order) && <CaretUp className='asc' weight='bold'></CaretUp>}
-						{(order === 'desc' || !order) && (
-							<CaretDown className='desc' weight='bold'></CaretDown>
-						)}
+						{(order === 'desc' || !order) && <CaretDown className='desc' weight='bold'></CaretDown>}
 					</div>
 				</div>
 			) : desc ? (

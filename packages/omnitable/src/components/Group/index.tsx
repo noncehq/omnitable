@@ -64,12 +64,7 @@ const Index = (props: IPropsGroup) => {
 				<div className='acc_wrap flex flex_column'>
 					<span className='title'>Acc</span>
 					<Item name='acc'>
-						<Select
-							mode='multiple'
-							labelInValue
-							placeholder='Select acc fields'
-							options={group_field_options}
-						></Select>
+						<Select mode='multiple' labelInValue placeholder='Select acc fields' options={group_field_options}></Select>
 					</Item>
 				</div>
 				<span className='title'>{counts ? 'Group By' : 'No grouping applied'}</span>
@@ -106,12 +101,7 @@ const Index = (props: IPropsGroup) => {
 									<div className='desc'>Add grouping to group your rows.</div>
 								)}
 							</div>
-							<div
-								className={$.cx(
-									'form_list_actions flex',
-									items.length > 0 && 'has_items'
-								)}
-							>
+							<div className={$.cx('form_list_actions flex', items.length > 0 && 'has_items')}>
 								<Button className='clickable' type='primary' onClick={() => add()}>
 									Add Group
 								</Button>

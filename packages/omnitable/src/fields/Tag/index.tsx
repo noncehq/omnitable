@@ -75,15 +75,10 @@ const Index = (props: ComponentType<Omnitable.Tag['props']>) => {
 						className='icon_wrap flex justify_center align_center'
 						style={{ width: icon_size, height: icon_size, fontSize: icon_size }}
 					>
-						<i
-							className={`ph ph-${typeof option.icon === 'function' ? option.icon(value) : option.icon}`}
-						></i>
+						<i className={`ph ph-${typeof option.icon === 'function' ? option.icon(value) : option.icon}`}></i>
 					</span>
 				) : (
-					<span
-						className={$.cx('dot', dot_shape)}
-						style={{ width: dot_size, height: dot_size }}
-					></span>
+					<span className={$.cx('dot', dot_shape)} style={{ width: dot_size, height: dot_size }}></span>
 				)}
 				<span className='text'>
 					{prefix}

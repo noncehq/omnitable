@@ -68,16 +68,11 @@ const Index = (props: IProps) => {
 			<div className='color_items background'>
 				{backgrounds.map(item => (
 					<span
-						className={$.cx(
-							'border_box clickable',
-							item && getbackgroundActive(Color(item).hex()) && 'active'
-						)}
+						className={$.cx('border_box clickable', item && getbackgroundActive(Color(item).hex()) && 'active')}
 						style={
 							{
 								'--color': item ? item : 'var(--color_bg)',
-								'--border_color': item
-									? Color(item).darken(0.1).toString()
-									: 'var(--color_border)'
+								'--border_color': item ? Color(item).darken(0.1).toString() : 'var(--color_border)'
 							} as CSSProperties
 						}
 						onClick={() => onSelect('background', item ? Color(item).hex() : '')}

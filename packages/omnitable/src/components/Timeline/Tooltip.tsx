@@ -50,11 +50,7 @@ const Index = (props: IProps) => {
 								className={$.cx('dot', item.label)}
 								style={{
 									backgroundColor:
-										item.color in preset_color
-											? preset_color[
-													item.color as keyof typeof preset_color
-												]
-											: item.color
+										item.color in preset_color ? preset_color[item.color as keyof typeof preset_color] : item.color
 								}}
 							></span>
 							<span className='label'>{item.label}</span>

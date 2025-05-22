@@ -88,11 +88,7 @@ const Index = (props: IProps) => {
 					label === 'divider' ? (
 						<span className='divider' key={index}></span>
 					) : (
-						<div
-							className='action_item flex align_center clickable'
-							onClick={action}
-							key={index}
-						>
+						<div className='action_item flex align_center clickable' onClick={action} key={index}>
 							{label}
 						</div>
 					)

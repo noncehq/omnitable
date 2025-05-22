@@ -80,11 +80,7 @@ const Index = (props: IPropsCol) => {
 
 	return (
 		<td
-			className={$.cx(
-				'form_table_td',
-				type === 'operation' && 'operation',
-				column.sticky && 'sticky left_0'
-			)}
+			className={$.cx('form_table_td', type === 'operation' && 'operation', column.sticky && 'sticky left_0')}
 			width={column.width}
 			style={{ textAlign: column.align }}
 			ref={ref}

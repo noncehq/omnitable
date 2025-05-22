@@ -75,7 +75,11 @@ export default class Index {
 
 	items = [] as Array<any>
 	items_raw = [] as Array<any>
-	pagination = { page: 1, pagesize: 12, total: 0 } as { page: number; pagesize: number; total: number }
+	pagination = { page: 1, pagesize: 12, total: 0 } as {
+		page: number
+		pagesize: number
+		total: number
+	}
 
 	living_timer = null as NodeJS.Timeout | null
 	disposers = [] as Array<IReactionDisposer | Lambda>
@@ -196,11 +200,7 @@ export default class Index {
 		this.items_raw = items
 
 		if (this.group_params.fields.length) {
-			this.items = this.makeGroupData(
-				items,
-				$.copy(this.group_params.fields),
-				$.copy(this.group_params.acc)
-			)
+			this.items = this.makeGroupData(items, $.copy(this.group_params.fields), $.copy(this.group_params.acc))
 		} else {
 			this.items = items
 		}
@@ -490,8 +490,7 @@ export default class Index {
 		} else {
 			this.form_columns =
 				this.config.form?.columns?.map(item => {
-					const field =
-						this.config.fields.form?.[item.name] || this.config.fields.common?.[item.name]
+					const field = this.config.fields.form?.[item.name] || this.config.fields.common?.[item.name]
 
 					return { ...item, ...field }
 				}) || []
@@ -574,8 +573,7 @@ export default class Index {
 		Object.keys(group_data).forEach(group_field_value => {
 			const children = group_data[group_field_value]
 			const current_group_id =
-				(group_id ? `${group_id}/` : '') +
-				`${group_field.value}:${group_field.label}:${group_field_value}`
+				(group_id ? `${group_id}/` : '') + `${group_field.value}:${group_field.label}:${group_field_value}`
 
 			// 如果field_value是number类型，需要进行还原
 			if (group_field_is_number) {
@@ -723,9 +721,7 @@ export default class Index {
 						if (index === counts - 1) {
 							const total_value = new Decimal(stat_item.value)
 
-							stat_item.value = new Decimal(
-								total_value.div(new Decimal(counts)).toFixed(3)
-							).toNumber()
+							stat_item.value = new Decimal(total_value.div(new Decimal(counts)).toFixed(3)).toNumber()
 						}
 						break
 					case 'COUNT':
@@ -861,11 +857,7 @@ export default class Index {
 		this.makeGroupVisible()
 
 		if (this.group_params.fields.length) {
-			this.items = this.makeGroupData(
-				this.items_raw,
-				$.copy(this.group_params.fields),
-				$.copy(this.group_params.acc)
-			)
+			this.items = this.makeGroupData(this.items_raw, $.copy(this.group_params.fields), $.copy(this.group_params.acc))
 		} else {
 			this.items = this.items_raw
 		}
@@ -935,9 +927,7 @@ export default class Index {
 		if (this.timeline_range) {
 			this.timeline_range = null
 
-			this.filter_params = $.copy(
-				this.filter_params.filter(item => item.field !== this.config.timeline!.control_bind)
-			)
+			this.filter_params = $.copy(this.filter_params.filter(item => item.field !== this.config.timeline!.control_bind))
 
 			this.query(false, true)
 		} else {

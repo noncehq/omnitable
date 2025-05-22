@@ -69,10 +69,7 @@ const Index = (props: IPropsFilter) => {
 		onChangeFilter({ filter_relation: v })
 	})
 
-	const has_range_picker = useMemo(
-		() => filter_params.some(item => item.expression === 'is between'),
-		[filter_params]
-	)
+	const has_range_picker = useMemo(() => filter_params.some(item => item.expression === 'is between'), [filter_params])
 
 	const Content = (
 		<div className={$.cx('flex flex_column', styles.popover_wrap, has_range_picker && styles.has_range_picker)}>
@@ -123,13 +120,8 @@ const Index = (props: IPropsFilter) => {
 													<FilterItem
 														filter_relation={filter_relation}
 														filter_columns={filter_columns}
-														filter_field_options={
-															filter_field_options
-														}
-														filter_param={
-															filter_params[args.name] ||
-															default_option
-														}
+														filter_field_options={filter_field_options}
+														filter_param={filter_params[args.name] || default_option}
 														onChangeRelation={onChangeRelation}
 														remove={remove}
 														{...args}
@@ -143,17 +135,10 @@ const Index = (props: IPropsFilter) => {
 									)}
 								</div>
 								<div
-									className={$.cx(
-										'form_list_actions filter_actions flex',
-										items.length > 0 && 'has_items'
-									)}
+									className={$.cx('form_list_actions filter_actions flex', items.length > 0 && 'has_items')}
 									style={{ paddingLeft: items.length > 0 ? 80 : 0 }}
 								>
-									<Button
-										className='clickable'
-										type='primary'
-										onClick={() => add(default_option)}
-									>
+									<Button className='clickable' type='primary' onClick={() => add(default_option)}>
 										Add filter
 									</Button>
 									{counts > 0 && (

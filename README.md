@@ -15,16 +15,16 @@ Then add `pnpm-workspace.yaml` in you app root dir, and add below to `pnpm-works
 
 ```yaml
 packages:
-      - 'omnitable/packages/*'
+  - 'omnitable/packages/*'
 ```
 
 Add this to your package.json:
 
 ```json
 {
-      "dependencies":{
-            "@omnitable/omnitable": "workspace:*"
-      }
+  "dependencies": {
+    "@omnitable/omnitable": "workspace:*"
+  }
 }
 ```
 
@@ -36,11 +36,11 @@ import Omnitable from 'omnitable'
 import config from '../../config_normal'
 
 const Index = () => {
-	return (
-		<div className='table_example_wrap'>
-			<Omnitable {...config}></Omnitable>
-		</div>
-	)
+  return (
+    <div className="table_example_wrap">
+      <Omnitable {...config}></Omnitable>
+    </div>
+  )
 }
 
 export default Index

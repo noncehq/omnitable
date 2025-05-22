@@ -124,27 +124,15 @@ const Index = (props: IProps) => {
 						style={{ zIndex: zIndex ? zIndex + 1 : 1002 }}
 					>
 						<div
-							className={$.cx(
-								styles.content,
-								className,
-								'if_modal_content border_box flex flex_column'
-							)}
+							className={$.cx(styles.content, className, 'if_modal_content border_box flex flex_column')}
 							style={{ width: width ?? 360, minHeight }}
 							ref={ref_content}
 						>
 							{title && (
-								<div
-									className={$.cx(
-										styles.header,
-										'w_100 border_box flex justify_between align_center'
-									)}
-								>
+								<div className={$.cx(styles.header, 'w_100 border_box flex justify_between align_center')}>
 									<span className='title'>{title}</span>
 									{!hideClose && (
-										<span
-											className='btn_close flex justify_center align_center clickable'
-											onClick={onCancel}
-										>
+										<span className='btn_close flex justify_center align_center clickable' onClick={onCancel}>
 											<X size={14}></X>
 										</span>
 									)}

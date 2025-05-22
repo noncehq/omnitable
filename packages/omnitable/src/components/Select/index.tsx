@@ -47,12 +47,7 @@ const Index = (props: ComponentType<Omnitable.Select['props']>) => {
 					onChange={onChange}
 				></Select>
 			) : (
-				<span
-					className={$.cx(
-						'text_wrap w_100 border_box inline_flex align_center',
-						!option && 'placeholder'
-					)}
-				>
+				<span className={$.cx('text_wrap w_100 border_box inline_flex align_center', !option && 'placeholder')}>
 					{option || self_props.placeholder}
 				</span>
 			)}

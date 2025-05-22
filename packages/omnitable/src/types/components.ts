@@ -80,12 +80,7 @@ export interface IPropsView {
 export interface IPropsViewItem
 	extends Pick<
 		IPropsView,
-		| 'hide'
-		| 'filter_columns'
-		| 'visible_columns'
-		| 'getSortFieldOptions'
-		| 'getGroupFieldOptions'
-		| 'onApplyView'
+		'hide' | 'filter_columns' | 'visible_columns' | 'getSortFieldOptions' | 'getGroupFieldOptions' | 'onApplyView'
 	> {
 	view: Model['views'][number]
 	view_index: number

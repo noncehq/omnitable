@@ -88,42 +88,27 @@ const Index = (props: IPropsTable) => {
 					<thead>
 						<tr className={$.cx(modal_index === 0 && 'selected')}>
 							{table_columns.map(item => (
-								<Th
-									column={item}
-									order={getOrder(item)}
-									onSort={item.sort ? onSort : undefined}
-									key={item.name}
-								></Th>
+								<Th column={item} order={getOrder(item)} onSort={item.sort ? onSort : undefined} key={item.name}></Th>
 							))}
 						</tr>
 					</thead>
 					{data.length ? (
 						<tbody>
 							{data.map((item, index) =>
-								!item['__group_top__'] &&
-								item['__group_visible_children__'] === false ? null : (
+								!item['__group_top__'] && item['__group_visible_children__'] === false ? null : (
 									<Row
 										table_columns={table_columns}
 										modal_index={modal_index}
 										item={item}
 										index={index}
-										editing_info={
-											editing_info?.row_index === index && editing_info
-												? editing_info
-												: null
-										}
+										editing_info={editing_info?.row_index === index && editing_info ? editing_info : null}
 										row_bg={table_props?.row_bg}
 										row_click={table_props?.row_click}
 										onChange={onChange}
 										onRowClick={onRowClick}
 										setEditingInfo={setEditingInfo}
 										onToggleGroupItems={onToggleGroupItems}
-										key={
-											item[primary] ||
-											item['__group_id__'] ||
-											item['__stat_type__'] ||
-											index
-										}
+										key={item[primary] || item['__group_id__'] || item['__stat_type__'] || index}
 									></Row>
 								)
 							)}
@@ -132,10 +117,7 @@ const Index = (props: IPropsTable) => {
 						<tbody>
 							<tr>
 								<td colSpan={9999}>
-									<div
-										className='w_100 flex justify_center align_center'
-										style={{ height: 300 }}
-									>
+									<div className='w_100 flex justify_center align_center' style={{ height: 300 }}>
 										<Empty description={null}></Empty>
 									</div>
 								</td>

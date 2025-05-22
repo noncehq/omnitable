@@ -71,12 +71,7 @@ const Index = (props: IPropsViewItem) => {
 	return (
 		<div className='view_item_wrap flex flex_column'>
 			<div className='view_option name_wrap w_100 flex justify_between align_center'>
-				<Input
-					className='view_name'
-					value={view.name}
-					variant='borderless'
-					onChange={onChangeName}
-				></Input>
+				<Input className='view_name' value={view.name} variant='borderless' onChange={onChangeName}></Input>
 				<div className='view_actions flex align_center'>
 					<Button className='btn_remove btn' onClick={onRemove}>
 						<Trash></Trash>

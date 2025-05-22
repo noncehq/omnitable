@@ -34,9 +34,7 @@ const Index = (props: IPropsTimeline) => {
 				>
 					<XAxis
 						dataKey={label_bind}
-						tickFormatter={v =>
-							dayjs(v).format(timeline_args_map[timeline_type].duration_format)
-						}
+						tickFormatter={v => dayjs(v).format(timeline_args_map[timeline_type].duration_format)}
 						tickLine={false}
 						axisLine={false}
 						fontSize={10}
@@ -49,33 +47,20 @@ const Index = (props: IPropsTimeline) => {
 							stroke: 'var(--color_text)',
 							strokeWidth: 1
 						}}
-						content={args => (
-							<TooltipContent
-								timeline_type={timeline_type}
-								items={items}
-								payload={args.payload}
-							/>
-						)}
+						content={args => <TooltipContent timeline_type={timeline_type} items={items} payload={args.payload} />}
 					/>
 					<Bar
 						dataKey=''
 						stackId='a'
 						background={(props: any) => (
-							<Background
-								{...pick(props, ['x', 'y', 'width', 'height'])}
-								focus={props.index === timeline_focus}
-							/>
+							<Background {...pick(props, ['x', 'y', 'width', 'height'])} focus={props.index === timeline_focus} />
 						)}
 					/>
 					{items.map(item => (
 						<Bar
 							dataKey={item.bind}
 							stackId='a'
-							fill={
-								item.color in preset_color
-									? preset_color[item.color as keyof typeof preset_color]
-									: item.color
-							}
+							fill={item.color in preset_color ? preset_color[item.color as keyof typeof preset_color] : item.color}
 						/>
 					))}
 				</BarChart>

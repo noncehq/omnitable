@@ -68,12 +68,7 @@ const Index = (props: IPropsStat) => {
 											strategy={verticalListSortingStrategy}
 										>
 											{items.map(args => (
-												<StatItem
-													visible_columns={visible_columns}
-													remove={remove}
-													{...args}
-													key={args.key}
-												></StatItem>
+												<StatItem visible_columns={visible_columns} remove={remove} {...args} key={args.key}></StatItem>
 											))}
 										</SortableContext>
 									</DndContext>
@@ -81,12 +76,7 @@ const Index = (props: IPropsStat) => {
 									<div className='desc'>Add stating to stat your rows.</div>
 								)}
 							</div>
-							<div
-								className={$.cx(
-									'form_list_actions flex',
-									items.length > 0 && 'has_items'
-								)}
-							>
+							<div className={$.cx('form_list_actions flex', items.length > 0 && 'has_items')}>
 								<Button className='clickable' type='primary' onClick={() => add()}>
 									Add stat
 								</Button>

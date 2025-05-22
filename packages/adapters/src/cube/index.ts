@@ -47,7 +47,7 @@ export default (cube: CubeApi) => {
 							total: true
 						},
 						cube_options
-					)
+					) as Query
 				)
 			)
 
