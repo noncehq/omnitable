@@ -75,7 +75,11 @@ export default class Index {
 
 	items = [] as Array<any>
 	items_raw = [] as Array<any>
-	pagination = { page: 1, pagesize: 12, total: 0 } as { page: number; pagesize: number; total: number }
+	pagination = { page: 1, pagesize: 12, total: 0 } as {
+		page: number
+		pagesize: number
+		total: number
+	}
 
 	living_timer = null as NodeJS.Timeout | null
 	disposers = [] as Array<IReactionDisposer | Lambda>
@@ -154,7 +158,7 @@ export default class Index {
 						config: this.config,
 						sort_params: this.sort_params,
 						filter_relation: this.filter_relation,
-						filter_params: this.filter_params.filter((i) => 'value' in i),
+						filter_params: this.filter_params.filter(i => 'value' in i),
 						page: this.pagination.page,
 						pagesize: this.pagination.pagesize
 					})
@@ -168,7 +172,7 @@ export default class Index {
 						body: {
 							sort_params: this.sort_params,
 							filter_relation: this.filter_relation,
-							filter_params: this.filter_params.filter((i) => 'value' in i),
+							filter_params: this.filter_params.filter(i => 'value' in i),
 							page: this.pagination.page,
 							pagesize: this.pagination.pagesize,
 							params
@@ -200,11 +204,7 @@ export default class Index {
 		this.items_raw = items
 
 		if (this.group_params.fields.length) {
-			this.items = this.makeGroupData(
-				items,
-				$.copy(this.group_params.fields),
-				$.copy(this.group_params.acc)
-			)
+			this.items = this.makeGroupData(items, $.copy(this.group_params.fields), $.copy(this.group_params.acc))
 		} else {
 			this.items = items
 		}
@@ -442,13 +442,13 @@ export default class Index {
 		}
 
 		this.filter_columns =
-			this.config.header?.filter?.columns.map((item) => {
+			this.config.header?.filter?.columns.map(item => {
 				const field = this.config.fields.filter?.[item.name] || this.config.fields.common?.[item.name]
 
 				return { ...item, ...field }
 			}) || []
 
-		this.table_columns = this.config.table.columns.map((item) => {
+		this.table_columns = this.config.table.columns.map(item => {
 			const field = this.config.fields.table?.[item.name] || this.config.fields.common?.[item.name]
 			const column = { ...item, ...field }
 
@@ -473,12 +473,12 @@ export default class Index {
 		if (!this.config.form || this.config.form?.use_table_columns) {
 			const target_columns = this.config.form
 				? uniqBy([...this.config.table.columns, ...(this.config.form?.columns || [])], 'name').filter(
-						(item) => !(this.config.form?.exclude_table_columns || []).includes(item.name)
+						item => !(this.config.form?.exclude_table_columns || []).includes(item.name)
 					)
 				: this.config.table.columns
 
 			const form_columns = target_columns
-				.map((item) => {
+				.map(item => {
 					const field =
 						this.config.fields.form?.[item.name] ||
 						this.config.fields.common?.[item.name] ||
@@ -488,14 +488,13 @@ export default class Index {
 
 					return { ...item, ...field }
 				})
-				.filter((item) => item !== null)
+				.filter(item => item !== null)
 
 			this.form_columns = uniqBy(form_columns, 'name')
 		} else {
 			this.form_columns =
-				this.config.form?.columns?.map((item) => {
-					const field =
-						this.config.fields.form?.[item.name] || this.config.fields.common?.[item.name]
+				this.config.form?.columns?.map(item => {
+					const field = this.config.fields.form?.[item.name] || this.config.fields.common?.[item.name]
 
 					return { ...item, ...field }
 				}) || []
@@ -507,8 +506,8 @@ export default class Index {
 
 		if (!columns || !columns.length) return
 
-		columns.forEach((item) => {
-			const stat_item = this.visible_columns.find((s) => s.name === item.name)
+		columns.forEach(item => {
+			const stat_item = this.visible_columns.find(s => s.name === item.name)
 
 			if (stat_item) {
 				this.stat_params.push({ field: stat_item.id, type: item.type })
@@ -527,7 +526,7 @@ export default class Index {
 		const visible_columns = [] as Index['visible_columns']
 		const group_params = { fields: [], acc: [] } as Index['group_params']
 
-		this.visible_columns.forEach((item) => {
+		this.visible_columns.forEach(item => {
 			if (field_names.includes(item.name)) {
 				group_params.fields.push({ label: item.name, value: item.id })
 			}
@@ -550,8 +549,8 @@ export default class Index {
 		const visible_columns = [] as Index['visible_columns']
 		const visible_fields = fields.slice(1)
 
-		this.table_columns.forEach((column) => {
-			if (!visible_fields.find((f) => f.label === column.name)) {
+		this.table_columns.forEach(column => {
+			if (!visible_fields.find(f => f.label === column.name)) {
 				visible_columns.push({ name: column.name, id: column.bind, visible: true })
 			}
 		})
@@ -575,11 +574,10 @@ export default class Index {
 
 		level += 1
 
-		Object.keys(group_data).forEach((group_field_value) => {
+		Object.keys(group_data).forEach(group_field_value => {
 			const children = group_data[group_field_value]
 			const current_group_id =
-				(group_id ? `${group_id}/` : '') +
-				`${group_field.value}:${group_field.label}:${group_field_value}`
+				(group_id ? `${group_id}/` : '') + `${group_field.value}:${group_field.label}:${group_field_value}`
 
 			// 如果field_value是number类型，需要进行还原
 			if (group_field_is_number) {
@@ -587,7 +585,7 @@ export default class Index {
 
 				// 如果数字是时间，需要进行格式化
 				if (
-					this.filter_columns.find((col) => col.name === group_field.label)?.datatype === 'date' ||
+					this.filter_columns.find(col => col.name === group_field.label)?.datatype === 'date' ||
 					isMillisecondTimestamp(group_field_value as unknown as number)
 				) {
 					group_field_value = dayjs(group_field_value).format('YYYY-MM-DD')
@@ -597,7 +595,7 @@ export default class Index {
 			const group_parent = this.visible_columns.reduce((total, item) => {
 				if (item.id === group_field.value) return total
 
-				if (acc.find((a) => a.label === item.name)) {
+				if (acc.find(a => a.label === item.name)) {
 					total[item.id] = children.reduce((all, child) => {
 						const real_all = new Decimal(all)
 						const real_value = new Decimal(child[item.id])
@@ -646,7 +644,7 @@ export default class Index {
 			}
 
 			if (level === fields.length) {
-				children.forEach((item) => {
+				children.forEach(item => {
 					target.push({
 						...item,
 						__group_field__: group_field.value,
@@ -672,10 +670,10 @@ export default class Index {
 		const disabled_options = [] as Index['sort_field_options']
 		const sort_params = v || this.sort_params
 
-		this.sort_columns.forEach((item) => {
+		this.sort_columns.forEach(item => {
 			const target_item = { label: item.name, value: item.bind }
 
-			if (sort_params.find((s) => s.field === item.bind)) {
+			if (sort_params.find(s => s.field === item.bind)) {
 				disabled_options.push({ ...target_item, disabled: true })
 			} else {
 				options.push(target_item)
@@ -710,7 +708,7 @@ export default class Index {
 		for (let index = 0; index < items.length; index++) {
 			const item = items[index]
 
-			Object.keys(stat_params_map).forEach((key) => {
+			Object.keys(stat_params_map).forEach(key => {
 				const stat_item = stat_params_map[key]
 				const { field, type } = stat_item
 				const stat_item_value = new Decimal(stat_item.value)
@@ -727,9 +725,7 @@ export default class Index {
 						if (index === counts - 1) {
 							const total_value = new Decimal(stat_item.value)
 
-							stat_item.value = new Decimal(
-								total_value.div(new Decimal(counts)).toFixed(3)
-							).toNumber()
+							stat_item.value = new Decimal(total_value.div(new Decimal(counts)).toFixed(3)).toNumber()
 						}
 						break
 					case 'COUNT':
@@ -754,7 +750,7 @@ export default class Index {
 
 		const stat_items = [] as Array<any>
 
-		Object.keys(stat_params_map).forEach((key) => {
+		Object.keys(stat_params_map).forEach(key => {
 			const stat_item = stat_params_map[key]
 			const { field, type, value } = stat_item
 
@@ -767,30 +763,33 @@ export default class Index {
 
 		const group_stat_items = groupBy(stat_items, '__stat_type__')
 
-		this.stat_items = Object.keys(group_stat_items).reduce((total, key) => {
-			const items = group_stat_items[key]
+		this.stat_items = Object.keys(group_stat_items).reduce(
+			(total, key) => {
+				const items = group_stat_items[key]
 
-			const target = items.reduce((all, it) => {
-				all['__stat_type__'] = key
-				all[it['__stat_field__']] = it['__stat_value__']
+				const target = items.reduce((all, it) => {
+					all['__stat_type__'] = key
+					all[it['__stat_field__']] = it['__stat_value__']
 
-				return all
-			}, {} as any)
+					return all
+				}, {} as any)
 
-			total.push(target)
+				total.push(target)
 
-			return total
-		}, [] as Array<any>)
+				return total
+			},
+			[] as Array<any>
+		)
 	}
 
 	getGroupFieldOptions(v: Index['group_params']['fields']) {
 		const options = [] as Array<{ label: string; value: any; disabled?: boolean }>
 		const disabled_options = [] as Array<{ label: string; value: any; disabled?: boolean }>
 
-		this.table_columns.forEach((item) => {
+		this.table_columns.forEach(item => {
 			const target_item = { label: item.name, value: item.bind }
 
-			if (v.find((s) => s.value === item.bind) || item.bind === '_operation') {
+			if (v.find(s => s.value === item.bind) || item.bind === '_operation') {
 				disabled_options.push({ ...target_item, disabled: true })
 			} else {
 				options.push(target_item)
@@ -801,7 +800,7 @@ export default class Index {
 	}
 
 	onSort(field: string) {
-		const exist_sort_index = this.sort_params.findIndex((item) => item.field === field)
+		const exist_sort_index = this.sort_params.findIndex(item => item.field === field)
 
 		if (exist_sort_index === -1) {
 			this.sort_params.push({ field, order: 'asc' })
@@ -839,7 +838,7 @@ export default class Index {
 		if (filter_relation) this.filter_relation = filter_relation
 		if (filter_params) this.filter_params = filter_params
 
-		const target_filter_params = this.filter_params.filter((item) => item.value)
+		const target_filter_params = this.filter_params.filter(item => item.value)
 
 		this.clearApplyView()
 
@@ -862,11 +861,7 @@ export default class Index {
 		this.makeGroupVisible()
 
 		if (this.group_params.fields.length) {
-			this.items = this.makeGroupData(
-				this.items_raw,
-				$.copy(this.group_params.fields),
-				$.copy(this.group_params.acc)
-			)
+			this.items = this.makeGroupData(this.items_raw, $.copy(this.group_params.fields), $.copy(this.group_params.acc))
 		} else {
 			this.items = this.items_raw
 		}
@@ -902,9 +897,7 @@ export default class Index {
 
 		this.timeline_range = this.timeline_items[index].range
 
-		const exist_index = this.filter_params.findIndex(
-			(item) => item.field === this.config.header.timeline!.control_bind
-		)
+		const exist_index = this.filter_params.findIndex(item => item.field === this.config.header.timeline!.control_bind)
 
 		const target_filter_param = {
 			field: this.config.header.timeline!.control_bind,
@@ -939,7 +932,7 @@ export default class Index {
 			this.timeline_range = null
 
 			this.filter_params = $.copy(
-				this.filter_params.filter((item) => item.field !== this.config.header.timeline!.control_bind)
+				this.filter_params.filter(item => item.field !== this.config.header.timeline!.control_bind)
 			)
 
 			this.query(false, true)
@@ -1006,7 +999,7 @@ export default class Index {
 				const item = this.items[this.modal_index]
 				const target = {} as any
 
-				Object.keys(v).forEach((key) => {
+				Object.keys(v).forEach(key => {
 					if (!deepEqual(item[key], v[key])) {
 						target[key] = v[key]
 					}
@@ -1067,7 +1060,7 @@ export default class Index {
 			document.removeEventListener('visibilitychange', this.onVisibilityChange)
 		}
 
-		this.disposers.map((item) => item())
+		this.disposers.map(item => item())
 		this.disposers = []
 	}
 }

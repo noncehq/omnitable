@@ -220,9 +220,7 @@ export default class Emittery<EventData = Record<EventName, any>, AllEventData =
 				try {
 					eventData = JSON.stringify(eventData)
 				} catch {
-					eventData = `Object with the following keys failed to stringify: ${Object.keys(
-						eventData
-					).join(',')}`
+					eventData = `Object with the following keys failed to stringify: ${Object.keys(eventData).join(',')}`
 				}
 
 				if (typeof eventName === 'symbol' || typeof eventName === 'number') {
@@ -233,9 +231,7 @@ export default class Emittery<EventData = Record<EventName, any>, AllEventData =
 				const logTime = `${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}.${currentTime.getMilliseconds()}`
 
 				console.log(
-					`[${logTime}][emittery:${type}][${debugName}] Event Name: ${
-						eventName as string
-					}\n\tdata: ${eventData}`
+					`[${logTime}][emittery:${type}][${debugName}] Event Name: ${eventName as string}\n\tdata: ${eventData}`
 				)
 			}
 		}
@@ -303,9 +299,7 @@ export default class Emittery<EventData = Record<EventName, any>, AllEventData =
 		}
 	}
 
-	once<Name extends keyof AllEventData>(
-		eventNames: Name | readonly Name[]
-	): EmitteryOncePromise<AllEventData[Name]> {
+	once<Name extends keyof AllEventData>(eventNames: Name | readonly Name[]): EmitteryOncePromise<AllEventData[Name]> {
 		let off_: () => void
 
 		const promise = new Promise(resolve => {
@@ -411,9 +405,7 @@ export default class Emittery<EventData = Record<EventName, any>, AllEventData =
 		return iterator(this)
 	}
 
-	offAny(
-		listener: (eventName: keyof EventData, eventData: EventData[keyof EventData]) => void | Promise<void>
-	): void {
+	offAny(listener: (eventName: keyof EventData, eventData: EventData[keyof EventData]) => void | Promise<void>): void {
 		assertListener(listener)
 
 		this.logIfDebugEnabled('unsubscribeAny', undefined, undefined)

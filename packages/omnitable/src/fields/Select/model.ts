@@ -21,11 +21,7 @@ export default class Index {
 	loading_search = false
 
 	constructor() {
-		makeAutoObservable(
-			this,
-			{ antd: false, base_url: false, remote: false, multiple: false },
-			{ autoBind: true }
-		)
+		makeAutoObservable(this, { antd: false, base_url: false, remote: false, multiple: false }, { autoBind: true })
 	}
 
 	init(args: {

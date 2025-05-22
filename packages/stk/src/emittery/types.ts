@@ -7,7 +7,10 @@ export type DatalessEventNames<EventData> = {
 declare const listenerAdded: unique symbol
 declare const listenerRemoved: unique symbol
 
-export type OmnipresentEventData = { [listenerAdded]: ListenerChangedData; [listenerRemoved]: ListenerChangedData }
+export type OmnipresentEventData = {
+	[listenerAdded]: ListenerChangedData
+	[listenerRemoved]: ListenerChangedData
+}
 
 export type DebugLogger<EventData, Name extends keyof EventData> = (
 	type: string,

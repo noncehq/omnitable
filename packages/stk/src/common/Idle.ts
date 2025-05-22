@@ -74,11 +74,7 @@ export default class Index<T = {}> {
 		addEventListeners(window, this.config.events, this.active.bind(this.config.context ?? this))
 
 		if (this.config.onShow || this.config.onHide) {
-			addEventListeners(
-				document,
-				['visibilitychange'],
-				this.changeVisible.bind(this.config.context ?? this)
-			)
+			addEventListeners(document, ['visibilitychange'], this.changeVisible.bind(this.config.context ?? this))
 		}
 	}
 
@@ -90,11 +86,7 @@ export default class Index<T = {}> {
 		removeEventListeners(window, this.config.events, this.active.bind(this.config.context ?? this))
 
 		if (this.config.onShow || this.config.onHide) {
-			removeEventListeners(
-				document,
-				['visibilitychange'],
-				this.changeVisible.bind(this.config.context ?? this)
-			)
+			removeEventListeners(document, ['visibilitychange'], this.changeVisible.bind(this.config.context ?? this))
 		}
 	}
 

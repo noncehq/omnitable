@@ -86,12 +86,7 @@ const Index = (props: IPropsSort) => {
 									<div className='desc'>Add sorting to organize your rows.</div>
 								)}
 							</div>
-							<div
-								className={$.cx(
-									'form_list_actions flex',
-									items.length > 0 && 'has_items'
-								)}
-							>
+							<div className={$.cx('form_list_actions flex', items.length > 0 && 'has_items')}>
 								<Button
 									className='clickable'
 									type='primary'

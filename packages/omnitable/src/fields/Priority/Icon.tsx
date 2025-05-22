@@ -27,10 +27,7 @@ const Index = (props: IProps) => {
 			return (
 				<div className='priority_items flex align_end'>
 					{Array.from({ length: 4 }).map((_, index) => (
-						<span
-							className={$.cx('priority_item', (value as number) >= index + 1 && 'active')}
-							key={index}
-						></span>
+						<span className={$.cx('priority_item', (value as number) >= index + 1 && 'active')} key={index}></span>
 					))}
 				</div>
 			)

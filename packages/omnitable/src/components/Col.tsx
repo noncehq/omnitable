@@ -28,7 +28,7 @@ const Index = (props: IPropsCol) => {
 		onToggleGroupItems
 	} = props
 	const { type, bind, readonly } = column
-	const ref_register_fields = useContext((v) => v.ref_register_fields)
+	const ref_register_fields = useContext(v => v.ref_register_fields)
 
 	const ref = useRef<HTMLTableCellElement>(null)
 	const [hover, setHover] = useState(false)
@@ -39,7 +39,7 @@ const Index = (props: IPropsCol) => {
 		const readonly_register_fields = []
 
 		if (register_fields) {
-			Object.keys(register_fields).forEach((key) => {
+			Object.keys(register_fields).forEach(key => {
 				const register_field = register_fields[key]
 
 				if ('Component' in register_field && register_field['readonly']) {
@@ -69,7 +69,7 @@ const Index = (props: IPropsCol) => {
 		}
 	}, [readonly, type, column])
 
-	const onFocus = useMemoizedFn((v) => {
+	const onFocus = useMemoizedFn(v => {
 		if (v) {
 			setEditingField?.({ row_index, field: bind, focus: true })
 		} else {
@@ -102,11 +102,7 @@ const Index = (props: IPropsCol) => {
 
 	return (
 		<td
-			className={$.cx(
-				'form_table_td',
-				type === 'operation' && 'operation',
-				column.sticky && 'sticky left_0'
-			)}
+			className={$.cx('form_table_td', type === 'operation' && 'operation', column.sticky && 'sticky left_0')}
 			width={column.width}
 			style={{ textAlign: column.align }}
 			ref={ref}

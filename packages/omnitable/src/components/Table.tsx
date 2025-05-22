@@ -44,7 +44,7 @@ const Index = (props: IPropsTable) => {
 	const getOrder = useMemoizedFn((item: IPropsTable['table_columns'][number]) => {
 		if (!item.sort || !sort_params.length) return
 
-		return sort_params.find((s) => s.field === item.bind)?.order
+		return sort_params.find(s => s.field === item.bind)?.order
 	})
 
 	const onToggleGroupItems = useMemoizedFn((group_id: string) => {
@@ -54,7 +54,7 @@ const Index = (props: IPropsTable) => {
 
 		let parent_visible = null as boolean | null
 
-		items.forEach((item) => {
+		items.forEach(item => {
 			if (!item['__stat_type__']) {
 				const item_group_ids = item['__group_id__'].split('/') as Array<string>
 
@@ -89,43 +89,28 @@ const Index = (props: IPropsTable) => {
 				<table className={table_class} ref={table}>
 					<thead>
 						<tr className={$.cx(modal_index === 0 && 'selected')}>
-							{table_columns.map((item) => (
-								<Th
-									column={item}
-									order={getOrder(item)}
-									onSort={item.sort ? onSort : undefined}
-									key={item.name}
-								></Th>
+							{table_columns.map(item => (
+								<Th column={item} order={getOrder(item)} onSort={item.sort ? onSort : undefined} key={item.name}></Th>
 							))}
 						</tr>
 					</thead>
 					{data.length ? (
 						<tbody>
 							{data.map((item, index) =>
-								!item['__group_top__'] &&
-								item['__group_visible_children__'] === false ? null : (
+								!item['__group_top__'] && item['__group_visible_children__'] === false ? null : (
 									<Row
 										table_columns={table_columns}
 										modal_index={modal_index}
 										item={item}
 										index={index}
-										editing_info={
-											editing_info?.row_index === index && editing_info
-												? editing_info
-												: null
-										}
+										editing_info={editing_info?.row_index === index && editing_info ? editing_info : null}
 										row_bg={table_props?.row_bg}
 										row_click={table_props?.row_click}
 										onChange={onChange}
 										onRowClick={onRowClick}
 										setEditingInfo={setEditingInfo}
 										onToggleGroupItems={onToggleGroupItems}
-										key={
-											item[primary] ||
-											item['__group_id__'] ||
-											item['__stat_type__'] ||
-											index
-										}
+										key={item[primary] || item['__group_id__'] || item['__stat_type__'] || index}
 									></Row>
 								)
 							)}
@@ -134,10 +119,7 @@ const Index = (props: IPropsTable) => {
 						<tbody>
 							<tr>
 								<td colSpan={9999}>
-									<div
-										className='w_100 flex justify_center align_center'
-										style={{ height: 300 }}
-									>
+									<div className='w_100 flex justify_center align_center' style={{ height: 300 }}>
 										<Empty description={null}></Empty>
 									</div>
 								</td>
@@ -147,10 +129,7 @@ const Index = (props: IPropsTable) => {
 				</table>
 			</div>
 			{sticky_top !== undefined && (
-				<div
-					className={$.cx('table_container clone w_100', !sticky_top && 'edge')}
-					style={{ zIndex: 103 }}
-				>
+				<div className={$.cx('table_container clone w_100', !sticky_top && 'edge')} style={{ zIndex: 103 }}>
 					<table className={table_class} ref={clone_table} />
 				</div>
 			)}

@@ -44,7 +44,7 @@ const Index = (props: IPropsRow) => {
 		setFieldsValue(item)
 	}, [item])
 
-	const onValuesChange: FormProps['onValuesChange'] = useMemoizedFn((v) => {
+	const onValuesChange: FormProps['onValuesChange'] = useMemoizedFn(v => {
 		onChange(index, v)
 		setEditingField(null)
 	})
@@ -97,8 +97,7 @@ const Index = (props: IPropsRow) => {
 							: undefined
 
 					const group_level =
-						(col.name === item['__group_name__'] ||
-							col.name === item['__group_replace__']?.name) &&
+						(col.name === item['__group_name__'] || col.name === item['__group_replace__']?.name) &&
 						item['__group_level__']
 							? item['__group_level__']
 							: undefined
@@ -128,11 +127,7 @@ const Index = (props: IPropsRow) => {
 							group_replace={group_replace}
 							row_index={index}
 							focus={!col.readonly && editing_info && col.bind === editing_info.field}
-							item={
-								col.use_item || (col.type === 'text' && col.props?.format)
-									? item
-									: undefined
-							}
+							item={col.use_item || (col.type === 'text' && col.props?.format) ? item : undefined}
 							group_info={group_info}
 							group_level={group_level}
 							setEditingField={col.readonly ? undefined : setEditingField}

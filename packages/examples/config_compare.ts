@@ -26,13 +26,9 @@ export default {
 				const earning_7d = new Decimal(item.earning_7d)
 				const earning_28d = new Decimal(item.earning_7d)
 
-				item['change_7d'] = new Decimal(
-					earning.minus(earning_7d).div(earning_7d).mul(100).toFixed(2)
-				).toNumber()
+				item['change_7d'] = new Decimal(earning.minus(earning_7d).div(earning_7d).mul(100).toFixed(2)).toNumber()
 
-				item['change_28d'] = new Decimal(
-					earning.minus(earning_28d).div(earning_28d).mul(100).toFixed(2)
-				).toNumber()
+				item['change_28d'] = new Decimal(earning.minus(earning_28d).div(earning_28d).mul(100).toFixed(2)).toNumber()
 			})
 
 			return items

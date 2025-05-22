@@ -58,9 +58,7 @@ const Index = (props: IPropsFilterItem & FormListFieldData) => {
 						></Select>
 					</span>
 				)}
-				{name > 1 && (
-					<span className='relation_item flex justify_center align_center'>{filter_relation}</span>
-				)}
+				{name > 1 && <span className='relation_item flex justify_center align_center'>{filter_relation}</span>}
 			</div>
 			<Item {...rest} className='field_name' name={[name, 'field']}>
 				<Select showSearch options={filter_field_options}></Select>
@@ -69,12 +67,7 @@ const Index = (props: IPropsFilterItem & FormListFieldData) => {
 				<Select popupMatchSelectWidth={false} options={expression_options}></Select>
 			</Item>
 			<Item {...rest} className='filter_value' name={[name, 'value']}>
-				<FormComponent
-					column={column}
-					disabled={false}
-					force_type={value_type}
-					use_by_filter
-				></FormComponent>
+				<FormComponent column={column} disabled={false} force_type={value_type} use_by_filter></FormComponent>
 			</Item>
 			<Button className='btn' onClick={() => remove(name)}>
 				<Trash></Trash>

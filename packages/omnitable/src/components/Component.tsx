@@ -37,7 +37,7 @@ const X = (props: IPropsComponent) => {
 		onChange
 	} = props
 	const { type, width, props: self_props } = column
-	const ref_register_fields = useContext((v) => v.ref_register_fields)
+	const ref_register_fields = useContext(v => v.ref_register_fields)
 
 	const Target = useMemo(() => {
 		const target_type = type === 'register' ? column.field : force_type || type

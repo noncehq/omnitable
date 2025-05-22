@@ -25,11 +25,9 @@ const Index = (props: IProps) => {
 	const [start, end] = range
 
 	const status_items = useMemo(() => {
-		const targets = [] as Array<
-			Required<Model['config']>['header']['timeline']['items'][number] & { count: number }
-		>
+		const targets = [] as Array<Required<Model['config']>['header']['timeline']['items'][number] & { count: number }>
 
-		items.forEach((i) => {
+		items.forEach(i => {
 			if (i.bind in item) {
 				targets.push({ ...i, count: item[i.bind] })
 			}
@@ -45,18 +43,14 @@ const Index = (props: IProps) => {
 				{dayjs(end).format(timeline_args_map[timeline_type].end_format)}
 			</span>
 			<div className='status_items w_100 flex flex_column'>
-				{status_items.map((item) => (
+				{status_items.map(item => (
 					<div className='status_item w_100 flex justify_between align_center' key={item.bind}>
 						<div className='flex align_center'>
 							<span
 								className={$.cx('dot', item.label)}
 								style={{
 									backgroundColor:
-										item.color in preset_color
-											? preset_color[
-													item.color as keyof typeof preset_color
-												]
-											: item.color
+										item.color in preset_color ? preset_color[item.color as keyof typeof preset_color] : item.color
 								}}
 							></span>
 							<span className='label'>{item.label}</span>

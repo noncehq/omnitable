@@ -112,13 +112,10 @@ const Index = (props: IProps) => {
 							<div
 								className={$.cx(
 									'btn_wrap flex justify_center align_center clickable',
-									(editor.isActive('textStyle') || editor.isActive('highlight')) &&
-										'active'
+									(editor.isActive('textStyle') || editor.isActive('highlight')) && 'active'
 								)}
 							>
-								<PaintBrush
-									weight={editor.isActive('highlight') ? 'bold' : 'regular'}
-								></PaintBrush>
+								<PaintBrush weight={editor.isActive('highlight') ? 'bold' : 'regular'}></PaintBrush>
 							</div>
 						</div>
 					</Popover>
@@ -188,10 +185,7 @@ const Index = (props: IProps) => {
 						render()
 					) : (
 						<button
-							className={$.cx(
-								'btn_wrap flex justify_center align_center clickable',
-								active?.() && 'active'
-							)}
+							className={$.cx('btn_wrap flex justify_center align_center clickable', active?.() && 'active')}
 							type='button'
 							disabled={disabled?.()}
 							onClick={action}

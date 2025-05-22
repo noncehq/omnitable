@@ -254,10 +254,7 @@ export default class StickyTableHeader {
 			return size
 		} else if (size.match(/rem$/)) {
 			const rem = +size.replace(/rem$/, '')
-			return (
-				Number.parseFloat(window.getComputedStyle(document.getElementsByTagName('html')[0]).fontSize) *
-				rem
-			)
+			return Number.parseFloat(window.getComputedStyle(document.getElementsByTagName('html')[0]).fontSize) * rem
 		} else {
 			console.error('Unsupported size format for sticky table header displacement.')
 			return 0

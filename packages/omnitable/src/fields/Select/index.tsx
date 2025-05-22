@@ -31,10 +31,7 @@ const Index = (props: ComponentType<Omnitable.Select['props']>) => {
 			if (item.icon) {
 				item.label = (
 					<div className='h_100 flex align_center'>
-						<div
-							className='icon_wrap flex justify_center align_center'
-							style={{ width: 16, height: 16 }}
-						>
+						<div className='icon_wrap flex justify_center align_center' style={{ width: 16, height: 16 }}>
 							<i className={`ph ph-${item.icon}`}></i>
 						</div>
 						<span className='text ml_4'>{item.label}</span>
@@ -88,13 +85,7 @@ const Index = (props: ComponentType<Omnitable.Select['props']>) => {
 					onChange={onChange}
 				></Select>
 			) : (
-				<span
-					className={$.cx(
-						'text_wrap border_box inline_flex align_center',
-						w_100,
-						!option && 'placeholder'
-					)}
-				>
+				<span className={$.cx('text_wrap border_box inline_flex align_center', w_100, !option && 'placeholder')}>
 					{option || self_props.placeholder}
 				</span>
 			)}

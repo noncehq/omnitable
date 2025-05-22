@@ -28,7 +28,7 @@ const Index = (props: IPropsView) => {
 		onChangeViews(target)
 	})
 
-	const remove: IPropsViewItem['remove'] = useMemoizedFn((index) => {
+	const remove: IPropsViewItem['remove'] = useMemoizedFn(index => {
 		const target = $.copy(views)
 
 		target.splice(index, 1)

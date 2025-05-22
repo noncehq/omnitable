@@ -26,7 +26,7 @@ const Index = (props: IPropsViewItem) => {
 		onChangeView
 	} = props
 
-	const onChangeName = useMemoizedFn((e) => {
+	const onChangeName = useMemoizedFn(e => {
 		onChangeView(view_index, { ...view, name: e.target.value })
 	})
 
@@ -37,7 +37,7 @@ const Index = (props: IPropsViewItem) => {
 		sort_field_options: getSortFieldOptions(view.sort_params)!,
 		sort_params: view.sort_params,
 		use_by_view: true,
-		onChangeSort: useMemoizedFn((v) => onChangeView(view_index, { ...view, sort_params: v }))
+		onChangeSort: useMemoizedFn(v => onChangeView(view_index, { ...view, sort_params: v }))
 	}
 
 	const props_filter: IPropsFilter = {
@@ -45,38 +45,33 @@ const Index = (props: IPropsViewItem) => {
 		filter_relation: view.filter_relation,
 		filter_params: view.filter_params,
 		use_by_view: true,
-		onChangeFilter: useMemoizedFn((v) => onChangeView(view_index, { ...view, ...v }))
+		onChangeFilter: useMemoizedFn(v => onChangeView(view_index, { ...view, ...v }))
 	}
 
 	const props_stat: IPropsStat = {
 		visible_columns,
 		stat_params: view.stat_params,
 		use_by_view: true,
-		onChangeStat: useMemoizedFn((v) => onChangeView(view_index, { ...view, stat_params: v }))
+		onChangeStat: useMemoizedFn(v => onChangeView(view_index, { ...view, stat_params: v }))
 	}
 
 	const props_group: IPropsGroup = {
 		group_params: view.group_params,
 		use_by_view: true,
 		getGroupFieldOptions,
-		onChangeGroup: useMemoizedFn((v) => onChangeView(view_index, { ...view, group_params: v }))
+		onChangeGroup: useMemoizedFn(v => onChangeView(view_index, { ...view, group_params: v }))
 	}
 
 	const props_fields: IPropsFields = {
 		visible_columns: view.visible_columns,
 		use_by_view: true,
-		onChangeVisibleColumns: useMemoizedFn((v) => onChangeView(view_index, { ...view, visible_columns: v }))
+		onChangeVisibleColumns: useMemoizedFn(v => onChangeView(view_index, { ...view, visible_columns: v }))
 	}
 
 	return (
 		<div className='view_item_wrap flex flex_column'>
 			<div className='view_option name_wrap w_100 flex justify_between align_center'>
-				<Input
-					className='view_name'
-					value={view.name}
-					variant='borderless'
-					onChange={onChangeName}
-				></Input>
+				<Input className='view_name' value={view.name} variant='borderless' onChange={onChangeName}></Input>
 				<div className='view_actions flex align_center'>
 					<Button className='btn_remove btn' onClick={onRemove}>
 						<Trash></Trash>

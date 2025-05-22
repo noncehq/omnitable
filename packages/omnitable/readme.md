@@ -90,14 +90,14 @@ Sort为排序项，通过在配置中指定哪些列的`sort`为`true`即可自�
 
 ```ts
 {
-	table: {
-		columns: [
-			{
-				name: '创建时间',
-				sort: true
-			}
-		]
-	}
+  table: {
+    columns: [
+      {
+        name: '创建时间',
+        sort: true,
+      },
+    ]
+  }
 }
 ```
 
@@ -122,21 +122,21 @@ Stat为数据统计配置，支持预先配置和自定义配置：
 
 ```ts
 {
-	stat: {
-		columns: [
-			{ name: 'Earning', type: 'SUM' },
-			{ name: 'Earning', type: 'AVG' },
-			{ name: 'Earning', type: 'MIN' },
-			{ name: 'Earning', type: 'MAX' },
-			{ name: 'Earning', type: 'COUNT' },
+  stat: {
+    columns: [
+      { name: 'Earning', type: 'SUM' },
+      { name: 'Earning', type: 'AVG' },
+      { name: 'Earning', type: 'MIN' },
+      { name: 'Earning', type: 'MAX' },
+      { name: 'Earning', type: 'COUNT' },
 
-			{ name: 'Hashrate', type: 'SUM' },
-			{ name: 'Hashrate', type: 'AVG' },
-			{ name: 'Hashrate', type: 'MIN' },
-			{ name: 'Hashrate', type: 'MAX' },
-			{ name: 'Hashrate', type: 'COUNT' }
-		]
-	}
+      { name: 'Hashrate', type: 'SUM' },
+      { name: 'Hashrate', type: 'AVG' },
+      { name: 'Hashrate', type: 'MIN' },
+      { name: 'Hashrate', type: 'MAX' },
+      { name: 'Hashrate', type: 'COUNT' },
+    ]
+  }
 }
 ```
 
@@ -165,9 +165,9 @@ Refresh Button为刷新按钮，可用来手动刷新数据，配置如下：
 
 ```ts
 {
-	refresh: {
-		on_show: true
-	}
+  refresh: {
+    on_show: true
+  }
 }
 ```
 
@@ -227,271 +227,271 @@ fields用来描述指定字段对应的组件，common代表通用，可通过�
 import type { Omnitable } from './types'
 
 export default {
-	name: 'table_log',
-	primary: 'id',
-	baseurl:
-		process.env.NODE_ENV === 'production'
-			? 'https://omnitable-worker.openages.workers.dev/api/omnitable/log'
-			: 'http://localhost:8787/api/omnitable/log',
-	actions: {
-		query: '/query'
-	},
-	filter: {
-		columns: [
-			{ name: 'Date', datatype: 'date' },
-			{ name: 'Status', datatype: 'array' },
-			{ name: 'Method', datatype: 'array' },
-			{ name: 'Host', datatype: 'string' },
-			{ name: 'region_full', datatype: 'string' }
-		]
-	},
-	stat: {
-		hide: true
-	},
-	group: {
-		hide: true
-	},
-	refresh: {
-		on_show: true
-	},
-	live: 3,
-	timeline: {
-		api: '/getStatusTimeline',
-		control_bind: 'create_at',
-		label_bind: 'duration',
-		items: [
-			{
-				label: 'Error',
-				bind: '5xx',
-				color: 'danger'
-			},
-			{
-				label: 'Warning',
-				bind: '4xx',
-				color: 'warning'
-			},
-			{
-				label: 'Success',
-				bind: '2xx',
-				color: 'light'
-			}
-		]
-	},
-	table: {
-		columns: [
-			{ name: '#', width: 24, align: 'center' },
-			{ name: 'Date', width: 210, sort: true },
-			{ name: 'Status' },
-			{ name: 'Bg', width: 36, align: 'center' },
-			{ name: 'Icon' },
-			{ name: 'Method' },
-			{ name: 'Host' },
-			{ name: 'Pathname', span: 24 },
-			{ name: 'Latency', sort: true, span: 24 },
-			{ name: 'Region', span: 24 }
-		],
-		props: {
-			pagesize: 18,
-			border: true,
-			row_click: true,
-			row_bg: {
-				bind: 'status',
-				options: {
-					400: 'dark',
-					404: 'warning',
-					500: 'danger',
-					503: 'danger'
-				}
-			}
-		}
-	},
-	form: {
-		use_table_columns: true,
-		exclude_table_columns: ['#', 'Bg', 'Icon']
-	},
-	fields: {
-		common: {
-			'#': {
-				bind: 'status',
-				type: 'tag',
-				props: {
-					mode: 'dot',
-					dot_shape: 'round',
-					options: [
-						{
-							label: '200',
-							value: 200,
-							color: 'success'
-						},
-						{
-							label: '400',
-							value: 400,
-							color: 'dark'
-						},
-						{
-							label: '404',
-							value: 404,
-							color: 'warning'
-						},
-						{
-							label: '500',
-							value: 500,
-							color: 'danger'
-						},
-						{
-							label: '503',
-							value: 503,
-							color: 'light'
-						}
-					]
-				}
-			},
-			Date: {
-				bind: 'create_at',
-				type: 'date',
-				props: {
-					format: 'YYYY-MM-DD HH:mm:ss'
-				}
-			},
-			Status: {
-				bind: 'status',
-				type: 'tag',
-				props: {
-					mode: 'text',
-					options: [
-						{
-							value: 200,
-							color: 'success'
-						},
-						{
-							value: 400,
-							color: 'dark'
-						},
-						{
-							value: 404,
-							color: 'warning'
-						},
-						{
-							value: 500,
-							color: 'danger'
-						},
-						{
-							value: 503,
-							color: 'light'
-						}
-					]
-				}
-			},
-			Bg: {
-				bind: 'status',
-				type: 'tag',
-				props: {
-					mode: 'text',
-					use_bg: true,
-					options: [
-						{
-							value: 200,
-							color: 'success'
-						},
-						{
-							value: 400,
-							color: 'dark'
-						},
-						{
-							value: 404,
-							color: 'warning'
-						},
-						{
-							value: 500,
-							color: 'danger'
-						},
-						{
-							value: 503,
-							color: 'light'
-						}
-					]
-				}
-			},
-			Icon: {
-				bind: 'status',
-				type: 'tag',
-				props: {
-					mode: 'text',
-					options: [
-						{
-							value: 200,
-							color: 'success',
-							icon: 'acorn'
-						},
-						{
-							value: 400,
-							color: 'dark',
-							icon: 'airplane'
-						},
-						{
-							value: 404,
-							color: 'warning',
-							icon: 'apple-logo'
-						},
-						{
-							value: 500,
-							color: 'danger',
-							icon: 'at'
-						},
-						{
-							value: 503,
-							color: 'light',
-							icon: 'baby'
-						}
-					]
-				}
-			},
-			Method: {
-				bind: 'method',
-				type: 'text'
-			},
-			Host: {
-				bind: 'host',
-				type: 'text'
-			},
-			Pathname: {
-				bind: 'pathname',
-				type: 'text'
-			},
-			Latency: {
-				bind: 'latency',
-				type: 'text',
-				props: {
-					suffix: 'ms'
-				}
-			},
-			Region: {
-				bind: 'region_short',
-				type: 'text',
-				props: {
-					format: '{{region_short}} {{region_full}}'
-				}
-			}
-		},
-		filter: {
-			Method: {
-				bind: 'method',
-				type: 'select',
-				props: {
-					options: [
-						{
-							label: 'Get',
-							value: 'GET'
-						},
-						{
-							label: 'Post',
-							value: 'POST'
-						}
-					]
-				}
-			}
-		}
-	}
+  name: 'table_log',
+  primary: 'id',
+  baseurl:
+    process.env.NODE_ENV === 'production'
+      ? 'https://omnitable-worker.openages.workers.dev/api/omnitable/log'
+      : 'http://localhost:8787/api/omnitable/log',
+  actions: {
+    query: '/query',
+  },
+  filter: {
+    columns: [
+      { name: 'Date', datatype: 'date' },
+      { name: 'Status', datatype: 'array' },
+      { name: 'Method', datatype: 'array' },
+      { name: 'Host', datatype: 'string' },
+      { name: 'region_full', datatype: 'string' },
+    ],
+  },
+  stat: {
+    hide: true,
+  },
+  group: {
+    hide: true,
+  },
+  refresh: {
+    on_show: true,
+  },
+  live: 3,
+  timeline: {
+    api: '/getStatusTimeline',
+    control_bind: 'create_at',
+    label_bind: 'duration',
+    items: [
+      {
+        label: 'Error',
+        bind: '5xx',
+        color: 'danger',
+      },
+      {
+        label: 'Warning',
+        bind: '4xx',
+        color: 'warning',
+      },
+      {
+        label: 'Success',
+        bind: '2xx',
+        color: 'light',
+      },
+    ],
+  },
+  table: {
+    columns: [
+      { name: '#', width: 24, align: 'center' },
+      { name: 'Date', width: 210, sort: true },
+      { name: 'Status' },
+      { name: 'Bg', width: 36, align: 'center' },
+      { name: 'Icon' },
+      { name: 'Method' },
+      { name: 'Host' },
+      { name: 'Pathname', span: 24 },
+      { name: 'Latency', sort: true, span: 24 },
+      { name: 'Region', span: 24 },
+    ],
+    props: {
+      pagesize: 18,
+      border: true,
+      row_click: true,
+      row_bg: {
+        bind: 'status',
+        options: {
+          400: 'dark',
+          404: 'warning',
+          500: 'danger',
+          503: 'danger',
+        },
+      },
+    },
+  },
+  form: {
+    use_table_columns: true,
+    exclude_table_columns: ['#', 'Bg', 'Icon'],
+  },
+  fields: {
+    common: {
+      '#': {
+        bind: 'status',
+        type: 'tag',
+        props: {
+          mode: 'dot',
+          dot_shape: 'round',
+          options: [
+            {
+              label: '200',
+              value: 200,
+              color: 'success',
+            },
+            {
+              label: '400',
+              value: 400,
+              color: 'dark',
+            },
+            {
+              label: '404',
+              value: 404,
+              color: 'warning',
+            },
+            {
+              label: '500',
+              value: 500,
+              color: 'danger',
+            },
+            {
+              label: '503',
+              value: 503,
+              color: 'light',
+            },
+          ],
+        },
+      },
+      Date: {
+        bind: 'create_at',
+        type: 'date',
+        props: {
+          format: 'YYYY-MM-DD HH:mm:ss',
+        },
+      },
+      Status: {
+        bind: 'status',
+        type: 'tag',
+        props: {
+          mode: 'text',
+          options: [
+            {
+              value: 200,
+              color: 'success',
+            },
+            {
+              value: 400,
+              color: 'dark',
+            },
+            {
+              value: 404,
+              color: 'warning',
+            },
+            {
+              value: 500,
+              color: 'danger',
+            },
+            {
+              value: 503,
+              color: 'light',
+            },
+          ],
+        },
+      },
+      Bg: {
+        bind: 'status',
+        type: 'tag',
+        props: {
+          mode: 'text',
+          use_bg: true,
+          options: [
+            {
+              value: 200,
+              color: 'success',
+            },
+            {
+              value: 400,
+              color: 'dark',
+            },
+            {
+              value: 404,
+              color: 'warning',
+            },
+            {
+              value: 500,
+              color: 'danger',
+            },
+            {
+              value: 503,
+              color: 'light',
+            },
+          ],
+        },
+      },
+      Icon: {
+        bind: 'status',
+        type: 'tag',
+        props: {
+          mode: 'text',
+          options: [
+            {
+              value: 200,
+              color: 'success',
+              icon: 'acorn',
+            },
+            {
+              value: 400,
+              color: 'dark',
+              icon: 'airplane',
+            },
+            {
+              value: 404,
+              color: 'warning',
+              icon: 'apple-logo',
+            },
+            {
+              value: 500,
+              color: 'danger',
+              icon: 'at',
+            },
+            {
+              value: 503,
+              color: 'light',
+              icon: 'baby',
+            },
+          ],
+        },
+      },
+      Method: {
+        bind: 'method',
+        type: 'text',
+      },
+      Host: {
+        bind: 'host',
+        type: 'text',
+      },
+      Pathname: {
+        bind: 'pathname',
+        type: 'text',
+      },
+      Latency: {
+        bind: 'latency',
+        type: 'text',
+        props: {
+          suffix: 'ms',
+        },
+      },
+      Region: {
+        bind: 'region_short',
+        type: 'text',
+        props: {
+          format: '{{region_short}} {{region_full}}',
+        },
+      },
+    },
+    filter: {
+      Method: {
+        bind: 'method',
+        type: 'select',
+        props: {
+          options: [
+            {
+              label: 'Get',
+              value: 'GET',
+            },
+            {
+              label: 'Post',
+              value: 'POST',
+            },
+          ],
+        },
+      },
+    },
+  },
 } as Omnitable.Config
 ```
 
@@ -501,309 +501,309 @@ export default {
 
 ```ts
 export namespace Omnitable {
-	export type Props = LowCodeConfig | Config
+  export type Props = LowCodeConfig | Config
 
-	export interface LowCodeConfig {
-		config_url: string
-	}
+  export interface LowCodeConfig {
+    config_url: string
+  }
 
-	export interface Config {
-		// 表名称，用于本地存储的前缀（请保持唯一）
-		name: string
-		// 主键，默认为 'id'
-		primary?: string
-		baseurl: string
-		// 支持mustache语法 /delete/{{id}} => /delete/3
-		actions: {
-			// POST
-			query: Action
-			// POST
-			create?: Action
-			// POST
-			update?: Action
-			// POST
-			delete?: Action
-		}
-		// 钩子函数，用来处理特定数据
-		hooks?: {
-			// 处理数据查询到的数据
-			afterQuery?: (v: any) => any
-			// 处理要创建的数据
-			beforeCreate?: (v: any) => any
-			// 处理要变更的数据
-			beforeUpdate?: (v: any) => any
-		}
-		// 筛选设置项
-		filter?: {
-			columns: Array<FilterColumn>
-			props?: {}
-			flat?: boolean
-		}
-		// 统计设置项
-		stat?: {
-			// 预先配置的字段，指定字段生成数据分析结果
-			columns?: Array<{ name: string; type: StatType }>
-			// 隐藏配置按钮
-			hide?: boolean
-		}
-		// 开启数据分组，支持多层级，
-		group?: {
-			// 预先配置的字段，表示顺序层级，格式为：'Period > Farm > Pool'
-			order?: string
-			// 指定在生成group时，哪些字段的值进行累加
-			acc?: Array<string>
-			// 隐藏配置按钮
-			hide?: boolean
-		}
-		// 显示刷新按钮
-		refresh?: {
-			// 切换页面时刷新
-			on_show?: boolean
-		}
-		// 开启定时刷新，单位秒
-		live?: number
-		// 时间线配置
-		timeline?: {
-			api: string
-			// 控制器绑定的查询字段
-			control_bind: string
-			// 横坐标绑定的变量
-			label_bind: string
-			// 数据项
-			items: Array<{ label: string; bind: string; color: PresetColor | string }>
-		}
-		// 表格设置项
-		table: {
-			columns: Array<TableColumn>
-			props?: {
-				// 预置的pagesize
-				pagesize?: number
-				border?: boolean
-				// 点击row展开详情
-				row_click?: boolean
-				// 根据某个字段的值改变row的背景色
-				row_bg?: {
-					bind: string
-					options: Record<string, PresetColor | string>
-				}
-			}
-			// 删除提示
-			delete_tips?: { title?: string; content?: string }
-		}
-		// 可选 form，如果不写就使用 table 的 columns 配置
-		form?: {
-			// columns中 的字段会覆盖 bind 相同的 table_columns 中的字段
-			columns?: Array<FormColumn>
-			props?: {}
-			// 在table_columns的基础上扩展
-			use_table_columns?: boolean
-			exclude_table_columns?: Array<string>
-		}
-		// 字段配置
-		fields: {
-			// filter和table可覆盖common中定义的字段
-			common: Fields
-			filter?: Fields
-			table?: Fields
-			form?: Fields
-		}
-	}
+  export interface Config {
+    // 表名称，用于本地存储的前缀（请保持唯一）
+    name: string
+    // 主键，默认为 'id'
+    primary?: string
+    baseurl: string
+    // 支持mustache语法 /delete/{{id}} => /delete/3
+    actions: {
+      // POST
+      query: Action
+      // POST
+      create?: Action
+      // POST
+      update?: Action
+      // POST
+      delete?: Action
+    }
+    // 钩子函数，用来处理特定数据
+    hooks?: {
+      // 处理数据查询到的数据
+      afterQuery?: (v: any) => any
+      // 处理要创建的数据
+      beforeCreate?: (v: any) => any
+      // 处理要变更的数据
+      beforeUpdate?: (v: any) => any
+    }
+    // 筛选设置项
+    filter?: {
+      columns: Array<FilterColumn>
+      props?: {}
+      flat?: boolean
+    }
+    // 统计设置项
+    stat?: {
+      // 预先配置的字段，指定字段生成数据分析结果
+      columns?: Array<{ name: string; type: StatType }>
+      // 隐藏配置按钮
+      hide?: boolean
+    }
+    // 开启数据分组，支持多层级，
+    group?: {
+      // 预先配置的字段，表示顺序层级，格式为：'Period > Farm > Pool'
+      order?: string
+      // 指定在生成group时，哪些字段的值进行累加
+      acc?: Array<string>
+      // 隐藏配置按钮
+      hide?: boolean
+    }
+    // 显示刷新按钮
+    refresh?: {
+      // 切换页面时刷新
+      on_show?: boolean
+    }
+    // 开启定时刷新，单位秒
+    live?: number
+    // 时间线配置
+    timeline?: {
+      api: string
+      // 控制器绑定的查询字段
+      control_bind: string
+      // 横坐标绑定的变量
+      label_bind: string
+      // 数据项
+      items: Array<{ label: string; bind: string; color: PresetColor | string }>
+    }
+    // 表格设置项
+    table: {
+      columns: Array<TableColumn>
+      props?: {
+        // 预置的pagesize
+        pagesize?: number
+        border?: boolean
+        // 点击row展开详情
+        row_click?: boolean
+        // 根据某个字段的值改变row的背景色
+        row_bg?: {
+          bind: string
+          options: Record<string, PresetColor | string>
+        }
+      }
+      // 删除提示
+      delete_tips?: { title?: string; content?: string }
+    }
+    // 可选 form，如果不写就使用 table 的 columns 配置
+    form?: {
+      // columns中 的字段会覆盖 bind 相同的 table_columns 中的字段
+      columns?: Array<FormColumn>
+      props?: {}
+      // 在table_columns的基础上扩展
+      use_table_columns?: boolean
+      exclude_table_columns?: Array<string>
+    }
+    // 字段配置
+    fields: {
+      // filter和table可覆盖common中定义的字段
+      common: Fields
+      filter?: Fields
+      table?: Fields
+      form?: Fields
+    }
+  }
 
-	type StatType = 'SUM' | 'AVG' | 'COUNT' | 'MIN' | 'MAX'
+  type StatType = 'SUM' | 'AVG' | 'COUNT' | 'MIN' | 'MAX'
 
-	export type Action =
-		| string
-		| {
-				api: string
-				params: Record<string, any>
-		  }
+  export type Action =
+    | string
+    | {
+        api: string
+        params: Record<string, any>
+      }
 
-	export interface BaseColumn {
-		name: string
-		width?: number
-		// form 24栅格，span表示跨度
-		span?: number
-	}
+  export interface BaseColumn {
+    name: string
+    width?: number
+    // form 24栅格，span表示跨度
+    span?: number
+  }
 
-	export interface FilterColumn extends BaseColumn {
-		datatype: 'string' | 'number' | 'array' | 'date'
-	}
+  export interface FilterColumn extends BaseColumn {
+    datatype: 'string' | 'number' | 'array' | 'date'
+  }
 
-	export interface TableColumn extends BaseColumn {
-		sort?: boolean
-		readonly?: boolean
-		sticky?: boolean
-		align?: CSSProperties['textAlign']
-	}
+  export interface TableColumn extends BaseColumn {
+    sort?: boolean
+    readonly?: boolean
+    sticky?: boolean
+    align?: CSSProperties['textAlign']
+  }
 
-	export interface FormColumn extends BaseColumn {
-		readonly?: boolean
-	}
+  export interface FormColumn extends BaseColumn {
+    readonly?: boolean
+  }
 
-	export interface Fields {
-		[key: string]: Field
-	}
+  export interface Fields {
+    [key: string]: Field
+  }
 
-	export type Field = { bind: string } & FieldComponent
+  export type Field = { bind: string } & FieldComponent
 
-	export type FieldComponent =
-		| Text
-		| Input
-		| InputNumber
-		| Textarea
-		| Select
-		| Tag
-		| Date
-		| DatePicker
-		| RangePicker
-		| Priority
-		| Editor
-		| Comments
-		| Operation
+  export type FieldComponent =
+    | Text
+    | Input
+    | InputNumber
+    | Textarea
+    | Select
+    | Tag
+    | Date
+    | DatePicker
+    | RangePicker
+    | Priority
+    | Editor
+    | Comments
+    | Operation
 
-	export type Text = {
-		type: 'text'
-		props?: {
-			// 开启format的情况下，会传入整个item作为参数
-			format?: string
-			// "({{value}})"
-			textwrap?: string
-			// 使用了上面其中一种格式化后prefix和suffix会失效
-			prefix?: string
-			suffix?: string
-		}
-	}
+  export type Text = {
+    type: 'text'
+    props?: {
+      // 开启format的情况下，会传入整个item作为参数
+      format?: string
+      // "({{value}})"
+      textwrap?: string
+      // 使用了上面其中一种格式化后prefix和suffix会失效
+      prefix?: string
+      suffix?: string
+    }
+  }
 
-	export type Input = {
-		type: 'input'
-		props?: InputProps
-	}
+  export type Input = {
+    type: 'input'
+    props?: InputProps
+  }
 
-	export type InputNumber = {
-		type: 'input_number'
-		props?: InputNumberProps
-	}
+  export type InputNumber = {
+    type: 'input_number'
+    props?: InputNumberProps
+  }
 
-	export type Textarea = {
-		type: 'textarea'
-		props?: TextAreaProps
-	}
+  export type Textarea = {
+    type: 'textarea'
+    props?: TextAreaProps
+  }
 
-	export type Select = {
-		type: 'select'
-		props: {
-			options?: Array<SelectOption>
-			// 如果设置remote，则忽略options，使用remote请求options
-			remote?: {
-				// 如果未设置search，则使用api获取options
-				api: string
-				// 开启关键词搜索options，值为查询key名称
-				search?: string
-				// 附带的请求参数
-				query?: Record<string, any>
-			}
-			mode?: 'single' | 'multiple' | 'tags'
-			placeholder?: string
-			borderless?: boolean
-		}
-	}
+  export type Select = {
+    type: 'select'
+    props: {
+      options?: Array<SelectOption>
+      // 如果设置remote，则忽略options，使用remote请求options
+      remote?: {
+        // 如果未设置search，则使用api获取options
+        api: string
+        // 开启关键词搜索options，值为查询key名称
+        search?: string
+        // 附带的请求参数
+        query?: Record<string, any>
+      }
+      mode?: 'single' | 'multiple' | 'tags'
+      placeholder?: string
+      borderless?: boolean
+    }
+  }
 
-	export interface SelectOption {
-		label: ReactNode
-		value: string | number | boolean
-		icon?: string
-	}
+  export interface SelectOption {
+    label: ReactNode
+    value: string | number | boolean
+    icon?: string
+  }
 
-	export interface Tag {
-		type: 'tag'
-		props: {
-			options: Array<TagOption>
-			mode?: 'dot' | 'text' | 'full'
-			dot_shape?: 'circle' | 'round'
-			dot_size?: number
-			icon_size?: number | string
-			icon_position?: 'left' | 'right'
-			use_bg?: boolean
-			center?: boolean
-			prefix?: string
-			suffix?: string
-		}
-	}
+  export interface Tag {
+    type: 'tag'
+    props: {
+      options: Array<TagOption>
+      mode?: 'dot' | 'text' | 'full'
+      dot_shape?: 'circle' | 'round'
+      dot_size?: number
+      icon_size?: number | string
+      icon_position?: 'left' | 'right'
+      use_bg?: boolean
+      center?: boolean
+      prefix?: string
+      suffix?: string
+    }
+  }
 
-	export interface TagOption {
-		label?: ReactNode
-		value: string | number | boolean | '__self__'
-		color: PresetColor | string | ((v: TagOption['value']) => PresetColor | string)
-		icon?: string | ((v: TagOption['value']) => string)
-	}
+  export interface TagOption {
+    label?: ReactNode
+    value: string | number | boolean | '__self__'
+    color: PresetColor | string | ((v: TagOption['value']) => PresetColor | string)
+    icon?: string | ((v: TagOption['value']) => string)
+  }
 
-	export type Date = {
-		type: 'date'
-		props?: {
-			format?: string
-		}
-	}
+  export type Date = {
+    type: 'date'
+    props?: {
+      format?: string
+    }
+  }
 
-	export type DatePicker = {
-		type: 'date_picker'
-		props?: {
-			format?: string
-		}
-	}
+  export type DatePicker = {
+    type: 'date_picker'
+    props?: {
+      format?: string
+    }
+  }
 
-	export type RangePicker = {
-		type: 'range_picker'
-		props?: {
-			format?: string | [string, string]
-		}
-	}
+  export type RangePicker = {
+    type: 'range_picker'
+    props?: {
+      format?: string | [string, string]
+    }
+  }
 
-	export type Priority = {
-		type: 'priority'
-		props?: {}
-	}
+  export type Priority = {
+    type: 'priority'
+    props?: {}
+  }
 
-	export type Editor = {
-		type: 'editor'
-		props?: {
-			max_height?: number
-		}
-	}
+  export type Editor = {
+    type: 'editor'
+    props?: {
+      max_height?: number
+    }
+  }
 
-	export type Comments = {
-		type: 'comments'
-		props: {
-			// 数据绑定的key
-			binds: {
-				date: string
-				text: string
-				role?: string
-			}
-		}
-	}
+  export type Comments = {
+    type: 'comments'
+    props: {
+      // 数据绑定的key
+      binds: {
+        date: string
+        text: string
+        role?: string
+      }
+    }
+  }
 
-	export type Operation = {
-		type: 'operation'
-		props?: {
-			no_edit?: boolean
-			no_delete?: boolean
-		}
-	}
+  export type Operation = {
+    type: 'operation'
+    props?: {
+      no_edit?: boolean
+      no_delete?: boolean
+    }
+  }
 
-	export type PresetColor = 'light' | 'dark' | 'danger' | 'success' | 'warning'
+  export type PresetColor = 'light' | 'dark' | 'danger' | 'success' | 'warning'
 
-	export interface Error {
-		error: string
-		message: string
-	}
+  export interface Error {
+    error: string
+    message: string
+  }
 
-	export type MutationResponse = Error | { id: number }
+  export type MutationResponse = Error | { id: number }
 
-	export interface List {
-		items: Array<any>
-		page: number
-		pagesize: number
-		total: number
-	}
+  export interface List {
+    items: Array<any>
+    page: number
+    pagesize: number
+    total: number
+  }
 }
 ```
