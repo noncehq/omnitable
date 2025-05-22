@@ -1,4 +1,4 @@
-:root {
+.omnitable_root {
 --line_height:1.62;
 --color_main_rgb:0,0,0;
 --color_main:rgb(var(--color_main_rgb));

@@ -67,7 +67,12 @@ export interface IPropsFieldsItem {
 }
 
 export interface IPropsView {
-	hide: { stat?: boolean; group?: boolean }
+	visibles: {
+		sort: boolean
+		filter: boolean
+		stat: boolean
+		group: boolean
+	}
 	filter_columns: Model['filter_columns']
 	visible_columns: Model['visible_columns']
 	views: Model['views']
@@ -80,7 +85,7 @@ export interface IPropsView {
 export interface IPropsViewItem
 	extends Pick<
 		IPropsView,
-		| 'hide'
+		| 'visibles'
 		| 'filter_columns'
 		| 'visible_columns'
 		| 'getSortFieldOptions'
@@ -104,8 +109,8 @@ export interface IPropsTimelineControls {
 }
 
 export interface IPropsTimeline {
-	label_bind: Required<Model['config']>['timeline']['label_bind']
-	items: Required<Model['config']>['timeline']['items']
+	label_bind: Required<Model['config']>['header']['timeline']['label_bind']
+	items: Required<Model['config']>['header']['timeline']['items']
 	timeline_type: Model['timeline_type']
 	timeline_items: Model['timeline_items']
 	timeline_focus: Model['timeline_focus']
@@ -119,7 +124,7 @@ export interface IPropsTable {
 	editing_info: Model['editing_info']
 	sort_params: Model['sort_params']
 	modal_index: Model['modal_index']
-	table_props: Model['config']['table']['props']
+	table_props: Pick<Model['config']['table'], 'table_header_sticky_top' | 'border' | 'row_bg' | 'row_click'>
 	onSort: Model['onSort']
 	onChange: Model['onChange']
 	onRowClick: (v: number) => void
@@ -138,8 +143,8 @@ export interface IPropsRow
 		IPropsTable,
 		'table_columns' | 'editing_info' | 'modal_index' | 'onChange' | 'onRowClick' | 'setEditingInfo'
 	> {
-	row_bg: Required<Model['config']['table']>['props']['row_bg']
-	row_click: Required<Model['config']['table']>['props']['row_click']
+	row_bg: Required<Model['config']['table']>['row_bg']
+	row_click: Required<Model['config']['table']>['row_click']
 	item: Omnitable.List['items'][number]
 	index: number
 	onToggleGroupItems: (group_id: string) => void

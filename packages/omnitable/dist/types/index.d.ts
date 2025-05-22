@@ -2,7 +2,7 @@ import type { InputProps, InputNumberProps } from 'antd';
 import type { TextAreaProps } from 'antd/es/input';
 import type { ReactNode } from 'react';
 import type { StatType } from '../metadata';
-import type { CSSProperties } from 'react';
+import type { CSSProperties, FC } from 'react';
 import type { Model } from '..';
 export * from './components';
 export declare namespace Omnitable {
@@ -11,88 +11,127 @@ export declare namespace Omnitable {
         config_url: string;
     }
     interface Config {
-        suspending?: boolean;
+        /** 外部注入的加载中状态，该字段存在，且为false时触发query */
         locale?: 'en' | 'zh';
         theme?: 'light' | 'dark';
-        name: string;
+        /** 表名称，用于本地存储的前缀（请保持唯一） */
+        name?: string;
         adapter?: Adapter;
+        /** 主键，默认为 'id' */
         primary?: string;
         baseurl?: string;
+        /** 支持mustache语法 /delete/{{id}} => /delete/3 */
         actions?: {
+            /** POST */
             query: Action;
+            /** POST */
             create?: Action;
+            /** POST */
             update?: Action;
+            /** POST */
             delete?: Action;
         };
         hooks?: {
+            /** 处理数据查询到的数据 */
             afterQuery?: (v: any) => any;
+            /** 处理要创建的数据 */
             beforeCreate?: (v: any) => any;
+            /** 处理要变更的数据 */
             beforeUpdate?: (v: any) => any;
         };
-        view?: {
-            hide?: boolean;
-        };
-        filter?: {
-            columns: Array<FilterColumn>;
-            defaults?: Model['filter_params'];
-        };
-        stat?: {
-            columns?: Array<{
-                name: string;
-                type: StatType;
-            }>;
-            hide?: boolean;
-        };
-        group?: {
-            order?: string;
-            acc?: Array<string>;
-            hide?: boolean;
-        };
-        refresh?: {
-            on_show?: boolean;
-        };
-        live?: number;
-        timeline?: {
-            api: string;
-            control_bind: string;
-            label_bind: string;
-            items: Array<{
-                label: string;
-                bind: string;
-                color: PresetColor | string;
-            }>;
+        header?: {
+            view?: {};
+            sort?: {};
+            filter?: {
+                columns: Array<FilterColumn>;
+                defaults?: Model['filter_params'];
+            };
+            stat?: {
+                /** 预先配置的字段，指定字段生成数据分析结果 */
+                columns?: Array<{
+                    name: string;
+                    type: StatType;
+                }>;
+            };
+            /** 开启数据分组，支持多层级， */
+            group?: {
+                /** 预先配置的字段，表示顺序层级，格式为：'Period > Farm > Pool' */
+                order?: string;
+                /** 指定在生成group时，哪些字段的值进行累加 */
+                acc?: Array<string>;
+            };
+            /** 显示刷新按钮 */
+            refresh?: {
+                /** 切换页面时刷新 */
+                on_show?: boolean;
+            };
+            /** 开启定时刷新，单位秒 */
+            live?: number;
+            /** 时间线配置 */
+            timeline?: {
+                api: string;
+                /** 控制器绑定的查询字段 */
+                control_bind: string;
+                /** 横坐标绑定的变量 */
+                label_bind: string;
+                /** 数据项 */
+                items: Array<{
+                    label: string;
+                    bind: string;
+                    color: PresetColor | string;
+                }>;
+            };
         };
         table: {
             columns: Array<TableColumn>;
-            props?: {
-                header_sticky_top?: number;
-                pagesize?: number;
-                border?: boolean;
-                row_click?: boolean;
-                row_bg?: {
-                    bind: string;
-                    options: Record<string, PresetColor | string>;
-                };
+            /** 是否开启表头滚动固定 */
+            table_header_sticky_top?: number;
+            border?: boolean;
+            /** 点击row展开详情 */
+            row_click?: boolean;
+            /** 根据某个字段的值改变row的背景色 */
+            row_bg?: {
+                bind: string;
+                options: Record<string, PresetColor | string>;
             };
             delete_tips?: {
                 title?: string;
                 content?: string;
             };
         };
+        /** 可选 form，如果不写就使用 table 的 columns 配置 */
         form?: {
+            /** columns中 的字段会覆盖 bind 相同的 table_columns 中的字段 */
             columns?: Array<FormColumn>;
             props?: {};
+            /** 在table_columns的基础上扩展列 */
             use_table_columns?: boolean;
             exclude_table_columns?: Array<string>;
         };
+        /** 字段对应的组件 */
         fields: {
+            /** filter和table可覆盖common中定义的字段 */
             common?: Fields;
             filter?: Fields;
             table?: Fields;
             form?: Fields;
         };
-        hide_header?: boolean;
-        hide_pagination?: boolean;
+        /** 分页器 */
+        pagination?: {
+            pagesize?: number;
+        };
+        /** 使用外部数据 */
+        external_data?: Error | {
+            data: Omnitable.List;
+        };
+        /** 加载中状态 */
+        suspending?: boolean;
+        /** 注册自定义 fields 组件 */
+        register_fields?: Record<string, RegisterFieldValue | FC<any>>;
+    }
+    interface RegisterFieldValue {
+        Component: FC<any>;
+        readonly?: boolean;
     }
     interface AdapterQueryArgs {
         config: Omnitable.Config;
@@ -102,6 +141,7 @@ export declare namespace Omnitable {
         page: Model['pagination']['page'];
         pagesize: Model['pagination']['pagesize'];
     }
+    /** 适配器 */
     interface Adapter {
         query: (args: AdapterQueryArgs) => Promise<Omnitable.Error | {
             data: Omnitable.List;
@@ -114,6 +154,7 @@ export declare namespace Omnitable {
     interface BaseColumn {
         name: string;
         width?: number;
+        /** form 24栅格，span表示跨度 */
         span?: number;
     }
     interface FilterColumn extends BaseColumn {
@@ -125,6 +166,7 @@ export declare namespace Omnitable {
         readonly?: boolean;
         sticky?: boolean;
         align?: CSSProperties['textAlign'];
+        use_item?: boolean;
     }
     interface FormColumn extends BaseColumn {
         readonly?: boolean;
@@ -135,7 +177,7 @@ export declare namespace Omnitable {
     type Field = {
         bind: string;
     } & FieldComponent;
-    type FieldComponent = Index | Text | Input | InputNumber | Textarea | Select | Tag | Date | DatePicker | RangePicker | Priority | Editor | Comments | Operation;
+    type FieldComponent = Index | Text | Input | InputNumber | Textarea | Select | Tag | Date | DatePicker | RangePicker | Priority | Editor | Comments | Operation | RegisterField;
     type Index = {
         type: 'index';
         props?: {};
@@ -143,8 +185,11 @@ export declare namespace Omnitable {
     type Text = {
         type: 'text';
         props?: {
+            /** 开启format的情况下，会传入整个item作为参数 */
             format?: string;
+            /** "({{value}})" */
             textwrap?: string;
+            /** 使用了上面其中一种格式化后prefix和suffix会失效 */
             prefix?: string;
             suffix?: string;
         };
@@ -165,9 +210,13 @@ export declare namespace Omnitable {
         type: 'select';
         props: {
             options?: Array<SelectOption>;
+            /** 如果设置remote，则忽略options，使用remote请求options */
             remote?: {
+                /** 如果未设置search，则使用api获取options */
                 api: string;
+                /** 开启关键词搜索options，值为查询key名称 */
                 search?: string;
+                /** 附带的请求参数 */
                 query?: Record<string, any>;
             };
             single?: boolean;
@@ -233,6 +282,7 @@ export declare namespace Omnitable {
     type Comments = {
         type: 'comments';
         props: {
+            /** 数据绑定的key */
             binds: {
                 date: string;
                 text: string;
@@ -247,6 +297,11 @@ export declare namespace Omnitable {
             no_delete?: boolean;
         };
     };
+    type RegisterField = {
+        type: 'register';
+        field: string;
+        props?: any;
+    };
     type PresetColor = 'light' | 'dark' | 'danger' | 'success' | 'warning';
     interface Error {
         error: any;
@@ -257,7 +312,7 @@ export declare namespace Omnitable {
     };
     interface List {
         items: Array<any>;
-        total: number;
+        total?: number;
         page?: number;
         pagesize?: number;
     }

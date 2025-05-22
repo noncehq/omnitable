@@ -11,7 +11,7 @@ export const getMustacheView = (value: any, item: any) => ({
 			const percent = new Decimal(render(children)).toNumber()
 			const up = percent >= 0
 
-			return `<span class="inline_flex align_center" style="color:var(--color_${up ? 'success' : 'danger'})"><i class="ph ph-arrow-${up ? 'up' : 'down'}" style="translate:0 0px"></i>${getPercent(percent)}</span>`
+			return `<span class="inline_flex align_center" style="color:var(--color_${up ? 'success' : 'danger'})"><i class="ph ph-arrow-${up ? 'up' : 'down'}"></i>${getPercent(percent)}</span>`
 		}
 	}
 })

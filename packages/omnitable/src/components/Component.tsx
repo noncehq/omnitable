@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 
 import { $ } from '@omnitable/stk/utils'
 
+import { useContext } from '../context'
 import Comments from '../fields/Comments'
 import Date from '../fields/Date'
 import DatePicker from '../fields/DatePicker'
@@ -18,6 +19,7 @@ import Text from '../fields/Text'
 import Textarea from '../fields/Textarea'
 
 import type { IPropsComponent } from '../types'
+import type { Omnitable } from '../types'
 
 const X = (props: IPropsComponent) => {
 	const {
@@ -35,10 +37,17 @@ const X = (props: IPropsComponent) => {
 		onChange
 	} = props
 	const { type, width, props: self_props } = column
+	const ref_register_fields = useContext((v) => v.ref_register_fields)
 
-	const Component = useMemo(() => {
+	const Target = useMemo(() => {
+		const target_type = type === 'register' ? column.field : force_type || type
+		const register_fields = ref_register_fields.current
+
+		if (register_fields && target_type in register_fields) {
+			return register_fields[target_type]
+		}
 		// 这里不使用React.lazy进行动态导入，因为单元格进入编辑状态时会闪现空白，如果是Form可使用动态导入
-		switch (force_type || type) {
+		switch (target_type) {
 			case 'index':
 				return Index
 			case 'text':
@@ -68,26 +77,32 @@ const X = (props: IPropsComponent) => {
 			case 'operation':
 				return Operation
 		}
-	}, [force_type, type])
+	}, [force_type, type, column, ref_register_fields])
+
+	const target_props = {
+		row_index,
+		self_props,
+		value,
+		editing,
+		item,
+		disabled,
+		use_by_filter,
+		use_by_form,
+		width: use_by_form ? undefined : width,
+		onFocus,
+		onBlur,
+		onChange
+	}
+
+	if ('Component' in Target) {
+		const Component = (Target as Omnitable.RegisterFieldValue).Component
+
+		return <Component {...target_props} />
+	}
 
 	return (
-		<Component
-			{...{
-				row_index,
-				self_props,
-				value,
-				editing,
-				item,
-				disabled,
-				use_by_filter,
-				use_by_form,
-				onFocus,
-				onBlur,
-				onChange
-			}}
-			// @ts-ignore
-			width={use_by_form ? undefined : width}
-		/>
+		// @ts-ignore
+		<Target {...target_props} />
 	)
 }
 

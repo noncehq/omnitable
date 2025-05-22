@@ -67,4 +67,4 @@ export declare const filter_expressions: {
     array: string[];
     date: string[];
 };
-export declare const getFilterComponentType: (datatype: Omnitable.FilterColumn["datatype"], expression: string) => "input" | "input_number" | "select" | "date_picker" | "range_picker";
+export declare const getFilterComponentType: (datatype: Omnitable.FilterColumn["datatype"], expression: string) => "input" | "input_number" | "select" | "range_picker" | "date_picker";

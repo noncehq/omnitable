@@ -7,5 +7,5 @@ declare const _default: import("react").MemoExoticComponent<((props: Omnitable.P
     displayName: string;
 }>;
 export default _default;
-export type { Omnitable } from './types';
+export type { Omnitable, ComponentType } from './types';
 export type { Model };

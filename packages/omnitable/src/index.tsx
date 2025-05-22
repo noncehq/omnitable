@@ -4,10 +4,10 @@ import '@omnitable/appframe/preset'
 
 import { useMemoizedFn } from 'ahooks'
 import { App, Button } from 'antd'
-import { debounce } from 'lodash-es'
+import { debounce, omit, pick } from 'lodash-es'
 import { RefreshCw } from 'lucide-react'
 import { observer } from 'mobx-react-lite'
-import { useLayoutEffect, useState, Fragment } from 'react'
+import { useLayoutEffect, useMemo, useRef, useState, Fragment } from 'react'
 
 import { AntdConfigProvider, Drawer, LoadingCircle } from '@omnitable/appframe/components'
 import { $ } from '@omnitable/stk/utils'
@@ -45,7 +45,6 @@ import type {
 	IPropsTimelineControls
 } from './types'
 import type { IPropsConfigProvider } from '@omnitable/appframe/components'
-
 const { useApp } = App
 
 const Index = (props: Omnitable.Props) => {
@@ -53,12 +52,22 @@ const Index = (props: Omnitable.Props) => {
 	const antd = useApp()
 	const filter_columns = $.copy(x.filter_columns)
 	const visible_columns = $.copy(x.visible_columns)
+	const ref_register_fields = useRef<Omnitable.Config['register_fields']>(null)
+
+	const target_props = useMemo(() => {
+		if ('config_url' in props) return props
+		if (!props.register_fields) return props
+
+		ref_register_fields.current = props.register_fields
+
+		return omit(props, ['register_fields'])
+	}, [props])
 
 	useLayoutEffect(() => {
-		x.init({ props, antd })
+		x.init({ props: target_props, antd })
 
 		return () => x.off()
-	}, [props, antd])
+	}, [target_props, antd])
 
 	const props_config_provider: IPropsConfigProvider = {}
 
@@ -74,7 +83,7 @@ const Index = (props: Omnitable.Props) => {
 	const props_filter: IPropsFilter = {
 		filter_columns,
 		filter_relation: x.filter_relation,
-		filter_params: $.copy(x.filter_params.filter(item => !item.shadow)),
+		filter_params: $.copy(x.filter_params.filter((item) => !item.shadow)),
 		onChangeFilter: useMemoizedFn(debounce(x.onChangeFilter, 300))
 	}
 
@@ -92,7 +101,7 @@ const Index = (props: Omnitable.Props) => {
 
 	const props_fields: IPropsFields = {
 		visible_columns,
-		onChangeVisibleColumns: useMemoizedFn(v => {
+		onChangeVisibleColumns: useMemoizedFn((v) => {
 			x.visible_columns = v
 
 			x.clearApplyView()
@@ -100,8 +109,8 @@ const Index = (props: Omnitable.Props) => {
 	}
 
 	const props_timeline: IPropsTimeline = {
-		label_bind: x.config?.timeline?.label_bind!,
-		items: $.copy(x.config?.timeline?.items) || [],
+		label_bind: x.config?.header?.timeline?.label_bind!,
+		items: $.copy(x.config?.header?.timeline?.items) || [],
 		timeline_type: x.timeline_type,
 		timeline_items: $.copy(x.timeline_items),
 		timeline_focus: x.timeline_focus,
@@ -122,18 +131,18 @@ const Index = (props: Omnitable.Props) => {
 		primary: x.primary,
 		table_columns: $.copy(
 			x.visible_columns
-				.map(item => {
-					const column = x.table_columns.find(c => c.name === item.name)!
+				.map((item) => {
+					const column = x.table_columns.find((c) => c.name === item.name)!
 
 					return item.visible ? column : null
 				})
-				.filter(item => item !== null)
+				.filter((item) => item !== null)
 		),
 		data: $.copy(x.items.concat(x.stat_items)),
 		sort_params: $.copy(x.sort_params),
 		editing_info: $.copy(x.editing_info),
 		modal_index: x.modal_index,
-		table_props: $.copy(x.config?.table?.props),
+		table_props: $.copy(pick(x.config?.table, ['table_header_sticky_top', 'border', 'row_click', 'row_bg'])),
 		onSort: x.onSort,
 		onChange: x.onChange,
 		onRowClick: useMemoizedFn((index: number) => {
@@ -141,8 +150,8 @@ const Index = (props: Omnitable.Props) => {
 			x.modal_index = index
 			x.modal_visible = true
 		}),
-		setEditingInfo: useMemoizedFn(v => (x.editing_info = v)),
-		setItems: useMemoizedFn(v => (x.items = v))
+		setEditingInfo: useMemoizedFn((v) => (x.editing_info = v)),
+		setItems: useMemoizedFn((v) => (x.items = v))
 	}
 
 	const props_pagination: IPropsPagination = {
@@ -163,9 +172,11 @@ const Index = (props: Omnitable.Props) => {
 	}
 
 	const props_view: IPropsView = {
-		hide: {
-			stat: x.config?.stat?.hide,
-			group: x.config?.group?.hide
+		visibles: {
+			sort: x.config?.header?.sort !== undefined,
+			filter: x.config?.header?.filter !== undefined,
+			stat: x.config?.header?.stat !== undefined,
+			group: x.config?.header?.group !== undefined
 		},
 		filter_columns,
 		visible_columns,
@@ -173,7 +184,7 @@ const Index = (props: Omnitable.Props) => {
 		getSortFieldOptions: x.getSortFieldOptions,
 		getGroupFieldOptions: x.getGroupFieldOptions,
 		onApplyView: x.onApplyView,
-		onChangeViews: useMemoizedFn(v => (x.views = v))
+		onChangeViews: useMemoizedFn((v) => (x.views = v))
 	}
 
 	const onToggleView = useMemoizedFn(() => (x.modal_view_visible = !x.modal_view_visible))
@@ -186,46 +197,44 @@ const Index = (props: Omnitable.Props) => {
 
 	return (
 		<AntdConfigProvider {...props_config_provider}>
-			<Provider value={{ base_url: x.config?.baseurl }}>
+			<Provider value={{ base_url: x.config?.baseurl, ref_register_fields }}>
 				<div className={$.cx('omnitable_root', styles._local)}>
-					{!x.config?.hide_header && (
+					{x.config?.header && (
 						<div
 							className={$.cx(
 								'omnitable_table_header_wrap header_wrap w_100 flex flex_wrap justify_between',
 								styles.header_wrap
 							)}
 						>
-							{x.config && (
-								<div className='flex'>
-									{!x.config?.view?.hide && (
-										<button
-											className='header_btn_wrap border_box flex align_center clickable mr_8'
-											onClick={onToggleView}
-										>
-											<Eyes className='icon'></Eyes>
-											<span className='label'>View</span>
-											{x.apply_view_name && (
-												<span className='counts flex align_center'>
-													{x.apply_view_name}
-												</span>
-											)}
-										</button>
-									)}
-									{x.sort_columns.length > 0 && <Sort {...props_sort}></Sort>}
-									{x.filter_columns.length > 0 && (
-										<Filter {...props_filter}></Filter>
-									)}
-									{!x.config?.stat?.hide && <Stat {...props_stat}></Stat>}
-									{!x.config?.group?.hide && <Group {...props_group}></Group>}
-									{x.config?.timeline && (
-										<TimelineControls
-											{...props_timeline_controls}
-										></TimelineControls>
-									)}
-								</div>
-							)}
 							<div className='flex'>
-								{x.config?.refresh && (
+								{x.config?.header?.view && (
+									<button
+										className='header_btn_wrap border_box flex align_center clickable mr_8'
+										onClick={onToggleView}
+									>
+										<Eyes className='icon'></Eyes>
+										<span className='label'>View</span>
+										{x.apply_view_name && (
+											<span className='counts flex align_center'>
+												{x.apply_view_name}
+											</span>
+										)}
+									</button>
+								)}
+								{x.config.header.sort && x.sort_columns.length > 0 && (
+									<Sort {...props_sort}></Sort>
+								)}
+								{x.config.header.filter && x.filter_columns.length > 0 && (
+									<Filter {...props_filter}></Filter>
+								)}
+								{x.config.header.stat && <Stat {...props_stat}></Stat>}
+								{x.config.header.group && <Group {...props_group}></Group>}
+								{x.config.header.timeline && (
+									<TimelineControls {...props_timeline_controls}></TimelineControls>
+								)}
+							</div>
+							<div className='flex'>
+								{x.config.header.refresh && (
 									<button
 										className={$.cx(
 											'header_btn_wrap square border_box flex justify_center align_center clickable mr_8',
@@ -240,7 +249,7 @@ const Index = (props: Omnitable.Props) => {
 										></RefreshCw>
 									</button>
 								)}
-								{x.config?.live && (
+								{x.config.header.live && (
 									<button
 										className={$.cx(
 											'header_btn_wrap border_box flex align_center clickable mr_8',
@@ -270,7 +279,7 @@ const Index = (props: Omnitable.Props) => {
 							</div>
 						</div>
 					)}
-					{x.config?.timeline && <Timeline {...props_timeline}></Timeline>}
+					{x.config?.header?.timeline && <Timeline {...props_timeline}></Timeline>}
 					<div className='omnitable_table_body_wrap body_wrap w_100 flex flex_column relative'>
 						{!x.loading_init && x.querying && (
 							<div className='querying_wrap w_100 h_100 flex justify_center align_center absolute'>
@@ -280,7 +289,7 @@ const Index = (props: Omnitable.Props) => {
 						{!x.loading_init && x.config ? (
 							<Fragment>
 								<Table {...props_table}></Table>
-								{!x.config?.hide_pagination && (
+								{x.config?.pagination && (
 									<Pagination {...props_pagination}></Pagination>
 								)}
 							</Fragment>
@@ -290,7 +299,6 @@ const Index = (props: Omnitable.Props) => {
 							</div>
 						)}
 					</div>
-
 					<Drawer
 						className={styles.Drawer}
 						open={x.modal_visible || x.modal_view_visible}
@@ -332,5 +340,5 @@ const Index = (props: Omnitable.Props) => {
 
 export default $.memo(observer(Index))
 
-export type { Omnitable } from './types'
+export type { Omnitable, ComponentType } from './types'
 export type { Model }

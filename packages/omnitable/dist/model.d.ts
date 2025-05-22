@@ -7,7 +7,7 @@ export default class Index {
     antd: useAppProps;
     primary: string;
     props: Omnitable.Props;
-    config: Omnitable.Config;
+    config: Omit<Omnitable.Config, "register_fields">;
     filter_columns: Array<Omnitable.FilterColumn & Omnitable.Field>;
     table_columns: Array<Omnitable.TableColumn & Omnitable.Field>;
     form_columns: Array<Omnitable.FormColumn & Omnitable.Field>;

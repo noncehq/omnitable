@@ -12,6 +12,35 @@ Omnitable 是一个**配置驱动开发**的表格组件，目的是通过**配�
 
 测试接口基于 hono，drizzle 和 cloudflare d1（sqlite），其中的 filter_params 合成为 sql 以及 sort_params 合成为 sort 需要与 omnitable 对齐。
 
+## Q & A
+
+- 前期缺乏沟通，我们对于 omnitable 集成预期不确定？
+
+问题关键：omnitable的发展过程是根据之前的需求来的，目前的问题是存在信息差，且不对齐（如何明确omnitable新的需求）？
+
+- 对于 intel 的场景，我们需要重写 intel 才能适配 omnitable？
+
+问题关键：如何在复用数据逻辑（不需要太多现有的代码改动来接入omnitable），且对主体不改动的情况下平滑迁移到omnitable？
+
+- 对于简单 table，将查询逻辑放入 table 中，并有过于复杂的配置和表达式，这并不符合直觉？
+
+问题关键：复杂度不会消失，只会转移，目前的问题是把特定字段的复杂度转移到了omnitable内部，使得模版语法配置看起来难以理解？
+
+- table 的集成随复杂度渐进提升？
+
+问题关键：把复杂度不要转移到 omnitable 中，让业务逻辑外置？
+
+- 如何保证 omnitable 的DX体验？
+
+问题关键：如何使用 omnitable 开发调试业务？如何支持开发者开发调试 omnitable 本身？
+
+## Solutions
+
+- 声明即存在，不声明不存在，而不是隐藏
+- data inject
+- register fields
+- omnitable dev guide
+
 ## 基本概念
 
 Omnitable 由多个“部分”组成：
@@ -58,16 +87,17 @@ Sort为排序项，通过在配置中指定哪些列的`sort`为`true`即可自�
 - 字段顺序：排序字段会通过api发送到后端，排序字段的顺序将会影响排序的优先级
 
 使用案例
+
 ```ts
 {
-      table:{
-            columns:[
-                  {
-                        name:'创建时间',
-                        sort: true
-                  }
-            ]
-      }
+	table: {
+		columns: [
+			{
+				name: '创建时间',
+				sort: true
+			}
+		]
+	}
 }
 ```
 
@@ -92,7 +122,7 @@ Stat为数据统计配置，支持预先配置和自定义配置：
 
 ```ts
 {
-      stat: {
+	stat: {
 		columns: [
 			{ name: 'Earning', type: 'SUM' },
 			{ name: 'Earning', type: 'AVG' },
@@ -106,7 +136,7 @@ Stat为数据统计配置，支持预先配置和自定义配置：
 			{ name: 'Hashrate', type: 'MAX' },
 			{ name: 'Hashrate', type: 'COUNT' }
 		]
-      }
+	}
 }
 ```
 
@@ -135,9 +165,9 @@ Refresh Button为刷新按钮，可用来手动刷新数据，配置如下：
 
 ```ts
 {
-      refresh: {
+	refresh: {
 		on_show: true
-      }
+	}
 }
 ```
 
@@ -465,7 +495,6 @@ export default {
 } as Omnitable.Config
 ```
 
-
 ## 配置项类型定义
 
 配置项的 Typescript 类型定义：
@@ -495,7 +524,7 @@ export namespace Omnitable {
 			// POST
 			delete?: Action
 		}
-            // 钩子函数，用来处理特定数据
+		// 钩子函数，用来处理特定数据
 		hooks?: {
 			// 处理数据查询到的数据
 			afterQuery?: (v: any) => any
@@ -504,13 +533,13 @@ export namespace Omnitable {
 			// 处理要变更的数据
 			beforeUpdate?: (v: any) => any
 		}
-            // 筛选设置项
+		// 筛选设置项
 		filter?: {
 			columns: Array<FilterColumn>
 			props?: {}
 			flat?: boolean
 		}
-            // 统计设置项
+		// 统计设置项
 		stat?: {
 			// 预先配置的字段，指定字段生成数据分析结果
 			columns?: Array<{ name: string; type: StatType }>
@@ -543,7 +572,7 @@ export namespace Omnitable {
 			// 数据项
 			items: Array<{ label: string; bind: string; color: PresetColor | string }>
 		}
-            // 表格设置项
+		// 表格设置项
 		table: {
 			columns: Array<TableColumn>
 			props?: {
@@ -558,7 +587,7 @@ export namespace Omnitable {
 					options: Record<string, PresetColor | string>
 				}
 			}
-                  // 删除提示
+			// 删除提示
 			delete_tips?: { title?: string; content?: string }
 		}
 		// 可选 form，如果不写就使用 table 的 columns 配置
@@ -570,7 +599,7 @@ export namespace Omnitable {
 			use_table_columns?: boolean
 			exclude_table_columns?: Array<string>
 		}
-            // 字段配置
+		// 字段配置
 		fields: {
 			// filter和table可覆盖common中定义的字段
 			common: Fields
@@ -580,7 +609,7 @@ export namespace Omnitable {
 		}
 	}
 
-      type StatType = "SUM" | "AVG" | "COUNT" | "MIN" | "MAX"
+	type StatType = 'SUM' | 'AVG' | 'COUNT' | 'MIN' | 'MAX'
 
 	export type Action =
 		| string

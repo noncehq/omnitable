@@ -63,9 +63,11 @@ export interface IPropsFieldsItem {
     onChange: (index: number, visible: boolean) => void;
 }
 export interface IPropsView {
-    hide: {
-        stat?: boolean;
-        group?: boolean;
+    visibles: {
+        sort: boolean;
+        filter: boolean;
+        stat: boolean;
+        group: boolean;
     };
     filter_columns: Model['filter_columns'];
     visible_columns: Model['visible_columns'];
@@ -75,7 +77,7 @@ export interface IPropsView {
     onApplyView: Model['onApplyView'];
     onChangeViews: (v: Model['views']) => void;
 }
-export interface IPropsViewItem extends Pick<IPropsView, 'hide' | 'filter_columns' | 'visible_columns' | 'getSortFieldOptions' | 'getGroupFieldOptions' | 'onApplyView'> {
+export interface IPropsViewItem extends Pick<IPropsView, 'visibles' | 'filter_columns' | 'visible_columns' | 'getSortFieldOptions' | 'getGroupFieldOptions' | 'onApplyView'> {
     view: Model['views'][number];
     view_index: number;
     onChangeView: (index: number, v: Model['views'][number]) => void;
@@ -91,8 +93,8 @@ export interface IPropsTimelineControls {
     onResetTimeline: Model['onResetTimeline'];
 }
 export interface IPropsTimeline {
-    label_bind: Required<Model['config']>['timeline']['label_bind'];
-    items: Required<Model['config']>['timeline']['items'];
+    label_bind: Required<Model['config']>['header']['timeline']['label_bind'];
+    items: Required<Model['config']>['header']['timeline']['items'];
     timeline_type: Model['timeline_type'];
     timeline_items: Model['timeline_items'];
     timeline_focus: Model['timeline_focus'];
@@ -105,7 +107,7 @@ export interface IPropsTable {
     editing_info: Model['editing_info'];
     sort_params: Model['sort_params'];
     modal_index: Model['modal_index'];
-    table_props: Model['config']['table']['props'];
+    table_props: Pick<Model['config']['table'], 'table_header_sticky_top' | 'border' | 'row_bg' | 'row_click'>;
     onSort: Model['onSort'];
     onChange: Model['onChange'];
     onRowClick: (v: number) => void;
@@ -118,8 +120,8 @@ export interface IPropsTh {
     onSort?: Model['onSort'];
 }
 export interface IPropsRow extends Pick<IPropsTable, 'table_columns' | 'editing_info' | 'modal_index' | 'onChange' | 'onRowClick' | 'setEditingInfo'> {
-    row_bg: Required<Model['config']['table']>['props']['row_bg'];
-    row_click: Required<Model['config']['table']>['props']['row_click'];
+    row_bg: Required<Model['config']['table']>['row_bg'];
+    row_click: Required<Model['config']['table']>['row_click'];
     item: Omnitable.List['items'][number];
     index: number;
     onToggleGroupItems: (group_id: string) => void;

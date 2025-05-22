@@ -23,7 +23,7 @@ export default class Index {
 	antd = null as unknown as useAppProps
 	primary = 'id'
 	props = null as unknown as Omnitable.Props
-	config = null as unknown as Omnitable.Config
+	config = null as unknown as Omit<Omnitable.Config, 'register_fields'>
 	filter_columns = [] as Array<Omnitable.FilterColumn & Omnitable.Field>
 	table_columns = [] as Array<Omnitable.TableColumn & Omnitable.Field>
 	form_columns = [] as Array<Omnitable.FormColumn & Omnitable.Field>
@@ -113,7 +113,7 @@ export default class Index {
 		this.disposers = [setStorageWhenChange([{ [`${this.config.name}:views`]: 'views' }], this)]
 
 		const primary = this.config.primary
-		const pagesize = this.config.table.props?.pagesize
+		const pagesize = this.config.pagination?.pagesize
 
 		if (primary) this.primary = primary
 		if (pagesize) this.pagination = { ...this.pagination, pagesize }
@@ -121,8 +121,8 @@ export default class Index {
 		this.make()
 		this.getSortFieldOptions()
 
-		if (this.config.group) this.makeGroupParams()
-		if (this.config.stat?.columns?.length) this.makeStatParams()
+		if (this.config.header?.group) this.makeGroupParams()
+		if (this.config.header?.stat?.columns?.length) this.makeStatParams()
 
 		await this.query()
 
@@ -145,36 +145,40 @@ export default class Index {
 		let err = null as Error
 		let res = null as Omnitable.Error | { data: Omnitable.List }
 
-		if (this.config.adapter) {
-			res = await this.config.adapter.query(
-				$.copy({
-					config: this.config,
-					sort_params: this.sort_params,
-					filter_relation: this.filter_relation,
-					filter_params: this.filter_params.filter(i => 'value' in i),
-					page: this.pagination.page,
-					pagesize: this.pagination.pagesize
-				})
-			)
+		if (this.config.external_data) {
+			res = this.config.external_data
 		} else {
-			const { api, params } = this.getAction(this.config.actions.query)
-
-			const response = await to<Omnitable.Error | { data: Omnitable.List }>(
-				ofetch(`${this.config.baseurl}${api}`, {
-					method: 'POST',
-					body: {
+			if (this.config.adapter) {
+				res = await this.config.adapter.query(
+					$.copy({
+						config: this.config,
 						sort_params: this.sort_params,
 						filter_relation: this.filter_relation,
-						filter_params: this.filter_params.filter(i => 'value' in i),
+						filter_params: this.filter_params.filter((i) => 'value' in i),
 						page: this.pagination.page,
-						pagesize: this.pagination.pagesize,
-						params
-					}
-				})
-			)
+						pagesize: this.pagination.pagesize
+					})
+				)
+			} else {
+				const { api, params } = this.getAction(this.config.actions.query)
 
-			err = response[0]
-			res = response[1]
+				const response = await to<Omnitable.Error | { data: Omnitable.List }>(
+					ofetch(`${this.config.baseurl}${api}`, {
+						method: 'POST',
+						body: {
+							sort_params: this.sort_params,
+							filter_relation: this.filter_relation,
+							filter_params: this.filter_params.filter((i) => 'value' in i),
+							page: this.pagination.page,
+							pagesize: this.pagination.pagesize,
+							params
+						}
+					})
+				)
+
+				err = response[0]
+				res = response[1]
+			}
 		}
 
 		if (!ignore_querying) this.querying = false
@@ -307,12 +311,12 @@ export default class Index {
 	}
 
 	async queryTimeline() {
-		if (!this.config?.timeline) return
+		if (!this.config?.header?.timeline) return
 
 		this.timeline_querying = true
 
 		const [err, res] = await to<Omnitable.Error | { data: Index['timeline_items'] }>(
-			ofetch(`${this.config.baseurl}${this.config.timeline!.api}`, {
+			ofetch(`${this.config.baseurl}${this.config.header.timeline!.api}`, {
 				method: 'GET',
 				query: { type: this.timeline_type, timestamp: this.timeline_timestamp }
 			})
@@ -428,23 +432,23 @@ export default class Index {
 			this.living_timer = setInterval(() => {
 				this.updateTimelineTimestamp()
 				this.query(true)
-			}, this.config.live! * 1000)
+			}, this.config.header?.live! * 1000)
 		}
 	}
 
 	make() {
-		if (this.config.filter?.defaults) {
-			this.filter_params = this.config.filter?.defaults
+		if (this.config.header?.filter?.defaults) {
+			this.filter_params = this.config.header.filter.defaults
 		}
 
 		this.filter_columns =
-			this.config.filter?.columns.map(item => {
+			this.config.header?.filter?.columns.map((item) => {
 				const field = this.config.fields.filter?.[item.name] || this.config.fields.common?.[item.name]
 
 				return { ...item, ...field }
 			}) || []
 
-		this.table_columns = this.config.table.columns.map(item => {
+		this.table_columns = this.config.table.columns.map((item) => {
 			const field = this.config.fields.table?.[item.name] || this.config.fields.common?.[item.name]
 			const column = { ...item, ...field }
 
@@ -469,12 +473,12 @@ export default class Index {
 		if (!this.config.form || this.config.form?.use_table_columns) {
 			const target_columns = this.config.form
 				? uniqBy([...this.config.table.columns, ...(this.config.form?.columns || [])], 'name').filter(
-						item => !(this.config.form?.exclude_table_columns || []).includes(item.name)
+						(item) => !(this.config.form?.exclude_table_columns || []).includes(item.name)
 					)
 				: this.config.table.columns
 
 			const form_columns = target_columns
-				.map(item => {
+				.map((item) => {
 					const field =
 						this.config.fields.form?.[item.name] ||
 						this.config.fields.common?.[item.name] ||
@@ -484,12 +488,12 @@ export default class Index {
 
 					return { ...item, ...field }
 				})
-				.filter(item => item !== null)
+				.filter((item) => item !== null)
 
 			this.form_columns = uniqBy(form_columns, 'name')
 		} else {
 			this.form_columns =
-				this.config.form?.columns?.map(item => {
+				this.config.form?.columns?.map((item) => {
 					const field =
 						this.config.fields.form?.[item.name] || this.config.fields.common?.[item.name]
 
@@ -499,12 +503,12 @@ export default class Index {
 	}
 
 	makeStatParams() {
-		const columns = this.config.stat?.columns
+		const columns = this.config.header?.stat?.columns
 
 		if (!columns || !columns.length) return
 
-		columns.forEach(item => {
-			const stat_item = this.visible_columns.find(s => s.name === item.name)
+		columns.forEach((item) => {
+			const stat_item = this.visible_columns.find((s) => s.name === item.name)
 
 			if (stat_item) {
 				this.stat_params.push({ field: stat_item.id, type: item.type })
@@ -515,7 +519,7 @@ export default class Index {
 	}
 
 	makeGroupParams() {
-		const { order, acc } = this.config.group!
+		const { order, acc } = this.config.header.group!
 
 		if (!order) return
 
@@ -523,7 +527,7 @@ export default class Index {
 		const visible_columns = [] as Index['visible_columns']
 		const group_params = { fields: [], acc: [] } as Index['group_params']
 
-		this.visible_columns.forEach(item => {
+		this.visible_columns.forEach((item) => {
 			if (field_names.includes(item.name)) {
 				group_params.fields.push({ label: item.name, value: item.id })
 			}
@@ -546,8 +550,8 @@ export default class Index {
 		const visible_columns = [] as Index['visible_columns']
 		const visible_fields = fields.slice(1)
 
-		this.table_columns.forEach(column => {
-			if (!visible_fields.find(f => f.label === column.name)) {
+		this.table_columns.forEach((column) => {
+			if (!visible_fields.find((f) => f.label === column.name)) {
 				visible_columns.push({ name: column.name, id: column.bind, visible: true })
 			}
 		})
@@ -571,7 +575,7 @@ export default class Index {
 
 		level += 1
 
-		Object.keys(group_data).forEach(group_field_value => {
+		Object.keys(group_data).forEach((group_field_value) => {
 			const children = group_data[group_field_value]
 			const current_group_id =
 				(group_id ? `${group_id}/` : '') +
@@ -583,7 +587,7 @@ export default class Index {
 
 				// 如果数字是时间，需要进行格式化
 				if (
-					this.filter_columns.find(col => col.name === group_field.label)?.datatype === 'date' ||
+					this.filter_columns.find((col) => col.name === group_field.label)?.datatype === 'date' ||
 					isMillisecondTimestamp(group_field_value as unknown as number)
 				) {
 					group_field_value = dayjs(group_field_value).format('YYYY-MM-DD')
@@ -593,7 +597,7 @@ export default class Index {
 			const group_parent = this.visible_columns.reduce((total, item) => {
 				if (item.id === group_field.value) return total
 
-				if (acc.find(a => a.label === item.name)) {
+				if (acc.find((a) => a.label === item.name)) {
 					total[item.id] = children.reduce((all, child) => {
 						const real_all = new Decimal(all)
 						const real_value = new Decimal(child[item.id])
@@ -642,7 +646,7 @@ export default class Index {
 			}
 
 			if (level === fields.length) {
-				children.forEach(item => {
+				children.forEach((item) => {
 					target.push({
 						...item,
 						__group_field__: group_field.value,
@@ -668,10 +672,10 @@ export default class Index {
 		const disabled_options = [] as Index['sort_field_options']
 		const sort_params = v || this.sort_params
 
-		this.sort_columns.forEach(item => {
+		this.sort_columns.forEach((item) => {
 			const target_item = { label: item.name, value: item.bind }
 
-			if (sort_params.find(s => s.field === item.bind)) {
+			if (sort_params.find((s) => s.field === item.bind)) {
 				disabled_options.push({ ...target_item, disabled: true })
 			} else {
 				options.push(target_item)
@@ -706,7 +710,7 @@ export default class Index {
 		for (let index = 0; index < items.length; index++) {
 			const item = items[index]
 
-			Object.keys(stat_params_map).forEach(key => {
+			Object.keys(stat_params_map).forEach((key) => {
 				const stat_item = stat_params_map[key]
 				const { field, type } = stat_item
 				const stat_item_value = new Decimal(stat_item.value)
@@ -750,7 +754,7 @@ export default class Index {
 
 		const stat_items = [] as Array<any>
 
-		Object.keys(stat_params_map).forEach(key => {
+		Object.keys(stat_params_map).forEach((key) => {
 			const stat_item = stat_params_map[key]
 			const { field, type, value } = stat_item
 
@@ -763,33 +767,30 @@ export default class Index {
 
 		const group_stat_items = groupBy(stat_items, '__stat_type__')
 
-		this.stat_items = Object.keys(group_stat_items).reduce(
-			(total, key) => {
-				const items = group_stat_items[key]
+		this.stat_items = Object.keys(group_stat_items).reduce((total, key) => {
+			const items = group_stat_items[key]
 
-				const target = items.reduce((all, it) => {
-					all['__stat_type__'] = key
-					all[it['__stat_field__']] = it['__stat_value__']
+			const target = items.reduce((all, it) => {
+				all['__stat_type__'] = key
+				all[it['__stat_field__']] = it['__stat_value__']
 
-					return all
-				}, {} as any)
+				return all
+			}, {} as any)
 
-				total.push(target)
+			total.push(target)
 
-				return total
-			},
-			[] as Array<any>
-		)
+			return total
+		}, [] as Array<any>)
 	}
 
 	getGroupFieldOptions(v: Index['group_params']['fields']) {
 		const options = [] as Array<{ label: string; value: any; disabled?: boolean }>
 		const disabled_options = [] as Array<{ label: string; value: any; disabled?: boolean }>
 
-		this.table_columns.forEach(item => {
+		this.table_columns.forEach((item) => {
 			const target_item = { label: item.name, value: item.bind }
 
-			if (v.find(s => s.value === item.bind) || item.bind === '_operation') {
+			if (v.find((s) => s.value === item.bind) || item.bind === '_operation') {
 				disabled_options.push({ ...target_item, disabled: true })
 			} else {
 				options.push(target_item)
@@ -800,7 +801,7 @@ export default class Index {
 	}
 
 	onSort(field: string) {
-		const exist_sort_index = this.sort_params.findIndex(item => item.field === field)
+		const exist_sort_index = this.sort_params.findIndex((item) => item.field === field)
 
 		if (exist_sort_index === -1) {
 			this.sort_params.push({ field, order: 'asc' })
@@ -838,7 +839,7 @@ export default class Index {
 		if (filter_relation) this.filter_relation = filter_relation
 		if (filter_params) this.filter_params = filter_params
 
-		const target_filter_params = this.filter_params.filter(item => item.value)
+		const target_filter_params = this.filter_params.filter((item) => item.value)
 
 		this.clearApplyView()
 
@@ -901,10 +902,12 @@ export default class Index {
 
 		this.timeline_range = this.timeline_items[index].range
 
-		const exist_index = this.filter_params.findIndex(item => item.field === this.config.timeline!.control_bind)
+		const exist_index = this.filter_params.findIndex(
+			(item) => item.field === this.config.header.timeline!.control_bind
+		)
 
 		const target_filter_param = {
-			field: this.config.timeline!.control_bind,
+			field: this.config.header.timeline!.control_bind,
 			expression: 'is between',
 			value: this.timeline_range
 		}
@@ -936,7 +939,7 @@ export default class Index {
 			this.timeline_range = null
 
 			this.filter_params = $.copy(
-				this.filter_params.filter(item => item.field !== this.config.timeline!.control_bind)
+				this.filter_params.filter((item) => item.field !== this.config.header.timeline!.control_bind)
 			)
 
 			this.query(false, true)
@@ -1003,7 +1006,7 @@ export default class Index {
 				const item = this.items[this.modal_index]
 				const target = {} as any
 
-				Object.keys(v).forEach(key => {
+				Object.keys(v).forEach((key) => {
 					if (!deepEqual(item[key], v[key])) {
 						target[key] = v[key]
 					}
@@ -1035,7 +1038,7 @@ export default class Index {
 	}
 
 	updateTimelineTimestamp() {
-		if (!this.config?.timeline) return
+		if (!this.config?.header?.timeline) return
 
 		this.timeline_timestamp = dayjs().valueOf()
 	}
@@ -1047,7 +1050,7 @@ export default class Index {
 	}
 
 	on() {
-		if (this.config?.refresh?.on_show) {
+		if (this.config?.header?.refresh?.on_show) {
 			document.addEventListener('visibilitychange', this.onVisibilityChange)
 		}
 	}
@@ -1060,11 +1063,11 @@ export default class Index {
 		this.editing_info = null
 		this.sort_columns = []
 
-		if (this.config?.refresh?.on_show) {
+		if (this.config?.header?.refresh?.on_show) {
 			document.removeEventListener('visibilitychange', this.onVisibilityChange)
 		}
 
-		this.disposers.map(item => item())
+		this.disposers.map((item) => item())
 		this.disposers = []
 	}
 }

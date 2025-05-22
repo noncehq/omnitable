@@ -1,7 +1,11 @@
 import { createContext, useContextSelector } from '@omnitable/stk/react'
 
+import type { Omnitable } from './types'
+import type { MutableRefObject } from 'react'
+
 export interface Context {
 	base_url: string
+	ref_register_fields: MutableRefObject<Omnitable.Config['register_fields']>
 }
 
 // @ts-ignore Avoid duplicate declarations

@@ -6,6 +6,7 @@ import { useDeepMemo } from '@omnitable/stk/react'
 import { $ } from '@omnitable/stk/utils'
 import { CaretRight } from '@phosphor-icons/react'
 
+import { useContext } from '../context'
 import { readonly_fields } from '../metadata'
 import Component from './Component'
 
@@ -27,13 +28,34 @@ const Index = (props: IPropsCol) => {
 		onToggleGroupItems
 	} = props
 	const { type, bind, readonly } = column
+	const ref_register_fields = useContext((v) => v.ref_register_fields)
+
 	const ref = useRef<HTMLTableCellElement>(null)
 	const [hover, setHover] = useState(false)
 
 	useLayoutEffect(() => {
 		const td = ref.current
+		const register_fields = ref_register_fields.current
+		const readonly_register_fields = []
 
-		if (!td || readonly || readonly_fields.includes(type)) return
+		if (register_fields) {
+			Object.keys(register_fields).forEach((key) => {
+				const register_field = register_fields[key]
+
+				if ('Component' in register_field && register_field['readonly']) {
+					readonly_register_fields.push(key)
+				}
+			})
+		}
+
+		if (
+			!td ||
+			readonly ||
+			readonly_fields.includes(type) ||
+			(type === 'register' && readonly_register_fields.includes(column.field))
+		) {
+			return
+		}
 
 		const setHoverTrue = () => setHover(true)
 		const setHoverFalse = () => setHover(false)
@@ -45,9 +67,9 @@ const Index = (props: IPropsCol) => {
 			td.removeEventListener('mouseenter', setHoverTrue)
 			td.removeEventListener('mouseleave', setHoverFalse)
 		}
-	}, [readonly, type])
+	}, [readonly, type, column])
 
-	const onFocus = useMemoizedFn(v => {
+	const onFocus = useMemoizedFn((v) => {
 		if (v) {
 			setEditingField?.({ row_index, field: bind, focus: true })
 		} else {

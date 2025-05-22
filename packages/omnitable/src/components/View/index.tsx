@@ -10,7 +10,7 @@ import type { IPropsView, IPropsViewItem } from '../../types'
 
 const Index = (props: IPropsView) => {
 	const {
-		hide,
+		visibles,
 		filter_columns,
 		visible_columns,
 		views,
@@ -28,7 +28,7 @@ const Index = (props: IPropsView) => {
 		onChangeViews(target)
 	})
 
-	const remove: IPropsViewItem['remove'] = useMemoizedFn(index => {
+	const remove: IPropsViewItem['remove'] = useMemoizedFn((index) => {
 		const target = $.copy(views)
 
 		target.splice(index, 1)
@@ -49,7 +49,7 @@ const Index = (props: IPropsView) => {
 			{views.map((view, view_index) => (
 				<Item
 					{...{
-						hide,
+						visibles,
 						filter_columns,
 						visible_columns,
 						view,

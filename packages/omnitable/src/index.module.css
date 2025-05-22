@@ -345,15 +345,6 @@
 							}
 						}
 
-						.desc {
-							cursor: pointer;
-							text-decoration-color: rgba(var(--color_text_rgb), 0.15);
-							text-decoration-line: underline;
-							text-decoration-style: dashed;
-							text-decoration-thickness: 2px;
-							text-underline-offset: 1.5px;
-						}
-
 						.table_sort {
 							display: inline-flex;
 							margin-left: 6px;

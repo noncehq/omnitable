@@ -27,9 +27,11 @@ const Index = (props: IPropsTable) => {
 	const table = useRef<HTMLTableElement>(null)
 	const clone_table = useRef<HTMLTableElement>(null)
 	const sticky = useRef<StickyTableHeader>(null)
-	const sticky_top = table_props?.header_sticky_top || 0
+	const sticky_top = table_props?.table_header_sticky_top
 
 	useLayoutEffect(() => {
+		if (sticky_top !== undefined) return
+
 		if (table.current && clone_table.current) {
 			sticky.current = new StickyTableHeader(table.current, clone_table.current, {
 				max: sticky_top
@@ -42,7 +44,7 @@ const Index = (props: IPropsTable) => {
 	const getOrder = useMemoizedFn((item: IPropsTable['table_columns'][number]) => {
 		if (!item.sort || !sort_params.length) return
 
-		return sort_params.find(s => s.field === item.bind)?.order
+		return sort_params.find((s) => s.field === item.bind)?.order
 	})
 
 	const onToggleGroupItems = useMemoizedFn((group_id: string) => {
@@ -52,7 +54,7 @@ const Index = (props: IPropsTable) => {
 
 		let parent_visible = null as boolean | null
 
-		items.forEach(item => {
+		items.forEach((item) => {
 			if (!item['__stat_type__']) {
 				const item_group_ids = item['__group_id__'].split('/') as Array<string>
 
@@ -87,7 +89,7 @@ const Index = (props: IPropsTable) => {
 				<table className={table_class} ref={table}>
 					<thead>
 						<tr className={$.cx(modal_index === 0 && 'selected')}>
-							{table_columns.map(item => (
+							{table_columns.map((item) => (
 								<Th
 									column={item}
 									order={getOrder(item)}
@@ -144,9 +146,14 @@ const Index = (props: IPropsTable) => {
 					)}
 				</table>
 			</div>
-			<div className={$.cx('table_container clone w_100', !sticky_top && 'edge')} style={{ zIndex: 103 }}>
-				<table className={table_class} ref={clone_table} />
-			</div>
+			{sticky_top !== undefined && (
+				<div
+					className={$.cx('table_container clone w_100', !sticky_top && 'edge')}
+					style={{ zIndex: 103 }}
+				>
+					<table className={table_class} ref={clone_table} />
+				</div>
+			)}
 		</Fragment>
 	)
 }
