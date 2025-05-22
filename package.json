@@ -14,11 +14,8 @@
     "biome": "biome format . --write --staged"
   },
   "lint-staged": {
-    "*.{css,md}": [
+    "*.{ts,tsx,js,json,css,md}": [
       "prettier --write"
-    ],
-    "*.(j|t)s?(x)": [
-      "biome format . --write --staged"
     ]
   },
   "devDependencies": {
