@@ -1,38 +1,38 @@
 {
-	"name": "monorepo",
-	"private": true,
-	"version": "0.0.0",
-	"packageManager": "pnpm@9.15.5",
-	"scripts": {
-		"prepare": "husky",
-		"dev": "turbo run dev",
-		"build": "turbo run build --filter=!examples",
-		"build:affected": "turbo run build --affected --filter=!examples",
-		"dev:omnitable": "turbo run dev --filter=omnitable",
-		"build:omnitable": "turbo run build --filter=omnitable",
-		"prettier": "prettier --parser=typescript --write \"**/*.ts?(x)\"",
-		"biome": "biome format . --write --staged"
-	},
-	"lint-staged": {
-		"*.{css,md}": [
-			"prettier --write"
-		],
-		"*.(j|t)s?(x)": [
-			"biome format . --write --staged"
-		]
-	},
-	"devDependencies": {
-		"@biomejs/biome": "2.0.0-beta.1",
-		"lint-staged": "^16.0.0",
-		"prettier": "^3.5.3",
-		"husky": "^9.1.7",
-		"turbo": "^2.5.3",
-		"@rslib/core": "^0.6.9",
-		"@types/node": "^22.15.17",
-		"@types/react": "^18",
-		"bun": "^1.2.13",
-		"bun-types": "^1.2.13",
-		"lodash-es": "^4.17.21",
-		"@types/lodash-es": "^4.17.12"
-	}
+  "name": "monorepo",
+  "private": true,
+  "version": "0.0.0",
+  "packageManager": "pnpm@9.15.5",
+  "scripts": {
+    "prepare": "husky",
+    "dev": "turbo run dev",
+    "build": "turbo run build --filter=!examples",
+    "build:affected": "turbo run build --affected --filter=!examples",
+    "dev:omnitable": "turbo run dev --filter=omnitable",
+    "build:omnitable": "turbo run build --filter=omnitable",
+    "prettier": "prettier --write \"**/*.{ts,tsx,json,md}\"",
+    "biome": "biome format . --write --staged"
+  },
+  "lint-staged": {
+    "*.{css,md}": [
+      "prettier --write"
+    ],
+    "*.(j|t)s?(x)": [
+      "biome format . --write --staged"
+    ]
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.0.0-beta.1",
+    "lint-staged": "^16.0.0",
+    "prettier": "^3.5.3",
+    "husky": "^9.1.7",
+    "turbo": "^2.5.3",
+    "@rslib/core": "^0.6.9",
+    "@types/node": "^22.15.17",
+    "@types/react": "^18",
+    "bun": "^1.2.13",
+    "bun-types": "^1.2.13",
+    "lodash-es": "^4.17.21",
+    "@types/lodash-es": "^4.17.12"
+  }
 }
