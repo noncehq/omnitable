@@ -12,35 +12,6 @@ Omnitable 是一个**配置驱动开发**的表格组件，目的是通过**配�
 
 测试接口基于 hono，drizzle 和 cloudflare d1（sqlite），其中的 filter_params 合成为 sql 以及 sort_params 合成为 sort 需要与 omnitable 对齐。
 
-## Q & A
-
-- 前期缺乏沟通，我们对于 omnitable 集成预期不确定？
-
-问题关键：omnitable的发展过程是根据之前的需求来的，目前的问题是存在信息差，且不对齐（如何明确omnitable新的需求）？
-
-- 对于 intel 的场景，我们需要重写 intel 才能适配 omnitable？
-
-问题关键：如何在复用数据逻辑（不需要太多现有的代码改动来接入omnitable），且对主体不改动的情况下平滑迁移到omnitable？
-
-- 对于简单 table，将查询逻辑放入 table 中，并有过于复杂的配置和表达式，这并不符合直觉？
-
-问题关键：复杂度不会消失，只会转移，目前的问题是把特定字段的复杂度转移到了omnitable内部，使得模版语法配置看起来难以理解？
-
-- table 的集成随复杂度渐进提升？
-
-问题关键：把复杂度不要转移到 omnitable 中，让业务逻辑外置？
-
-- 如何保证 omnitable 的DX体验？
-
-问题关键：如何使用 omnitable 开发调试业务？如何支持开发者开发调试 omnitable 本身？
-
-## Solutions
-
-- 声明即存在，不声明不存在，而不是隐藏
-- data inject
-- register fields
-- omnitable dev guide
-
 ## 基本概念
 
 Omnitable 由多个“部分”组成：
