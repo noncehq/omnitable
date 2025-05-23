@@ -1,31 +1,31 @@
 import 'react'
 
 declare module 'react' {
-	export const unstable_Activity: ComponentClass<
-		{
-			children: ReactNode
-			mode: 'hidden' | 'visible'
-		},
-		any
-	>
+  export const unstable_Activity: ComponentClass<
+    {
+      children: ReactNode
+      mode: 'hidden' | 'visible'
+    },
+    any
+  >
 
-	interface DragEvent {
-		offsetX: number
-		offsetY: number
-	}
+  interface DragEvent {
+    offsetX: number
+    offsetY: number
+  }
 
-	interface CSSProperties {
-		[key: string]: any
-	}
+  interface CSSProperties {
+    [key: string]: any
+  }
 }
 
 declare module 'react-dom' {
-	var prefetchDNS: (v: string) => void
+  var prefetchDNS: (v: string) => void
 }
 
 declare global {
-	interface DragEvent {
-		rangeParent?: Node
-		rangeOffset?: number
-	}
+  interface DragEvent {
+    rangeParent?: Node
+    rangeOffset?: number
+  }
 }

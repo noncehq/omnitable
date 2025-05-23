@@ -2,50 +2,50 @@ import { useEventListener, useMemoizedFn } from 'ahooks'
 import { useRef, useState } from 'react'
 
 export default () => {
-	const [markup_visible, setMarkupVisible] = useState(false)
-	const [markup_rect, setMarkupRect] = useState<DOMRect>()
-	const selection_container = useRef<HTMLDivElement>(null)
+  const [markup_visible, setMarkupVisible] = useState(false)
+  const [markup_rect, setMarkupRect] = useState<DOMRect>()
+  const selection_container = useRef<HTMLDivElement>(null)
 
-	useEventListener(
-		'mouseup',
-		() => {
-			const selection = window.getSelection()
+  useEventListener(
+    'mouseup',
+    () => {
+      const selection = window.getSelection()
 
-			if (!selection) return
+      if (!selection) return
 
-			const text = selection.toString()
+      const text = selection.toString()
 
-			if (!text.length) return
+      if (!text.length) return
 
-			const range = selection.getRangeAt(0)
-			const parent = range.commonAncestorContainer as HTMLElement
+      const range = selection.getRangeAt(0)
+      const parent = range.commonAncestorContainer as HTMLElement
 
-			let editable = false
-			let el = parent
+      let editable = false
+      let el = parent
 
-			while (el) {
-				if (el.hasAttribute('contenteditable') && el.getAttribute('contenteditable')) {
-					editable = true
+      while (el) {
+        if (el.hasAttribute('contenteditable') && el.getAttribute('contenteditable')) {
+          editable = true
 
-					break
-				}
+          break
+        }
 
-				if (el.parentNode) {
-					el = el.parentNode as HTMLElement
-				} else {
-					break
-				}
-			}
+        if (el.parentNode) {
+          el = el.parentNode as HTMLElement
+        } else {
+          break
+        }
+      }
 
-			if (!editable) return
+      if (!editable) return
 
-			setMarkupVisible(true)
-			setMarkupRect(range.getBoundingClientRect())
-		},
-		{ target: selection_container }
-	)
+      setMarkupVisible(true)
+      setMarkupRect(range.getBoundingClientRect())
+    },
+    { target: selection_container },
+  )
 
-	const closeMarkup = useMemoizedFn(() => setMarkupVisible(false))
+  const closeMarkup = useMemoizedFn(() => setMarkupVisible(false))
 
-	return { selection_container, markup_visible, markup_rect, closeMarkup }
+  return { selection_container, markup_visible, markup_rect, closeMarkup }
 }

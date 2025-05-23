@@ -13,44 +13,44 @@ import Table from './pages/table'
 import type { RouteObject } from 'react-router-dom'
 
 const routes: Array<RouteObject> = [
-	{
-		path: '/',
-		element: <Table />
-	},
-	{
-		path: '/config_group',
-		element: <ConfigGroup />
-	},
-	{
-		path: '/custom_group',
-		element: <CustomGroup />
-	},
-	{
-		path: '/config_stat',
-		element: <ConfigStat />
-	},
-	{
-		path: '/custom_stat',
-		element: <CustomStat />
-	},
-	{
-		path: '/log',
-		element: <Log />
-	},
-	{
-		path: '/editor',
-		element: <Editor />
-	},
-	{
-		path: '/compare',
-		element: <Compare />
-	}
+  {
+    path: '/',
+    element: <Table />,
+  },
+  {
+    path: '/config_group',
+    element: <ConfigGroup />,
+  },
+  {
+    path: '/custom_group',
+    element: <CustomGroup />,
+  },
+  {
+    path: '/config_stat',
+    element: <ConfigStat />,
+  },
+  {
+    path: '/custom_stat',
+    element: <CustomStat />,
+  },
+  {
+    path: '/log',
+    element: <Log />,
+  },
+  {
+    path: '/editor',
+    element: <Editor />,
+  },
+  {
+    path: '/compare',
+    element: <Compare />,
+  },
 ]
 
 export default createBrowserRouter([
-	{
-		path: '/',
-		element: <Layout />,
-		children: routes
-	}
+  {
+    path: '/',
+    element: <Layout />,
+    children: routes,
+  },
 ])

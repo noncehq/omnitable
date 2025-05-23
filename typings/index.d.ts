@@ -3,9 +3,9 @@ declare module '*.png'
 declare module '*.jpeg'
 
 declare module '*.svg' {
-	import { FC, SVGProps } from 'react'
+  import { FC, SVGProps } from 'react'
 
-	const content: FC<SVGProps<SVGSVGElement>>
+  const content: FC<SVGProps<SVGSVGElement>>
 
-	export default content
+  export default content
 }

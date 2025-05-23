@@ -1,3 +1,3 @@
 export default (v: string) => {
-	return Number(v.replace('px', ''))
+  return Number(v.replace('px', ''))
 }

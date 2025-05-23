@@ -10,29 +10,29 @@ import type { PropsWithChildren } from 'react'
 import type { ConfigProviderProps } from 'antd/es/config-provider'
 
 export interface IProps extends PropsWithChildren, Omit<ConfigProviderProps, 'locale' | 'theme'> {
-	locale?: 'en' | 'zh'
-	theme?: 'light' | 'dark'
+  locale?: 'en' | 'zh'
+  theme?: 'light' | 'dark'
 }
 
 const Index = (props: IProps) => {
-	const { children, locale, theme, ...rest_props } = props
+  const { children, locale, theme, ...rest_props } = props
 
-	const props_config_provider: ConfigProviderProps = {
-		...rest_props,
-		prefixCls: 'omni',
-		iconPrefixCls: 'omni-icon',
-		virtual: false,
-		getPopupContainer: n => n?.parentElement!
-	}
+  const props_config_provider: ConfigProviderProps = {
+    ...rest_props,
+    prefixCls: 'omni',
+    iconPrefixCls: 'omni-icon',
+    virtual: false,
+    getPopupContainer: n => n?.parentElement!,
+  }
 
-	if (locale) props_config_provider['locale'] = locale === 'en' ? en_US : zh_CN
-	if (theme) props_config_provider['theme'] = getAntdTheme(theme)
+  if (locale) props_config_provider['locale'] = locale === 'en' ? en_US : zh_CN
+  if (theme) props_config_provider['theme'] = getAntdTheme(theme)
 
-	return (
-		<ConfigProvider {...props_config_provider}>
-			<App prefixCls='omni'>{children}</App>
-		</ConfigProvider>
-	)
+  return (
+    <ConfigProvider {...props_config_provider}>
+      <App prefixCls="omni">{children}</App>
+    </ConfigProvider>
+  )
 }
 
 export default memo(Index)

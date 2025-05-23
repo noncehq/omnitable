@@ -7,16 +7,16 @@ import { rslib } from '../../config'
 import type { RslibConfig } from '@rslib/core'
 
 export default deepmerge(rslib, {
-	source: {
-		entry: {
-			index: './src/index.tsx'
-		}
-	},
-	output: {
-		filename: {
-			js: 'index.js'
-		}
-	},
-	plugins: [pluginReact()]
-	// performance: { removeConsole: false },
+  source: {
+    entry: {
+      index: './src/index.tsx',
+    },
+  },
+  output: {
+    filename: {
+      js: 'index.js',
+    },
+  },
+  plugins: [pluginReact()],
+  // performance: { removeConsole: false },
 } as Partial<RslibConfig>)

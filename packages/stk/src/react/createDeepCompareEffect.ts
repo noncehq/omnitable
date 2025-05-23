@@ -7,15 +7,15 @@ type EffectHookType = typeof useEffect | typeof useLayoutEffect
 type CreateUpdateEffect = (hook: EffectHookType) => EffectHookType
 
 const createDeepCompareEffect: CreateUpdateEffect = hook => (effect, deps) => {
-	const ref = useRef<DependencyList>(null)
-	const signalRef = useRef<number>(0)
+  const ref = useRef<DependencyList>(null)
+  const signalRef = useRef<number>(0)
 
-	if (deps === undefined || !deepEqual(deps, ref.current)) {
-		ref.current = deps
-		signalRef.current += 1
-	}
+  if (deps === undefined || !deepEqual(deps, ref.current)) {
+    ref.current = deps
+    signalRef.current += 1
+  }
 
-	hook(effect, [signalRef.current])
+  hook(effect, [signalRef.current])
 }
 
 export default createDeepCompareEffect

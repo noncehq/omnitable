@@ -1,13 +1,13 @@
 export default (target: HTMLElement, selector: string) => {
-	let parent = target
+  let parent = target
 
-	while (parent) {
-		if (parent?.matches(selector)) {
-			return parent
-		}
+  while (parent) {
+    if (parent?.matches(selector)) {
+      return parent
+    }
 
-		parent = parent?.parentElement
-	}
+    parent = parent?.parentElement
+  }
 
-	return null
+  return null
 }

@@ -36,73 +36,72 @@ lowlight.register('js', js)
 lowlight.register('ts', ts)
 
 interface IProps {
-	value: string
-	readonly?: boolean
-	max_height?: number
-	onChange: (v: string) => void
+  value: string
+  readonly?: boolean
+  max_height?: number
+  onChange: (v: string) => void
 }
 
 const Index = (props: IProps) => {
-	const { value, readonly, max_height, onChange } = props
+  const { value, readonly, max_height, onChange } = props
 
-	const editor = useEditor({
-		editable: !readonly,
-		immediatelyRender: false,
-		extensions: [
-			StarterKit.configure({
-				codeBlock: false
-			}),
-			Placeholder.configure({
-				placeholder: 'Write description...'
-			}),
-			Link.configure({
-				openOnClick: false,
-				defaultProtocol: 'https'
-			}),
-			TaskItem.configure({
-				nested: true
-			}),
-			Table.configure({
-				resizable: true
-			}),
-			CodeBlockLowlight.configure({
-				lowlight,
-				defaultLanguage: 'ts'
-			}),
-			Highlight.configure({
-				multicolor: true
-			}),
-			Typography,
-			Image,
-			TableHeader,
-			TableRow,
-			TableCell,
-			TaskList,
-			Underline,
-			TextStyle,
-			Color
-		],
-		content: value ? JSON.parse(value) : '',
-		onUpdate: ({ editor }) => {
-			const content = editor.getJSON()
+  const editor = useEditor({
+    editable: !readonly,
+    immediatelyRender: false,
+    extensions: [
+      StarterKit.configure({
+        codeBlock: false,
+      }),
+      Placeholder.configure({
+        placeholder: 'Write description...',
+      }),
+      Link.configure({
+        openOnClick: false,
+        defaultProtocol: 'https',
+      }),
+      TaskItem.configure({
+        nested: true,
+      }),
+      Table.configure({
+        resizable: true,
+      }),
+      CodeBlockLowlight.configure({
+        lowlight,
+        defaultLanguage: 'ts',
+      }),
+      Highlight.configure({
+        multicolor: true,
+      }),
+      Typography,
+      Image,
+      TableHeader,
+      TableRow,
+      TableCell,
+      TaskList,
+      Underline,
+      TextStyle,
+      Color,
+    ],
+    content: value ? JSON.parse(value) : '',
+    onUpdate: ({ editor }) => {
+      const content = editor.getJSON()
 
-			onChange(JSON.stringify(content))
-		}
-	})
+      onChange(JSON.stringify(content))
+    },
+  })
 
-	if (!editor) return null
+  if (!editor) return null
 
-	return (
-		<div className={$.cx('w_100 flex flex_column', styles._local)}>
-			<Toolbar editor={editor}></Toolbar>
-			<div
-				className='editor_wrap w_100 border_box'
-				style={{ height: max_height, maxHeight: max_height, overflowY: 'scroll' }}
-			>
-				<EditorContent editor={editor} />
-			</div>
-		</div>
-	)
+  return (
+    <div className={$.cx('w_100 flex flex_column', styles._local)}>
+      <Toolbar editor={editor}></Toolbar>
+      <div
+        className="editor_wrap w_100 border_box"
+        style={{ height: max_height, maxHeight: max_height, overflowY: 'scroll' }}>
+        <EditorContent editor={editor} />
+      </div>
+    </div>
+  )
 }
 
 export default $.memo(Index)

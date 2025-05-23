@@ -4,12 +4,12 @@ export { default as memo } from './memo'
 export { default as handle } from './handle'
 export { default as createDeepCompareEffect } from './createDeepCompareEffect'
 export {
-	createContext,
-	useContextSelector,
-	useContext,
-	useContextUpdate,
-	BridgeProvider,
-	useBridgeValue
+  createContext,
+  useContextSelector,
+  useContext,
+  useContextUpdate,
+  BridgeProvider,
+  useBridgeValue,
 } from './useContextSelector'
 export { default as useDeepMemo } from './useDeepMemo'
 export { default as useDoubleClick } from './useDoubleClick'

@@ -12,104 +12,108 @@ import type { useAppProps } from 'antd/es/app/context'
 type Options = Array<Omnitable.SelectOption>
 
 export default class Index {
-	antd = null as unknown as useAppProps
-	base_url = ''
-	remote = null as unknown as Omnitable.Select['props']['remote']
-	multiple = false
-	options = [] as Array<Omnitable.SelectOption>
-	search_props = {} as SelectProps<any, Omnitable.SelectOption>
-	loading_search = false
+  antd = null as unknown as useAppProps
+  base_url = ''
+  remote = null as unknown as Omnitable.Select['props']['remote']
+  multiple = false
+  options = [] as Array<Omnitable.SelectOption>
+  search_props = {} as SelectProps<any, Omnitable.SelectOption>
+  loading_search = false
 
-	constructor() {
-		makeAutoObservable(this, { antd: false, base_url: false, remote: false, multiple: false }, { autoBind: true })
-	}
+  constructor() {
+    makeAutoObservable(
+      this,
+      { antd: false, base_url: false, remote: false, multiple: false },
+      { autoBind: true },
+    )
+  }
 
-	init(args: {
-		antd: Index['antd']
-		options_raw: Array<Omnitable.SelectOption> | undefined
-		base_url: string
-		remote: Index['remote']
-		multiple: Index['multiple']
-	}) {
-		const { antd, options_raw, base_url, remote, multiple } = args
+  init(args: {
+    antd: Index['antd']
+    options_raw: Array<Omnitable.SelectOption> | undefined
+    base_url: string
+    remote: Index['remote']
+    multiple: Index['multiple']
+  }) {
+    const { antd, options_raw, base_url, remote, multiple } = args
 
-		this.antd = antd
-		this.base_url = base_url
+    this.antd = antd
+    this.base_url = base_url
 
-		if (options_raw) this.options = options_raw
+    if (options_raw) this.options = options_raw
 
-		if (remote) {
-			this.remote = remote
+    if (remote) {
+      this.remote = remote
 
-			if (this.remote.search) {
-				this.search_props = {
-					showSearch: true,
-					filterOption: false,
-					defaultActiveFirstOption: false,
-					onSearch: debounce(this.search, 450, { leading: false })
-				}
-			} else {
-				this.get()
-			}
-		}
+      if (this.remote.search) {
+        this.search_props = {
+          showSearch: true,
+          filterOption: false,
+          defaultActiveFirstOption: false,
+          onSearch: debounce(this.search, 450, { leading: false }),
+        }
+      } else {
+        this.get()
+      }
+    }
 
-		this.multiple = multiple
-	}
+    this.multiple = multiple
+  }
 
-	async get() {
-		const remote = this.remote!
+  async get() {
+    const remote = this.remote!
 
-		const query = remote.query!
-		const session_key = `${remote.api}|${new URLSearchParams(query).toString()}`
-		const session_cache = decode(sessionStorage.getItem(session_key)) as Options
+    const query = remote.query!
+    const session_key = `${remote.api}|${new URLSearchParams(query).toString()}`
+    const session_cache = decode(sessionStorage.getItem(session_key)) as Options
 
-		if (session_cache) return (this.options = session_cache)
+    if (session_cache) return (this.options = session_cache)
 
-		const url = remote.api.indexOf('https') !== -1 ? remote.api : `${this.base_url}${remote.api}`
+    const url = remote.api.indexOf('https') !== -1 ? remote.api : `${this.base_url}${remote.api}`
 
-		const [err, res] = await to<Omnitable.Error | Options>(ofetch(url, { query }))
+    const [err, res] = await to<Omnitable.Error | Options>(ofetch(url, { query }))
 
-		if (err) {
-			this.antd.message.error(`Query error: ${err?.message}`)
+    if (err) {
+      this.antd.message.error(`Query error: ${err?.message}`)
 
-			return false
-		}
+      return false
+    }
 
-		if ('error' in res) {
-			this.antd.message.error(`${res.error}: ${res.message}`)
+    if ('error' in res) {
+      this.antd.message.error(`${res.error}: ${res.message}`)
 
-			return false
-		}
+      return false
+    }
 
-		this.options = res
+    this.options = res
 
-		sessionStorage.setItem(session_key, encode(res))
-	}
+    sessionStorage.setItem(session_key, encode(res))
+  }
 
-	async search(v: string) {
-		this.loading_search = true
+  async search(v: string) {
+    this.loading_search = true
 
-		const remote = this.remote!
-		const search = remote.search!
-		const query = { ...remote.query, [search]: v }
-		const url = remote.api.indexOf('https') !== -1 ? remote.api : `${this.base_url}${remote.api}`
+    const remote = this.remote!
+    const search = remote.search!
+    const query = { ...remote.query, [search]: v }
+    const url = remote.api.indexOf('https') !== -1 ? remote.api : `${this.base_url}${remote.api}`
 
-		const [err, res] = await to<Omnitable.Error | Options>(ofetch(url, { query }))
+    const [err, res] = await to<Omnitable.Error | Options>(ofetch(url, { query }))
 
-		this.loading_search = false
+    this.loading_search = false
 
-		if (err) {
-			this.antd.message.error(`Query error: ${err?.message}`)
+    if (err) {
+      this.antd.message.error(`Query error: ${err?.message}`)
 
-			return false
-		}
+      return false
+    }
 
-		if ('error' in res) {
-			this.antd.message.error(`${res.error}: ${res.message}`)
+    if ('error' in res) {
+      this.antd.message.error(`${res.error}: ${res.message}`)
 
-			return false
-		}
+      return false
+    }
 
-		this.options = res
-	}
+    this.options = res
+  }
 }

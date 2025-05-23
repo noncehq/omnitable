@@ -8,18 +8,18 @@ import light from '../src/theme/light'
 const output_path = join(process.cwd(), `/src/styles`)
 
 const getVars = (theme: any) => {
-	return Object.keys(theme).reduce((total, key: string) => {
-		const value = theme[key]
+  return Object.keys(theme).reduce((total, key: string) => {
+    const value = theme[key]
 
-		total += `--${key}:${value};\n`
+    total += `--${key}:${value};\n`
 
-		return total
-	}, '')
+    return total
+  }, '')
 }
 
 writeFileSync(`${output_path}/common.css`, `.omnitable_root {\n${getVars(common)}}`)
 writeFileSync(`${output_path}/light.css`, `.omnitable_root {\n${getVars(light)}}`)
 writeFileSync(
-	`${output_path}/dark.css`,
-	`[data-theme='dark'] .omnitable_root,.dark .omnitable_root {\n${getVars(dark)}}`
+  `${output_path}/dark.css`,
+  `[data-theme='dark'] .omnitable_root,.dark .omnitable_root {\n${getVars(dark)}}`,
 )

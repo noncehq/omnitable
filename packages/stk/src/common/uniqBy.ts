@@ -1,11 +1,11 @@
 export default <T>(arr: Array<T>, key: string): Array<T> => {
-	const map = {}
+  const map = {}
 
-	arr.forEach(item => {
-		const uniq_value = item[key]
+  arr.forEach(item => {
+    const uniq_value = item[key]
 
-		map[uniq_value] = item
-	})
+    map[uniq_value] = item
+  })
 
-	return Object.values(map)
+  return Object.values(map)
 }
