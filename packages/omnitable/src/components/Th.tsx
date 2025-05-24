@@ -14,6 +14,14 @@ const Index = (props: IPropsTh) => {
 
   const onClick = useMemoizedFn(() => onSort?.(bind))
 
+  const Text = desc ? (
+    <Tooltip title={desc}>
+      <span className="desc">{name}</span>
+    </Tooltip>
+  ) : (
+    <span>{text}</span>
+  )
+
   return (
     <th
       className={$.cx(
@@ -26,24 +34,14 @@ const Index = (props: IPropsTh) => {
       onClick={sort ? onClick : undefined}>
       {sort ? (
         <div className="inline_flex align_center">
-          {desc ? (
-            <Tooltip title={desc}>
-              <span className="desc">{name}</span>
-            </Tooltip>
-          ) : (
-            <span>{name}</span>
-          )}
+          {Text}
           <div className={$.cx('table_sort flex_column justify_center', order && 'order')}>
             {(order === 'asc' || !order) && <CaretUp className="asc" weight="bold"></CaretUp>}
             {(order === 'desc' || !order) && <CaretDown className="desc" weight="bold"></CaretDown>}
           </div>
         </div>
-      ) : desc ? (
-        <Tooltip title={desc}>
-          <span className="desc">{name}</span>
-        </Tooltip>
       ) : (
-        text
+        Text
       )}
     </th>
   )

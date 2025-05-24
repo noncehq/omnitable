@@ -1,0 +1,7 @@
+.omni-tooltip {
+  .omni-tooltip-content {
+    .omni-tooltip-inner {
+      white-space: pre-wrap;
+    }
+  }
+}
