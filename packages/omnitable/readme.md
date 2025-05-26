@@ -207,46 +207,42 @@ export default {
   actions: {
     query: '/query',
   },
-  filter: {
-    columns: [
-      { name: 'Date', datatype: 'date' },
-      { name: 'Status', datatype: 'array' },
-      { name: 'Method', datatype: 'array' },
-      { name: 'Host', datatype: 'string' },
-      { name: 'region_full', datatype: 'string' },
-    ],
-  },
-  stat: {
-    hide: true,
-  },
-  group: {
-    hide: true,
-  },
-  refresh: {
-    on_show: true,
-  },
-  live: 3,
-  timeline: {
-    api: '/getStatusTimeline',
-    control_bind: 'create_at',
-    label_bind: 'duration',
-    items: [
-      {
-        label: 'Error',
-        bind: '5xx',
-        color: 'danger',
-      },
-      {
-        label: 'Warning',
-        bind: '4xx',
-        color: 'warning',
-      },
-      {
-        label: 'Success',
-        bind: '2xx',
-        color: 'light',
-      },
-    ],
+  header: {
+    filter: {
+      columns: [
+        { name: 'Date', datatype: 'date' },
+        { name: 'Status', datatype: 'array' },
+        { name: 'Method', datatype: 'array' },
+        { name: 'Host', datatype: 'string' },
+        { name: 'region_full', datatype: 'string' },
+      ],
+    },
+    refresh: {
+      on_show: true,
+    },
+    live: 3,
+    timeline: {
+      api: '/getStatusTimeline',
+      control_bind: 'create_at',
+      label_bind: 'duration',
+      items: [
+        {
+          label: 'Error',
+          bind: '5xx',
+          color: 'danger',
+        },
+        {
+          label: 'Warning',
+          bind: '4xx',
+          color: 'warning',
+        },
+        {
+          label: 'Success',
+          bind: '2xx',
+          color: 'light',
+        },
+      ],
+    },
   },
   table: {
     columns: [
