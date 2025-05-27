@@ -1,5 +1,9 @@
+import type { useAppProps } from 'antd/es/app/context';
 import type Model from '../model';
 import type { Omnitable } from '../types';
+export interface IPropsAntd {
+    setAntd: (v: useAppProps) => void;
+}
 export interface IPropsSort {
     sort_field_options: Model['sort_field_options'];
     sort_params: Model['sort_params'];

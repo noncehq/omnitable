@@ -100,11 +100,10 @@ export default class Index {
     )
   }
 
-  async init(args: { props: Index['props']; antd: Index['antd'] }) {
-    const { props, antd } = args
+  async init(args: { props: Index['props'] }) {
+    const { props } = args
 
     this.loading_init = true
-    this.antd = antd
 
     if ('config_url' in props) {
       await this.getConfig(props.config_url)

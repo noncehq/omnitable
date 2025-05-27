@@ -14,6 +14,7 @@ import { $ } from '@omnitable/stk/utils'
 import { Eyes, PauseCircle, PlayCircle, Plus } from '@phosphor-icons/react'
 
 import {
+  Antd,
   Detail,
   Fields,
   Filter,
@@ -30,7 +31,7 @@ import { Provider } from './context'
 import styles from './index.module.css'
 import Model from './model'
 
-import type { IPropsConfigProvider, IPropsDrawer, IPropsModal } from '@omnitable/appframe/components'
+import type { IPropsConfigProvider, IPropsDrawer } from '@omnitable/appframe/components'
 import type {
   IPropsDetail,
   IPropsFields,
@@ -46,11 +47,8 @@ import type {
   Omnitable,
 } from './types'
 
-const { useApp } = App
-
 const Index = (props: Omnitable.Props) => {
   const [x] = useState(() => new Model())
-  const antd = useApp()
   const filter_columns = $.copy(x.filter_columns)
   const visible_columns = $.copy(x.visible_columns)
   const ref_register_fields = useRef<Omnitable.Config['register_fields']>(null)
@@ -65,15 +63,17 @@ const Index = (props: Omnitable.Props) => {
   }, [props])
 
   useLayoutEffect(() => {
-    x.init({ props: target_props, antd })
+    x.init({ props: target_props })
 
     return () => x.off()
-  }, [target_props, antd])
+  }, [target_props])
 
   const props_config_provider: IPropsConfigProvider = {}
 
   if (x.config?.locale) props_config_provider['locale'] = x.config?.locale
   if (x.config?.theme) props_config_provider['theme'] = x.config?.theme
+
+  const setAntd = useMemoizedFn(v => (x.antd = v))
 
   const props_sort: IPropsSort = {
     sort_field_options: $.copy(x.sort_field_options),
@@ -170,7 +170,7 @@ const Index = (props: Omnitable.Props) => {
       x.modal_visible = false
       x.modal_index = -2
     }),
-    render: x.config.form.render ? useMemoizedFn(x.config.form.render) : undefined,
+    render: x.config?.form?.render ? useMemoizedFn(x.config.form.render) : undefined,
   }
 
   const props_view: IPropsView = {
@@ -214,6 +214,7 @@ const Index = (props: Omnitable.Props) => {
 
   return (
     <AntdConfigProvider {...props_config_provider}>
+      <Antd setAntd={setAntd}></Antd>
       <Provider value={{ base_url: x.config?.baseurl, ref_register_fields }}>
         <div className={$.cx('omnitable_root', styles._local)}>
           {x.config?.header && (

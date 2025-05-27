@@ -90,7 +90,6 @@ export default class Index {
     constructor();
     init(args: {
         props: Index['props'];
-        antd: Index['antd'];
     }): Promise<void>;
     getConfig(config_url: string): Promise<boolean>;
     query(ignore_querying?: boolean, ignore_timeline_query?: boolean): Promise<boolean>;

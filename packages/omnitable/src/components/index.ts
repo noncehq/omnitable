@@ -1,3 +1,4 @@
+export { default as Antd } from './Antd'
 export { default as Sort } from './Sort'
 export { default as Filter } from './Filter'
 export { default as Fields } from './Fields'

@@ -30,7 +30,9 @@ const Index = (props: IProps) => {
 
   return (
     <ConfigProvider {...props_config_provider}>
-      <App prefixCls="omni">{children}</App>
+      <App prefixCls="omni" component={false}>
+        {children}
+      </App>
     </ConfigProvider>
   )
 }
