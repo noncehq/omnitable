@@ -117,7 +117,7 @@ const Index = (props: IProps) => {
       <AnimatePresence>
         {open && (
           <motion.div
-            className={$.cx(styles.mask, styles.on_body, 'w_100 h_100')}
+            className={$.cx('omni', styles.mask, styles.on_body, 'w_100 h_100')}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -129,17 +129,19 @@ const Index = (props: IProps) => {
         {open && (
           <div
             className={$.cx(
+              'omni',
               styles.content_wrap,
               styles.on_body,
               disableOverflow && styles.disableOverflow,
               disablePadding && styles.disablePadding,
-              'if_modal_wrap w_100 h_100 border_box flex',
               align,
+              className,
+              'if_modal_wrap w_100 h_100 border_box flex',
             )}
             ref={ref_content_wrap}
             style={{ zIndex: zIndex ? zIndex + 1 : 1002 }}>
             <motion.div
-              className={$.cx(styles.content, className, 'if_modal_content border_box flex flex_column')}
+              className={$.cx(styles.content, 'if_modal_content border_box flex flex_column')}
               initial={{ transform }}
               animate={{ transform: 'translate3d(0px, 0px, 0px)' }}
               exit={{ transform }}

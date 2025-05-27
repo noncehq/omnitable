@@ -7,6 +7,7 @@ export interface IProps {
     title?: string | number;
     width?: string | number;
     minHeight?: string | number;
+    height?: string | number;
     maskClosable?: boolean;
     disableOverflow?: boolean;
     disablePadding?: boolean;

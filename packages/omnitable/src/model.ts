@@ -483,7 +483,7 @@ export default class Index {
             this.config.fields.common?.[item.name] ||
             this.config.fields.table?.[item.name]
 
-          if (field.bind === '_operation') return null
+          if (field?.bind === '_operation') return null
 
           return { ...item, ...field }
         })

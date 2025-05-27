@@ -17,9 +17,9 @@ const getVars = (theme: any) => {
   }, '')
 }
 
-writeFileSync(`${output_path}/common.css`, `.omnitable_root {\n${getVars(common)}}`)
-writeFileSync(`${output_path}/light.css`, `.omnitable_root {\n${getVars(light)}}`)
+writeFileSync(`${output_path}/common.css`, `.omni,.omnitable_root {\n${getVars(common)}}`)
+writeFileSync(`${output_path}/light.css`, `.omni,.omnitable_root {\n${getVars(light)}}`)
 writeFileSync(
   `${output_path}/dark.css`,
-  `[data-theme='dark'] .omnitable_root,.dark .omnitable_root {\n${getVars(dark)}}`,
+  `[data-theme='dark'] .omni,.dark .omni, [data-theme='dark'] .omnitable_root,.dark .omnitable_root {\n${getVars(dark)}}`,
 )

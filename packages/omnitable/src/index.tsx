@@ -31,7 +31,7 @@ import { Provider } from './context'
 import styles from './index.module.css'
 import Model from './model'
 
-import type { IPropsConfigProvider, IPropsDrawer } from '@omnitable/appframe/components'
+import type { IPropsConfigProvider, IPropsDrawer, IPropsModal } from '@omnitable/appframe/components'
 import type {
   IPropsDetail,
   IPropsFields,
@@ -52,14 +52,26 @@ const Index = (props: Omnitable.Props) => {
   const filter_columns = $.copy(x.filter_columns)
   const visible_columns = $.copy(x.visible_columns)
   const ref_register_fields = useRef<Omnitable.Config['register_fields']>(null)
+  const ref_form_render = useRef<Omnitable.Config['form']['render']>(null)
 
   const target_props = useMemo(() => {
     if ('config_url' in props) return props
-    if (!props.register_fields) return props
 
-    ref_register_fields.current = props.register_fields
+    let target = props
 
-    return omit(props, ['register_fields'])
+    if (target.register_fields) {
+      ref_register_fields.current = props.register_fields
+
+      omit(target, ['register_fields'])
+    }
+
+    if (target?.form?.render) {
+      ref_form_render.current = target.form.render
+
+      delete target.form['render']
+    }
+
+    return target
   }, [props])
 
   useLayoutEffect(() => {
@@ -170,7 +182,7 @@ const Index = (props: Omnitable.Props) => {
       x.modal_visible = false
       x.modal_index = -2
     }),
-    render: x.config?.form?.render ? useMemoizedFn(x.config.form.render) : undefined,
+    render: ref_form_render.current ? useMemoizedFn(ref_form_render.current) : undefined,
   }
 
   const props_view: IPropsView = {
@@ -197,20 +209,26 @@ const Index = (props: Omnitable.Props) => {
     x.modal_visible = true
   })
 
-  const Dialog = x.config?.form?.dialog === 'modal' ? Modal : Drawer
+  const props_modal: Partial<IPropsModal> = {
+    className: x.config?.form?.modal?.className,
+    width: x.config?.form?.modal?.width,
+    height: x.config?.form?.modal?.height,
+  }
 
-  const props_dialog =
-    x.config?.form?.dialog === 'modal'
-      ? {}
-      : ({
-          placement: x.modal_view_visible ? 'left' : 'right',
-          header_actions: x.modal_view_visible && (
-            <button className="btn_add_view flex justify_center align_center absolute clickable" onClick={x.onAddView}>
-              <Plus className="icon" weight="bold"></Plus>
-              <span>Add</span>
-            </button>
-          ),
-        } as IPropsDrawer)
+  const props_drawer: Partial<IPropsDrawer> = {
+    className: x.config?.form?.drawer?.className,
+    width: x.config?.form?.drawer?.width,
+    placement: x.modal_view_visible ? 'left' : 'right',
+    header_actions: x.modal_view_visible && (
+      <button className="btn_add_view flex justify_center align_center absolute clickable" onClick={x.onAddView}>
+        <Plus className="icon" weight="bold"></Plus>
+        <span>Add</span>
+      </button>
+    ),
+  }
+
+  const Dialog = x.config?.form?.dialog === 'modal' ? Modal : Drawer
+  const props_dialog = x.config?.form?.dialog === 'modal' ? props_modal : props_drawer
 
   return (
     <AntdConfigProvider {...props_config_provider}>
@@ -224,7 +242,7 @@ const Index = (props: Omnitable.Props) => {
                 styles.header_wrap,
               )}>
               <div className="flex">
-                {x.config?.header?.view && (
+                {x.config.header.view && (
                   <button
                     className="header_btn_wrap border_box flex align_center clickable mr_8"
                     onClick={onToggleView}>

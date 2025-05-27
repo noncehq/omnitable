@@ -18,6 +18,7 @@ export interface IProps {
   title?: string | number
   width?: string | number
   minHeight?: string | number
+  height?: string | number
   maskClosable?: boolean
   disableOverflow?: boolean
   disablePadding?: boolean
@@ -37,6 +38,7 @@ const Index = (props: IProps) => {
     title,
     width,
     minHeight,
+    height,
     maskClosable,
     disableOverflow,
     disablePadding,
@@ -97,7 +99,7 @@ const Index = (props: IProps) => {
       <AnimatePresence>
         {open && (
           <motion.div
-            className={$.cx(styles.mask, on_body && styles.on_body, 'w_100 h_100')}
+            className={$.cx('omni', styles.mask, on_body && styles.on_body, 'w_100 h_100')}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -109,10 +111,12 @@ const Index = (props: IProps) => {
         {open && (
           <motion.div
             className={$.cx(
+              'omni',
               styles.content_wrap,
               on_body && styles.on_body,
               disableOverflow && styles.disableOverflow,
               disablePadding && styles.disablePadding,
+              className,
               'if_modal_wrap w_100 h_100 border_box flex align_center',
             )}
             ref={ref_content_wrap}
@@ -122,8 +126,8 @@ const Index = (props: IProps) => {
             transition={{ duration: 0.18, ease: 'easeInOut' }}
             style={{ zIndex: zIndex ? zIndex + 1 : 1002 }}>
             <div
-              className={$.cx(styles.content, className, 'if_modal_content border_box flex flex_column')}
-              style={{ width: width ?? 360, minHeight }}
+              className={$.cx(styles.content, 'if_modal_content border_box flex flex_column')}
+              style={{ width: width ?? 360, minHeight, ...(height ? { height, overflowY: 'scroll' } : {}) }}
               ref={ref_content}>
               {title && (
                 <div className={$.cx(styles.header, 'w_100 border_box flex justify_between align_center')}>

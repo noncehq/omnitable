@@ -45,6 +45,7 @@ const X = (props: IPropsComponent) => {
     if (register_fields && target_type in register_fields) {
       return register_fields[target_type]
     }
+
     // 这里不使用React.lazy进行动态导入，因为单元格进入编辑状态时会闪现空白，如果是Form可使用动态导入
     switch (target_type) {
       case 'index':

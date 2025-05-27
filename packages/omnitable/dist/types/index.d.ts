@@ -104,6 +104,17 @@ export declare namespace Omnitable {
             columns?: Array<FormColumn>;
             /** 弹窗形式，drawer 为抽屉弹窗，modal为模态框 */
             dialog?: 'drawer' | 'modal';
+            /** dialog 为 drawer 时生效 */
+            drawer?: {
+                width?: number | string;
+                className?: string;
+            };
+            /** dialog 为 modal 时生效 */
+            modal?: {
+                width?: number | string;
+                height?: number | string;
+                className?: string;
+            };
             /** 在table_columns的基础上扩展列 */
             use_table_columns?: boolean;
             exclude_table_columns?: Array<string>;
