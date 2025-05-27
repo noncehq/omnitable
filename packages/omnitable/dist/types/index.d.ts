@@ -1,9 +1,8 @@
-import type { InputProps, InputNumberProps } from 'antd';
+import type { InputNumberProps, InputProps } from 'antd';
 import type { TextAreaProps } from 'antd/es/input';
-import type { ReactNode } from 'react';
-import type { StatType } from '../metadata';
-import type { CSSProperties, FC } from 'react';
+import type { CSSProperties, FC, ReactNode } from 'react';
 import type { Model } from '..';
+import type { StatType } from '../metadata';
 export * from './components';
 export declare namespace Omnitable {
     type Props = LowCodeConfig | Config;
@@ -103,10 +102,20 @@ export declare namespace Omnitable {
         form?: {
             /** columns中 的字段会覆盖 bind 相同的 table_columns 中的字段 */
             columns?: Array<FormColumn>;
-            props?: {};
+            /** 弹窗形式，drawer 为抽屉弹窗，modal为模态框 */
+            dialog?: 'drawer' | 'modal';
             /** 在table_columns的基础上扩展列 */
             use_table_columns?: boolean;
             exclude_table_columns?: Array<string>;
+            /**
+             * 自定义渲染内容，fields 通过 column name 可引用对应的字段组件
+             * @param fields - 字段组件的集合，key 为 column 的 name，value 为对应的 ReactNode
+             * @param item - 当前行的数据项
+             */
+            render?: (fields: Record<string, ReactNode>, item: any, options: {
+                save: ReactNode;
+                cancel: ReactNode;
+            }) => ReactNode;
         };
         /** 字段对应的组件 */
         fields: {

@@ -1,8 +1,8 @@
-import type { Omnitable } from './types';
 import type { useAppProps } from 'antd/es/app/context';
 import type { IReactionDisposer, Lambda } from 'mobx';
-import type { StatType } from './metadata';
 import type { CategoricalChartState } from 'recharts/types/chart/types';
+import type { StatType } from './metadata';
+import type { Omnitable } from './types';
 export default class Index {
     antd: useAppProps;
     primary: string;

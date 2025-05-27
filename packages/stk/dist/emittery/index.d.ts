@@ -1,4 +1,4 @@
-import type { EventName, OmnipresentEventData, DebugOptions, Options, UnsubscribeFunction, EmitteryOncePromise } from './types';
+import type { DebugOptions, EmitteryOncePromise, EventName, OmnipresentEventData, Options, UnsubscribeFunction } from './types';
 declare const listenerAdded: unique symbol;
 declare const listenerRemoved: unique symbol;
 export default class Emittery<EventData = Record<EventName, any>, AllEventData = EventData & OmnipresentEventData> {

@@ -1,6 +1,6 @@
 import type { SelectProps } from 'antd';
-import type { Omnitable } from '../../types';
 import type { useAppProps } from 'antd/es/app/context';
+import type { Omnitable } from '../../types';
 type Options = Array<Omnitable.SelectOption>;
 export default class Index {
     antd: useAppProps;

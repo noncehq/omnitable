@@ -40,7 +40,7 @@
     "@phosphor-icons/react": "2.1.7",
     "@swc/helpers": "^0.5.17",
     "ahooks": "^3.8.4",
-    "antd": "^5.25.1",
+    "antd": "^5.25.2",
     "classix": "^2.2.2",
     "dayjs": "^1.11.13",
     "fast-equals": "^5.2.2",

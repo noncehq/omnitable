@@ -1,5 +1,5 @@
-import type { PropsWithChildren } from 'react';
 import type { ConfigProviderProps } from 'antd/es/config-provider';
+import type { PropsWithChildren } from 'react';
 export interface IProps extends PropsWithChildren, Omit<ConfigProviderProps, 'locale' | 'theme'> {
     locale?: 'en' | 'zh';
     theme?: 'light' | 'dark';
