@@ -8,8 +8,7 @@ export default (root: Node, options: Options) => {
   const treeSize = root.children.length
   const rightTreeSize = Math.round(treeSize / 2)
 
-  const getSide =
-    options.getSide || ((_: Node, index: number) => (index < rightTreeSize ? 'right' : 'left'))
+  const getSide = options.getSide || ((_: Node, index: number) => (index < rightTreeSize ? 'right' : 'left'))
 
   for (let i = 0; i < treeSize; i++) {
     const child = root.children[i]

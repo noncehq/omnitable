@@ -1,13 +1,13 @@
-import mustache from 'mustache'
 import { useMemo } from 'react'
+import mustache from 'mustache'
 
 import { $ } from '@omnitable/stk/utils'
 
 import styles from './index.module.css'
 import { getMustacheView } from './utils'
 
-import type { Omnitable, ComponentType } from '../../types'
 import type { DOMAttributes } from 'react'
+import type { ComponentType, Omnitable } from '../../types'
 
 const Index = (props: ComponentType<Omnitable.Text['props']>) => {
   const { value, use_by_form, disabled, item, self_props } = props

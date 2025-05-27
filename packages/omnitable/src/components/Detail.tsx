@@ -1,6 +1,6 @@
+import { useLayoutEffect } from 'react'
 import { useMemoizedFn } from 'ahooks'
 import { Button, Col, ConfigProvider, Form, Row } from 'antd'
-import { useLayoutEffect } from 'react'
 
 import { deepEqual } from '@omnitable/stk/react'
 import { $ } from '@omnitable/stk/utils'
@@ -41,12 +41,7 @@ const Index = (props: IPropsDetail) => {
           controlHeightSM: 30,
         },
       }}>
-      <Form
-        className={styles.Detail}
-        form={form}
-        layout="vertical"
-        disabled={disabled}
-        onFinish={onFinish}>
+      <Form className={styles.Detail} form={form} layout="vertical" disabled={disabled} onFinish={onFinish}>
         <Row gutter={12} wrap>
           {form_columns.map((col, index) => (
             <Col span={col.span || 12} key={index}>
@@ -54,9 +49,7 @@ const Index = (props: IPropsDetail) => {
                 <FormComponent
                   column={col}
                   disabled={disabled || col.readonly}
-                  item={
-                    col.type === 'text' && col.props?.format ? item : undefined
-                  }></FormComponent>
+                  item={col.type === 'text' && col.props?.format ? item : undefined}></FormComponent>
               </Item>
             </Col>
           ))}

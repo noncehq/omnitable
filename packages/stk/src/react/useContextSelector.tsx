@@ -1,24 +1,21 @@
-import { useIsomorphicLayoutEffect } from 'ahooks'
-import { deepEqual } from 'fast-equals'
 import {
+  Context as ContextOrig,
   createContext as createContextOrig,
   createElement,
+  Provider,
   useContext as useContextOrig,
   useReducer,
   useRef,
   useState,
-  Context as ContextOrig,
-  Provider,
 } from 'react'
+import { useIsomorphicLayoutEffect } from 'ahooks'
+import { deepEqual } from 'fast-equals'
 import { unstable_batchedUpdates as batchedUpdates } from 'react-dom'
-import {
-  unstable_runWithPriority as runWithPriority,
-  unstable_NormalPriority as NormalPriority,
-} from 'scheduler'
+import { unstable_NormalPriority as NormalPriority, unstable_runWithPriority as runWithPriority } from 'scheduler'
 
 import memo from './memo'
 
-import type { ReactNode, MutableRefObject, ComponentType } from 'react'
+import type { ComponentType, MutableRefObject, ReactNode } from 'react'
 
 const CONTEXT_VALUE = Symbol()
 const ORIGINAL_PROVIDER = Symbol()
@@ -133,13 +130,8 @@ export function createContext<Value>(defaultValue: Value) {
   return context as unknown as Context<Value>
 }
 
-export function useContextSelector<Value, Selected>(
-  context: Context<Value>,
-  selector: (value: Value) => Selected,
-) {
-  const contextValue = useContextOrig(context as unknown as ContextOrig<ContextValue<Value>>)[
-    CONTEXT_VALUE
-  ]
+export function useContextSelector<Value, Selected>(context: Context<Value>, selector: (value: Value) => Selected) {
+  const contextValue = useContextOrig(context as unknown as ContextOrig<ContextValue<Value>>)[CONTEXT_VALUE]
 
   if (typeof process === 'object' && process.env.NODE_ENV !== 'production') {
     if (!contextValue) {
@@ -214,9 +206,7 @@ export function useContext<Value>(context: Context<Value>) {
 }
 
 export function useContextUpdate<Value>(context: Context<Value>) {
-  const contextValue = useContextOrig(context as unknown as ContextOrig<ContextValue<Value>>)[
-    CONTEXT_VALUE
-  ]
+  const contextValue = useContextOrig(context as unknown as ContextOrig<ContextValue<Value>>)[CONTEXT_VALUE]
 
   if (typeof process === 'object' && process.env.NODE_ENV !== 'production') {
     if (!contextValue) {

@@ -1,5 +1,5 @@
-import { deepEqual } from 'fast-equals'
 import { useEffect, useLayoutEffect, useRef } from 'react'
+import { deepEqual } from 'fast-equals'
 
 import type { DependencyList } from 'react'
 

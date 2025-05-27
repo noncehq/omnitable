@@ -1,27 +1,25 @@
 {
-      "$schema": "https://json.schemastore.org/prettierrc",
-      "printWidth": 120,
-      "tabWidth": 2,
-      "trailingComma": "all",
-      "singleQuote": true,
-      "semi": false,
-      "importOrder": [
-        "^react$|^(react)$",
-        "<THIRD_PARTY_MODULES>",
-        "",
-        "^@(.*)$",
-        "",
-        "^[./]",
-        "",
-        "<TYPES>^(node:)",
-        "<TYPES>",
-        "<TYPES>^[.]"
-      ],
-      "importOrderSortSpecifiers": true,
-      "importOrderCaseSensitive": false,
-      "plugins": ["@ianvs/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"],
-      "arrowParens": "avoid",
-      "bracketSameLine": true,
-      "endOfLine": "lf"
-    }
-    
+  "$schema": "https://json.schemastore.org/prettierrc",
+  "printWidth": 120,
+  "tabWidth": 2,
+  "trailingComma": "all",
+  "singleQuote": true,
+  "semi": false,
+  "importOrder": [
+    "^react$|^(react)$",
+    "<THIRD_PARTY_MODULES>",
+    "",
+    "^@(.*)$",
+    "",
+    "^[./]",
+    "",
+    "<TYPES>^(node:)",
+    "<TYPES>",
+    "<TYPES>^[.]"
+  ],
+  "importOrderCaseSensitive": false,
+  "plugins": ["@ianvs/prettier-plugin-sort-imports"],
+  "arrowParens": "avoid",
+  "bracketSameLine": true,
+  "endOfLine": "lf"
+}

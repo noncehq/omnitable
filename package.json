@@ -10,8 +10,7 @@
     "build:affected": "turbo run build --affected --filter=!examples",
     "dev:omnitable": "turbo run dev --filter=omnitable",
     "build:omnitable": "turbo run build --filter=omnitable",
-    "prettier": "prettier --write \"**/*.{ts,tsx,json,md}\"",
-    "biome": "biome format . --write --staged"
+    "prettier": "prettier --write \"**/*.{ts,tsx,js,json,css,md}\""
   },
   "lint-staged": {
     "*.{ts,tsx,js,json,css,md}": [

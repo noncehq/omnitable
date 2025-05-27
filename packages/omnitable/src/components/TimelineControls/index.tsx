@@ -51,9 +51,7 @@ const Index = (props: IPropsTimelineControls) => {
           {dayjs(timeline_timestamp).format(timeline_args_map[timeline_type].duration_format)}
         </div>
       )}
-      <div
-        className="btn_wrap btn_reset flex justify_center align_center clickable"
-        onClick={onResetTimeline}>
+      <div className="btn_wrap btn_reset flex justify_center align_center clickable" onClick={onResetTimeline}>
         <ArrowCounterClockwise size={14}></ArrowCounterClockwise>
       </div>
       {timeline_querying && (

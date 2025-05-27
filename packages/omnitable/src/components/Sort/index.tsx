@@ -1,9 +1,9 @@
+import { useLayoutEffect, useMemo } from 'react'
 import { useMemoizedFn } from 'ahooks'
 import { Button, Form, Popover } from 'antd'
-import { useLayoutEffect, useMemo } from 'react'
 
 import { DndContext } from '@dnd-kit/core'
-import { verticalListSortingStrategy, SortableContext } from '@dnd-kit/sortable'
+import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { deepEqual } from '@omnitable/stk/react'
 import { $ } from '@omnitable/stk/utils'
 import { ArrowsDownUp } from '@phosphor-icons/react'

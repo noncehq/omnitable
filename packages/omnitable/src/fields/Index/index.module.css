@@ -1,16 +1,16 @@
 ._local {
-	&.use_by_form {
-		display: flex;
-		overflow: scroll;
-		height: 30px;
-		line-height: 30px;
-		padding: 0 7px;
-		border: var(--border);
-		border-radius: var(--radius);
-		white-space: nowrap;
-	}
+  &.use_by_form {
+    display: flex;
+    overflow: scroll;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 7px;
+    border: var(--border);
+    border-radius: var(--radius);
+    white-space: nowrap;
+  }
 
-	&.disabled {
-		background-color: var(--color_border_soft);
-	}
+  &.disabled {
+    background-color: var(--color_border_soft);
+  }
 }

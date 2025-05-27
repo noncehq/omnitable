@@ -18,8 +18,7 @@ import Tag from '../fields/Tag'
 import Text from '../fields/Text'
 import Textarea from '../fields/Textarea'
 
-import type { IPropsComponent } from '../types'
-import type { Omnitable } from '../types'
+import type { IPropsComponent, Omnitable } from '../types'
 
 const X = (props: IPropsComponent) => {
   const {

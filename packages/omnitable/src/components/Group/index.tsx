@@ -1,10 +1,10 @@
+import { useLayoutEffect, useMemo } from 'react'
 import { useMemoizedFn } from 'ahooks'
 import { Button, Form, Popover, Select } from 'antd'
 import { pick } from 'lodash-es'
-import { useLayoutEffect, useMemo } from 'react'
 
 import { DndContext } from '@dnd-kit/core'
-import { verticalListSortingStrategy, SortableContext } from '@dnd-kit/sortable'
+import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { deepEqual } from '@omnitable/stk/react'
 import { $ } from '@omnitable/stk/utils'
 import { CaretDoubleRight } from '@phosphor-icons/react'
@@ -64,11 +64,7 @@ const Index = (props: IPropsGroup) => {
         <div className="acc_wrap flex flex_column">
           <span className="title">Acc</span>
           <Item name="acc">
-            <Select
-              mode="multiple"
-              labelInValue
-              placeholder="Select acc fields"
-              options={group_field_options}></Select>
+            <Select mode="multiple" labelInValue placeholder="Select acc fields" options={group_field_options}></Select>
           </Item>
         </div>
         <span className="title">{counts ? 'Group By' : 'No grouping applied'}</span>

@@ -6,8 +6,8 @@ import { ofetch } from 'ofetch'
 import { decode, encode } from '@omnitable/stk/storage'
 
 import type { SelectProps } from 'antd'
-import type { Omnitable } from '../../types'
 import type { useAppProps } from 'antd/es/app/context'
+import type { Omnitable } from '../../types'
 
 type Options = Array<Omnitable.SelectOption>
 
@@ -21,11 +21,7 @@ export default class Index {
   loading_search = false
 
   constructor() {
-    makeAutoObservable(
-      this,
-      { antd: false, base_url: false, remote: false, multiple: false },
-      { autoBind: true },
-    )
+    makeAutoObservable(this, { antd: false, base_url: false, remote: false, multiple: false }, { autoBind: true })
   }
 
   init(args: {

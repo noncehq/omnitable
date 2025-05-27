@@ -1,4 +1,4 @@
-import { find, flatten, flatMap, get, initial, last, omit, reduceRight } from 'lodash-es'
+import { find, flatMap, flatten, get, initial, last, omit, reduceRight } from 'lodash-es'
 import { makeAutoObservable, toJS } from 'mobx'
 
 export type RawNode<T = {}> = {
@@ -39,11 +39,7 @@ export default class Index<T = {}> {
     const raw_tree_map = this.getRawTreeMap(raw_nodes)
     const { tree, tree_map, lost_tree } = this.getTree(raw_nodes, raw_tree_map)
 
-    const { tree: target_tree, lost_tree: target_lost_tree } = this.sortTree(
-      tree,
-      tree_map,
-      lost_tree,
-    )
+    const { tree: target_tree, lost_tree: target_lost_tree } = this.sortTree(tree, tree_map, lost_tree)
 
     this.tree = target_tree
 

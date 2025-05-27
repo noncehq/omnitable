@@ -1,6 +1,6 @@
+import { Fragment, useLayoutEffect, useRef } from 'react'
 import { useMemoizedFn } from 'ahooks'
 import { Empty } from 'antd'
-import { useLayoutEffect, useRef, Fragment } from 'react'
 
 import { $, StickyTableHeader } from '@omnitable/stk/utils'
 
@@ -81,10 +81,7 @@ const Index = (props: IPropsTable) => {
     setItems(target_items)
   })
 
-  const table_class = $.cx(
-    'omnitable_table_wrap table_wrap w_100',
-    table_props?.border && 'border_style',
-  )
+  const table_class = $.cx('omnitable_table_wrap table_wrap w_100', table_props?.border && 'border_style')
 
   return (
     <Fragment>
@@ -93,11 +90,7 @@ const Index = (props: IPropsTable) => {
           <thead>
             <tr className={$.cx(modal_index === 0 && 'selected')}>
               {table_columns.map(item => (
-                <Th
-                  column={item}
-                  order={getOrder(item)}
-                  onSort={item.sort ? onSort : undefined}
-                  key={item.name}></Th>
+                <Th column={item} order={getOrder(item)} onSort={item.sort ? onSort : undefined} key={item.name}></Th>
               ))}
             </tr>
           </thead>
@@ -110,18 +103,14 @@ const Index = (props: IPropsTable) => {
                     modal_index={modal_index}
                     item={item}
                     index={index}
-                    editing_info={
-                      editing_info?.row_index === index && editing_info ? editing_info : null
-                    }
+                    editing_info={editing_info?.row_index === index && editing_info ? editing_info : null}
                     row_bg={table_props?.row_bg}
                     row_click={table_props?.row_click}
                     onChange={onChange}
                     onRowClick={onRowClick}
                     setEditingInfo={setEditingInfo}
                     onToggleGroupItems={onToggleGroupItems}
-                    key={
-                      item[primary] || item['__group_id__'] || item['__stat_type__'] || index
-                    }></Row>
+                    key={item[primary] || item['__group_id__'] || item['__stat_type__'] || index}></Row>
                 ),
               )}
             </tbody>
@@ -139,9 +128,7 @@ const Index = (props: IPropsTable) => {
         </table>
       </div>
       {sticky_top !== undefined && (
-        <div
-          className={$.cx('table_container clone w_100', !sticky_top && 'edge')}
-          style={{ zIndex: 103 }}>
+        <div className={$.cx('table_container clone w_100', !sticky_top && 'edge')} style={{ zIndex: 103 }}>
           <table className={table_class} ref={clone_table} />
         </div>
       )}

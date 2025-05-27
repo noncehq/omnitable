@@ -1,5 +1,5 @@
-import dayjs from 'dayjs'
 import { useMemo } from 'react'
+import dayjs from 'dayjs'
 
 import { $ } from '@omnitable/stk/utils'
 
@@ -25,9 +25,7 @@ const Index = (props: IProps) => {
   const [start, end] = range
 
   const status_items = useMemo(() => {
-    const targets = [] as Array<
-      Required<Model['config']>['header']['timeline']['items'][number] & { count: number }
-    >
+    const targets = [] as Array<Required<Model['config']>['header']['timeline']['items'][number] & { count: number }>
 
     items.forEach(i => {
       if (i.bind in item) {
@@ -52,9 +50,7 @@ const Index = (props: IProps) => {
                 className={$.cx('dot', item.label)}
                 style={{
                   backgroundColor:
-                    item.color in preset_color
-                      ? preset_color[item.color as keyof typeof preset_color]
-                      : item.color,
+                    item.color in preset_color ? preset_color[item.color as keyof typeof preset_color] : item.color,
                 }}></span>
               <span className="label">{item.label}</span>
               <span className="code">{item.bind}</span>

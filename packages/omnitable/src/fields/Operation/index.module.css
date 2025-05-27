@@ -1,44 +1,44 @@
 ._local {
-	width: 26px;
-	height: 26px;
-	padding: 0;
-	color: var(--color_text_greylight);
-	background-color: transparent;
-	text-align: left;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  color: var(--color_text_greylight);
+  background-color: transparent;
+  text-align: left;
 
-	:global {
-		.btn_wrap {
-			width: 26px;
-			height: 26px;
-			border-radius: var(--radius);
+  :global {
+    .btn_wrap {
+      width: 26px;
+      height: 26px;
+      border-radius: var(--radius);
 
-			&:hover,
-			&:active {
-				color: var(--color_text);
-			}
+      &:hover,
+      &:active {
+        color: var(--color_text);
+      }
 
-			&:hover {
-				background-color: var(--color_bg_2);
-			}
+      &:hover {
+        background-color: var(--color_bg_2);
+      }
 
-			&:active {
-				background-color: var(--color_border);
-			}
-		}
-	}
+      &:active {
+        background-color: var(--color_border);
+      }
+    }
+  }
 }
 
 .dropdown {
-	:global {
-		.omni-dropdown-menu {
-			.omni-dropdown-menu-item {
-				min-width: 108px;
-				padding: 3px 6px !important;
+  :global {
+    .omni-dropdown-menu {
+      .omni-dropdown-menu-item {
+        min-width: 108px;
+        padding: 3px 6px !important;
 
-				.omni-dropdown-menu-item-icon {
-					margin-inline-end: 6px !important;
-				}
-			}
-		}
-	}
+        .omni-dropdown-menu-item-icon {
+          margin-inline-end: 6px !important;
+        }
+      }
+    }
+  }
 }

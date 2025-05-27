@@ -1,6 +1,6 @@
+import { Fragment, useEffect, useMemo, useRef, useState } from 'react'
 import { useClickAway } from 'ahooks'
-import { motion, AnimatePresence } from 'motion/react'
-import { useEffect, useMemo, useRef, useState, Fragment } from 'react'
+import { AnimatePresence, motion } from 'motion/react'
 import { createPortal } from 'react-dom'
 
 import { $, is_server } from '@omnitable/stk/utils'
@@ -8,7 +8,7 @@ import { X } from '@phosphor-icons/react'
 
 import styles from './index.module.css'
 
-import type { MouseEvent, ReactNode, CSSProperties } from 'react'
+import type { CSSProperties, MouseEvent, ReactNode } from 'react'
 
 export interface IProps {
   children: ReactNode
@@ -139,11 +139,7 @@ const Index = (props: IProps) => {
             ref={ref_content_wrap}
             style={{ zIndex: zIndex ? zIndex + 1 : 1002 }}>
             <motion.div
-              className={$.cx(
-                styles.content,
-                className,
-                'if_modal_content border_box flex flex_column',
-              )}
+              className={$.cx(styles.content, className, 'if_modal_content border_box flex flex_column')}
               initial={{ transform }}
               animate={{ transform: 'translate3d(0px, 0px, 0px)' }}
               exit={{ transform }}
@@ -151,18 +147,12 @@ const Index = (props: IProps) => {
               style={style}
               ref={ref_content}>
               {title && (
-                <div
-                  className={$.cx(
-                    styles.header,
-                    'w_100 border_box flex justify_between align_center relative',
-                  )}>
+                <div className={$.cx(styles.header, 'w_100 border_box flex justify_between align_center relative')}>
                   <span className="title">{title}</span>
                   {header_actions ? (
                     header_actions
                   ) : (
-                    <span
-                      className="btn_close flex justify_center align_center clickable"
-                      onClick={onCancel}>
+                    <span className="btn_close flex justify_center align_center clickable" onClick={onCancel}>
                       <X size={16}></X>
                     </span>
                   )}

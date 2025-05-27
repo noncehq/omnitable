@@ -118,9 +118,7 @@ export default class StickyTableHeader {
       const distY = event.clientY - cloneRect.y
 
       const scrollParents = this.getAllScrollParents()
-      scrollParents.forEach(
-        p => ((p as any)._save_scroll = 'scrollY' in p ? p.scrollY : p.scrollTop),
-      )
+      scrollParents.forEach(p => ((p as any)._save_scroll = 'scrollY' in p ? p.scrollY : p.scrollTop))
 
       this.header.style.scrollMarginTop = `${this.getTop() + 3}px`
       this.header.scrollIntoView({ behavior: 'instant' as any, block: 'start' })
@@ -146,9 +144,7 @@ export default class StickyTableHeader {
       }
 
       hiddenTargets.forEach(t => t.style.removeProperty('visibility'))
-      scrollParents.forEach(p =>
-        p.scrollTo({ behavior: 'instant' as any, top: (p as any)._save_scroll }),
-      )
+      scrollParents.forEach(p => p.scrollTo({ behavior: 'instant' as any, top: (p as any)._save_scroll }))
     }
     this.cloneContainer.addEventListener('click', this.clickListener)
   }
@@ -258,11 +254,7 @@ export default class StickyTableHeader {
       return size
     } else if (size.match(/rem$/)) {
       const rem = +size.replace(/rem$/, '')
-      return (
-        Number.parseFloat(
-          window.getComputedStyle(document.getElementsByTagName('html')[0]).fontSize,
-        ) * rem
-      )
+      return Number.parseFloat(window.getComputedStyle(document.getElementsByTagName('html')[0]).fontSize) * rem
     } else {
       console.error('Unsupported size format for sticky table header displacement.')
       return 0
@@ -293,19 +285,14 @@ export default class StickyTableHeader {
     const headerHeight = this.header.getBoundingClientRect().height
 
     const defaultBottom =
-      (lastElement ? lastElement.getBoundingClientRect().y : tableRect.y + tableRect.height) -
-      headerHeight
-    const parentBottoms = this.scrollParents.map(
-      c => c.getBoundingClientRect().bottom - 2 * headerHeight,
-    )
+      (lastElement ? lastElement.getBoundingClientRect().y : tableRect.y + tableRect.height) - headerHeight
+    const parentBottoms = this.scrollParents.map(c => c.getBoundingClientRect().bottom - 2 * headerHeight)
     return Math.min(defaultBottom, ...parentBottoms, Number.MAX_VALUE)
   }
 
   private getLastElement() {
     if (!this.lastElement) {
-      this.lastElement = this.tableContainer.querySelector(
-        ':scope > tbody:last-of-type > tr:last-child',
-      )
+      this.lastElement = this.tableContainer.querySelector(':scope > tbody:last-of-type > tr:last-child')
       return this.lastElement
     }
 

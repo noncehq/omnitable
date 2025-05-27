@@ -1,9 +1,9 @@
+import { useLayoutEffect, useMemo } from 'react'
 import { useMemoizedFn } from 'ahooks'
 import { Button, Form, Popover } from 'antd'
-import { useLayoutEffect, useMemo } from 'react'
 
 import { DndContext } from '@dnd-kit/core'
-import { verticalListSortingStrategy, SortableContext } from '@dnd-kit/sortable'
+import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { deepEqual } from '@omnitable/stk/react'
 import { $ } from '@omnitable/stk/utils'
 import { FunnelSimple } from '@phosphor-icons/react'
@@ -69,18 +69,10 @@ const Index = (props: IPropsFilter) => {
     onChangeFilter({ filter_relation: v })
   })
 
-  const has_range_picker = useMemo(
-    () => filter_params.some(item => item.expression === 'is between'),
-    [filter_params],
-  )
+  const has_range_picker = useMemo(() => filter_params.some(item => item.expression === 'is between'), [filter_params])
 
   const Content = (
-    <div
-      className={$.cx(
-        'flex flex_column',
-        styles.popover_wrap,
-        has_range_picker && styles.has_range_picker,
-      )}>
+    <div className={$.cx('flex flex_column', styles.popover_wrap, has_range_picker && styles.has_range_picker)}>
       <span className="title">{counts ? 'Filters' : 'No filters applied'}</span>
       <div className="w_100 flex">
         <Form
@@ -139,10 +131,7 @@ const Index = (props: IPropsFilter) => {
                   )}
                 </div>
                 <div
-                  className={$.cx(
-                    'form_list_actions filter_actions flex',
-                    items.length > 0 && 'has_items',
-                  )}
+                  className={$.cx('form_list_actions filter_actions flex', items.length > 0 && 'has_items')}
                   style={{ paddingLeft: items.length > 0 ? 80 : 0 }}>
                   <Button className="clickable" type="primary" onClick={() => add(default_option)}>
                     Add filter

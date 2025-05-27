@@ -1,54 +1,54 @@
 ._local {
-	&.use_by_form {
-		:global {
-			.omni-picker {
-				height: 30px;
-				line-height: 30px;
-			}
-		}
-	}
+  &.use_by_form {
+    :global {
+      .omni-picker {
+        height: 30px;
+        line-height: 30px;
+      }
+    }
+  }
 
-	:global {
-		.omni-picker {
-			height: 26px;
-			line-height: 26px;
-			padding: 0 7px;
+  :global {
+    .omni-picker {
+      height: 26px;
+      line-height: 26px;
+      padding: 0 7px;
 
-			.omni-picker-input {
-				height: 100%;
+      .omni-picker-input {
+        height: 100%;
 
-				input {
-					font-size: 14px;
-				}
-			}
-		}
+        input {
+          font-size: 14px;
+        }
+      }
+    }
 
-		.text_wrap {
-			height: 26px;
-			line-height: 26px;
-			padding: 0 7px;
-			border: 1px solid transparent;
-			border-radius: var(--radius);
-		}
-	}
+    .text_wrap {
+      height: 26px;
+      line-height: 26px;
+      padding: 0 7px;
+      border: 1px solid transparent;
+      border-radius: var(--radius);
+    }
+  }
 }
 
 .popup {
-	:global {
-		.omni-picker-body {
-			padding: 0 6px !important;
-		}
+  :global {
+    .omni-picker-body {
+      padding: 0 6px !important;
+    }
 
-		.omni-picker-cell {
-			padding: 3px !important;
-		}
+    .omni-picker-cell {
+      padding: 3px !important;
+    }
 
-		.omni-picker-ranges {
-			border-top: var(--border);
+    .omni-picker-ranges {
+      border-top: var(--border);
 
-			.omni-picker-now-btn {
-				color: var(--color_text);
-			}
-		}
-	}
+      .omni-picker-now-btn {
+        color: var(--color_text);
+      }
+    }
+  }
 }

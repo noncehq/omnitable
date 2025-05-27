@@ -1,10 +1,10 @@
+import { useLayoutEffect } from 'react'
 import { useMemoizedFn } from 'ahooks'
 import { Button, Form, Popover } from 'antd'
 import { uniqBy } from 'lodash-es'
-import { useLayoutEffect } from 'react'
 
 import { DndContext } from '@dnd-kit/core'
-import { verticalListSortingStrategy, SortableContext } from '@dnd-kit/sortable'
+import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { deepEqual } from '@omnitable/stk/react'
 import { $ } from '@omnitable/stk/utils'
 import { ArrowsDownUp } from '@phosphor-icons/react'
@@ -40,9 +40,7 @@ const Index = (props: IPropsStat) => {
     if (!items.length) return onReset()
 
     if (items.every(item => item.field && item.type)) {
-      onChangeStat(
-        uniqBy(items, (item: IPropsStat['stat_params'][number]) => `${item.field}-${item.type}`),
-      )
+      onChangeStat(uniqBy(items, (item: IPropsStat['stat_params'][number]) => `${item.field}-${item.type}`))
     }
   })
 
@@ -68,11 +66,7 @@ const Index = (props: IPropsStat) => {
                       }))}
                       strategy={verticalListSortingStrategy}>
                       {items.map(args => (
-                        <StatItem
-                          visible_columns={visible_columns}
-                          remove={remove}
-                          {...args}
-                          key={args.key}></StatItem>
+                        <StatItem visible_columns={visible_columns} remove={remove} {...args} key={args.key}></StatItem>
                       ))}
                     </SortableContext>
                   </DndContext>

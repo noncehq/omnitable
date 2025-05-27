@@ -2,15 +2,15 @@ import { useMemoizedFn } from 'ahooks'
 import { Popover } from 'antd'
 
 import { DndContext } from '@dnd-kit/core'
-import { arrayMove, verticalListSortingStrategy, SortableContext } from '@dnd-kit/sortable'
+import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { $ } from '@omnitable/stk/utils'
 import { SlidersHorizontal } from '@phosphor-icons/react'
 
 import styles from '../../index.module.css'
 import Item from './Item'
 
-import type { IPropsFields } from '../../types'
 import type { DragEndEvent } from '@dnd-kit/core'
+import type { IPropsFields } from '../../types'
 
 const Index = (props: IPropsFields) => {
   const { visible_columns, use_by_view, onChangeVisibleColumns } = props

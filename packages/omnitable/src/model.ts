@@ -13,11 +13,11 @@ import { $, isMillisecondTimestamp } from '@omnitable/stk/utils'
 
 import { timeline_args_map } from './metadata'
 
-import type { Omnitable } from './types'
 import type { useAppProps } from 'antd/es/app/context'
 import type { IReactionDisposer, Lambda } from 'mobx'
-import type { StatType } from './metadata'
 import type { CategoricalChartState } from 'recharts/types/chart/types'
+import type { StatType } from './metadata'
+import type { Omnitable } from './types'
 
 export default class Index {
   antd = null as unknown as useAppProps
@@ -199,18 +199,12 @@ export default class Index {
       return false
     }
 
-    const items = this.config.hooks?.afterQuery
-      ? this.config.hooks.afterQuery(res.data.items)
-      : res.data.items
+    const items = this.config.hooks?.afterQuery ? this.config.hooks.afterQuery(res.data.items) : res.data.items
 
     this.items_raw = items
 
     if (this.group_params.fields.length) {
-      this.items = this.makeGroupData(
-        items,
-        $.copy(this.group_params.fields),
-        $.copy(this.group_params.acc),
-      )
+      this.items = this.makeGroupData(items, $.copy(this.group_params.fields), $.copy(this.group_params.acc))
     } else {
       this.items = items
     }
@@ -299,9 +293,7 @@ export default class Index {
       [this.primary]: primary_value,
     })
 
-    const [err, res] = await to<Omnitable.MutationResponse>(
-      ofetch(url, { method: 'POST', body: { params } }),
-    )
+    const [err, res] = await to<Omnitable.MutationResponse>(ofetch(url, { method: 'POST', body: { params } }))
 
     if (err) {
       this.antd.message.error(`Delete error: ${err.message}`)
@@ -451,8 +443,7 @@ export default class Index {
 
     this.filter_columns =
       this.config.header?.filter?.columns.map(item => {
-        const field =
-          this.config.fields.filter?.[item.name] || this.config.fields.common?.[item.name]
+        const field = this.config.fields.filter?.[item.name] || this.config.fields.common?.[item.name]
 
         return { ...item, ...field }
       }) || []
@@ -481,10 +472,9 @@ export default class Index {
 
     if (!this.config.form || this.config.form?.use_table_columns) {
       const target_columns = this.config.form
-        ? uniqBy(
-            [...this.config.table.columns, ...(this.config.form?.columns || [])],
-            'name',
-          ).filter(item => !(this.config.form?.exclude_table_columns || []).includes(item.name))
+        ? uniqBy([...this.config.table.columns, ...(this.config.form?.columns || [])], 'name').filter(
+            item => !(this.config.form?.exclude_table_columns || []).includes(item.name),
+          )
         : this.config.table.columns
 
       const form_columns = target_columns
@@ -504,8 +494,7 @@ export default class Index {
     } else {
       this.form_columns =
         this.config.form?.columns?.map(item => {
-          const field =
-            this.config.fields.form?.[item.name] || this.config.fields.common?.[item.name]
+          const field = this.config.fields.form?.[item.name] || this.config.fields.common?.[item.name]
 
           return { ...item, ...field }
         }) || []
@@ -588,8 +577,7 @@ export default class Index {
     Object.keys(group_data).forEach(group_field_value => {
       const children = group_data[group_field_value]
       const current_group_id =
-        (group_id ? `${group_id}/` : '') +
-        `${group_field.value}:${group_field.label}:${group_field_value}`
+        (group_id ? `${group_id}/` : '') + `${group_field.value}:${group_field.label}:${group_field_value}`
 
       // 如果field_value是number类型，需要进行还原
       if (group_field_is_number) {
@@ -737,9 +725,7 @@ export default class Index {
             if (index === counts - 1) {
               const total_value = new Decimal(stat_item.value)
 
-              stat_item.value = new Decimal(
-                total_value.div(new Decimal(counts)).toFixed(3),
-              ).toNumber()
+              stat_item.value = new Decimal(total_value.div(new Decimal(counts)).toFixed(3)).toNumber()
             }
             break
           case 'COUNT':
@@ -872,11 +858,7 @@ export default class Index {
     this.makeGroupVisible()
 
     if (this.group_params.fields.length) {
-      this.items = this.makeGroupData(
-        this.items_raw,
-        $.copy(this.group_params.fields),
-        $.copy(this.group_params.acc),
-      )
+      this.items = this.makeGroupData(this.items_raw, $.copy(this.group_params.fields), $.copy(this.group_params.acc))
     } else {
       this.items = this.items_raw
     }
@@ -912,9 +894,7 @@ export default class Index {
 
     this.timeline_range = this.timeline_items[index].range
 
-    const exist_index = this.filter_params.findIndex(
-      item => item.field === this.config.header.timeline!.control_bind,
-    )
+    const exist_index = this.filter_params.findIndex(item => item.field === this.config.header.timeline!.control_bind)
 
     const target_filter_param = {
       field: this.config.header.timeline!.control_bind,

@@ -1,7 +1,7 @@
+import { useLayoutEffect, useMemo } from 'react'
 import { useMemoizedFn } from 'ahooks'
 import { Form } from 'antd'
 import { get } from 'lodash-es'
-import { useLayoutEffect, useMemo } from 'react'
 
 import { deepEqual } from '@omnitable/stk/react'
 import { $ } from '@omnitable/stk/utils'
@@ -9,9 +9,9 @@ import { $ } from '@omnitable/stk/utils'
 import { preset_color } from '../metadata'
 import Column from './Col'
 
-import type { IPropsRow } from '../types'
 import type { FormProps } from 'antd'
 import type { CSSProperties } from 'react'
+import type { IPropsRow } from '../types'
 
 const { useForm } = Form
 

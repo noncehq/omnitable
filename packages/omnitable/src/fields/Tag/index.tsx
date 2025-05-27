@@ -5,8 +5,8 @@ import { $ } from '@omnitable/stk/utils'
 import { preset_color } from '../../metadata'
 import styles from './index.module.css'
 
-import type { Omnitable, ComponentType } from '../../types'
 import type { CSSProperties } from 'react'
+import type { ComponentType, Omnitable } from '../../types'
 
 const Index = (props: ComponentType<Omnitable.Tag['props']>) => {
   const { self_props, width, value, use_by_form } = props
@@ -72,13 +72,10 @@ const Index = (props: ComponentType<Omnitable.Tag['props']>) => {
           <span
             className="icon_wrap flex justify_center align_center"
             style={{ width: icon_size, height: icon_size, fontSize: icon_size }}>
-            <i
-              className={`ph ph-${typeof option.icon === 'function' ? option.icon(value) : option.icon}`}></i>
+            <i className={`ph ph-${typeof option.icon === 'function' ? option.icon(value) : option.icon}`}></i>
           </span>
         ) : (
-          <span
-            className={$.cx('dot', dot_shape)}
-            style={{ width: dot_size, height: dot_size }}></span>
+          <span className={$.cx('dot', dot_shape)} style={{ width: dot_size, height: dot_size }}></span>
         )}
         <span className="text">
           {prefix}

@@ -10,11 +10,7 @@ export type Direction = (typeof VALID_DIRECTIONS)[number]
 
 const isHorizontal = (direction: Direction) => HORIZONTAL_DIRECTIONS.indexOf(direction) > -1
 
-export default (
-  root: Node,
-  options: Options,
-  layoutAlgrithm: (root: Node, options: Options) => void,
-) => {
+export default (root: Node, options: Options, layoutAlgrithm: (root: Node, options: Options) => void) => {
   const direction = options.direction || DEFAULT_DIRECTION
 
   options.isHorizontal = isHorizontal(direction)

@@ -1,15 +1,15 @@
+import { useMemo, useRef } from 'react'
 import { useMemoizedFn } from 'ahooks'
 import { Dropdown } from 'antd'
 import { Ellipsis } from 'lucide-react'
-import { useMemo, useRef } from 'react'
 
 import { $ } from '@omnitable/stk/utils'
 import { Eye, PencilSimpleLine, Trash } from '@phosphor-icons/react'
 
 import styles from './index.module.css'
 
-import type { Omnitable, ComponentType } from '../../types'
 import type { MenuProps } from 'antd'
+import type { ComponentType, Omnitable } from '../../types'
 
 const Index = (props: ComponentType<Omnitable.Operation['props']>) => {
   const { self_props, editing, onFocus, onChange } = props

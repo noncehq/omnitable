@@ -1,9 +1,8 @@
-import type { InputProps, InputNumberProps } from 'antd'
+import type { InputNumberProps, InputProps } from 'antd'
 import type { TextAreaProps } from 'antd/es/input'
-import type { ReactNode, JSX } from 'react'
-import type { StatType } from '../metadata'
-import type { CSSProperties, FC } from 'react'
+import type { CSSProperties, FC, JSX, ReactNode } from 'react'
 import type { Model } from '..'
+import type { StatType } from '../metadata'
 
 export * from './components'
 

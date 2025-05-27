@@ -10,14 +10,7 @@ import Group from '../Group'
 import Sort from '../Sort'
 import Stat from '../Stat'
 
-import type {
-  IPropsViewItem,
-  IPropsSort,
-  IPropsFilter,
-  IPropsGroup,
-  IPropsFields,
-  IPropsStat,
-} from '../../types'
+import type { IPropsFields, IPropsFilter, IPropsGroup, IPropsSort, IPropsStat, IPropsViewItem } from '../../types'
 
 const Index = (props: IPropsViewItem) => {
   const {
@@ -72,19 +65,13 @@ const Index = (props: IPropsViewItem) => {
   const props_fields: IPropsFields = {
     visible_columns: view.visible_columns,
     use_by_view: true,
-    onChangeVisibleColumns: useMemoizedFn(v =>
-      onChangeView(view_index, { ...view, visible_columns: v }),
-    ),
+    onChangeVisibleColumns: useMemoizedFn(v => onChangeView(view_index, { ...view, visible_columns: v })),
   }
 
   return (
     <div className="view_item_wrap flex flex_column">
       <div className="view_option name_wrap w_100 flex justify_between align_center">
-        <Input
-          className="view_name"
-          value={view.name}
-          variant="borderless"
-          onChange={onChangeName}></Input>
+        <Input className="view_name" value={view.name} variant="borderless" onChange={onChangeName}></Input>
         <div className="view_actions flex align_center">
           <Button className="btn_remove btn" onClick={onRemove}>
             <Trash></Trash>

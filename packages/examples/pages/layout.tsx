@@ -1,6 +1,6 @@
+import { useMemo } from 'react'
 import { App } from 'antd'
 import en_US from 'antd/locale/en_US'
-import { useMemo } from 'react'
 import { useOutlet } from 'react-router-dom'
 
 import { AntdConfigProvider } from '@@omnitable/omnitable/appframe/components'

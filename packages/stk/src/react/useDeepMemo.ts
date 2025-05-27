@@ -1,5 +1,5 @@
-import { deepEqual } from 'fast-equals'
 import { useRef } from 'react'
+import { deepEqual } from 'fast-equals'
 
 export default <TKey, TValue>(memoFn: () => TValue, key: TKey): TValue => {
   const ref = useRef<{ key: TKey; value: TValue }>(null)

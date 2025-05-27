@@ -1,8 +1,8 @@
+import { useLayoutEffect } from 'react'
 import { useMemoizedFn } from 'ahooks'
 import { Button, Form, Input } from 'antd'
 import dayjs from 'dayjs'
 import { debounce } from 'lodash-es'
-import { useLayoutEffect } from 'react'
 
 import { deepEqual } from '@omnitable/stk/react'
 import { $ } from '@omnitable/stk/utils'
@@ -10,7 +10,7 @@ import { Plus } from '@phosphor-icons/react'
 
 import styles from './index.module.css'
 
-import type { Omnitable, ComponentType } from '../../types'
+import type { ComponentType, Omnitable } from '../../types'
 
 const { Item, List, useForm } = Form
 const { TextArea } = Input
@@ -52,14 +52,10 @@ const Index = (props: ComponentType<Omnitable.Comments['props']>) => {
             {items.length > 0 && (
               <div className="form_items flex flex_column">
                 {items.map(({ key, name: index, ...rest }) => (
-                  <div
-                    className="form_item_wrap w_100 border_box flex flex_column relative"
-                    key={key}>
+                  <div className="form_item_wrap w_100 border_box flex flex_column relative" key={key}>
                     <div className="item_header flex justify_between align_center">
                       <span className="field_date mr_12">
-                        {value?.[index]?.[binds.date]
-                          ? dayjs(value[index][binds.date]).format('YYYY-MM-DD HH:mm')
-                          : ''}
+                        {value?.[index]?.[binds.date] ? dayjs(value[index][binds.date]).format('YYYY-MM-DD HH:mm') : ''}
                       </span>
                       {binds.role && (
                         <Item {...rest} name={[index, binds.role]} noStyle>

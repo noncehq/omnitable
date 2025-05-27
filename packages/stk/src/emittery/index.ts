@@ -1,12 +1,12 @@
 import { anyMap, eventsMap, producersMap } from './maps'
 
 import type {
+  DebugOptions,
+  EmitteryOncePromise,
   EventName,
   OmnipresentEventData,
-  DebugOptions,
   Options,
   UnsubscribeFunction,
-  EmitteryOncePromise,
 } from './types'
 
 const anyProducer = Symbol('anyProducer')
@@ -19,11 +19,7 @@ let canEmitMetaEvents = false
 let isGlobalDebugEnabled = false
 
 function assertEventName(eventName: EventName) {
-  if (
-    typeof eventName !== 'string' &&
-    typeof eventName !== 'symbol' &&
-    typeof eventName !== 'number'
-  ) {
+  if (typeof eventName !== 'string' && typeof eventName !== 'symbol' && typeof eventName !== 'number') {
     throw new TypeError('`eventName` must be a string, symbol, or number')
   }
 }
@@ -173,8 +169,7 @@ function defaultMethodNamesOrAssert(methodNames: readonly string[]) {
   return methodNames
 }
 
-const isMetaEvent = (eventName: EventName) =>
-  eventName === listenerAdded || eventName === listenerRemoved
+const isMetaEvent = (eventName: EventName) => eventName === listenerAdded || eventName === listenerRemoved
 
 function emitMetaEvent(emitter: any, eventName: EventName, eventData: any) {
   if (isMetaEvent(eventName)) {
@@ -187,10 +182,7 @@ function emitMetaEvent(emitter: any, eventName: EventName, eventData: any) {
   }
 }
 
-export default class Emittery<
-  EventData = Record<EventName, any>,
-  AllEventData = EventData & OmnipresentEventData,
-> {
+export default class Emittery<EventData = Record<EventName, any>, AllEventData = EventData & OmnipresentEventData> {
   static readonly listenerAdded: typeof listenerAdded
   static readonly listenerRemoved: typeof listenerRemoved
 
@@ -307,9 +299,7 @@ export default class Emittery<
     }
   }
 
-  once<Name extends keyof AllEventData>(
-    eventNames: Name | readonly Name[],
-  ): EmitteryOncePromise<AllEventData[Name]> {
+  once<Name extends keyof AllEventData>(eventNames: Name | readonly Name[]): EmitteryOncePromise<AllEventData[Name]> {
     let off_: () => void
 
     const promise = new Promise(resolve => {
@@ -400,10 +390,7 @@ export default class Emittery<
   }
 
   onAny(
-    listener: (
-      eventName: keyof EventData,
-      eventData: EventData[keyof EventData],
-    ) => void | Promise<void>,
+    listener: (eventName: keyof EventData, eventData: EventData[keyof EventData]) => void | Promise<void>,
   ): UnsubscribeFunction {
     assertListener(listener)
 
@@ -418,12 +405,7 @@ export default class Emittery<
     return iterator(this)
   }
 
-  offAny(
-    listener: (
-      eventName: keyof EventData,
-      eventData: EventData[keyof EventData],
-    ) => void | Promise<void>,
-  ): void {
+  offAny(listener: (eventName: keyof EventData, eventData: EventData[keyof EventData]) => void | Promise<void>): void {
     assertListener(listener)
 
     this.logIfDebugEnabled('unsubscribeAny', undefined, undefined)
@@ -438,11 +420,7 @@ export default class Emittery<
     for (const eventName of eventNames) {
       this.logIfDebugEnabled('clear', eventName, undefined)
 
-      if (
-        typeof eventName === 'string' ||
-        typeof eventName === 'symbol' ||
-        typeof eventName === 'number'
-      ) {
+      if (typeof eventName === 'string' || typeof eventName === 'symbol' || typeof eventName === 'number') {
         const set = getListeners(this, eventName)
         if (set) {
           set.clear()
@@ -529,9 +507,7 @@ export default class Emittery<
   }
 }
 
-const allEmitteryMethods = Object.getOwnPropertyNames(Emittery.prototype).filter(
-  v => v !== 'constructor',
-)
+const allEmitteryMethods = Object.getOwnPropertyNames(Emittery.prototype).filter(v => v !== 'constructor')
 
 Object.defineProperty(Emittery, 'listenerAdded', {
   value: listenerAdded,

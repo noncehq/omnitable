@@ -1,5 +1,5 @@
-import { Button, Form, Select } from 'antd'
 import { useMemo } from 'react'
+import { Button, Form, Select } from 'antd'
 
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
@@ -9,8 +9,8 @@ import { DotsSixVertical, Trash } from '@phosphor-icons/react'
 import { filter_expressions, filter_relation_options, getFilterComponentType } from '../../metadata'
 import FormComponent from '../FormComponent'
 
-import type { IPropsFilterItem } from '../../types'
 import type { FormListFieldData } from 'antd'
+import type { IPropsFilterItem } from '../../types'
 
 const { Item } = Form
 
@@ -25,26 +25,19 @@ const Index = (props: IPropsFilterItem & FormListFieldData) => {
     remove,
     ...rest
   } = props
-  const { attributes, listeners, transform, transition, setNodeRef, setActivatorNodeRef } =
-    useSortable({
-      id: name,
-    })
+  const { attributes, listeners, transform, transition, setNodeRef, setActivatorNodeRef } = useSortable({
+    id: name,
+  })
   const { field, expression } = filter_param
 
-  const column = useMemo(
-    () => filter_columns.find(item => item.bind === field)!,
-    [field, filter_columns],
-  )
+  const column = useMemo(() => filter_columns.find(item => item.bind === field)!, [field, filter_columns])
 
   const expression_options = useMemo(
     () => filter_expressions[column.datatype].map(item => ({ label: item, value: item })),
     [column],
   )
 
-  const value_type = useMemo(
-    () => getFilterComponentType(column.datatype, expression),
-    [column, expression],
-  )
+  const value_type = useMemo(() => getFilterComponentType(column.datatype, expression), [column, expression])
 
   return (
     <div
@@ -53,9 +46,7 @@ const Index = (props: IPropsFilterItem & FormListFieldData) => {
       ref={setNodeRef}
       {...attributes}>
       <div className="relation_wrap">
-        {name === 0 && (
-          <span className="relation_item flex justify_center align_center">where</span>
-        )}
+        {name === 0 && <span className="relation_item flex justify_center align_center">where</span>}
         {name === 1 && (
           <span className="relation_item">
             <Select
@@ -65,9 +56,7 @@ const Index = (props: IPropsFilterItem & FormListFieldData) => {
               onChange={onChangeRelation}></Select>
           </span>
         )}
-        {name > 1 && (
-          <span className="relation_item flex justify_center align_center">{filter_relation}</span>
-        )}
+        {name > 1 && <span className="relation_item flex justify_center align_center">{filter_relation}</span>}
       </div>
       <Item {...rest} className="field_name" name={[name, 'field']}>
         <Select showSearch options={filter_field_options}></Select>
@@ -76,11 +65,7 @@ const Index = (props: IPropsFilterItem & FormListFieldData) => {
         <Select popupMatchSelectWidth={false} options={expression_options}></Select>
       </Item>
       <Item {...rest} className="filter_value" name={[name, 'value']}>
-        <FormComponent
-          column={column}
-          disabled={false}
-          force_type={value_type}
-          use_by_filter></FormComponent>
+        <FormComponent column={column} disabled={false} force_type={value_type} use_by_filter></FormComponent>
       </Item>
       <Button className="btn" onClick={() => remove(name)}>
         <Trash></Trash>

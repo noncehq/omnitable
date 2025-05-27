@@ -1,6 +1,6 @@
+import { useMemo } from 'react'
 import { useMemoizedFn } from 'ahooks'
 import { Popover } from 'antd'
-import { useMemo } from 'react'
 
 import { $ } from '@omnitable/stk/utils'
 import {
@@ -181,10 +181,7 @@ const Index = (props: IProps) => {
             render()
           ) : (
             <button
-              className={$.cx(
-                'btn_wrap flex justify_center align_center clickable',
-                active?.() && 'active',
-              )}
+              className={$.cx('btn_wrap flex justify_center align_center clickable', active?.() && 'active')}
               type="button"
               disabled={disabled?.()}
               onClick={action}

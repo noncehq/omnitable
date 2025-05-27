@@ -220,10 +220,7 @@ export default (root: Node, options = {} as Options) => {
   }
 
   function positionRoot(t: Node) {
-    t.prelim =
-      (t.c[0].prelim + t.c[0].mod + t.c[t.cs - 1].mod + t.c[t.cs - 1].prelim + t.c[t.cs - 1].w) /
-        2 -
-      t.w / 2
+    t.prelim = (t.c[0].prelim + t.c[0].mod + t.c[t.cs - 1].mod + t.c[t.cs - 1].prelim + t.c[t.cs - 1].w) / 2 - t.w / 2
   }
 
   function secondWalk(t: Node, modsum: number) {

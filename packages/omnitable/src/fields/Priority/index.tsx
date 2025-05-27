@@ -3,7 +3,7 @@ import { $ } from '@omnitable/stk/utils'
 import { Select } from '../../components'
 import Icon from './Icon'
 
-import type { Omnitable, ComponentType } from '../../types'
+import type { ComponentType, Omnitable } from '../../types'
 
 const options = [
   {

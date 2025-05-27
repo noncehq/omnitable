@@ -1,5 +1,5 @@
-import { deepEqual } from 'fast-equals'
 import { memo } from 'react'
+import { deepEqual } from 'fast-equals'
 
 type Element = React.JSX.Element | null
 

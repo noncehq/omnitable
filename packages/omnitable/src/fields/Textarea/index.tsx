@@ -6,7 +6,7 @@ import { $ } from '@omnitable/stk/utils'
 
 import styles from './index.module.css'
 
-import type { Omnitable, ComponentType } from '../../types'
+import type { ComponentType, Omnitable } from '../../types'
 
 const { TextArea } = Input
 

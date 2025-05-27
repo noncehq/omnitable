@@ -10,11 +10,10 @@ import type { IPropsFieldsItem } from '../../types'
 
 const Index = (props: IPropsFieldsItem) => {
   const { item, index, onChange } = props
-  const { attributes, listeners, transform, transition, setNodeRef, setActivatorNodeRef } =
-    useSortable({
-      id: item.name,
-      disabled: item.id === '_operation',
-    })
+  const { attributes, listeners, transform, transition, setNodeRef, setActivatorNodeRef } = useSortable({
+    id: item.name,
+    disabled: item.id === '_operation',
+  })
 
   const onClick = useMemoizedFn(() => onChange(index, item.visible))
 

@@ -3,24 +3,16 @@ import { makeAutoObservable } from 'mobx'
 
 import { useInstanceWatch } from '@/mobx'
 
-import type { IReactionDisposer, Lambda } from 'mobx'
 import type { Watch } from '@/mobx'
+import type { IReactionDisposer, Lambda } from 'mobx'
 
-const addEventListeners = (
-  object: typeof window | typeof document,
-  events: Array<string>,
-  callback: () => any,
-) => {
+const addEventListeners = (object: typeof window | typeof document, events: Array<string>, callback: () => any) => {
   events.forEach(event => {
     object.addEventListener(event, debounce(callback, 900, { leading: true }))
   })
 }
 
-const removeEventListeners = (
-  object: typeof window | typeof document,
-  events: Array<string>,
-  callback: () => any,
-) => {
+const removeEventListeners = (object: typeof window | typeof document, events: Array<string>, callback: () => any) => {
   events.forEach(event => {
     object.removeEventListener(event, debounce(callback, 900, { leading: true }))
   })
@@ -82,11 +74,7 @@ export default class Index<T = {}> {
     addEventListeners(window, this.config.events, this.active.bind(this.config.context ?? this))
 
     if (this.config.onShow || this.config.onHide) {
-      addEventListeners(
-        document,
-        ['visibilitychange'],
-        this.changeVisible.bind(this.config.context ?? this),
-      )
+      addEventListeners(document, ['visibilitychange'], this.changeVisible.bind(this.config.context ?? this))
     }
   }
 
@@ -98,11 +86,7 @@ export default class Index<T = {}> {
     removeEventListeners(window, this.config.events, this.active.bind(this.config.context ?? this))
 
     if (this.config.onShow || this.config.onHide) {
-      removeEventListeners(
-        document,
-        ['visibilitychange'],
-        this.changeVisible.bind(this.config.context ?? this),
-      )
+      removeEventListeners(document, ['visibilitychange'], this.changeVisible.bind(this.config.context ?? this))
     }
   }
 

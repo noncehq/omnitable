@@ -7,18 +7,17 @@ import { DotsSixVertical, Trash } from '@phosphor-icons/react'
 
 import { stat_options } from '../../metadata'
 
-import type { IPropsStatItem } from '../../types'
 import type { FormListFieldData } from 'antd'
+import type { IPropsStatItem } from '../../types'
 
 const { Item } = Form
 
 const Index = (props: IPropsStatItem & FormListFieldData) => {
   const { visible_columns, name, remove, ...rest } = props
 
-  const { attributes, listeners, transform, transition, setNodeRef, setActivatorNodeRef } =
-    useSortable({
-      id: name,
-    })
+  const { attributes, listeners, transform, transition, setNodeRef, setActivatorNodeRef } = useSortable({
+    id: name,
+  })
 
   return (
     <div
@@ -27,10 +26,7 @@ const Index = (props: IPropsStatItem & FormListFieldData) => {
       ref={setNodeRef}
       {...attributes}>
       <Item {...rest} className="field_name" name={[name, 'field']}>
-        <Select
-          showSearch
-          fieldNames={{ label: 'name', value: 'id' }}
-          options={visible_columns}></Select>
+        <Select showSearch fieldNames={{ label: 'name', value: 'id' }} options={visible_columns}></Select>
       </Item>
       <Item {...rest} className="sort_value" name={[name, 'type']}>
         <Select options={[...stat_options]}></Select>

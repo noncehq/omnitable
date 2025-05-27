@@ -5,18 +5,17 @@ import { CSS } from '@dnd-kit/utilities'
 import { $ } from '@omnitable/stk/utils'
 import { DotsSixVertical, Trash } from '@phosphor-icons/react'
 
-import type { IPropsGroupItem } from '../../types'
 import type { FormListFieldData } from 'antd'
+import type { IPropsGroupItem } from '../../types'
 
 const { Item } = Form
 
 const Index = (props: IPropsGroupItem & FormListFieldData) => {
   const { group_field_options, name, remove, ...rest } = props
 
-  const { attributes, listeners, transform, transition, setNodeRef, setActivatorNodeRef } =
-    useSortable({
-      id: name,
-    })
+  const { attributes, listeners, transform, transition, setNodeRef, setActivatorNodeRef } = useSortable({
+    id: name,
+  })
 
   return (
     <div
@@ -25,11 +24,7 @@ const Index = (props: IPropsGroupItem & FormListFieldData) => {
       ref={setNodeRef}
       {...attributes}>
       <Item {...rest} className="field_name" name={[name]}>
-        <Select
-          showSearch
-          labelInValue
-          placeholder="Select group field"
-          options={group_field_options}></Select>
+        <Select showSearch labelInValue placeholder="Select group field" options={group_field_options}></Select>
       </Item>
       <Button className="btn" onClick={() => remove(name)}>
         <Trash></Trash>

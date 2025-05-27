@@ -20,8 +20,7 @@ export const preset_color = {
 }
 
 const Index = (props: IPropsTimeline) => {
-  const { label_bind, items, timeline_type, timeline_items, timeline_focus, onTimelineFocus } =
-    props
+  const { label_bind, items, timeline_type, timeline_items, timeline_focus, onTimelineFocus } = props
 
   return (
     <div className={$.cx(styles._local)}>
@@ -47,29 +46,20 @@ const Index = (props: IPropsTimeline) => {
               stroke: 'var(--color_text)',
               strokeWidth: 1,
             }}
-            content={args => (
-              <TooltipContent timeline_type={timeline_type} items={items} payload={args.payload} />
-            )}
+            content={args => <TooltipContent timeline_type={timeline_type} items={items} payload={args.payload} />}
           />
           <Bar
             dataKey=""
             stackId="a"
             background={(props: any) => (
-              <Background
-                {...pick(props, ['x', 'y', 'width', 'height'])}
-                focus={props.index === timeline_focus}
-              />
+              <Background {...pick(props, ['x', 'y', 'width', 'height'])} focus={props.index === timeline_focus} />
             )}
           />
           {items.map(item => (
             <Bar
               dataKey={item.bind}
               stackId="a"
-              fill={
-                item.color in preset_color
-                  ? preset_color[item.color as keyof typeof preset_color]
-                  : item.color
-              }
+              fill={item.color in preset_color ? preset_color[item.color as keyof typeof preset_color] : item.color}
             />
           ))}
         </BarChart>

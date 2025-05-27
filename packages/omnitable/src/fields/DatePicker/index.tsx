@@ -6,8 +6,8 @@ import { $ } from '@omnitable/stk/utils'
 
 import styles from './index.module.css'
 
-import type { Omnitable, ComponentType } from '../../types'
 import type { Dayjs } from 'dayjs'
+import type { ComponentType, Omnitable } from '../../types'
 
 const Index = (props: ComponentType<Omnitable.DatePicker['props']>) => {
   const { self_props, width, value, editing, use_by_form, onFocus, onChange } = props

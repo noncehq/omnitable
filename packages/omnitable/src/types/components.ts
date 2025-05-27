@@ -85,12 +85,7 @@ export interface IPropsView {
 export interface IPropsViewItem
   extends Pick<
     IPropsView,
-    | 'visibles'
-    | 'filter_columns'
-    | 'visible_columns'
-    | 'getSortFieldOptions'
-    | 'getGroupFieldOptions'
-    | 'onApplyView'
+    'visibles' | 'filter_columns' | 'visible_columns' | 'getSortFieldOptions' | 'getGroupFieldOptions' | 'onApplyView'
   > {
   view: Model['views'][number]
   view_index: number
@@ -124,10 +119,7 @@ export interface IPropsTable {
   editing_info: Model['editing_info']
   sort_params: Model['sort_params']
   modal_index: Model['modal_index']
-  table_props: Pick<
-    Model['config']['table'],
-    'table_header_sticky_top' | 'border' | 'row_bg' | 'row_click'
-  >
+  table_props: Pick<Model['config']['table'], 'table_header_sticky_top' | 'border' | 'row_bg' | 'row_click'>
   onSort: Model['onSort']
   onChange: Model['onChange']
   onRowClick: (v: number) => void

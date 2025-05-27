@@ -42,12 +42,7 @@ const positionNode = (
   return
 }
 
-export default (
-  root: Node,
-  indent: ((n: Node) => number) | number,
-  dropCap: boolean,
-  align: 'center' | undefined,
-) => {
+export default (root: Node, indent: ((n: Node) => number) | number, dropCap: boolean, align: 'center' | undefined) => {
   let previousNode = null
 
   root.eachNode(node => {

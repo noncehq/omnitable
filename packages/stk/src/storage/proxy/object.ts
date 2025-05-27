@@ -56,8 +56,7 @@ function set(target: object, key: string, value: unknown, receiver: object) {
     arrayLength = target.length
   }
   const oldValue = target[key]
-  const hadKey =
-    isArray(target) && isIntegerKey(key) ? Number(key) < target.length : hasOwn(target, key)
+  const hadKey = isArray(target) && isIntegerKey(key) ? Number(key) < target.length : hasOwn(target, key)
 
   const result = Reflect.set(target, key, value, receiver)
   if (result && hasChanged(value, oldValue)) {

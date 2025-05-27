@@ -2,12 +2,12 @@ import '@phosphor-icons/web/regular'
 import '@omnitable/appframe/global.css'
 import '@omnitable/appframe/preset'
 
+import { Fragment, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { useMemoizedFn } from 'ahooks'
 import { App, Button } from 'antd'
 import { debounce, omit, pick } from 'lodash-es'
 import { RefreshCw } from 'lucide-react'
 import { observer } from 'mobx-react-lite'
-import { useLayoutEffect, useMemo, useRef, useState, Fragment } from 'react'
 
 import { AntdConfigProvider, Drawer, LoadingCircle } from '@omnitable/appframe/components'
 import { $ } from '@omnitable/stk/utils'
@@ -30,22 +30,21 @@ import { Provider } from './context'
 import styles from './index.module.css'
 import Model from './model'
 
+import type { IPropsConfigProvider } from '@omnitable/appframe/components'
 import type {
-  Omnitable,
-  IPropsSort,
-  IPropsFilter,
-  IPropsFields,
-  IPropsTable,
-  IPropsPagination,
   IPropsDetail,
-  IPropsView,
+  IPropsFields,
+  IPropsFilter,
   IPropsGroup,
+  IPropsPagination,
+  IPropsSort,
   IPropsStat,
+  IPropsTable,
   IPropsTimeline,
   IPropsTimelineControls,
+  IPropsView,
+  Omnitable,
 } from './types'
-
-import type { IPropsConfigProvider } from '@omnitable/appframe/components'
 
 const { useApp } = App
 
@@ -144,9 +143,7 @@ const Index = (props: Omnitable.Props) => {
     sort_params: $.copy(x.sort_params),
     editing_info: $.copy(x.editing_info),
     modal_index: x.modal_index,
-    table_props: $.copy(
-      pick(x.config?.table, ['table_header_sticky_top', 'border', 'row_click', 'row_bg']),
-    ),
+    table_props: $.copy(pick(x.config?.table, ['table_header_sticky_top', 'border', 'row_click', 'row_bg'])),
     onSort: x.onSort,
     onChange: x.onChange,
     onRowClick: useMemoizedFn((index: number) => {
@@ -166,9 +163,7 @@ const Index = (props: Omnitable.Props) => {
   const props_detail: IPropsDetail = {
     form_columns: $.copy(x.form_columns),
     modal_type: x.modal_type,
-    item: $.copy(
-      x.modal_index !== null && x.modal_index >= 0 ? x.items.at(x.modal_index) : undefined,
-    ),
+    item: $.copy(x.modal_index !== null && x.modal_index >= 0 ? x.items.at(x.modal_index) : undefined),
     loading: x.loading,
     onSubmit: x.onSubmit,
     onClose: useMemoizedFn(() => {
@@ -218,20 +213,14 @@ const Index = (props: Omnitable.Props) => {
                     onClick={onToggleView}>
                     <Eyes className="icon"></Eyes>
                     <span className="label">View</span>
-                    {x.apply_view_name && (
-                      <span className="counts flex align_center">{x.apply_view_name}</span>
-                    )}
+                    {x.apply_view_name && <span className="counts flex align_center">{x.apply_view_name}</span>}
                   </button>
                 )}
                 {x.config.header.sort && x.sort_columns.length > 0 && <Sort {...props_sort}></Sort>}
-                {x.config.header.filter && x.filter_columns.length > 0 && (
-                  <Filter {...props_filter}></Filter>
-                )}
+                {x.config.header.filter && x.filter_columns.length > 0 && <Filter {...props_filter}></Filter>}
                 {x.config.header.stat && <Stat {...props_stat}></Stat>}
                 {x.config.header.group && <Group {...props_group}></Group>}
-                {x.config.header.timeline && (
-                  <TimelineControls {...props_timeline_controls}></TimelineControls>
-                )}
+                {x.config.header.timeline && <TimelineControls {...props_timeline_controls}></TimelineControls>}
               </div>
               <div className="flex">
                 {x.config.header.refresh && (
@@ -261,10 +250,7 @@ const Index = (props: Omnitable.Props) => {
                 )}
                 <Fields {...props_fields}></Fields>
                 {x.config?.actions?.create && (
-                  <Button
-                    className="flex justify_center align_center clickable ml_8"
-                    type="primary"
-                    onClick={onCreate}>
+                  <Button className="flex justify_center align_center clickable ml_8" type="primary" onClick={onCreate}>
                     <Plus className="icon" weight="bold"></Plus>
                     <span>Create</span>
                   </Button>
@@ -294,11 +280,7 @@ const Index = (props: Omnitable.Props) => {
             className={styles.Drawer}
             open={x.modal_visible || x.modal_view_visible}
             title={
-              x.modal_view_visible
-                ? 'Table views'
-                : x.modal_type === 'add'
-                  ? 'Create'
-                  : props_detail.item?.[x.primary]
+              x.modal_view_visible ? 'Table views' : x.modal_type === 'add' ? 'Create' : props_detail.item?.[x.primary]
             }
             width={x.modal_view_visible ? 'min(90vw,660px)' : 'min(100vw,480px)'}
             placement={x.modal_view_visible ? 'left' : 'right'}
@@ -315,11 +297,7 @@ const Index = (props: Omnitable.Props) => {
                 </button>
               )
             }>
-            {x.modal_view_visible ? (
-              <View {...props_view}></View>
-            ) : (
-              <Detail {...props_detail}></Detail>
-            )}
+            {x.modal_view_visible ? <View {...props_view}></View> : <Detail {...props_detail}></Detail>}
           </Drawer>
         </div>
       </Provider>

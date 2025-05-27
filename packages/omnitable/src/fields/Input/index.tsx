@@ -6,11 +6,10 @@ import { $ } from '@omnitable/stk/utils'
 
 import styles from './index.module.css'
 
-import type { Omnitable, ComponentType } from '../../types'
+import type { ComponentType, Omnitable } from '../../types'
 
 const Index = (props: ComponentType<Omnitable.Input['props']>) => {
-  const { self_props, width, value, editing, use_by_form, disabled, onFocus, onBlur, onChange } =
-    props
+  const { self_props, width, value, editing, use_by_form, disabled, onFocus, onBlur, onChange } = props
   const {} = self_props || {}
 
   const debounceChange = onChange ? useMemoizedFn(debounce(onChange!, 300)) : undefined

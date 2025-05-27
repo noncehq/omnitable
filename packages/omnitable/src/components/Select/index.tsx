@@ -1,24 +1,14 @@
-import { Select } from 'antd'
 import { useMemo } from 'react'
+import { Select } from 'antd'
 
 import { $ } from '@omnitable/stk/utils'
 
 import styles from './index.module.css'
 
-import type { Omnitable, ComponentType } from '../../types'
+import type { ComponentType, Omnitable } from '../../types'
 
 const Index = (props: ComponentType<Omnitable.Select['props']>) => {
-  const {
-    self_props,
-    width,
-    value,
-    editing,
-    use_by_form,
-    use_by_filter,
-    onFocus,
-    onBlur,
-    onChange,
-  } = props
+  const { self_props, width, value, editing, use_by_form, use_by_filter, onFocus, onBlur, onChange } = props
   const { options, remote, mode, borderless, ...rest_props } = self_props
   const multiple = mode !== undefined
 
@@ -56,11 +46,7 @@ const Index = (props: ComponentType<Omnitable.Select['props']>) => {
           onBlur={onBlur}
           onChange={onChange}></Select>
       ) : (
-        <span
-          className={$.cx(
-            'text_wrap w_100 border_box inline_flex align_center',
-            !option && 'placeholder',
-          )}>
+        <span className={$.cx('text_wrap w_100 border_box inline_flex align_center', !option && 'placeholder')}>
           {option || self_props.placeholder}
         </span>
       )}

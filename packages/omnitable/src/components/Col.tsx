@@ -1,6 +1,6 @@
+import { useLayoutEffect, useRef, useState } from 'react'
 import { useMemoizedFn } from 'ahooks'
 import { Form } from 'antd'
-import { useLayoutEffect, useRef, useState } from 'react'
 
 import { useDeepMemo } from '@omnitable/stk/react'
 import { $ } from '@omnitable/stk/utils'
@@ -98,17 +98,11 @@ const Index = (props: IPropsCol) => {
 
   const Content = useDeepMemo(() => <Component {...props_component}></Component>, [props_component])
 
-  const onToggleGroup = group_info
-    ? useMemoizedFn(() => onToggleGroupItems?.(group_info.group_id))
-    : undefined
+  const onToggleGroup = group_info ? useMemoizedFn(() => onToggleGroupItems?.(group_info.group_id)) : undefined
 
   return (
     <td
-      className={$.cx(
-        'form_table_td',
-        type === 'operation' && 'operation',
-        column.sticky && 'sticky left_0',
-      )}
+      className={$.cx('form_table_td', type === 'operation' && 'operation', column.sticky && 'sticky left_0')}
       width={column.width}
       style={{ textAlign: column.align }}
       ref={ref}>

@@ -1,5 +1,5 @@
-import { useMemoizedFn } from 'ahooks'
 import { useRef } from 'react'
+import { useMemoizedFn } from 'ahooks'
 
 export default (callback: (...args: any) => any, delay = 300) => {
   const times = useRef(0)

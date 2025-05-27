@@ -2,9 +2,8 @@ import to from 'await-to-js'
 import { deepmergeCustom } from 'deepmerge-ts'
 import { uniq } from 'lodash-es'
 
+import type { CubeApi, Filter, Query } from '@cubejs-client/core'
 import type { Model, Omnitable } from '@omnitable/omnitable'
-import type { Filter, CubeApi } from '@cubejs-client/core'
-import type { Query } from '@cubejs-client/core'
 
 const deepmerge = deepmergeCustom({
   mergeArrays: (values, utils) => {

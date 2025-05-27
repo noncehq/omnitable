@@ -6,8 +6,8 @@ import { $ } from '@omnitable/stk/utils'
 
 import styles from './index.module.css'
 
-import type { Omnitable, ComponentType } from '../../types'
 import type { Dayjs } from 'dayjs'
+import type { ComponentType, Omnitable } from '../../types'
 
 const { RangePicker } = DatePicker
 
@@ -17,9 +17,7 @@ const Index = (props: ComponentType<Omnitable.RangePicker['props']>) => {
 
   const onChangeDate = useMemoizedFn((v: [Dayjs | null, Dayjs | null] | null) =>
     onChange?.(
-      v?.[0] && v?.[1]
-        ? [v[0].format('YYYY-MM-DDTHH:mm:ss.SSS'), v[1].format('YYYY-MM-DDTHH:mm:ss.SSS')]
-        : [],
+      v?.[0] && v?.[1] ? [v[0].format('YYYY-MM-DDTHH:mm:ss.SSS'), v[1].format('YYYY-MM-DDTHH:mm:ss.SSS')] : [],
     ),
   )
 
