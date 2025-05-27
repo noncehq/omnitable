@@ -196,4 +196,5 @@ export interface IPropsDetail {
   loading: Model['loading']
   onSubmit: Model['onSubmit']
   onClose: () => void
+  render: Omnitable.Config['form']['render']
 }

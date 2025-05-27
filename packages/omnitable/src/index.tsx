@@ -9,7 +9,7 @@ import { debounce, omit, pick } from 'lodash-es'
 import { RefreshCw } from 'lucide-react'
 import { observer } from 'mobx-react-lite'
 
-import { AntdConfigProvider, Drawer, LoadingCircle } from '@omnitable/appframe/components'
+import { AntdConfigProvider, Drawer, LoadingCircle, Modal } from '@omnitable/appframe/components'
 import { $ } from '@omnitable/stk/utils'
 import { Eyes, PauseCircle, PlayCircle, Plus } from '@phosphor-icons/react'
 
@@ -30,7 +30,7 @@ import { Provider } from './context'
 import styles from './index.module.css'
 import Model from './model'
 
-import type { IPropsConfigProvider } from '@omnitable/appframe/components'
+import type { IPropsConfigProvider, IPropsDrawer, IPropsModal } from '@omnitable/appframe/components'
 import type {
   IPropsDetail,
   IPropsFields,
@@ -170,6 +170,7 @@ const Index = (props: Omnitable.Props) => {
       x.modal_visible = false
       x.modal_index = -2
     }),
+    render: x.config.form.render ? useMemoizedFn(x.config.form.render) : undefined,
   }
 
   const props_view: IPropsView = {
@@ -195,6 +196,21 @@ const Index = (props: Omnitable.Props) => {
     x.modal_type = 'add'
     x.modal_visible = true
   })
+
+  const Dialog = x.config?.form?.dialog === 'modal' ? Modal : Drawer
+
+  const props_dialog =
+    x.config?.form?.dialog === 'modal'
+      ? {}
+      : ({
+          placement: x.modal_view_visible ? 'left' : 'right',
+          header_actions: x.modal_view_visible && (
+            <button className="btn_add_view flex justify_center align_center absolute clickable" onClick={x.onAddView}>
+              <Plus className="icon" weight="bold"></Plus>
+              <span>Add</span>
+            </button>
+          ),
+        } as IPropsDrawer)
 
   return (
     <AntdConfigProvider {...props_config_provider}>
@@ -276,29 +292,19 @@ const Index = (props: Omnitable.Props) => {
               </div>
             )}
           </div>
-          <Drawer
-            className={styles.Drawer}
+          <Dialog
+            className={styles.Dialog}
             open={x.modal_visible || x.modal_view_visible}
             title={
               x.modal_view_visible ? 'Table views' : x.modal_type === 'add' ? 'Create' : props_detail.item?.[x.primary]
             }
             width={x.modal_view_visible ? 'min(90vw,660px)' : 'min(100vw,480px)'}
-            placement={x.modal_view_visible ? 'left' : 'right'}
             maskClosable={x.modal_type === 'view' || x.modal_view_visible}
             disablePadding={x.modal_visible}
             onCancel={x.modal_view_visible ? onToggleView : props_detail.onClose}
-            header_actions={
-              x.modal_view_visible && (
-                <button
-                  className="btn_add_view flex justify_center align_center absolute clickable"
-                  onClick={x.onAddView}>
-                  <Plus className="icon" weight="bold"></Plus>
-                  <span>Add</span>
-                </button>
-              )
-            }>
+            {...props_dialog}>
             {x.modal_view_visible ? <View {...props_view}></View> : <Detail {...props_detail}></Detail>}
-          </Drawer>
+          </Dialog>
         </div>
       </Provider>
     </AntdConfigProvider>

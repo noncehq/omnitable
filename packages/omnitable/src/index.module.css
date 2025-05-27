@@ -543,7 +543,7 @@
   }
 }
 
-.Drawer {
+.Dialog {
   :global {
     .btn_add_view {
       right: 18px;
