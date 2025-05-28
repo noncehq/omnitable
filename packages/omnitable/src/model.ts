@@ -174,7 +174,7 @@ export default class Index {
               filter_params: this.filter_params.filter(i => 'value' in i),
               page: this.pagination.page,
               pagesize: this.pagination.pagesize,
-              params,
+              ...(params ?? {}),
             },
           }),
         )
@@ -225,7 +225,7 @@ export default class Index {
         method: 'POST',
         body: {
           ...(this.config.hooks?.beforeCreate ? this.config.hooks.beforeCreate(v) : v),
-          params,
+          ...(params ?? {}),
         },
       }),
     )
@@ -262,7 +262,7 @@ export default class Index {
         method: 'POST',
         body: {
           ...(this.config.hooks?.beforeUpdate ? this.config.hooks.beforeUpdate(v) : v),
-          params,
+          ...(params ?? {}),
         },
       }),
     )
@@ -292,7 +292,9 @@ export default class Index {
       [this.primary]: primary_value,
     })
 
-    const [err, res] = await to<Omnitable.MutationResponse>(ofetch(url, { method: 'POST', body: { params } }))
+    const [err, res] = await to<Omnitable.MutationResponse>(
+      ofetch(url, { method: 'POST', body: { ...(params ?? {}) } }),
+    )
 
     if (err) {
       this.antd.message.error(`Delete error: ${err.message}`)
