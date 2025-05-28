@@ -32,7 +32,7 @@ const Index = (props: ComponentType<Omnitable.Select['props']>) => {
         <Select
           {...rest_props}
           className={$.cx((mode || Boolean(width) || remote?.search) && 'w_100')}
-          classNames={{ popup: { root: $.cx(styles.popup) } }}
+          classNames={{ popup: { root: $.cx('omni', styles.popup) } }}
           size={use_by_form ? 'middle' : 'small'}
           popupMatchSelectWidth={false}
           virtual={false}

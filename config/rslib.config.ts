@@ -33,8 +33,13 @@ export default {
       targets: 'chrome >= 120',
       exclude: { isSelector: true },
     },
-    postcss: (_, { addPlugins }) => {
-      addPlugins(postcss_plugins.map(item => require(item)))
+    postcss: () => {
+      return {
+        postcssOptions: {
+          config: false,
+          plugins: postcss_plugins.map(item => require(item)),
+        },
+      }
     },
   },
 } as RslibConfig

@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef, useState } from 'react'
+import { Fragment, useEffect, useMemo, useRef, useState } from 'react'
 import { useClickAway } from 'ahooks'
 import { AnimatePresence, motion } from 'motion/react'
 import { createPortal } from 'react-dom'
@@ -24,6 +24,7 @@ export interface IProps {
   disablePadding?: boolean
   hideClose?: boolean
   zIndex?: number
+  header?: (onClose: IProps['onCancel']) => ReactNode
   onCancel?: (e?: MouseEvent<HTMLElement>) => void
   getContainer?: () => Element
   getRef?: (v: HTMLDivElement) => void
@@ -44,6 +45,7 @@ const Index = (props: IProps) => {
     disablePadding,
     hideClose,
     zIndex,
+    header,
     onCancel,
     getContainer,
     getRef,
@@ -92,6 +94,22 @@ const Index = (props: IProps) => {
     setOnbody(container === document.body)
   }, [container])
 
+  const Header = useMemo(() => {
+    if (header) return header(onCancel)
+    if (!title) return null
+
+    return (
+      <div className={$.cx(styles.header, 'w_100 border_box flex justify_between align_center')}>
+        <span className="title">{title}</span>
+        {!hideClose && (
+          <span className="btn_close flex justify_center align_center clickable" onClick={onCancel}>
+            <X size={14}></X>
+          </span>
+        )}
+      </div>
+    )
+  }, [title, hideClose, onCancel, header])
+
   if (!exsit) return null
 
   const Content = (
@@ -129,16 +147,7 @@ const Index = (props: IProps) => {
               className={$.cx(styles.content, 'if_modal_content border_box flex flex_column')}
               style={{ width: width ?? 360, minHeight, ...(height ? { height, overflowY: 'scroll' } : {}) }}
               ref={ref_content}>
-              {title && (
-                <div className={$.cx(styles.header, 'w_100 border_box flex justify_between align_center')}>
-                  <span className="title">{title}</span>
-                  {!hideClose && (
-                    <span className="btn_close flex justify_center align_center clickable" onClick={onCancel}>
-                      <X size={14}></X>
-                    </span>
-                  )}
-                </div>
-              )}
+              {Header}
               <div
                 className={$.cx(
                   styles.body,

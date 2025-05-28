@@ -29,7 +29,7 @@ const Index = (props: ComponentType<Omnitable.RangePicker['props']>) => {
         <RangePicker
           {...self_props}
           showTime
-          classNames={{ popup: { root: styles.popup } }}
+          classNames={{ popup: { root: $.cx('omni', styles.popup) } }}
           className="w_100"
           placement="bottomLeft"
           suffixIcon={null}

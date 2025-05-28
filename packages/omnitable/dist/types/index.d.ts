@@ -1,3 +1,4 @@
+import type { IPropsDrawer, IPropsModal } from '@omnitable/appframe/components';
 import type { InputNumberProps, InputProps } from 'antd';
 import type { TextAreaProps } from 'antd/es/input';
 import type { CSSProperties, FC, ReactNode } from 'react';
@@ -105,16 +106,9 @@ export declare namespace Omnitable {
             /** 弹窗形式，drawer 为抽屉弹窗，modal为模态框 */
             dialog?: 'drawer' | 'modal';
             /** dialog 为 drawer 时生效 */
-            drawer?: {
-                width?: number | string;
-                className?: string;
-            };
+            drawer?: Pick<IPropsDrawer, 'className' | 'width' | 'header'>;
             /** dialog 为 modal 时生效 */
-            modal?: {
-                width?: number | string;
-                height?: number | string;
-                className?: string;
-            };
+            modal?: Pick<IPropsModal, 'className' | 'width' | 'height' | 'header'>;
             /** 在table_columns的基础上扩展列 */
             use_table_columns?: boolean;
             exclude_table_columns?: Array<string>;
@@ -124,6 +118,7 @@ export declare namespace Omnitable {
              * @param item - 当前行的数据项
              */
             render?: (fields: Record<string, ReactNode>, item: any, options: {
+                type: Model['modal_type'];
                 save: ReactNode;
                 cancel: ReactNode;
             }) => ReactNode;
@@ -291,7 +286,10 @@ export declare namespace Omnitable {
     };
     type Priority = {
         type: 'priority';
-        props?: {};
+        props?: {
+            options?: [undefined | string | number, string | number, string | number, string | number, string | number];
+            placeholder?: string;
+        };
     };
     type Editor = {
         type: 'editor';

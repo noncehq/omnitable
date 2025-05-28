@@ -10,7 +10,7 @@
   :global {
     .omni-select-disabled,
     .omni-select-open {
-      .custom_icon_wrap,
+      .icon_wrap,
       img {
         opacity: 0.3;
       }
@@ -31,6 +31,17 @@
     .omni-select-selector {
       .omni-select-selection-item {
         border-radius: var(--radius_small_0) !important;
+      }
+    }
+  }
+}
+
+.label {
+  :global {
+    .icon_wrap {
+      img {
+        border-radius: 50%;
+        object-fit: cover;
       }
     }
   }

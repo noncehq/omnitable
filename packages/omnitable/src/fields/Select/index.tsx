@@ -5,8 +5,9 @@ import { observer } from 'mobx-react-lite'
 import { $ } from '@omnitable/stk/utils'
 
 import { useContext } from '../../context'
-import styles from './index.module.css'
 import Model from './model'
+
+import styles from './index.module.css'
 
 import type { ComponentType, Omnitable } from '../../types'
 
@@ -30,9 +31,13 @@ const Index = (props: ComponentType<Omnitable.Select['props']>) => {
     return options.map(item => {
       if (item.icon) {
         item.label = (
-          <div className="h_100 flex align_center">
+          <div className={$.cx('h_100 flex align_center', styles.label)}>
             <div className="icon_wrap flex justify_center align_center" style={{ width: 16, height: 16 }}>
-              <i className={`ph ph-${item.icon}`}></i>
+              {item.icon.startsWith('https:') ? (
+                <img className="w_100 h_100" src={item.icon} alt="image" />
+              ) : (
+                <i className={`ph ph-${item.icon}`}></i>
+              )}
             </div>
             <span className="text ml_4">{item.label}</span>
           </div>
@@ -69,7 +74,7 @@ const Index = (props: ComponentType<Omnitable.Select['props']>) => {
           {...rest_props}
           {...search_props}
           className={$.cx(w_100)}
-          classNames={{ popup: { root: styles.popup } }}
+          classNames={{ popup: { root: $.cx('omni', styles.popup) } }}
           size={use_by_form ? 'middle' : 'small'}
           popupMatchSelectWidth={false}
           virtual={false}

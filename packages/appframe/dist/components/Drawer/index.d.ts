@@ -13,6 +13,7 @@ export interface IProps {
     disablePadding?: boolean;
     zIndex?: number;
     header_actions?: ReactNode;
+    header?: (onClose: IProps['onCancel']) => ReactNode;
     onCancel?: (e?: MouseEvent<HTMLElement>) => void;
     getRef?: (v: HTMLElement | null) => void;
 }

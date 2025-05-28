@@ -28,8 +28,9 @@ import {
   View,
 } from './components'
 import { Provider } from './context'
-import styles from './index.module.css'
 import Model from './model'
+
+import styles from './index.module.css'
 
 import type { IPropsConfigProvider, IPropsDrawer, IPropsModal } from '@omnitable/appframe/components'
 import type {
@@ -210,14 +211,11 @@ const Index = (props: Omnitable.Props) => {
   })
 
   const props_modal: Partial<IPropsModal> = {
-    className: x.config?.form?.modal?.className,
-    width: x.config?.form?.modal?.width,
-    height: x.config?.form?.modal?.height,
+    ...x.config?.form?.modal,
   }
 
   const props_drawer: Partial<IPropsDrawer> = {
-    className: x.config?.form?.drawer?.className,
-    width: x.config?.form?.drawer?.width,
+    ...x.config?.form?.drawer,
     placement: x.modal_view_visible ? 'left' : 'right',
     header_actions: x.modal_view_visible && (
       <button className="btn_add_view flex justify_center align_center absolute clickable" onClick={x.onAddView}>

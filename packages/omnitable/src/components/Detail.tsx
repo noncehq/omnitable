@@ -5,8 +5,9 @@ import { Button, Col, ConfigProvider, Form, Row } from 'antd'
 import { deepEqual } from '@omnitable/stk/react'
 import { $ } from '@omnitable/stk/utils'
 
-import styles from '../index.module.css'
 import FormComponent from './FormComponent'
+
+import styles from '../index.module.css'
 
 import type { ReactNode } from 'react'
 import type { IPropsDetail } from '../types'
@@ -65,7 +66,7 @@ const Index = (props: IPropsDetail) => {
     const fields = form_columns.reduce(
       (total, col) => {
         total[col.name] = (
-          <Item label={col.name} name={col.bind}>
+          <Item label={col.name} name={col.bind} noStyle>
             <FormComponent
               column={col}
               disabled={disabled || col.readonly}
@@ -79,6 +80,7 @@ const Index = (props: IPropsDetail) => {
     )
 
     const options = {
+      type: modal_type,
       save: (
         <Button type="primary" htmlType="submit" loading={loading}>
           Save

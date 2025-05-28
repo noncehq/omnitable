@@ -22,7 +22,7 @@ const Index = (props: ComponentType<Omnitable.DatePicker['props']>) => {
       {editing ? (
         <DatePicker
           {...self_props}
-          classNames={{ popup: { root: styles.popup } }}
+          classNames={{ popup: { root: $.cx('omni', styles.popup) } }}
           className="w_100"
           placement="bottomLeft"
           suffixIcon={null}

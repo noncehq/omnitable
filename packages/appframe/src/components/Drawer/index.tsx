@@ -24,6 +24,7 @@ export interface IProps {
   disablePadding?: boolean
   zIndex?: number
   header_actions?: ReactNode
+  header?: (onClose: IProps['onCancel']) => ReactNode
   onCancel?: (e?: MouseEvent<HTMLElement>) => void
   getRef?: (v: HTMLElement | null) => void
 }
@@ -43,6 +44,7 @@ const Index = (props: IProps) => {
     disablePadding,
     zIndex,
     header_actions,
+    header,
     onCancel,
     getRef,
   } = props
@@ -110,6 +112,24 @@ const Index = (props: IProps) => {
     }
   }, [placement, width, height])
 
+  const Header = useMemo(() => {
+    if (header) return header(onCancel)
+    if (!title) return null
+
+    return (
+      <div className={$.cx(styles.header, 'w_100 border_box flex justify_between align_center relative')}>
+        <span className="title">{title}</span>
+        {header_actions ? (
+          header_actions
+        ) : (
+          <span className="btn_close flex justify_center align_center clickable" onClick={onCancel}>
+            <X size={16}></X>
+          </span>
+        )}
+      </div>
+    )
+  }, [title, header_actions, onCancel, header])
+
   if (!exsit) return null
 
   const Content = (
@@ -148,18 +168,7 @@ const Index = (props: IProps) => {
               transition={{ duration: 0.18, ease: 'easeInOut' }}
               style={style}
               ref={ref_content}>
-              {title && (
-                <div className={$.cx(styles.header, 'w_100 border_box flex justify_between align_center relative')}>
-                  <span className="title">{title}</span>
-                  {header_actions ? (
-                    header_actions
-                  ) : (
-                    <span className="btn_close flex justify_center align_center clickable" onClick={onCancel}>
-                      <X size={16}></X>
-                    </span>
-                  )}
-                </div>
-              )}
+              {Header}
               <div
                 className={$.cx(
                   styles.body,
