@@ -92,13 +92,13 @@ export type StatType = (typeof stat_options)[number]['value']
 export const common_expressions = ['set', 'notSet', 'euqals', 'notEquals']
 
 export const filter_expressions = {
-  string: [...common_expressions, 'contains', 'notContains', 'startsWith', 'noStartsWith', 'endsWith', 'notEndsWith'],
+  string: [...common_expressions, 'contains', 'notContains', 'startsWith', 'notStartsWith', 'endsWith', 'notEndsWith'],
   number: [...common_expressions, 'gt', 'gte', 'lt', 'lte'],
-  array: [...common_expressions, 'has any of', 'has none of'],
-  date: [...common_expressions, 'inDateRange', 'notInDateRange', 'beforeDate', 'afterDate'],
+  array: ['set', 'notSet', 'hasAnyOf', 'hasNoneOf'],
+  date: ['before', 'after', 'onBefore', 'onAfter', 'inRange', 'notInRange'],
 }
 
-export const getFilterComponentType = (datatype: Omnitable.FilterColumn['datatype'], expression: string) => {
+export const getFilterComponentType = (datatype: Omnitable.FilterColumn['datatype'] | string, expression: string) => {
   switch (datatype) {
     case 'string':
       return 'input'
@@ -110,6 +110,8 @@ export const getFilterComponentType = (datatype: Omnitable.FilterColumn['datatyp
       if (expression === 'is between') return 'range_picker'
 
       return 'date_picker'
+    case 'priority':
+      return 'priority'
     default:
       return 'input'
   }

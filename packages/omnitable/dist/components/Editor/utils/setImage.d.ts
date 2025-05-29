@@ -1,3 +1,4 @@
 import type { Editor } from '@tiptap/react';
-declare const _default: (editor: Editor) => void;
+import type { IProps } from '..';
+declare const _default: (editor: Editor, uploadImage: IProps["uploadImage"]) => Promise<void>;
 export default _default;

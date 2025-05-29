@@ -1,5 +1,6 @@
 import 'highlight.js/styles/atom-one-dark.min.css'
 
+import { useEffect, useState } from 'react'
 import css from 'highlight.js/lib/languages/css'
 import js from 'highlight.js/lib/languages/javascript'
 import ts from 'highlight.js/lib/languages/typescript'
@@ -25,8 +26,9 @@ import Underline from '@tiptap/extension-underline'
 import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 
-import styles from './index.module.css'
 import Toolbar from './Toolbar'
+
+import styles from './index.module.css'
 
 const lowlight = createLowlight()
 
@@ -35,15 +37,19 @@ lowlight.register('css', css)
 lowlight.register('js', js)
 lowlight.register('ts', ts)
 
-interface IProps {
+export interface IProps {
   value: string
   readonly?: boolean
   max_height?: number
   onChange: (v: string) => void
+  uploadImage?: () => Promise<string>
 }
 
+const getContentString = (v: string) => (v.startsWith('{') ? JSON.parse(v) : v)
+
 const Index = (props: IProps) => {
-  const { value, readonly, max_height, onChange } = props
+  const { value, readonly, max_height, onChange, uploadImage } = props
+  const [seted, setSeted] = useState(false)
 
   const editor = useEditor({
     editable: !readonly,
@@ -82,7 +88,7 @@ const Index = (props: IProps) => {
       TextStyle,
       Color,
     ],
-    content: value ? JSON.parse(value) : '',
+    content: value ? getContentString(value) : '',
     onUpdate: ({ editor }) => {
       const content = editor.getJSON()
 
@@ -90,11 +96,19 @@ const Index = (props: IProps) => {
     },
   })
 
+  useEffect(() => {
+    if (!value || seted) return
+
+    editor.commands.setContent(value ? getContentString(value) : '', false)
+
+    setSeted(true)
+  }, [value, seted])
+
   if (!editor) return null
 
   return (
     <div className={$.cx('w_100 flex flex_column', styles._local)}>
-      <Toolbar editor={editor}></Toolbar>
+      <Toolbar editor={editor} uploadImage={uploadImage}></Toolbar>
       <div
         className="editor_wrap w_100 border_box"
         style={{ height: max_height, maxHeight: max_height, overflowY: 'scroll' }}>

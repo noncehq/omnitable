@@ -37,7 +37,10 @@ const Index = (props: IPropsFilterItem & FormListFieldData) => {
     [column],
   )
 
-  const value_type = useMemo(() => getFilterComponentType(column.datatype, expression), [column, expression])
+  const value_type = useMemo(
+    () => getFilterComponentType(column.forcetype || column.datatype, expression),
+    [column, expression],
+  )
 
   return (
     <div

@@ -22,17 +22,20 @@ import {
 } from '@phosphor-icons/react'
 
 import { Highlight, TableActions } from './components'
-import styles from './index.module.css'
 import { setImage, setLink } from './utils'
 
+import styles from './index.module.css'
+
 import type { Editor } from '@tiptap/react'
+import type { IProps as IPropsEditor } from '.'
 
 interface IProps {
   editor: Editor
+  uploadImage: IPropsEditor['uploadImage']
 }
 
 const Index = (props: IProps) => {
-  const { editor } = props
+  const { editor, uploadImage } = props
 
   const getColorActive = useMemoizedFn(v => editor.isActive('textStyle', { color: v }))
   const getbackgroundActive = useMemoizedFn(v => editor.isActive('highlight', { color: v }))
@@ -164,7 +167,7 @@ const Index = (props: IProps) => {
       },
       {
         Icon: Image,
-        action: () => setImage(editor),
+        action: () => setImage(editor, uploadImage),
       },
       {
         Icon: RowsPlusBottom,

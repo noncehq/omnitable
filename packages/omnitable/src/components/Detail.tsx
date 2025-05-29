@@ -86,7 +86,8 @@ const Index = (props: IPropsDetail) => {
           Save
         </Button>
       ),
-      cancel: <Button onClick={onClose}>Cancel</Button>,
+      close: <Button onClick={onClose}>Cancel</Button>,
+      onClose,
     }
 
     return render(fields, item, options)

@@ -1,7 +1,9 @@
+import { useEffect, useRef } from 'react'
 import { useMemoizedFn } from 'ahooks'
 import { Input } from 'antd'
 import { debounce } from 'lodash-es'
 
+import { deepEqual } from '@omnitable/stk/react'
 import { $ } from '@omnitable/stk/utils'
 
 import styles from './index.module.css'
@@ -14,8 +16,6 @@ const Index = (props: ComponentType<Omnitable.Textarea['props']>) => {
   const { self_props, width, value, editing, use_by_form, onFocus, onBlur, onChange } = props
   const {} = self_props || {}
 
-  const debounceChange = onChange ? useMemoizedFn(debounce(onChange!, 600)) : undefined
-
   return (
     <div
       className={$.cx('w_100 flex align_center', styles._local, use_by_form && styles.use_by_form)}
@@ -25,10 +25,10 @@ const Index = (props: ComponentType<Omnitable.Textarea['props']>) => {
           {...self_props}
           className="w_100 line_clamp_1"
           variant={use_by_form ? 'outlined' : 'borderless'}
-          defaultValue={value}
+          value={value}
           onFocus={onFocus}
           onBlur={onBlur}
-          onChange={debounceChange}></TextArea>
+          onChange={onChange}></TextArea>
       ) : (
         <span className="text_wrap border_box">{value}</span>
       )}

@@ -114,7 +114,7 @@ export namespace Omnitable {
       render?: (
         fields: Record<string, ReactNode>,
         item: any,
-        options: { type: Model['modal_type']; save: ReactNode; cancel: ReactNode },
+        options: { type: Model['modal_type']; save: ReactNode; close: ReactNode; onClose: () => void },
       ) => ReactNode
     }
     /** 字段对应的组件 */
@@ -171,7 +171,9 @@ export namespace Omnitable {
   }
 
   export interface FilterColumn extends BaseColumn {
-    datatype: 'string' | 'number' | 'array' | 'date'
+    datatype: 'string' | 'number' | 'array' | 'date' | 'priority'
+    // 指定组件类型
+    forcetype?: string
   }
 
   export interface TableColumn extends BaseColumn {
@@ -318,6 +320,7 @@ export namespace Omnitable {
     props?: {
       options?: [undefined | string | number, string | number, string | number, string | number, string | number]
       placeholder?: string
+      borderless?: boolean
     }
   }
 
@@ -325,6 +328,7 @@ export namespace Omnitable {
     type: 'editor'
     props?: {
       max_height?: number
+      uploadImage?: () => Promise<string | undefined>
     }
   }
 

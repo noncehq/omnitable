@@ -107,6 +107,7 @@
 
     img {
       max-width: 100%;
+      margin-block-end: var(--editor_padding_y);
       border-radius: var(--radius_small);
     }
 

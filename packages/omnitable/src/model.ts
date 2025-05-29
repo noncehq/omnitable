@@ -171,7 +171,11 @@ export default class Index {
             body: {
               sort_params: this.sort_params,
               filter_relation: this.filter_relation,
-              filter_params: this.filter_params.filter(i => 'value' in i),
+              filter_params: this.filter_params.filter(i => {
+                if (Array.isArray(i?.value) && !i.value.length) return false
+
+                return 'value' in i
+              }),
               page: this.pagination.page,
               pagesize: this.pagination.pagesize,
               ...(params ?? {}),
