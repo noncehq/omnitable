@@ -174,7 +174,7 @@ const Index = (props: IProps) => {
         action: () => editor.chain().insertContent('<p></p>').focus('end').run(),
       },
     ]
-  }, [editor])
+  }, [editor, uploadImage])
 
   return (
     <div className={$.cx('border_box', styles.Toolbar)}>

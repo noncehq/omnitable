@@ -52,7 +52,7 @@ const Index = (props: IPropsDetail) => {
               <Col span={col.span || 12} key={index}>
                 <Item label={col.name} name={col.bind}>
                   <FormComponent
-                    column={getTemplateValue(col, item)}
+                    column={col}
                     disabled={disabled || col.readonly}
                     item={col.type === 'text' && col.props?.format ? item : undefined}></FormComponent>
                 </Item>
@@ -76,7 +76,7 @@ const Index = (props: IPropsDetail) => {
         total[col.name] = (
           <Item label={col.name} name={col.bind} noStyle>
             <FormComponent
-              column={getTemplateValue(col, item)}
+              column={col}
               disabled={disabled || col.readonly}
               item={col.type === 'text' && col.props?.format ? item : undefined}></FormComponent>
           </Item>

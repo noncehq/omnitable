@@ -10,7 +10,7 @@ const Index: FunctionType = (template, data = {}) => {
     return Mustache.render(template, data)
   }
 
-  if (typeof template === 'boolean' || typeof template === 'number') {
+  if (typeof template === 'boolean' || typeof template === 'number' || typeof template === 'function') {
     return template
   }
 
