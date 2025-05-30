@@ -240,6 +240,7 @@ export declare namespace Omnitable {
             mode?: 'multiple' | 'tags';
             placeholder?: string;
             borderless?: boolean;
+            allowClear?: boolean;
         };
     };
     interface SelectOption {

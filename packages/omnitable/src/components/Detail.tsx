@@ -1,7 +1,8 @@
-import { Fragment, useLayoutEffect, useMemo } from 'react'
+import { Fragment, useLayoutEffect, useMemo, useState } from 'react'
 import { useMemoizedFn } from 'ahooks'
 import { Button, Col, ConfigProvider, Form, Row } from 'antd'
 
+import { getTemplateValue } from '@/utils'
 import { deepEqual } from '@omnitable/stk/react'
 import { $ } from '@omnitable/stk/utils'
 
@@ -18,8 +19,11 @@ const Index = (props: IPropsDetail) => {
   const { form_columns, modal_type, item, loading, onSubmit, onClose, render } = props
   const [form] = useForm()
   const { setFieldsValue, getFieldsValue, resetFields } = form
+  const [target_item, setTargetItem] = useState(() => item)
 
   const disabled = modal_type === 'view'
+
+  const target_columns = useMemo(() => getTemplateValue(form_columns, target_item), [form_columns, target_item])
 
   useLayoutEffect(() => {
     if (!item) return resetFields()
@@ -35,16 +39,20 @@ const Index = (props: IPropsDetail) => {
     onSubmit(values)
   })
 
+  const onValuesChange = useMemoizedFn(values => {
+    setTargetItem({ ...item, ...values })
+  })
+
   const Render = useMemo(() => {
     if (!render) {
       return (
         <Fragment>
           <Row gutter={12} wrap>
-            {form_columns.map((col, index) => (
+            {target_columns.map((col, index) => (
               <Col span={col.span || 12} key={index}>
                 <Item label={col.name} name={col.bind}>
                   <FormComponent
-                    column={col}
+                    column={getTemplateValue(col, item)}
                     disabled={disabled || col.readonly}
                     item={col.type === 'text' && col.props?.format ? item : undefined}></FormComponent>
                 </Item>
@@ -63,12 +71,12 @@ const Index = (props: IPropsDetail) => {
       )
     }
 
-    const fields = form_columns.reduce(
+    const fields = target_columns.reduce(
       (total, col) => {
         total[col.name] = (
           <Item label={col.name} name={col.bind} noStyle>
             <FormComponent
-              column={col}
+              column={getTemplateValue(col, item)}
               disabled={disabled || col.readonly}
               item={col.type === 'text' && col.props?.format ? item : undefined}></FormComponent>
           </Item>
@@ -91,7 +99,7 @@ const Index = (props: IPropsDetail) => {
     }
 
     return render(fields, item, options)
-  }, [form_columns, modal_type, item, render, onClose])
+  }, [target_columns, modal_type, item, render, onClose])
 
   return (
     <ConfigProvider
@@ -101,7 +109,13 @@ const Index = (props: IPropsDetail) => {
           controlHeightSM: 30,
         },
       }}>
-      <Form className={styles.Detail} form={form} layout="vertical" disabled={disabled} onFinish={onFinish}>
+      <Form
+        className={styles.Detail}
+        form={form}
+        layout="vertical"
+        disabled={disabled}
+        onFinish={onFinish}
+        onValuesChange={onValuesChange}>
         {Render}
       </Form>
     </ConfigProvider>

@@ -1,5 +1,5 @@
 import type { IPropsDrawer, IPropsModal } from '@omnitable/appframe/components'
-import type { InputNumberProps, InputProps } from 'antd'
+import type { InputNumberProps, InputProps, SelectProps } from 'antd'
 import type { TextAreaProps } from 'antd/es/input'
 import type { CSSProperties, FC, ReactNode } from 'react'
 import type { Model } from '..'
@@ -262,6 +262,7 @@ export namespace Omnitable {
       mode?: 'multiple' | 'tags'
       placeholder?: string
       borderless?: boolean
+      allowClear?: boolean
     }
   }
 

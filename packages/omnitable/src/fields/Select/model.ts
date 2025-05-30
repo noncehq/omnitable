@@ -65,7 +65,7 @@ export default class Index {
 
     if (session_cache) return (this.options = session_cache)
 
-    const url = remote.api.indexOf('https') !== -1 ? remote.api : `${this.base_url}${remote.api}`
+    const url = remote.api.indexOf('http') !== -1 ? remote.api : `${this.base_url}${remote.api}`
 
     const [err, res] = await to<Omnitable.Error | Options>(ofetch(url, { query }))
 
@@ -92,7 +92,7 @@ export default class Index {
     const remote = this.remote!
     const search = remote.search!
     const query = { ...remote.query, [search]: v }
-    const url = remote.api.indexOf('https') !== -1 ? remote.api : `${this.base_url}${remote.api}`
+    const url = remote.api.indexOf('http') !== -1 ? remote.api : `${this.base_url}${remote.api}`
 
     const [err, res] = await to<Omnitable.Error | Options>(ofetch(url, { query }))
 

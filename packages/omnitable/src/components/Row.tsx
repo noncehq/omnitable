@@ -3,6 +3,7 @@ import { useMemoizedFn } from 'ahooks'
 import { Form } from 'antd'
 import { get } from 'lodash-es'
 
+import { getTemplateValue } from '@/utils'
 import { deepEqual } from '@omnitable/stk/react'
 import { $ } from '@omnitable/stk/utils'
 
@@ -66,6 +67,8 @@ const Index = (props: IPropsRow) => {
 
   const onRow = useMemoizedFn(() => onRowClick(index))
 
+  const target_columns = useMemo(() => getTemplateValue(table_columns, item), [table_columns, item])
+
   return (
     <Form form={form} component={false} onValuesChange={onValuesChange}>
       <tr
@@ -79,7 +82,7 @@ const Index = (props: IPropsRow) => {
         )}
         style={style}
         onClick={row_click ? onRow : undefined}>
-        {table_columns.map((col, col_index) => {
+        {target_columns.map((col, col_index) => {
           let group_replace = undefined
 
           const is_group_row =
@@ -126,7 +129,7 @@ const Index = (props: IPropsRow) => {
               group_replace={group_replace}
               row_index={index}
               focus={!col.readonly && editing_info && col.bind === editing_info.field}
-              item={col.use_item || (col.type === 'text' && col.props?.format) ? item : undefined}
+              item={col.use_item ? item : undefined}
               group_info={group_info}
               group_level={group_level}
               setEditingField={col.readonly ? undefined : setEditingField}
