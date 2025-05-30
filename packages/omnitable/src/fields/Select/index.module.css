@@ -65,3 +65,10 @@
     }
   }
 }
+
+.loading_wrap {
+  padding: 8px 0;
+  border: var(--border);
+  border-radius: var(--radius);
+  background-color: var(--color_bg);
+}

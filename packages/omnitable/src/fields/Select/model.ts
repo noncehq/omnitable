@@ -19,6 +19,7 @@ export default class Index {
   options = [] as Array<Omnitable.SelectOption>
   search_props = {} as SelectProps<any, Omnitable.SelectOption>
   loading_search = false
+  loading_values = false
 
   constructor() {
     makeAutoObservable(this, { antd: false, base_url: false, remote: false, multiple: false }, { autoBind: true })
@@ -114,12 +115,16 @@ export default class Index {
   }
 
   async getLabeledValues(values: Array<string>) {
+    this.loading_values = true
+
     const remote = this.remote!
     const id = remote.id!
     const query = { [id]: values }
     const url = remote.api.indexOf('http') !== -1 ? remote.api : `${this.base_url}${remote.api}`
 
     const [err, res] = await to<Omnitable.Error | Options>(ofetch(url, { query }))
+
+    this.loading_values = false
 
     if (err) {
       this.antd.message.error(`getValueOptions error: ${err?.message}`)

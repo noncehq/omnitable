@@ -1,8 +1,9 @@
-import { useEffect, useLayoutEffect, useMemo, useState } from 'react'
-import { useMemoizedFn } from 'ahooks'
+import { useLayoutEffect, useMemo, useState } from 'react'
+import { useDeepCompareLayoutEffect, useMemoizedFn } from 'ahooks'
 import { App, Select, Spin } from 'antd'
 import { observer } from 'mobx-react-lite'
 
+import { LoadingCircle } from '@omnitable/appframe/components'
 import { $ } from '@omnitable/stk/utils'
 
 import { useContext } from '../../context'
@@ -38,12 +39,12 @@ const Index = (props: ComponentType<Omnitable.Select['props']>) => {
     x.init({ antd, options_raw, base_url, remote, multiple })
   }, [antd, options_raw, base_url, remote, multiple])
 
-  useEffect(() => {
+  useDeepCompareLayoutEffect(() => {
     if (!value) return
-    if (!labelInValue) return setTargetValue(value)
+    if (options.length || !labelInValue) return setTargetValue(value)
 
     x.getLabeledValues(value).then(res => setTargetValue(res))
-  }, [value, labelInValue])
+  }, [value, options, labelInValue])
 
   const options_real = useMemo(() => {
     return options.map(item => {
@@ -86,12 +87,22 @@ const Index = (props: ComponentType<Omnitable.Select['props']>) => {
   const w_100 = (mode || Boolean(width) || remote?.search) && 'w_100'
 
   const onSelectChange = useMemoizedFn(value => {
+    setTargetValue(value)
+
     if (labelInValue && Array.isArray(value)) {
-      return value.map(item => item.value)
+      return onChange(value.map(item => item.value))
     }
 
-    return value
+    onChange(value)
   })
+
+  if (x.loading_values) {
+    return (
+      <div className={$.cx('w_100 border_box flex justify_center align_center', styles.loading_wrap)}>
+        <LoadingCircle size={18}></LoadingCircle>
+      </div>
+    )
+  }
 
   return (
     <div className={$.cx(styles._local, borderless && styles.borderless)} style={{ width }}>

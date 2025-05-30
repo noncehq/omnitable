@@ -10,6 +10,7 @@ export default class Index {
     options: Array<Omnitable.SelectOption>;
     search_props: SelectProps<any, Omnitable.SelectOption>;
     loading_search: boolean;
+    loading_values: boolean;
     constructor();
     init(args: {
         antd: Index['antd'];
