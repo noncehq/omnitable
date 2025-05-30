@@ -255,6 +255,8 @@ export namespace Omnitable {
         api: string
         /** 开启关键词搜索options，值为查询key名称 */
         search?: string
+        /** 值为根据value查询的id的key */
+        id?: string
         /** 附带的请求参数 */
         query?: Record<string, any>
       }
@@ -263,6 +265,7 @@ export namespace Omnitable {
       placeholder?: string
       borderless?: boolean
       allowClear?: boolean
+      labelInValue?: boolean
     }
   }
 

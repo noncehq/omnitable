@@ -1,4 +1,5 @@
-import { useLayoutEffect, useMemo, useState } from 'react'
+import { useEffect, useLayoutEffect, useMemo, useState } from 'react'
+import { useMemoizedFn } from 'ahooks'
 import { App, Select, Spin } from 'antd'
 import { observer } from 'mobx-react-lite'
 
@@ -15,17 +16,34 @@ const { useApp } = App
 
 const Index = (props: ComponentType<Omnitable.Select['props']>) => {
   const { self_props, width, value, editing, use_by_form, use_by_filter, onFocus, onBlur, onChange } = props
-  const { options: options_raw, remote, single, mode, borderless, allowClear = false, ...rest_props } = self_props || {}
+  const {
+    options: options_raw,
+    remote,
+    single,
+    mode,
+    borderless,
+    allowClear = false,
+    labelInValue = false,
+    ...rest_props
+  } = self_props || {}
 
   const [x] = useState(() => new Model())
   const antd = useApp()
   const base_url = useContext(v => v.base_url)
+  const [target_value, setTargetValue] = useState(() => value)
   const multiple = mode === 'multiple' || mode === 'tags'
   const options = $.copy(x.options)
 
   useLayoutEffect(() => {
     x.init({ antd, options_raw, base_url, remote, multiple })
   }, [antd, options_raw, base_url, remote, multiple])
+
+  useEffect(() => {
+    if (!value) return
+    if (!labelInValue) return setTargetValue(value)
+
+    x.getLabeledValues(value).then(res => setTargetValue(res))
+  }, [value, labelInValue])
 
   const options_real = useMemo(() => {
     return options.map(item => {
@@ -67,6 +85,14 @@ const Index = (props: ComponentType<Omnitable.Select['props']>) => {
   const search_props = $.copy(x.search_props)
   const w_100 = (mode || Boolean(width) || remote?.search) && 'w_100'
 
+  const onSelectChange = useMemoizedFn(value => {
+    if (labelInValue && Array.isArray(value)) {
+      return value.map(item => item.value)
+    }
+
+    return value
+  })
+
   return (
     <div className={$.cx(styles._local, borderless && styles.borderless)} style={{ width }}>
       {editing ? (
@@ -81,14 +107,15 @@ const Index = (props: ComponentType<Omnitable.Select['props']>) => {
           suffixIcon={null}
           mode={single ? undefined : use_by_filter ? 'multiple' : mode}
           allowClear={allowClear}
+          labelInValue={labelInValue}
           options={options}
-          value={value}
+          value={target_value}
           notFoundContent={x.loading_search ? <Spin size="small" /> : null}
           getPopupContainer={() => document.body}
           onOpenChange={onFocus}
           onFocus={onFocus}
           onBlur={onBlur}
-          onChange={onChange}></Select>
+          onChange={onSelectChange}></Select>
       ) : (
         <span className={$.cx('text_wrap border_box inline_flex align_center', w_100, !option && 'placeholder')}>
           {option || self_props.placeholder}

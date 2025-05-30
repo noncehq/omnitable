@@ -20,5 +20,6 @@ export default class Index {
     }): void;
     get(): Promise<false | Options>;
     search(v: string): Promise<boolean>;
+    getLabeledValues(values: Array<string>): Promise<false | Options>;
 }
 export {};

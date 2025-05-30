@@ -112,4 +112,27 @@ export default class Index {
 
     this.options = res
   }
+
+  async getLabeledValues(values: Array<string>) {
+    const remote = this.remote!
+    const id = remote.id!
+    const query = { [id]: values }
+    const url = remote.api.indexOf('http') !== -1 ? remote.api : `${this.base_url}${remote.api}`
+
+    const [err, res] = await to<Omnitable.Error | Options>(ofetch(url, { query }))
+
+    if (err) {
+      this.antd.message.error(`getValueOptions error: ${err?.message}`)
+
+      return false
+    }
+
+    if ('error' in res) {
+      this.antd.message.error(`${res.error}: ${res.message}`)
+
+      return false
+    }
+
+    return res
+  }
 }
