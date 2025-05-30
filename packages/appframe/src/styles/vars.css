@@ -21,7 +21,7 @@
   --border_soft: 1px solid var(--color_border_soft);
   --border_softlight: 1px solid var(--color_border_softlight);
 
-  --editor_padding_y: 1.8em;
+  --editor_padding_y: 1em;
   --editor_padding_x: 0;
 
   --font_family:

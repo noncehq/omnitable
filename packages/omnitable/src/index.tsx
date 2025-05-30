@@ -249,8 +249,8 @@ const Index = (props: Omnitable.Props) => {
                     {x.apply_view_name && <span className="counts flex align_center">{x.apply_view_name}</span>}
                   </button>
                 )}
-                {x.config.header.sort && x.sort_columns.length > 0 && <Sort {...props_sort}></Sort>}
                 {x.config.header.filter && x.filter_columns.length > 0 && <Filter {...props_filter}></Filter>}
+                {x.config.header.sort && x.sort_columns.length > 0 && <Sort {...props_sort}></Sort>}
                 {x.config.header.stat && <Stat {...props_stat}></Stat>}
                 {x.config.header.group && <Group {...props_group}></Group>}
                 {x.config.header.timeline && <TimelineControls {...props_timeline_controls}></TimelineControls>}

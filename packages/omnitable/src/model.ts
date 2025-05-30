@@ -172,7 +172,10 @@ export default class Index {
               sort_params: this.sort_params,
               filter_relation: this.filter_relation,
               filter_params: this.filter_params.filter(i => {
+                if (['set', 'notSet'].includes(i.expression)) return true
+
                 if (Array.isArray(i?.value) && !i.value.length) return false
+                if (i?.value === undefined || i.value === '') return false
 
                 return 'value' in i
               }),
@@ -840,11 +843,7 @@ export default class Index {
     if (filter_relation) this.filter_relation = filter_relation
     if (filter_params) this.filter_params = filter_params
 
-    const target_filter_params = this.filter_params.filter(item => item.value)
-
     this.clearApplyView()
-
-    if (filter_params?.length && !target_filter_params.length) return
 
     if (!ignore_query) this.query()
   }

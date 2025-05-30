@@ -8,9 +8,10 @@ import { deepEqual } from '@omnitable/stk/react'
 import { $ } from '@omnitable/stk/utils'
 import { FunnelSimple } from '@phosphor-icons/react'
 
-import styles from '../../index.module.css'
 import { filter_expressions } from '../../metadata'
 import FilterItem from './Item'
+
+import styles from '../../index.module.css'
 
 import type { IPropsFilter } from '../../types'
 
@@ -83,17 +84,25 @@ const Index = (props: IPropsFilter) => {
             if (!fields[0]) return
 
             const name_path = fields[0]?.name
+            const value = fields[0]?.value
 
             if (name_path?.length !== 3) return
 
-            if (name_path.at(0) === 'items' && name_path.at(-1) === 'field') {
-              const index = name_path[1]
+            if (name_path.at(0) === 'items') {
               const form_values = getFieldsValue()
               const items = form_values.items as IPropsFilter['filter_params']
 
-              delete items[index]['value']
+              if (name_path.at(-1) === 'field') {
+                const index = name_path[1]
 
-              onChangeFilter({ filter_params: items, ignore_query: true })
+                delete items[index]['value']
+
+                onChangeFilter({ filter_params: items, ignore_query: true })
+              } else if (name_path.at(-1) === 'expression') {
+                if (['set', 'notSet'].includes(value)) {
+                  onChangeFilter({ filter_params: items })
+                }
+              }
             }
           }}>
           <List name="items">

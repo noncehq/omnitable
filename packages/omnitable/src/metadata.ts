@@ -92,8 +92,8 @@ export type StatType = (typeof stat_options)[number]['value']
 export const common_expressions = ['set', 'notSet', 'euqals', 'notEquals']
 
 export const filter_expressions = {
-  string: [...common_expressions, 'contains', 'notContains', 'startsWith', 'notStartsWith', 'endsWith', 'notEndsWith'],
-  number: [...common_expressions, 'gt', 'gte', 'lt', 'lte'],
+  string: ['contains', 'notContains', 'startsWith', 'notStartsWith', 'endsWith', 'notEndsWith', ...common_expressions],
+  number: ['gt', 'gte', 'lt', 'lte', ...common_expressions],
   array: ['set', 'notSet', 'hasAnyOf', 'hasNoneOf'],
   date: ['before', 'after', 'onBefore', 'onAfter', 'inRange', 'notInRange'],
 }
