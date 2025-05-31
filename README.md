@@ -46,6 +46,6 @@ const Index = () => {
 export default Index
 ```
 
-## Attension
+## Attention
 
-Using omnitable in Nextjs, you shuold add `"use client"` on top of file.
+Using omnitable in Next.js, you should add `"use client"` on top of file.

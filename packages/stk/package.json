@@ -1,7 +1,7 @@
 {
   "name": "@omnitable/stk",
   "version": "1.0.0",
-  "description": "Shared tookkit for web apps.",
+  "description": "Shared toolkits for web apps.",
   "author": "1yasa",
   "license": "MIT",
   "sideEffects": false,

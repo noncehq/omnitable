@@ -63,7 +63,6 @@ export default (cube: CubeApi) => {
 declare module '@omnitable/omnitable' {
   namespace Omnitable {
     export interface Config {
-      // cube 自定义配置项，可覆盖和合并table生成的query配置
       cube_options?: Partial<Query>
     }
   }

@@ -30,7 +30,7 @@ export function transformJSON(data: string): TargetObject | string {
   }
 }
 
-// prototies exist in the prototype chain
+// properties exist in the prototype chain
 export function propertyIsInPrototype(object: object, prototypeName: string) {
   return !object.hasOwnProperty(prototypeName) && prototypeName in object
 }
