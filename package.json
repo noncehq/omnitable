@@ -6,7 +6,7 @@
   "scripts": {
     "prepare": "husky",
     "dev": "turbo run dev",
-    "build": "turbo run build --filter=!examples",
+    "build": "turbo run build --filter=!examples --no-cache",
     "build:affected": "turbo run build --affected --filter=!examples",
     "dev:omnitable": "turbo run dev --filter=omnitable",
     "build:omnitable": "turbo run build --filter=omnitable",

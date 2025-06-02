@@ -16,7 +16,7 @@ const options_preset = [
         No priority
       </span>
     ),
-    value: 'no-priority',
+    value: 0,
   },
   {
     label: (
@@ -25,7 +25,7 @@ const options_preset = [
         Urgent
       </span>
     ),
-    value: 'urgent',
+    value: 4,
   },
   {
     label: (
@@ -34,7 +34,7 @@ const options_preset = [
         High
       </span>
     ),
-    value: 'high',
+    value: 3,
   },
   {
     label: (
@@ -43,7 +43,7 @@ const options_preset = [
         Medium
       </span>
     ),
-    value: 'medium',
+    value: 2,
   },
   {
     label: (
@@ -52,7 +52,7 @@ const options_preset = [
         Low
       </span>
     ),
-    value: 'low',
+    value: 1,
   },
 ] as Array<{ label: ReactNode; value: undefined | string | number }>
 
