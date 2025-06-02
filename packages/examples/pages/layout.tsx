@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 import { App } from 'antd'
+import en_US from 'antd/locale/en_US'
 import { useOutlet } from 'react-router-dom'
 
 import { AntdConfigProvider } from '@omnitable/appframe/components'
@@ -14,7 +15,7 @@ export default () => {
   const theme = useMemo(() => getAntdTheme('light'), [])
 
   return (
-    <AntdConfigProvider theme="light">
+    <AntdConfigProvider locale={en_US} theme={theme}>
       <App prefixCls="omni">
         <div className={styles._local}>
           <Nav></Nav>
