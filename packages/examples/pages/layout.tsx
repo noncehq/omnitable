@@ -3,11 +3,12 @@ import { App } from 'antd'
 import en_US from 'antd/locale/en_US'
 import { useOutlet } from 'react-router-dom'
 
-import { AntdConfigProvider } from '@@omnitable/omnitable/appframe/components'
-import { getAntdTheme } from '@@omnitable/omnitable/appframe/theme'
+import { AntdConfigProvider } from '@omnitable/appframe/components'
+import { getAntdTheme } from '@omnitable/appframe/theme'
+
+import Nav from './Nav'
 
 import styles from './layout.module.css'
-import Nav from './Nav'
 
 export default () => {
   const outlet = useOutlet()

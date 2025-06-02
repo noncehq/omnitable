@@ -1,5 +1,6 @@
-import '@omnitable/appframe/global.css'
 import '@omnitable/appframe/preset'
+import '@omnitable/appframe/global.css'
+import '@omnitable/appframe/init.css'
 
 import { createRoot } from 'react-dom/client'
 import { RouterProvider } from 'react-router-dom'
