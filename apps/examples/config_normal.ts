@@ -1,188 +1,122 @@
+import styles from './page.module.css'
+
 import type { Omnitable } from '@omnitable/omnitable'
+
+const options = {
+  Status: [
+    { label: 'Investigating', value: 'investigating', icon: 'magnifying-glass' },
+    { label: 'Fixing', value: 'fixing', icon: 'wrench' },
+    { label: 'Monitoring', value: 'monitoring', icon: 'pulse' },
+    { label: 'Resolved', value: 'resolved', icon: 'checks' },
+  ],
+  Priority: [
+    { label: 'No Priority', value: 'no-priority' },
+    { label: 'Low', value: 'low' },
+    { label: 'Medium', value: 'medium' },
+    { label: 'High', value: 'high' },
+    { label: 'Urgent', value: 'urgent' },
+  ],
+  Category: [
+    { label: 'Hardware', value: 'hardware', icon: 'hard-drives' },
+    { label: 'Software', value: 'software', icon: 'app-window' },
+    { label: 'Network', value: 'network', icon: 'cell-tower' },
+    { label: 'Power Supply', value: 'power_supply', icon: 'lightning-slash' },
+    { label: 'Operational', value: 'operational', icon: 'hand' },
+    { label: 'Environmental', value: 'environmental', icon: 'globe-x' },
+    { label: 'Other', value: 'other', icon: 'waves' },
+  ],
+  Diagnosis: [
+    { label: 'Fan', value: 'fan', icon: 'fan' },
+    { label: 'Hashboard', value: 'hashboard', icon: 'gauge' },
+    { label: 'Control Board', value: 'control_board', icon: 'toggle-left' },
+    { label: 'Psu', value: 'psu', icon: 'battery-charging' },
+    { label: 'Temperature Sensor', value: 'temperature_sensor', icon: 'thermometer-simple' },
+    { label: 'Firmware', value: 'firmware', icon: 'hard-drive' },
+    { label: 'Overheating', value: 'overheating', icon: 'thermometer-hot' },
+    { label: 'Other', value: 'other', icon: 'waves' },
+  ],
+}
 
 export default {
   name: 'table_normal',
-  primary: 'id',
-  baseurl:
-    process.env.NODE_ENV === 'production'
-      ? 'https://omnitable-worker.openages.workers.dev/api/omnitable'
-      : 'http://localhost:8787/api/omnitable',
+  primary: 'incidentID',
+  baseurl: process.env.NODE_ENV === 'production' ? '' : 'http://localhost:8787/api/omnitable/incidents',
   actions: {
     query: '/query',
     create: '/create',
-    update: '/update/{{id}}',
-    delete: '/delete/{{id}}',
+    update: '/update/{{incidentID}}',
+    delete: '/delete/{{incidentID}}',
   },
-  filter: {
-    columns: [
-      { name: 'Title', datatype: 'string' },
-      { name: 'Status', datatype: 'array' },
-      { name: 'Priority', datatype: 'array' },
-      { name: 'Est. Hours', datatype: 'number' },
-      { name: 'Create At', datatype: 'date' },
-      { name: 'Update At', datatype: 'date' },
-      { name: 'Deadline', datatype: 'date' },
-      { name: 'Labels', datatype: 'array' },
-    ],
+  header: {
+    filter: {
+      columns: [
+        { name: 'Title', datatype: 'string' },
+        { name: 'Status', datatype: 'array' },
+        { name: 'Priority', datatype: 'array', forcetype: 'priority' },
+        { name: 'Category', datatype: 'array' },
+        { name: 'Diagnosis', datatype: 'array' },
+        { name: 'Reporter', datatype: 'array' },
+      ],
+    },
+    sort: {},
   },
   table: {
     columns: [
-      { name: 'Task', readonly: true, sticky: true },
+      { name: 'ID' },
       { name: 'Priority', sort: true },
-      { name: 'Title', width: 540, span: 24 },
-      { name: 'Status', sort: true },
-      // { name: 'RemoteStatus' },
-      { name: 'SearchMiner' },
-      { name: 'Est. Hours', width: 72, sort: true },
-      { name: 'Deadline', width: 150, sort: true },
-      { name: 'Labels', width: 180 },
-      { name: 'Create At', readonly: true, sort: true },
-      { name: 'Update At', readonly: true, sort: true },
+      { name: 'Title', width: 320 },
+      { name: 'Status' },
+      { name: 'Category' },
+      { name: 'Diagnosis' },
+      { name: 'Created At', sort: true },
       { name: 'Operation' },
     ],
   },
-  group: {
-    hide: true,
-  },
   form: {
+    columns: [{ name: 'Title' }, { name: 'Description' }],
     use_table_columns: true,
-    exclude_table_columns: ['Create At', 'Update At'],
+    exclude_table_columns: ['Created At', 'Operation'],
+    dialog: 'modal',
+    modal: {
+      className: styles.modal,
+      width: 'min(900px,84vw)',
+      height: 'min(600px,84vh)',
+      header: () => null,
+    },
   },
   fields: {
     common: {
-      Title: {
-        bind: 'title',
-        type: 'input',
-        props: {
-          placeholder: 'Search titles',
-        },
+      ID: { bind: 'incidentID', type: 'text', props: { prefix: '' } },
+      Title: { bind: 'Title', type: 'input' },
+      Priority: {
+        bind: 'Priority',
+        type: 'priority',
+        props: { placeholder: 'Select Priority', borderless: true },
       },
       Status: {
-        bind: 'status',
+        bind: 'Status',
         type: 'select',
-        props: {
-          options: [
-            {
-              label: 'Todo',
-              value: 0,
-              icon: 'acorn',
-            },
-            {
-              label: 'In-progress',
-              value: 1,
-              icon: 'timer',
-            },
-            {
-              label: 'Done',
-              value: 2,
-              icon: 'check-circle',
-            },
-            {
-              label: 'Canceled',
-              value: 3,
-              icon: 'x-circle',
-            },
-          ],
-          placeholder: 'Select status',
-        },
+        props: { options: options.Status, placeholder: 'Select Status', borderless: true },
       },
-      RemoteStatus: {
-        bind: 'status',
+      Category: {
+        bind: 'Category',
         type: 'select',
-        props: {
-          remote: {
-            api: '/getOptions',
-            query: {
-              a: 1,
-              b: '666',
-            },
-          },
-          placeholder: 'Select status',
-        },
+        props: { options: options.Category, placeholder: 'Select Category', borderless: true },
       },
-      SearchMiner: {
-        bind: 'miner',
+      Diagnosis: {
+        bind: 'Diagnosis',
         type: 'select',
-        props: {
-          remote: {
-            api: '/searchOptions',
-            search: 'keyword',
-          },
-          placeholder: 'Search status',
-        },
-      },
-      Labels: {
-        bind: 'labels',
-        type: 'select',
-        props: {
-          options: [
-            { label: 'Bug', value: 'Bug' },
-            { label: 'Feature', value: 'Feature' },
-            { label: 'Improvement', value: 'Improvement' },
-          ],
-          mode: 'multiple',
-          placeholder: 'Select labels',
-        },
-      },
-      Priority: {
-        bind: 'priority',
-        type: 'priority',
-        props: {
-          placeholder: 'Select priorities',
-          borderless: true,
-        },
-      },
-      'Est. Hours': {
-        bind: 'estimated_hours',
-        type: 'input_number',
-        props: {
-          placeholder: 'Enter a value',
-        },
-      },
-      Deadline: {
-        bind: 'deadline_time',
-        type: 'date_picker',
-        props: {
-          placeholder: 'Select date',
-        },
-      },
-      'Create At': {
-        bind: 'create_at',
-        type: 'date',
-        props: {
-          placeholder: 'Select date',
-        },
-      },
-      'Update At': {
-        bind: 'update_at',
-        type: 'date',
-        props: {
-          placeholder: 'Select date',
-        },
-      },
-      Operation: {
-        bind: '_operation',
-        type: 'operation',
+        props: { options: options.Diagnosis, placeholder: 'Select Diagnosis', borderless: true },
       },
     },
-    filter: {},
     table: {
-      Task: {
-        bind: 'id',
-        type: 'text',
-        props: {
-          format: 'Task-{{id}}',
-        },
-      },
+      'Created At': { bind: 'Created At', type: 'date', props: { format: 'YYYY-MM-DD HH:mm' } },
+      Operation: { bind: '_operation', type: 'operation' },
     },
     form: {
-      Title: {
-        bind: 'title',
-        type: 'textarea',
-        props: {
-          rows: 3,
-        },
-      },
+      Title: { bind: 'Title', type: 'textarea', props: { autoSize: true, placeholder: 'Input event title' } },
+      Description: { bind: 'Description', type: 'editor', props: {} },
     },
   },
+  pagination: {},
 } as Omnitable.Config

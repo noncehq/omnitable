@@ -1,0 +1,23 @@
+.page {
+  :global(.form_table_td) {
+    border-bottom-color: transparent !important ;
+  }
+}
+
+.modal {
+  :global(.if_modal_body),
+  :global(.omni-form) {
+    height: 100%;
+    padding: 0 !important;
+  }
+
+  :global(.if_modal_body) {
+    max-height: unset !important;
+  }
+}
+
+.loadingWrap {
+  height: 180px;
+  border: var(--border);
+  border-radius: var(--radius);
+}

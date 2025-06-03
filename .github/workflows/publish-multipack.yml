@@ -24,7 +24,9 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install
+        run: |
+          echo 'node-linker=hoisted' > .npmrc
+          pnpm install
 
       - name: Build all packages
         run: pnpm build

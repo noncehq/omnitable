@@ -4,6 +4,10 @@
 
 /*====flex====*/
 
+.flex {
+  display: flex;
+}
+
 .border_box {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
