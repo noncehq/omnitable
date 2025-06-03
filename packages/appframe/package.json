@@ -6,8 +6,9 @@
   "description": "Preset components and utils for omnitable app.",
   "scripts": {
     "dev": "concurrently \"cross-env NODE_ENV=development rslib build -w\" \"tsc -w\"",
+    "prebuild": "pnpm run build:theme",
     "build": "cross-env NODE_ENV=production pnpm run build:theme && rslib build && tsc -p ./tsconfig.build.json",
-    "build:theme": "node ./build/theme-generate.mjs"
+    "build:theme": "tsx ./scripts/theme-generate.ts"
   },
   "exports": {
     "./components": {
@@ -37,6 +38,7 @@
   "dependencies": {
     "@abraham/reflection": "^0.13.0",
     "@ant-design/v5-patch-for-react-19": "^1.0.3",
+    "@omnitable/stk": "workspace:*",
     "@phosphor-icons/react": "2.1.7",
     "@swc/helpers": "^0.5.17",
     "ahooks": "^3.8.4",
@@ -53,12 +55,10 @@
     "react": "^18",
     "react-dom": "^18",
     "react-error-boundary": "^6.0.0",
-    "@omnitable/stk": "workspace:*",
     "tslib": "^2.8.1",
     "tsyringe": "^4.10.0"
   },
   "devDependencies": {
-    "concurrently": "^9.1.2",
     "@rsbuild/plugin-react": "^1.3.1",
     "@rslib/core": "^0.6.9",
     "@svgr/webpack": "^8.1.0",
@@ -70,6 +70,7 @@
     "autoprefixer": "^10.4.21",
     "bun": "^1.2.13",
     "bun-types": "^1.2.13",
+    "concurrently": "^9.1.2",
     "cross-env": "^7.0.3",
     "cssnano": "^7.0.7",
     "deepmerge-ts": "^7.1.5",
@@ -80,6 +81,7 @@
     "postcss-nested": "^7.0.2",
     "react-refresh": "^0.17.0",
     "tinyglobby": "^0.2.13",
+    "tsx": "^4.19.4",
     "typescript": "^5.8.3"
   }
 }
