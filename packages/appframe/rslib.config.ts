@@ -12,6 +12,7 @@ export default deepmerge(rslib, {
       components: './src/components/index.ts',
       theme: './src/theme/index.ts',
       preset: './src/preset/index.ts',
+      global: './src/styles/index.css', // New CSS entry point
     },
   },
   output: {

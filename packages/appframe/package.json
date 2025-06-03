@@ -2,12 +2,12 @@
   "name": "@omnitable/appframe",
   "author": "1yasa",
   "version": "0.0.0",
+  "type": "module",
   "description": "Preset components and utils for omnitable app.",
   "scripts": {
     "dev": "concurrently \"cross-env NODE_ENV=development rslib build -w\" \"tsc -w\"",
-    "build": "cross-env NODE_ENV=production rslib build && pnpm run build:theme && pnpm run build:styles && tsc -p ./tsconfig.build.json",
-    "build:theme": "bun ./build/theme",
-    "build:styles": "bun ./build/styles"
+    "build": "cross-env NODE_ENV=production pnpm run build:theme && rslib build && tsc -p ./tsconfig.build.json",
+    "build:theme": "node ./build/theme-generate.mjs"
   },
   "exports": {
     "./components": {
