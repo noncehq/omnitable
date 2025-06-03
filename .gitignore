@@ -1,0 +1,39 @@
+# dependencies
+node_modules
+npm-debug.log*
+*-lock.json
+
+# production
+**/dist
+.next
+.open-next
+.vercel
+.wrangler
+.turbo
+*.tsbuildinfo
+
+!packages/stk/dist
+!packages/appframe/dist
+!packages/omnitable/dist
+!packages/adapters/dist
+
+# misc
+.DS_Store
+.idea
+.svn
+.swc
+@mf-types
+.husky/_
+
+# temp
+**/.tmp
+*.js.map
+
+# Electron
+release
+src/main/bundle.js
+src/main/bundle.js.map
+
+# dist
+dist
+tgz

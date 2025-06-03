@@ -1,0 +1,46 @@
+._local {
+  margin-top: 16px;
+  margin-bottom: 4px;
+}
+
+.tooltip {
+  padding: 8px 12px;
+  border: var(--border_light);
+  border-radius: var(--radius);
+  background-color: var(--color_bg);
+  box-shadow: var(--shadow);
+  font-size: 12px;
+
+  :global {
+    .title {
+      margin-bottom: 4px;
+      font-weight: 500;
+    }
+
+    .status_items {
+      .status_item {
+        .dot {
+          width: 9px;
+          height: 9px;
+          margin-right: 8px;
+          border-radius: var(--radius_small_1);
+          background-color: var(--item_color);
+        }
+
+        .label {
+          width: 60px;
+          color: var(--color_text_grey);
+        }
+
+        .code {
+          width: 30px;
+          color: var(--color_text_light);
+        }
+
+        .count {
+          text-align: right;
+        }
+      }
+    }
+  }
+}

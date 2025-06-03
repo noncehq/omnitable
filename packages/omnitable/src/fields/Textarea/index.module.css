@@ -1,0 +1,20 @@
+._local {
+  &.use_by_form {
+    :global {
+      .omni-input {
+        border: var(--border);
+      }
+    }
+  }
+
+  :global {
+    .omni-input {
+      resize: none;
+      white-space: wrap;
+
+      &-disabled {
+        background-color: var(--color_border_soft);
+      }
+    }
+  }
+}

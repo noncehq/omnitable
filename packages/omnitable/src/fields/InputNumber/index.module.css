@@ -1,0 +1,31 @@
+._local {
+  &.use_by_form {
+    :global {
+      .omni-input-number {
+        width: 100% !important;
+        height: 30px;
+        line-height: 30px;
+        padding: 0 7px;
+        border: var(--border);
+      }
+    }
+  }
+
+  &.disabled {
+    :global {
+      .omni-input-number {
+        background-color: var(--color_border_soft);
+      }
+    }
+  }
+
+  :global {
+    .omni-input-number {
+      width: unset !important;
+
+      .omni-input-number-input {
+        padding: 0;
+      }
+    }
+  }
+}
