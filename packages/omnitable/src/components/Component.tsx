@@ -96,7 +96,6 @@ const X = (props: IPropsComponent) => {
 
   if (Target && 'Component' in Target) {
     const Component = (Target as Omnitable.RegisterFieldValue).Component
-
     return <Component {...target_props} />
   } else {
     console.warn(`Field type "${type}" is not registered or not supported.`)

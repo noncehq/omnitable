@@ -33,6 +33,10 @@
     "./global.css": {
       "import": "./dist/global.css",
       "default": "./dist/global.css"
+    },
+    "./components.css": {
+      "import": "./dist/components.css",
+      "default": "./dist/components.css"
     }
   },
   "dependencies": {

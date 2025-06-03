@@ -1,4 +1,5 @@
 import '@omnitable/appframe/global.css'
+import '@omnitable/appframe/components.css'
 import '@omnitable/appframe/init.css'
 import '@omnitable/appframe/preset'
 
