@@ -10,7 +10,7 @@ on:
       - feat/*
 
 jobs:
-  build-and-release:
+  build-and-publish-packs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
