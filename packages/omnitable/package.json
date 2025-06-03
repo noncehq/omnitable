@@ -87,6 +87,7 @@
     "typescript": "^5.8.3"
   },
   "bundledDependencies": [
-    "@omnitable/stk"
+    "@omnitable/stk",
+    "@omnitable/appframe"
   ]
 }
