@@ -37,12 +37,17 @@ export default {
     hide: true,
   },
   form: {
+    columns: [{ name: 'Description' }, { name: 'Farm' }, { name: 'Miners' }, { name: 'Farm' }],
     use_table_columns: true,
-    exclude_table_columns: ['Create At', 'Update At'],
-    columns: [
-      { name: 'Desc', span: 24 },
-      { name: 'Comments', span: 24 },
-    ],
+    exclude_table_columns: ['Created At', 'Operation'],
+    dialog: 'modal',
+    modal: {
+      className: '',
+      width: 'min(900px,84vw)',
+      height: 'min(600px,84vh)',
+      header: () => null,
+    },
+    render: () => null,
   },
   fields: {
     common: {

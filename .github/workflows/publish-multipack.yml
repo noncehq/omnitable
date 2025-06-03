@@ -30,13 +30,7 @@ jobs:
         run: pnpm build
 
       - name: Pack packages
-        run: |
-          mkdir tgz
-          for pkg in stk appframe omnitable; do
-            cd packages/$pkg
-            pnpm pack --pack-destination ../../tgz
-            cd -
-          done
+        run: pnpm multipack
 
       - name: Generate release tag
         id: tag

@@ -11,7 +11,8 @@
     "dev:omnitable": "turbo run dev --filter=omnitable",
     "build:omnitable": "turbo run build --filter=omnitable",
     "prettier": "prettier --write \"**/*.{ts,tsx,js,json,css,md}\"",
-    "release": "sh ./pack.sh"
+    "multipack": "sh ./pack.sh",
+    "clean:dist": "rimraf packages/*/dist && rimraf apps/*/dist"
   },
   "lint-staged": {
     "*.{ts,tsx,js,json,css,md}": [
@@ -20,16 +21,17 @@
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
-    "lint-staged": "^16.0.0",
-    "prettier": "^3.5.3",
-    "husky": "^9.1.7",
-    "turbo": "^2.5.3",
     "@rslib/core": "^0.6.9",
+    "@types/lodash-es": "^4.17.12",
     "@types/node": "^22.15.17",
     "@types/react": "^18",
     "bun": "^1.2.13",
     "bun-types": "^1.2.13",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.0.0",
     "lodash-es": "^4.17.21",
-    "@types/lodash-es": "^4.17.12"
+    "prettier": "^3.5.3",
+    "rimraf": "^6.0.1",
+    "turbo": "^2.5.3"
   }
 }
