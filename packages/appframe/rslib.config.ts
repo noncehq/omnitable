@@ -17,6 +17,7 @@ export default deepmerge(rslib, {
   },
   output: {
     copy: [{ from: './src/styles/init.css', to: './init.css' }],
+    injectStyles: false, // Ensure separate CSS file for global entry
   },
   plugins: [pluginReact()],
 } as Partial<RslibConfig>)
