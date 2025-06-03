@@ -85,5 +85,8 @@
     "postcss-nested": "^7.0.2",
     "tinyglobby": "^0.2.13",
     "typescript": "^5.8.3"
-  }
+  },
+  "bundledDependencies": [
+    "@omnitable/stk"
+  ]
 }
