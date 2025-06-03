@@ -35,4 +35,5 @@ src/main/bundle.js
 src/main/bundle.js.map
 
 # dist
-#dist
+dist
+tgz

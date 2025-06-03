@@ -1,0 +1,56 @@
+# .github/workflows/publish-multipack.yml
+
+name: Build and Release All Packages as .tgz
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+      - feat/*
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node and PNPM
+        uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build all packages
+        run: pnpm build
+
+      - name: Pack packages
+        run: |
+          mkdir tgz
+          for pkg in stk appframe omnitable; do
+            cd packages/$pkg
+            pnpm pack --pack-destination ../../tgz
+            cd -
+          done
+
+      - name: Generate release tag
+        id: tag
+        run: |
+          BRANCH="${GITHUB_REF##*/}"               # e.g. feat/integrate-xxx
+          TS=$(date -u +"%Y%m%d%H%M")              # e.g. 202506031517
+          TAG="${BRANCH//\//-}-$TS"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ steps.tag.outputs.tag }}
+          tag_name: ${{ steps.tag.outputs.tag }}
+          files: tgz/*.tgz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
