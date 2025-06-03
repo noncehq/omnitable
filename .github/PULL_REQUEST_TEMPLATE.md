@@ -17,5 +17,5 @@
 
 <!-- Select issue resolve types, update #<issue_number> and remove unused -->
 
-- [ ] Partial Resolve #<issue_number>
+- [ ] Partial Refs #<issue_number>
 - [ ] Resolves #<issue_number>
