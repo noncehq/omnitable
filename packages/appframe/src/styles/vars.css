@@ -1,3 +1,4 @@
+:root,
 .omni,
 .omnitable_root {
   --radius: 6px;
@@ -12,18 +13,14 @@
   --radius_large_4: 48px;
   --radius_large_5: 54px;
   --radius_large_6: 60px;
-
   --blur: saturate(150%) blur(9px);
   --blur_deep: saturate(150%) blur(24px);
-
   --border: 1px solid var(--color_border);
   --border_light: 1px solid var(--color_border_light);
   --border_soft: 1px solid var(--color_border_soft);
   --border_softlight: 1px solid var(--color_border_softlight);
-
   --editor_padding_y: 1em;
   --editor_padding_x: 0;
-
   --font_family:
     'WorkSans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
