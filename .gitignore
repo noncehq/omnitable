@@ -2,7 +2,6 @@
 node_modules
 npm-debug.log*
 *-lock.json
-pnpm-lock.yaml
 
 # production
 **/dist
@@ -34,3 +33,7 @@ pnpm-lock.yaml
 release
 src/main/bundle.js
 src/main/bundle.js.map
+
+# dist
+dist
+tgz

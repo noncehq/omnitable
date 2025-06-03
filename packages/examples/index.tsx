@@ -1,4 +1,5 @@
 import '@omnitable/appframe/global.css'
+import '@omnitable/appframe/init.css'
 import '@omnitable/appframe/preset'
 
 import { createRoot } from 'react-dom/client'

@@ -12,6 +12,18 @@ export default deepmerge(rslib, {
       index: './src/index.tsx',
     },
   },
+  lib: [
+    {
+      format: 'esm',
+      bundle: true,
+      output: {
+        filename: {
+          js: 'index.js',
+        },
+      },
+      autoExternal: true,
+    },
+  ],
   output: {
     filename: {
       js: 'index.js',

@@ -15,7 +15,7 @@ export default {
   plugins: [pluginReact(), pluginSvgr()],
   performance: { removeConsole: is_prod },
   server: {
-    port: 666,
+    port: 4000,
     cors: {
       origin: ['http://localhost:8787'],
     },

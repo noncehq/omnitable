@@ -1,4 +1,4 @@
-import type { Omnitable } from 'omnitable'
+import type { Omnitable } from '@omnitable/omnitable'
 
 export default {
   name: 'table_config_stat',

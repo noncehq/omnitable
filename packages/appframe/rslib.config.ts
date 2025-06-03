@@ -12,10 +12,12 @@ export default deepmerge(rslib, {
       components: './src/components/index.ts',
       theme: './src/theme/index.ts',
       preset: './src/preset/index.ts',
+      global: './src/styles/index.css', // New CSS entry point
     },
   },
   output: {
     copy: [{ from: './src/styles/init.css', to: './init.css' }],
+    injectStyles: false, // Ensure separate CSS file for global entry
   },
   plugins: [pluginReact()],
 } as Partial<RslibConfig>)
