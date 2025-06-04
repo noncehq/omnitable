@@ -20,6 +20,7 @@ import {
   Filter,
   Group,
   Pagination,
+  Select,
   Sort,
   Stat,
   Table,
@@ -332,3 +333,4 @@ export default $.memo(observer(Index))
 
 export type { Omnitable, ComponentType } from './types'
 export type { Model }
+export { Detail, Fields, Filter, Group, Pagination, Sort, Stat, Table, Timeline, TimelineControls, View, Select }

@@ -8,10 +8,18 @@ import { Eye, PencilSimpleLine, Trash } from '@phosphor-icons/react'
 
 import styles from './index.module.css'
 
+import type { ComponentType, Omnitable } from '@omnitable/omnitable'
 import type { MenuProps } from 'antd'
-import type { ComponentType, Omnitable } from '../../types'
 
-const Index = (props: ComponentType<Omnitable.Operation['props']>) => {
+export type OperationComponentType = {
+  type: 'operation'
+  props?: {
+    no_edit?: boolean
+    no_delete?: boolean
+  }
+}
+
+const Index = (props: ComponentType<OperationComponentType['props']>) => {
   const { self_props, editing, onFocus, onChange } = props
   const { no_edit, no_delete } = self_props || {}
   const signal = useRef(0)
@@ -50,7 +58,6 @@ const Index = (props: ComponentType<Omnitable.Operation['props']>) => {
   }, [no_edit, no_delete])
 
   const onClick = useMemoizedFn(({ key }) => {
-    // 添加一个动态值，以通过form的相同值校验，触发onValuesChange
     signal.current++
 
     onChange?.({ key, signal: signal.current })

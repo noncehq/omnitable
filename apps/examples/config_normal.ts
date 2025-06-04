@@ -1,3 +1,6 @@
+import Operation from '@/components/fields/Operation'
+import Priority from '@/components/fields/Priority'
+
 import styles from './page.module.css'
 
 import type { Omnitable } from '@omnitable/omnitable'
@@ -37,6 +40,16 @@ const options = {
   ],
 }
 
+const PriorityFieldValue: Omnitable.RegisterFieldValue = {
+  Component: Priority,
+  readonly: false,
+}
+
+const OperationFieldValue: Omnitable.RegisterFieldValue = {
+  Component: Operation, // Placeholder for operation component
+  readonly: true,
+}
+
 export default {
   name: 'table_normal',
   primary: 'incidentID',
@@ -63,8 +76,8 @@ export default {
   table: {
     columns: [
       { name: 'ID' },
-      { name: 'Priority', sort: true },
       { name: 'Title', width: 320 },
+      { name: 'Priority', sort: true },
       { name: 'Status' },
       { name: 'Category' },
       { name: 'Diagnosis' },
@@ -114,9 +127,17 @@ export default {
       Operation: { bind: '_operation', type: 'operation' },
     },
     form: {
-      Title: { bind: 'Title', type: 'textarea', props: { autoSize: true, placeholder: 'Input event title' } },
+      Title: {
+        bind: 'Title',
+        type: 'textarea',
+        props: { autoSize: true, placeholder: 'Input event title' },
+      },
       Description: { bind: 'Description', type: 'editor', props: {} },
     },
+  },
+  register_fields: {
+    priority: PriorityFieldValue,
+    operation: OperationFieldValue,
   },
   pagination: {},
 } as Omnitable.Config

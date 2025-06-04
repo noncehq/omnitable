@@ -10,8 +10,6 @@ import Editor from '../fields/Editor'
 import Index from '../fields/Index'
 import Input from '../fields/Input'
 import InputNumber from '../fields/InputNumber'
-import Operation from '../fields/Operation'
-import Priority from '../fields/Priority'
 import RangePicker from '../fields/RangePicker'
 import Select from '../fields/Select'
 import Tag from '../fields/Tag'
@@ -46,7 +44,6 @@ const X = (props: IPropsComponent) => {
       return register_fields[target_type]
     }
 
-    // 这里不使用React.lazy进行动态导入，因为单元格进入编辑状态时会闪现空白，如果是Form可使用动态导入
     switch (target_type) {
       case 'index':
         return Index
@@ -68,14 +65,11 @@ const X = (props: IPropsComponent) => {
         return DatePicker
       case 'range_picker':
         return RangePicker
-      case 'priority':
-        return Priority
       case 'editor':
         return Editor
+      // TODO: migrated to usage `register_fields`
       case 'comments':
         return Comments
-      case 'operation':
-        return Operation
     }
   }, [force_type, type, column, ref_register_fields])
 

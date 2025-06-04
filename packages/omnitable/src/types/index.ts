@@ -206,10 +206,8 @@ export namespace Omnitable {
     | Date
     | DatePicker
     | RangePicker
-    | Priority
     | Editor
-    | Comments
-    | Operation
+    | Comments // TODO: migrated to RegisterField
     | RegisterField
 
   export type Index = {
@@ -319,15 +317,6 @@ export namespace Omnitable {
     }
   }
 
-  export type Priority = {
-    type: 'priority'
-    props?: {
-      options?: [undefined | string | number, string | number, string | number, string | number, string | number]
-      placeholder?: string
-      borderless?: boolean
-    }
-  }
-
   export type Editor = {
     type: 'editor'
     props?: {
@@ -345,14 +334,6 @@ export namespace Omnitable {
         text: string
         role?: string
       }
-    }
-  }
-
-  export type Operation = {
-    type: 'operation'
-    props?: {
-      no_edit?: boolean
-      no_delete?: boolean
     }
   }
 

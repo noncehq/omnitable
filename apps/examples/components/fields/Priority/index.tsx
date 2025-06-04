@@ -1,12 +1,20 @@
 import { useMemo } from 'react'
 
+import { Select } from '@omnitable/omnitable'
 import { $ } from '@omnitable/stk/utils'
 
-import { Select } from '../../components'
 import Icon from './Icon'
 
-import type { ReactNode } from 'react'
-import type { ComponentType, Omnitable } from '../../types'
+import type { ComponentType, Omnitable } from '@omnitable/omnitable'
+
+export type PriorityComponentType = {
+  type: 'priority'
+  props?: {
+    options?: [string]
+    placeholder?: string
+    borderless?: boolean
+  }
+}
 
 const options_preset = [
   {
@@ -54,9 +62,9 @@ const options_preset = [
     ),
     value: 'low',
   },
-] as Array<{ label: ReactNode; value: undefined | string | number }>
+] as Array<Omnitable.SelectOption>
 
-const Index = (props: ComponentType<Omnitable.Priority['props']>) => {
+const Index = (props: ComponentType<PriorityComponentType['props']>) => {
   const { options, ...reset_props } = props.self_props || {}
 
   const target_options = useMemo(() => {
