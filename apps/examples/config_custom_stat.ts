@@ -76,7 +76,8 @@ export default {
       },
       Operation: {
         bind: '_operation',
-        type: 'operation',
+        type: 'register',
+        field: 'operation',
         props: {
           no_edit: true,
           no_delete: true,

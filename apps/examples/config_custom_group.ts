@@ -1,4 +1,11 @@
+import Operation from '@/components/fields/Operation'
+
 import type { Omnitable } from '@omnitable/omnitable'
+
+const OperationFieldValue: Omnitable.RegisterFieldValue = {
+  Component: Operation,
+  readonly: true,
+}
 
 export default {
   name: 'table_custom_group',
@@ -74,7 +81,8 @@ export default {
       },
       Operation: {
         bind: '_operation',
-        type: 'operation',
+        type: 'register',
+        field: 'operation',
         props: {
           no_edit: true,
           no_delete: true,
@@ -139,6 +147,9 @@ export default {
           placeholder: 'Enter a value',
         },
       },
+    },
+    register_fields: {
+      operation: OperationFieldValue,
     },
   },
 } as Omnitable.Config

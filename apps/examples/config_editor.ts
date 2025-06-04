@@ -1,4 +1,17 @@
+import Operation from '@/components/fields/Operation'
+import Priority from '@/components/fields/Priority'
+
 import type { Omnitable } from '@omnitable/omnitable'
+
+const PriorityFieldValue: Omnitable.RegisterFieldValue = {
+  Component: Priority,
+  readonly: false,
+}
+
+const OperationFieldValue: Omnitable.RegisterFieldValue = {
+  Component: Operation,
+  readonly: true,
+}
 
 export default {
   name: 'table_normal',
@@ -89,7 +102,8 @@ export default {
       },
       Priority: {
         bind: 'priority',
-        type: 'priority',
+        type: 'register',
+        field: 'priority',
         props: {
           placeholder: 'Select priorities',
           borderless: true,
@@ -111,7 +125,8 @@ export default {
       },
       Operation: {
         bind: '_operation',
-        type: 'operation',
+        type: 'register',
+        field: 'operation',
       },
     },
     filter: {},
@@ -150,6 +165,10 @@ export default {
           },
         },
       },
+    },
+    register_fields: {
+      priority: PriorityFieldValue,
+      operation: OperationFieldValue,
     },
   },
 } as Omnitable.Config

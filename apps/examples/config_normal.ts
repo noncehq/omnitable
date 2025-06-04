@@ -46,14 +46,14 @@ const PriorityFieldValue: Omnitable.RegisterFieldValue = {
 }
 
 const OperationFieldValue: Omnitable.RegisterFieldValue = {
-  Component: Operation, // Placeholder for operation component
+  Component: Operation,
   readonly: true,
 }
 
 export default {
   name: 'table_normal',
   primary: 'incidentID',
-  baseurl: process.env.NODE_ENV === 'production' ? '' : 'http://localhost:8787/api/omnitable/incidents',
+  baseurl: 'http://localhost:8787/api/omnitable/incidents',
   actions: {
     query: '/query',
     create: '/create',
@@ -103,7 +103,8 @@ export default {
       Title: { bind: 'Title', type: 'input' },
       Priority: {
         bind: 'Priority',
-        type: 'priority',
+        type: 'register',
+        field: 'priority',
         props: { placeholder: 'Select Priority', borderless: true },
       },
       Status: {
@@ -124,7 +125,11 @@ export default {
     },
     table: {
       'Created At': { bind: 'Created At', type: 'date', props: { format: 'YYYY-MM-DD HH:mm' } },
-      Operation: { bind: '_operation', type: 'operation' },
+      Operation: {
+        bind: '_operation',
+        type: 'register',
+        field: 'operation',
+      },
     },
     form: {
       Title: {
