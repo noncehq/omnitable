@@ -11,7 +11,6 @@
     "dev:omnitable": "turbo run dev --filter=omnitable",
     "build:omnitable": "turbo run build --filter=omnitable",
     "prettier": "prettier --write \"**/*.{ts,tsx,js,json,css,md}\"",
-    "multipack": "sh ./pack.sh",
     "clean:dist": "rimraf packages/*/dist && rimraf apps/*/dist"
   },
   "lint-staged": {

@@ -122,7 +122,7 @@ const makeMockIncident = (id: number): QueryIncidentData => ({
   ),
 })
 
-// 1. POST /omnitable/incidents/query
+// 1. POST /api/omnitable/incidents/query
 app.post('/api/omnitable/incidents/query', async c => {
   let body: OmniTableQueryRequest
   try {
@@ -153,7 +153,7 @@ app.post('/api/omnitable/incidents/query', async c => {
   return c.json(response)
 })
 
-// 2. POST /omnitable/incidents/create
+// 2. POST /api/omnitable/incidents/create
 app.post('/api/omnitable/incidents/create', async c => {
   let body: CreateIncidentData
   try {
@@ -167,7 +167,7 @@ app.post('/api/omnitable/incidents/create', async c => {
   return c.json(response)
 })
 
-// 3. POST /omnitable/incidents/update/:id
+// 3. POST /api/omnitable/incidents/update/:id
 app.post('/api/omnitable/incidents/update/:id', async c => {
   const idParam = c.req.param('id')
   const incidentId = Number(idParam)
@@ -186,7 +186,7 @@ app.post('/api/omnitable/incidents/update/:id', async c => {
   return c.json(response)
 })
 
-// 4. POST /omnitable/incidents/delete/:id
+// 4. POST /api/omnitable/incidents/delete/:id
 app.post('/api/omnitable/incidents/delete/:id', c => {
   const idParam = c.req.param('id')
   const incidentId = Number(idParam)
@@ -201,7 +201,7 @@ app.post('/api/omnitable/incidents/delete/:id', c => {
 app.all('*', c => c.text('Not Found', 404))
 
 const port = Number(process.env.PORT ?? 8787)
-console.log(`🚀 Mock server (Hono v4 + @hono/node-server) running at http://localhost:${port}/omnitable/...`)
+console.log(`🚀 Mock server (Hono v4 + @hono/node-server) running at http://localhost:${port}/api/omnitable/...`)
 
 serve({
   fetch: app.fetch,

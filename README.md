@@ -153,14 +153,14 @@ Stat为数据统计配置，支持预先配置和自定义配置：
 
 Group为数据分组配置，支持预先配置和自定义配置：
 
-```ts
+```json
 {
-      header: {
-            group: {
-                  order: 'Period > Farm > Pool',
-                  acc: ['Hashrate', 'Earning']
-            }
-      }
+  "header": {
+    "group": {
+      "order": "Period > Farm > Pool",
+      "acc": ["Hashrate", "Earning"]
+    }
+  }
 }
 ```
 
@@ -605,3 +605,26 @@ export namespace Omnitable {
 ## Attention
 
 Using omnitable in Next.js, you should add `"use client"` on top of file.
+
+## Usage: Examples
+
+You can find examples in the `examples` directory of the omnitable monorepo. Each example demonstrates different features and configurations of Omnitable.
+
+1. Build Deps
+   ```bash
+   pnpm build
+   ```
+2. Start MockServer for CRUD api request mocking
+   ```bash
+   pnpm dev --filter mockserver
+   ```
+3. Start Omnitable examples
+   ```bash
+   pnpm dev --filter examples
+   ```
+4. Optional(run all dev for watching changes):
+   ```bash
+   # stop process in 2, 3
+   pnpm dev
+   ```
+5. Visit http://localhost:4000 to checkout the examples.

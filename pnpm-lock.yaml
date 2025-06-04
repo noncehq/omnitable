@@ -217,9 +217,6 @@ importers:
       tsx:
         specifier: ^4.7.1
         version: 4.19.4
-      typescript:
-        specifier: ^5.8.3
-        version: 5.8.3
 
   packages/adapters:
     dependencies:
@@ -2535,7 +2532,6 @@ packages:
 
   bun@1.2.14:
     resolution: {integrity: sha512-xCd8eiUn5jju0+Noaz7aTWZFvrC8NbMjvcLDnk3gsa1UEaE3Gk4jMStZDsSzW97ynkb4d2ZYvwunstQxJhpZaA==}
-    cpu: [arm64, x64, aarch64]
     os: [darwin, linux, win32]
     hasBin: true
 
